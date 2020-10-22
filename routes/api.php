@@ -20,6 +20,8 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');
     Route::patch('settings/password', 'Settings\PasswordController@update');
+
+    Route::get('users', 'Auth\UserController@userList');
 });
 
 Route::group(['middleware' => 'guest:api'], function () {
