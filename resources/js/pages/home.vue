@@ -442,10 +442,10 @@ export default {
   metaInfo () {
     return { title: this.$t('home') }
   },
-<<<<<<< HEAD
   data(){
     return{
-      islogin:true
+      islogin:true,
+      baseUrl:window.base_url
     }
   },
   computed:{
@@ -455,12 +455,7 @@ export default {
   },
   mounted(){
     console.log(this.currentUser)
-  }
-=======
+  },
 
-  data: () => ({
-    baseUrl:window.base_url
-  }),
->>>>>>> 289542feae17d1dfeee60737276481ffdfec90c6
 }
 </script>

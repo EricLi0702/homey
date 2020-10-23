@@ -68,12 +68,12 @@
         <template v-else>
           <li class="nav-item mx-3">
             <router-link :to="{ name: 'login' }" class="nav-link" active-class="active">
-              {{ $t('login') }}
+              {{ $t('login').login }}
             </router-link>
           </li>
           <li class="nav-item">
             <router-link :to="{ name: 'register' }" class="nav-link" active-class="active">
-              {{ $t('register') }}
+              {{ $t('register').register }}
             </router-link>
           </li>
         </template>
