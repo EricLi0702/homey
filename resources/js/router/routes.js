@@ -14,6 +14,11 @@ export default [
 
   { path: '/home', name: 'home', component: page('home.vue') },
   { path: '/userRole',  name:  'userRole',  component:  page('auth/permission/UserRole.vue') },
+  { path: '/notification',  name:  'notification',  component:  page('notification/notification.vue') },
+  { path: '/community',  name:  'community',  component:  page('community/community.vue') },
+  { path: '/suggestion',  name:  'suggestion',  component:  page('suggestion/suggestion.vue') },
+  { path: '/repair',  name:  'repair',  component:  page('repair/repair.vue') },
+  { path: '/facillity',  name:  'facillity',  component:  page('facillity/facillity.vue') },
   { path: '/settings',
     component: page('settings/index.vue'),
     children: [
