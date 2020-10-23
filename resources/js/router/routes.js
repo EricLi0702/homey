@@ -13,7 +13,23 @@ export default [
   { path: '/email/resend', name: 'verification.resend', component: page('auth/verification/resend.vue') },
 
   { path: '/home', name: 'home', component: page('home.vue') },
-  { path: '/userRole',  name:  'userRole',  component:  page('auth/permission/UserRole.vue') },
+  { path: '/userRole', component: page('auth/permission/UserRole.vue'),
+    children: [
+      {path:'', name:  'permission.UserRole', redirect: {name:  'permission.UserRoleList'}},
+      {path:  'list', name: 'permission.UserRoleList', component: page('auth/permission/UserRoleList.vue')},
+      {path:'permission',  name: 'permission.UserRoleAdd', component: page('auth/permission/UserRoleAdd.vue')}
+    ]
+  },
+  { path: '/apartment', name: 'apartment', component: page('apartment/index.vue'),
+    children:[
+      {path:'register', name:  'apartment.register', component: page('apartment/register.vue')},
+    ]
+  },
+  { path: '/superManager', name:'superManager', component: page('superManager/index.vue'),
+    children:[
+      {path:'register', name:  'superManager.register', component: page('superManager/register.vue')},
+    ]
+  },
   { path: '/settings',
     component: page('settings/index.vue'),
     children: [

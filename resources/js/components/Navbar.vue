@@ -20,7 +20,9 @@
         <ul class="navbar-nav ml-auto">
           <!-- Authenticated -->
           <li v-if="user" class="nav-item dropdown">
-            <router-link :to="{path:'/userRole'}">userRole</router-link>
+            <router-link :to="{path:'/apartment/register'}">{{ $t('common').apartment}} | </router-link>
+            <router-link :to="{path:'/superManager/register'}">{{ $t('common').superManager}} | </router-link>
+            <router-link :to="{path:'/userRole'}">{{ $t('userRole')}} | </router-link>
             <a class="nav-link dropdown-toggle text-dark"
                href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             >
@@ -44,12 +46,12 @@
           <template v-else>
             <li class="nav-item">
               <router-link :to="{ name: 'login' }" class="nav-link" active-class="active">
-                {{ $t('login') }}
+                {{ $t('login').login }}
               </router-link>
             </li>
             <li class="nav-item">
               <router-link :to="{ name: 'register' }" class="nav-link" active-class="active">
-                {{ $t('register') }}
+                {{ $t('register').register }}
               </router-link>
             </li>
           </template>

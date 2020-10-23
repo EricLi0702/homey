@@ -80,12 +80,12 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'vn',
 
     'locales' => [
+        'vn' => 'VN',
         'en' => 'EN',
-        'zh-CN' => '中文',
-        'es' => 'ES',
+        'kr' => 'KR',
     ],
 
     /*

@@ -9,5 +9,5 @@ export const UPDATE_USER = 'UPDATE_USER'
 // lang.js
 export const SET_LOCALE = 'SET_LOCALE'
 
-//user.js
-export const USER_ROLE = 'USER_ROLE'
+//permission.js
+export const ROLE_LIST = 'ROLE_LIST'

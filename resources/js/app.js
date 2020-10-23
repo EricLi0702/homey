@@ -6,6 +6,8 @@ import App from '~/components/App'
 
 import '~/plugins'
 import '~/components'
+import common from './helper/common'
+Vue.mixin(common)
 
 Vue.config.productionTip = false
 

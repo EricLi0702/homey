@@ -1,11 +1,11 @@
 <template>
   <div class="row">
     <div class="col-lg-8 m-auto">
-      <card :title="$t('login')">
+      <card :title="$t('login').login">
         <form @submit.prevent="login" @keydown="form.onKeydown($event)">
           <!-- Email -->
           <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
+            <label class="col-md-3 col-form-label text-md-right">{{ $t('common').email }}</label>
             <div class="col-md-7">
               <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
               <has-error :form="form" field="email" />
@@ -14,7 +14,7 @@
 
           <!-- Password -->
           <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('password') }}</label>
+            <label class="col-md-3 col-form-label text-md-right">{{ $t('common').password }}</label>
             <div class="col-md-7">
               <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
               <has-error :form="form" field="password" />
@@ -26,11 +26,11 @@
             <div class="col-md-3" />
             <div class="col-md-7 d-flex">
               <checkbox v-model="remember" name="remember">
-                {{ $t('remember_me') }}
+                {{ $t('common').rememberMe }}
               </checkbox>
 
               <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto">
-                {{ $t('forgot_password') }}
+                {{ $t('common').forgotPassword }}
               </router-link>
             </div>
           </div>
@@ -39,7 +39,7 @@
             <div class="col-md-7 offset-md-3 d-flex">
               <!-- Submit Button -->
               <v-button :loading="form.busy">
-                {{ $t('login') }}
+                {{ $t('login').login }}
               </v-button>
 
               <!-- GitHub Login Button -->
@@ -64,7 +64,7 @@ export default {
   },
 
   metaInfo () {
-    return { title: this.$t('login') }
+    return { title: this.$t('login').login }
   },
 
   data: () => ({
@@ -79,7 +79,7 @@ export default {
     async login () {
       // Submit the form.
       const { data } = await this.form.post('/api/login')
-
+      console.log('----',data);
       // Save the token.
       this.$store.dispatch('auth/saveToken', {
         token: data.token,

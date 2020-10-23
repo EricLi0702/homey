@@ -16,7 +16,8 @@ class SetLocale
     public function handle($request, Closure $next)
     {
         if ($locale = $this->parseLocale($request)) {
-            app()->setLocale($locale);
+            // app()->setLocale($locale);
+            app()->setLocale('vn');
         }
 
         return $next($request);

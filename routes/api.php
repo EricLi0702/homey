@@ -22,6 +22,16 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('settings/password', 'Settings\PasswordController@update');
 
     Route::get('users', 'Auth\UserController@userList');
+
+    Route::get('userRole','UserRoleController@getUserRoleList');
+    Route::post('userRole','UserRoleController@addUserRole');
+    Route::put('userRole','UserRoleController@updateUserRole');
+    Route::delete('userRole','UserRoleController@delUserRole');
+
+    Route::get('apartment','ApartmentController@getAptList');
+    Route::post('apartment','ApartmentController@addApt');
+    Route::put('apartment','ApartmentController@updateApt');
+    Route::delete('apartment','ApartmentController@delApt');
 });
 
 Route::group(['middleware' => 'guest:api'], function () {
