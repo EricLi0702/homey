@@ -4,10 +4,20 @@ const mix = require('laravel-mix')
 require('laravel-mix-versionhash')
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
-mix
-  .js('resources/js/app.js', 'public/dist/js')
-  .sass('resources/sass/app.scss', 'public/dist/css')
+mix.styles([
+  'public/asset/css/main.css',
+  'public/asset/css/animate.css',
+  'public/asset/css/fontawesome5-8-1.css',
+  'public/asset/css/style.css',
+], 'public/dist/css/all.css');
 
+mix
+  .js([
+    'resources/js/app.js',
+    'public/asset/js/custom.js',
+], 'public/dist/js')
+  .sass('resources/sass/app.scss', 'public/dist/css')
+  
   .disableNotifications()
 
 if (mix.inProduction()) {
