@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row m-0 p-0">
     <div class="col-lg-8 m-auto">
       <card :title="$t('login')">
         <form @submit.prevent="login" @keydown="form.onKeydown($event)">

@@ -15,6 +15,14 @@ $config = [
   <title>{{ config('app.name') }}</title>
 
   <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
+  <link rel="stylesheet" href="{{ mix('dist/css/all.css')}}">
+  <script src="{{ asset('asset/js/jquery-3.5.1.min.js') }}"></script>
+  <script type="text/javascript">
+    let base_url = "{{ URL::to('/') }}"
+    window.base_url = "{{ URL::to('/') }}"
+    console.log(base_url)
+  </script>
+
 </head>
 <body>
   <div id="app"></div>
@@ -26,5 +34,7 @@ $config = [
 
   {{-- Load the application scripts --}}
   <script src="{{ mix('dist/js/app.js') }}"></script>
+  {{-- <script src="{{ asset('asset/js/custom.js') }}"></script> --}}
+  {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmoGr8OWrJb6AmKHeOrmS2U9z9gx7WBeQ&callback=myMap"></script> --}}
 </body>
 </html>
