@@ -345,3 +345,7 @@ html{
     text-align: center;
     line-height: 29px;
 }
+
+.mt-7{
+    margin-top:7rem!important;
+}

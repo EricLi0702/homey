@@ -1,0 +1,95 @@
+<template>
+  <div>
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">AptName</label>
+      <div class="col-sm-10">
+        <input type="text" id="aptName" v-model="addData.aptName" class="form-control" placeholder="">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Address</label>
+      <div class="col-sm-10">
+        <input type="text" id="address" v-model="addData.address" class="form-control" placeholder="">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Representative name</label>
+      <div class="col-sm-10">
+        <input type="text" id="repreName" v-model="addData.repreName" class="form-control" placeholder="">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Phone Number</label>
+      <div class="col-sm-10">
+        <input type="text" v-model="addData.phoneNumber" class="form-control" id="phoneNumber" placeholder="">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email" v-model="addData.email" class="form-control" id="email" placeholder="">
+      </div>
+    </div>
+    <div class="form-group row">
+      <Button type="success" @click="editApt" :loading="isAdding" :disabled="isAdding">Edit</Button>
+      <!-- <button type="button" class="btn btn-primary">Edit</button> -->
+    </div>
+  </div>
+</template>
+
+<script>
+import {updateApt} from '~/api/apartment'
+export default {
+  props:{
+    addData:Object
+  },
+  data(){
+    return{
+      isAdding:false,
+    }
+  },
+  mounted(){
+    console.log('++++',this.addData)
+  },
+  methods:{
+    async  editApt(){
+      if(this.addData.aptName.trim() == ''){
+        this.error('aptName is required')
+      }
+      if(this.addData.address.trim() == ''){
+        this.error('address is required')
+      }
+      if(this.addData.repreName.trim() == ''){
+        this.error('Representation Name is reqired')
+      }
+      if(this.addData.phoneNumber.trim() == ''){
+        this.error('phone Number is required')
+      }
+      if(this.addData.email.trim() == ''){
+        this.error('email is required')
+      }
+      
+      this.isAdding = true
+      await updateApt(this.addData)
+        .then(res=>{
+          console.log(res)
+            this.isAdding = false
+            this.addData.aptName = ''
+            this.addData.address = ''
+            this.addData.repreName = ''
+            this.addData.phoneNumber = ''
+            this.addData.email = ''
+            this.$router.push({path:'/apartment'})
+        })
+        .catch(err=>{
+          console.log(err)
+        })
+      
+    },
+  }
+}
+</script>
+
+<style>
+
+</style>

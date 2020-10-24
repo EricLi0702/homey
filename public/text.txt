@@ -1,0 +1,16 @@
+DELETE /api/apartment HTTP/1.1
+Accept:          application/json, text/plain, */*
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en
+Authorization:   Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYwMzQ5MzUxMiwiZXhwIjoxNjAzNTc5OTEyLCJuYmYiOjE2MDM0OTM1MTIsImp0aSI6IldBa2dtc1U2RWVKUmYyeGgiLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.USzX7PPw2ralrdkUA94kUOBAokzVNOlx4ewVaRpvJbY
+Connection:      keep-alive
+Cookie:          locale=en; token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYwMzQ5MzUxMiwiZXhwIjoxNjAzNTc5OTEyLCJuYmYiOjE2MDM0OTM1MTIsImp0aSI6IldBa2dtc1U2RWVKUmYyeGgiLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.USzX7PPw2ralrdkUA94kUOBAokzVNOlx4ewVaRpvJbY
+Host:            localhost:8000
+Origin:          http://localhost:8000
+Referer:         http://localhost:8000/apartment/register
+Sec-Fetch-Dest:  empty
+Sec-Fetch-Mode:  cors
+Sec-Fetch-Site:  same-origin
+User-Agent:      Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36
+Cookie: locale=en; token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYwMzQ5MzUxMiwiZXhwIjoxNjAzNTc5OTEyLCJuYmYiOjE2MDM0OTM1MTIsImp0aSI6IldBa2dtc1U2RWVKUmYyeGgiLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.USzX7PPw2ralrdkUA94kUOBAokzVNOlx4ewVaRpvJbY
+

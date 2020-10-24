@@ -32,6 +32,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('apartment','ApartmentController@addApt');
     Route::put('apartment','ApartmentController@updateApt');
     Route::delete('apartment','ApartmentController@delApt');
+
+    Route::post('superMng','ApartmentController@addSuperMng');
+
+    Route::get('aptBuilding','BuildingController@getBuildingList');
+    Route::post('aptBuilding','BuildingController@addBuilding');
 });
 
 Route::group(['middleware' => 'guest:api'], function () {

@@ -8,6 +8,14 @@
           </button>
           <div class="dropdown-menu position-absolute">
             <ul class="navbar-nav flex-column">
+              <router-link :to="{ path: '/apartment' }" class="nav-item dropdown-item" active-class="active">
+                {{ $t('common').apartment }}
+                
+              </router-link>
+              <router-link :to="{ path:'/UserRole' }" class="nav-item dropdown-item" active-class="active">
+                {{ $t('common').userRole }}
+              </router-link>
+              
               <router-link :to="{ name: 'notification' }" class="nav-item dropdown-item" active-class="active">
                 <!-- {{ $t('register') }} -->
                 Notification

@@ -1,38 +1,39 @@
 <template>
   <div>
-    <Button type="info" size="small" @click="addModal = true">Add</Button>
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Crated at</th>
-            <th>Action</th>
-        </tr>
-        <template v-if="aptLists && aptLists.length > 0">
-            <tr v-for="(apt,i) in aptLists" :key="i">
-                <td>{{i+1}}</td>
-                <td v-if="apt.isEditing == undefined || apt.isEditing == false">{{apt.aptName}}</td>
-                <td v-else-if="apt.isEditing == true"><Input v-model="apt.aptName" style="width:220px"/></td>
-                <td>{{TimeView(apt.created_at)}}</td>
-                <td class="d-flex">
-                    <Button v-if="apt.isEditing == undefined || apt.isEditing == false" type="info" size="small" @click="editApt(apt,i)">Edit</Button>
-                    <Button v-else-if="apt.isEditing == true" type="info" size="small" @click="updateApt(apt,i)" :disabled="isEditing" :loading="isEditing">Update</Button>
-                    <Button type="error" size="small" @click="delApt(apt,i)">Delete</Button>
-                </td>
-            </tr>
-        </template>
-    </table>
-    <Modal
-        v-model="addModal"
-        title="Add apt"
-    >
-        <Input v-model="addData.aptName" class="mb-2" placeholder="Enter something..."/>
-        
-        <div slot="footer">
-            <Button type="default" @click="addModal=false">Close</Button>
-            <Button type="primary" @click="addApt" :disabled="isAdding" :loading="isAdding">{{isAdding ? 'Adding': 'Add apt'}}</Button>
-        </div>
-    </Modal>
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">AptName</label>
+      <div class="col-sm-10">
+        <input type="text" id="aptName" v-model="addData.aptName" class="form-control" placeholder="">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Address</label>
+      <div class="col-sm-10">
+        <input type="text" id="address" v-model="addData.address" class="form-control" placeholder="">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Representative name</label>
+      <div class="col-sm-10">
+        <input type="text" id="repreName" v-model="addData.repreName" class="form-control" placeholder="">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Phone Number</label>
+      <div class="col-sm-10">
+        <input type="text" v-model="addData.phoneNumber" class="form-control" id="phoneNumber" placeholder="">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email" v-model="addData.email" class="form-control" id="email" placeholder="">
+      </div>
+    </div>
+    <div class="form-group row">
+      <Button type="success" @click="addApt" :loading="isAdding" :disabled="isAdding">Register</Button>
+      <!-- <button type="button" class="btn btn-primary">Edit</button> -->
+    </div>
   </div>
 </template>
 
@@ -41,14 +42,14 @@ import {addApt,getAptLists,updateApt,delApt} from '~/api/apartment'
 export default {
   data(){
     return{
-      addModal:false,
-      aptLists:[],
       addData:{
         aptName:'',
+        address:'',
+        repreName:'',
+        phoneNumber:'',
+        email:''
       },
       isAdding:false,
-      isEditing:false,
-
     }
   },
   mounted(){
@@ -63,47 +64,41 @@ export default {
   },
   methods:{
     async  addApt(){
+      if(this.addData.aptName.trim() == ''){
+        this.error('aptName is required')
+      }
+      if(this.addData.address.trim() == ''){
+        this.error('address is required')
+      }
+      if(this.addData.repreName.trim() == ''){
+        this.error('Representation Name is reqired')
+      }
+      if(this.addData.phoneNumber.trim() == ''){
+        this.error('phone Number is required')
+      }
+      if(this.addData.email.trim() == ''){
+        this.error('email is required')
+      }
+      
       this.isAdding = true
       await addApt(this.addData)
         .then(res=>{
           console.log(res)
-          this.aptLists.unshift(res.data)
+          if(res.status == 201){
+            this.isAdding = false
+            this.addData.aptName = ''
+            this.addData.address = ''
+            this.addData.repreName = ''
+            this.addData.phoneNumber = ''
+            this.addData.email = ''
+            this.$router.push({path:'/apartment'})
+          }
         })
         .catch(err=>{
           console.log(err)
         })
       this.isAdding = false
-      this.addModal = false
-      this.addData.aptName = ''
     },
-
-    editApt(apt,index){
-      this.$set(apt,'isEditing',true)
-      console.log(apt)
-    },
-    updateApt(apt,index){
-      if(apt.aptName.trim() == ''){
-        return this.error('aptName is required')
-      }
-      this.isEditing = true
-      updateApt(apt)
-        .then(res=>{
-          apt.isEditing = false
-        })
-        .catch(err=>{
-
-        })
-      this.isEditing = false
-    },
-    delApt(apt,index){
-      delApt(apt)
-        .then(res=>{
-          this.aptLists.splice(index,1)
-        })
-        .catch(err=>{
-          console.log(err)
-        })
-    }
   }
 }
 </script>
