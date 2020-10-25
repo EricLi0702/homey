@@ -1,0 +1,141 @@
+<template>
+  <div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Apt Code</label>
+      <div class="col-sm-10">
+        {{currentUser.apt.id}}
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Apt Name</label>
+      <div class="col-sm-10">
+        {{currentUser.apt.aptName}}
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">UserName</label>
+      <div class="col-sm-10">
+        <input type="text" id="userName" v-model="user.name" class="form-control" placeholder="">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email" id="userEmail" v-model="user.email" class="form-control" placeholder="">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">phoneNumber</label>
+      <div class="col-sm-10">
+        <input type="text" id="userName" v-model="user.phoneNumber" class="form-control" placeholder="">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Building</label>
+      <div class="col-sm-10">
+        <select class="mdb-select md-form" v-model="user.buildingId">
+          <option v-for="building in currentUser.apt.building" :key="building.id" :value="building.id">{{building.number}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Ho</label>
+      <div class="col-sm-10">
+        <input type="text" v-model="user.ho" class="form-control" id="phoneNumber" placeholder="">
+      </div>
+    </div>
+    <!-- <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">UserRole</label>
+      <div class="col-sm-10">
+        <select class="mdb-select md-form" v-model="user.buildingId">
+          <option v-for="building in currentUser.apt.building" :key="building.id" :value="building.id">{{building.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Ho</label>
+      <div class="col-sm-10">
+        <input type="email" v-model="user.email" class="form-control" id="email" placeholder="">
+      </div>
+    </div> -->
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">UserRole</label>
+      <div class="col-sm-10">
+        <select class="mdb-select md-form" v-model="user.roleId">
+          <option v-for="role in userRole" :key="role.id" :value="role.id" v-if="role.id > 2">{{role.roleName}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <Button type="success" @click="addUser" :loading="isAdding" :disabled="isAdding">Register</Button>
+      <!-- <button type="button" class="btn btn-primary">Edit</button> -->
+    </div>
+  </div>
+</template>
+
+<script>
+import {fetchUserRole} from '~/api/permission'
+import {addUser} from '~/api/user'
+import {mapGetters} from 'vuex'
+export default {
+  data(){
+    return{
+      user:{
+        aptId:'',
+        name:'',
+        email:'',
+        phoneNumber:'',
+        buildingId:'',
+        ho:'',
+        roleId:''
+      },
+      isAdding:false,
+      userRole:[],
+    }
+  },
+  computed:{
+    ...mapGetters({
+      currentUser:'auth/user'
+    })
+  },
+  mounted(){
+    console.log('++++',this.currentUser)
+    fetchUserRole()
+      .then(res=>{
+        console.log('---',res.data)
+        this.userRole = res.data
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+  },
+  methods:{
+    async  addUser(){
+      this.user.aptId = this.currentUser.apt.id
+      console.log('!!!!!!',this.user)
+      this.isAdding = true
+      await addUser(this.user)
+        .then(res=>{
+          console.log(res)
+          if(res.status == 201){
+            // this.isAdding = false
+            // this.addData.aptName = ''
+            // this.addData.address = ''
+            // this.addData.repreName = ''
+            // this.addData.phoneNumber = ''
+            // this.addData.email = ''
+            this.$router.push({path:'/user'})
+          }
+        })
+        .catch(err=>{
+          console.log(err)
+        })
+      this.isAdding = false
+    },
+  }
+}
+</script>
+
+<style>
+
+</style>

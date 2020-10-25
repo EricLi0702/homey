@@ -53,6 +53,7 @@ export default {
             addBuilding(this.buildingInfo)
                 .then(res=>{
                     console.log(res.data)
+                    this.buildingInfo.number = ''
                     this.buildingList.unshift(res.data)
                 })
                 .catch(err=>{

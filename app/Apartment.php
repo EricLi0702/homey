@@ -10,7 +10,7 @@ class Apartment extends Model
     protected $fillable = ['aptName','address','repreName','phoneNumber','email'];
 
     public function building(){
-        return $this->hasMany(Building::class,'buildingId');
+        return $this->hasMany(Building::class,'aptId');
     }
     public function superMng(){
         return $this->belongsTo(User::class,'aptId');

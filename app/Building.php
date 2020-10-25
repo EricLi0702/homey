@@ -8,4 +8,8 @@ class Building extends Model
 {
     //
     protected $guarded = [];
+
+    public function apt(){
+        return $this->belongsTo(Apartment::class,'aptId');
+    }
 }

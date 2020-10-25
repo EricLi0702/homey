@@ -30,11 +30,16 @@ export default [
       {path:'building', name:  'apartment.building', component: page('apartment/building.vue'),props:true},
     ]
   },
-  { path: '/building', name:'building', compoent: page('apartment/building/index.vue'),
+  
+  { path:'/user', component: page('user/index.vue'),
     children:[
-      {path:'', name:'building.'}
+      {path:'', name:'user.index', redirect:{name:'user.list'}},
+      {path:'list', name:'user.list', component: page('user/list')},
+      {path:'register', name:'user.register', component: page('user/register')},
+      {path:'edit', name:'user.details', component: page('user/details.vue')}
     ]
   },
+
   { path: '/superManager', name:'superManager', component: page('superManager/index.vue'),
     children:[
       {path:'register', name:  'superManager.register', component: page('superManager/register.vue')},

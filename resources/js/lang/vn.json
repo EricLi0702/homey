@@ -9,7 +9,8 @@
         "forgotPassword":"forgot password",
         "apartment":"apartment",
         "superManager":"super Manager",
-        "userRole":"vn_UserRole"
+        "userRole":"vn_UserRole",
+        "user":"vn_user"
     },
     "login":{
         "login":"Đăng nhập",

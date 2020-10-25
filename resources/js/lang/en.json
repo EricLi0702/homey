@@ -9,7 +9,9 @@
         "forgotPassword":"forgot password",
         "apartment":"apartment",
         "superManager":"super Manager",
-        "userRole":"UserRole"
+        "userRole":"UserRole",
+        "user":"user"
+
     },
     "login":{
         "login":"login",

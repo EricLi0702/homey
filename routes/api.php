@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('settings/password', 'Settings\PasswordController@update');
 
     Route::get('users', 'Auth\UserController@userList');
+    Route::post('users','Auth\UserController@addUser');
 
     Route::get('userRole','UserRoleController@getUserRoleList');
     Route::post('userRole','UserRoleController@addUserRole');

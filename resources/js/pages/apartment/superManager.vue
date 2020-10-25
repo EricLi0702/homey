@@ -7,13 +7,13 @@
             </div>
         </div>        
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">AptName</label>
+            <label for="staticEmail" class="col-sm-2 col-form-label">Address</label>
             <div class="col-sm-10">
                 {{aptData.address}}
             </div>
         </div>        
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">AptName</label>
+            <label for="staticEmail" class="col-sm-2 col-form-label">Represent Name</label>
             <div class="col-sm-10">
                 {{aptData.repreName}}
             </div>

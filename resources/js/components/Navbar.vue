@@ -12,6 +12,11 @@
                 {{ $t('common').apartment }}
                 
               </router-link>
+
+              <router-link :to="{ path:'/user' }" class="nav-item dropdown-item" active-class="active">
+                {{ $t('common').user }}
+              </router-link>
+
               <router-link :to="{ path:'/UserRole' }" class="nav-item dropdown-item" active-class="active">
                 {{ $t('common').userRole }}
               </router-link>
