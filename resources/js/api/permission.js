@@ -13,7 +13,7 @@ function updateUserRole(payload){
 }
 
 function delUserRole(payload){
-    return axios.delete('/api/userRole',payload)
+    return axios.delete('/api/userRole',{data:payload})
 }
 
 export{

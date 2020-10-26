@@ -20,11 +20,26 @@ export default [
       {path:'permission',  name: 'permission.UserRoleAdd', component: page('auth/permission/UserRoleAdd.vue')}
     ]
   },
-  { path: '/apartment', name: 'apartment', component: page('apartment/index.vue'),
+  { path: '/apartment', component: page('apartment/index.vue'),
     children:[
+      {path:'',name:'apartment.index', redirect:{name:'apartment.list'}},
+      {path:'list',name:'apartment.list', component:page('apartment/list.vue')},
       {path:'register', name:  'apartment.register', component: page('apartment/register.vue')},
+      {path:'edit', name:  'apartment.details', component: page('apartment/details.vue'),props:true},
+      {path:'superManager', name:  'apartment.superManager', component: page('apartment/superManager.vue'),props:true},
+      {path:'building', name:  'apartment.building', component: page('apartment/building.vue'),props:true},
     ]
   },
+  
+  { path:'/user', component: page('user/index.vue'),
+    children:[
+      {path:'', name:'user.index', redirect:{name:'user.list'}},
+      {path:'list', name:'user.list', component: page('user/list')},
+      {path:'register', name:'user.register', component: page('user/register')},
+      {path:'edit', name:'user.details', component: page('user/details.vue')}
+    ]
+  },
+
   { path: '/superManager', name:'superManager', component: page('superManager/index.vue'),
     children:[
       {path:'register', name:  'superManager.register', component: page('superManager/register.vue')},

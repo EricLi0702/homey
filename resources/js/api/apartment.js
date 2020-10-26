@@ -13,7 +13,19 @@ function updateApt(payload){
 }
 
 function delApt(payload){
-    return axios.delete('/api/apartment',payload)
+    return axios.delete('/api/apartment',{data: payload})
+}
+
+function addSuperMng(payload){
+    return axios.post('/api/superMng',payload)
+}
+
+function getBuildingList(payload){
+    return axios.get('/api/aptBuilding',{params:payload});
+}
+
+function addBuilding(payload){
+    return axios.post('/api/aptBuilding',payload)
 }
 
 export{
@@ -21,4 +33,7 @@ export{
     addApt,
     updateApt,
     delApt,
+    addSuperMng,
+    getBuildingList,
+    addBuilding
 }

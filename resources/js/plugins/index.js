@@ -5,5 +5,6 @@ import './wysiwyg'
 import './infinite'
 import './imageviewer'
 import './videoview'
+import './googleMaps'
 import 'bootstrap'
 

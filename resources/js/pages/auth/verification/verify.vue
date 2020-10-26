@@ -8,7 +8,7 @@
           </div>
 
           <router-link :to="{ name: 'login' }" class="btn btn-primary">
-            {{ $t('login') }}
+            {{ $t('login').login }}
           </router-link>
         </template>
         <template v-else>

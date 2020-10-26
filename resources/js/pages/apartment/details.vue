@@ -31,39 +31,28 @@
       </div>
     </div>
     <div class="form-group row">
-      <Button type="success" @click="addApt" :loading="isAdding" :disabled="isAdding">Register</Button>
+      <Button type="success" @click="editApt" :loading="isAdding" :disabled="isAdding">Edit</Button>
       <!-- <button type="button" class="btn btn-primary">Edit</button> -->
     </div>
   </div>
 </template>
 
 <script>
-import {addApt,getAptLists,updateApt,delApt} from '~/api/apartment'
+import {updateApt} from '~/api/apartment'
 export default {
+  props:{
+    addData:Object
+  },
   data(){
     return{
-      addData:{
-        aptName:'',
-        address:'',
-        repreName:'',
-        phoneNumber:'',
-        email:''
-      },
       isAdding:false,
     }
   },
   mounted(){
-    getAptLists()
-      .then(res=>{
-        console.log(res)
-        this.aptLists = res.data
-      })
-      .catch(err=>{
-        console.log(err)
-      })
+    console.log('++++',this.addData)
   },
   methods:{
-    async  addApt(){
+    async  editApt(){
       if(this.addData.aptName.trim() == ''){
         this.error('aptName is required')
       }
@@ -81,10 +70,9 @@ export default {
       }
       
       this.isAdding = true
-      await addApt(this.addData)
+      await updateApt(this.addData)
         .then(res=>{
           console.log(res)
-          if(res.status == 201){
             this.isAdding = false
             this.addData.aptName = ''
             this.addData.address = ''
@@ -92,12 +80,11 @@ export default {
             this.addData.phoneNumber = ''
             this.addData.email = ''
             this.$router.push({path:'/apartment'})
-          }
         })
         .catch(err=>{
           console.log(err)
         })
-      this.isAdding = false
+      
     },
   }
 }

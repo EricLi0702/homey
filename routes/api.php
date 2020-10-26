@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('settings/password', 'Settings\PasswordController@update');
 
     Route::get('users', 'Auth\UserController@userList');
+    Route::post('users','Auth\UserController@addUser');
 
     Route::get('userRole','UserRoleController@getUserRoleList');
     Route::post('userRole','UserRoleController@addUserRole');
@@ -53,6 +54,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('fileUpload/other','UploadController@otherUpload');
     Route::post('fileUpload/video','UploadController@videoUpload');
     Route::delete('fileUpload/file','UploadController@deleteFile');
+    Route::post('superMng','ApartmentController@addSuperMng');
+
+    Route::get('aptBuilding','BuildingController@getBuildingList');
+    Route::post('aptBuilding','BuildingController@addBuilding');
 });
 
 Route::group(['middleware' => 'guest:api'], function () {

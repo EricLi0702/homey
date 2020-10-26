@@ -8,7 +8,9 @@
         "rememberMe":"remember me",
         "forgotPassword":"forgot password",
         "apartment":"apartment",
-        "superManager":"super Manager"
+        "superManager":"super Manager",
+        "userRole":"vn_UserRole",
+        "user":"vn_user"
     },
     "login":{
         "login":"Đăng nhập",

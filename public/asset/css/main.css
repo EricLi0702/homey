@@ -110,6 +110,10 @@ body{
     background: #ECF0F1;
 }
 
+.mt-7{
+    margin-top:7rem!important;
+}
+
 .clearfix::before{
     content: "";
     display: table;

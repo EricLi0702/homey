@@ -8,7 +8,9 @@
         "rememberMe":"remember me",
         "forgotPassword":"forgot password",
         "apartment":"apartment",
-        "superManager":"super Manager"
+        "superManager":"super Manager",
+        "userRole":"kr_UserRole",
+        "user":"kr_user"
     },
     "login":{
         "login":"로그인",

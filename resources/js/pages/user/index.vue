@@ -1,7 +1,6 @@
 <template>
-  <div>
-      regiter superAdmin
-      <Icon type="ios-add-circle-outline" />
+  <div class="container mt-7">
+      <router-view></router-view>
   </div>
 </template>
 

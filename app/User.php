@@ -19,7 +19,7 @@ class User extends Authenticatable implements JWTSubject , MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','roleId',
+        'name', 'email', 'password','roleId','phoneNumber','aptId','ho',
     ];
 
     /**
@@ -108,5 +108,12 @@ class User extends Authenticatable implements JWTSubject , MustVerifyEmail
 
     public function role(){
         return $this->belongsTo(UserRole::class, 'roleId');
+    }
+
+    public function apt(){
+        return $this->belongsTo(Apartment::class,'aptId');
+    }
+    public function building(){
+        return $this->belongsTo(Building::class,'buidingId');
     }
 }
