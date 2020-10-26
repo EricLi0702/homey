@@ -136,10 +136,10 @@
                 <div class="attraction">
                     <div class="row p-0 m-0">
                         <div class="a-title col-md-12">
-                            <h1>Vampire-Apartement Awesome</h1>
+                            <h1 class="text-white">Vampire-Apartement Awesome</h1>
                         </div>
                         <div class="a-description col-md-12 mt-5">
-                            <h4>V-apartment Services</h4>
+                            <h4 class="text-white">V-apartment Services</h4>
                         </div>
                         <hr>
                         <div class="a-link col-md-12 d-flex justify-content-center mt-5">

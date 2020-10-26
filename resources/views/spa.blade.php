@@ -13,14 +13,12 @@ $config = [
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>{{ config('app.name') }}</title>
-
   <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
   <link rel="stylesheet" href="{{ mix('dist/css/all.css')}}">
   <script src="{{ asset('asset/js/jquery-3.5.1.min.js') }}"></script>
   <script type="text/javascript">
     let base_url = "{{ URL::to('/') }}"
     window.base_url = "{{ URL::to('/') }}"
-    console.log(base_url)
   </script>
 
 </head>
@@ -30,6 +28,13 @@ $config = [
   {{-- Global configuration object --}}
   <script>
     window.config = @json($config);
+  </script>
+  <script>
+    (function(){
+        window.Laravel = {
+            csrfToken:'{{ csrf_token() }}'
+        }
+      })();
   </script>
 
   {{-- Load the application scripts --}}

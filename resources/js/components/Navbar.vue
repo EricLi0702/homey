@@ -40,9 +40,11 @@
         <img :src="`${baseUrl}/asset/img/icon/logo.png`" alt="">
       </router-link>
       <ul class="navbar-nav ml-auto">
-        <!-- <li>
-          <Icon size="25" color="#FF5E14" type="md-notifications" />
-        </li> -->
+        <li class="mr-3 d-flex align-items-center">
+          <Badge :count="1">
+            <Icon size="25" color="#FF5E14" type="md-notifications" />
+          </Badge>
+        </li>
         <locale-dropdown />
         <!-- Authenticated -->
         <li v-if="user" class="nav-item dropdown mx-3">
@@ -95,13 +97,37 @@ export default {
   computed: mapGetters({
     user: 'auth/user'
   }),
+  mounted(){
+    this.listenNewNotification();
+  },
   methods: {
     async logout () {
       // Log out the user.
       await this.$store.dispatch('auth/logout')
       // Redirect to login.
       this.$router.push({ name: 'login' })
-    }
+    },
+
+    listenNewNotification(){
+      Echo.private('notification')
+          .listen('NewNotification', (newNotification) => {
+              console.log("wow, greate!!",newNotification);
+              // this.$store.commit('setNewNotificationCnt', this.getCurrentUser.new_noti_cnt + 1);
+              // this.notificationList.unshift(newNotification.notification);
+              // Notification.requestPermission( permission => {
+              //     let notification = new Notification('New post alert!', {
+              //         body: newNotification.notification.title, // content for the alert
+              //         icon: "http://127.0.0.1:8000/images/icons/mainPage-phone.png" // optional image url
+              //     });
+
+              //     // link to page on clicking the notification
+              //     notification.onclick = () => {
+              //         window.open(window.location.href);
+              //     };
+              // });
+              // const res = this.callApi('post','/api/users/newVideoCount',{new_video_cnt:this.$store.state.user.new_video_cnt});
+          });
+    },
   }
 }
 </script>

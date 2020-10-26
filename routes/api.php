@@ -32,6 +32,27 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('apartment','ApartmentController@addApt');
     Route::put('apartment','ApartmentController@updateApt');
     Route::delete('apartment','ApartmentController@delApt');
+
+    Route::post('notification/create', 'NotificationController@store');
+    Route::get('notification', 'NotificationController@index');
+
+
+
+    Route::post('suggestion/create', 'SuggestionController@store');
+    Route::get('suggestion', 'SuggestionController@index');
+    Route::get('suggestion/current', 'SuggestionController@getCurrent');
+    Route::post('suggestion/comment', 'CommentOfSuggestionController@leaveComment');
+    Route::post('suggestion/heart', 'SuggestionController@addHeart');
+    Route::post('suggestion/unheart', 'SuggestionController@removeHeart');
+    Route::post('suggestion/like', 'SuggestionController@addLike');
+    Route::post('suggestion/unlike', 'SuggestionController@removeLike');
+    Route::post('suggestion/dislike', 'SuggestionController@addDislike');
+    Route::post('suggestion/undislike', 'SuggestionController@removeDislike');
+
+    Route::post('fileUpload/image','UploadController@imageUpload');
+    Route::post('fileUpload/other','UploadController@otherUpload');
+    Route::post('fileUpload/video','UploadController@videoUpload');
+    Route::delete('fileUpload/file','UploadController@deleteFile');
 });
 
 Route::group(['middleware' => 'guest:api'], function () {

@@ -1,0 +1,183 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Suggestion;
+use App\CommentOfSuggestion;
+use App\User;
+
+class SuggestionController extends Controller
+{
+    public function store(Request $request)
+    {
+        $this->validate($request,[
+            'title' => 'bail|required',
+            'desc' => 'bail|required',
+        ]);
+        $userId = Auth::user()->id;
+        $suggestionData['userId'] = $userId;
+        $suggestionData['title'] = $request->title;
+        $suggestionData['content'] = $request->desc;
+        $suggestionData['upload_file'] = json_encode($request->file);
+
+        $suggestion = Suggestion::create($suggestionData); 
+        return response()->json([
+            'suggestion' => $suggestion
+        ], 201);
+    }
+
+    public function index(Request $request){
+        return Suggestion::with('userId')
+                        ->orderBy('created_at','desc')->paginate(2);
+    }
+
+    public function getCurrent(Request $request){
+        $id = $request->id;
+        $suggestionData =  Suggestion::where([['id','=',$request->id]])
+                        ->with('userId')
+                        ->get();
+        $commentData = CommentOfSuggestion::where([['suId','=',$request->id]])
+                        ->with('userId')
+                        ->get();
+        return response()->json([
+            'suggestionData' => $suggestionData,
+            'commentData' => $commentData
+        ], 200);
+    }
+
+    
+
+    public function addHeart(Request $request){
+        $userId = Auth::user()->id;
+        $suggestionId = $request->id;
+        $suggestionData = Suggestion::where('id', $suggestionId)->first();
+        $currentHeartCnt = json_decode($suggestionData->heart_cnt);
+        if($currentHeartCnt == null){
+            $currentHeartCnt[] = $userId;
+            $suggestionData->heart_cnt = $currentHeartCnt;
+            $suggestionData->save();
+            return $currentHeartCnt;
+        }
+        else{
+            if (in_array($userId, $currentHeartCnt)) {
+                return $currentHeartCnt;
+            }
+            else{
+                array_push($currentHeartCnt, $userId);
+                $suggestionData->heart_cnt = $currentHeartCnt;
+                $suggestionData->save();
+                return $currentHeartCnt;
+            }
+        }
+    }
+    public function addLike(Request $request){
+        $userId = Auth::user()->id;
+        $suggestionId = $request->id;
+        $suggestionData = Suggestion::where('id', $suggestionId)->first();
+        $currentLikeCnt = json_decode($suggestionData->like_cnt);
+        if($currentLikeCnt == null){
+            $currentLikeCnt[] = $userId;
+            $suggestionData->like_cnt = $currentLikeCnt;
+            $suggestionData->save();
+            return $currentLikeCnt;
+        }
+        else{
+            if (in_array($userId, $currentLikeCnt)) {
+                return $currentLikeCnt;
+            }
+            else{
+                array_push($currentLikeCnt, $userId);
+                $suggestionData->like_cnt = $currentLikeCnt;
+                $suggestionData->save();
+                return $currentLikeCnt;
+            }
+        }
+    }
+
+    public function addDislike(Request $request){
+        $userId = Auth::user()->id;
+        $suggestionId = $request->id;
+        $suggestionData = Suggestion::where('id', $suggestionId)->first();
+        $currentDislikeCnt = json_decode($suggestionData->dislike_cnt);
+        if($currentDislikeCnt == null){
+            $currentDislikeCnt[] = $userId;
+            $suggestionData->dislike_cnt = $currentDislikeCnt;
+            $suggestionData->save();
+            return $currentDislikeCnt;
+        }
+        else{
+            if (in_array($userId, $currentDislikeCnt)) {
+                return $currentDislikeCnt;
+            }
+            else{
+                array_push($currentDislikeCnt, $userId);
+                $suggestionData->dislike_cnt = $currentDislikeCnt;
+                $suggestionData->save();
+                return $currentDislikeCnt;
+            }
+        }
+    }
+    
+
+    public function removeHeart(Request $request){
+        $userId = Auth::user()->id;
+        $suggestionId = $request->id;
+        $suggestionData = Suggestion::where('id', $suggestionId)->first();
+        $currentHeartCnt = json_decode($suggestionData->heart_cnt);
+        if( sizeof($currentHeartCnt) == 1 && $currentHeartCnt[0] == $userId){
+            $currentHeartCnt = null;
+            $suggestionData->heart_cnt = $currentHeartCnt;
+            $suggestionData->save();
+        }
+        else{
+            if (($key = array_search($userId, $currentHeartCnt)) !== false) {
+                unset($currentHeartCnt[$key]);
+            }
+            $suggestionData->heart_cnt = $currentHeartCnt;
+            $suggestionData->save();
+            return $currentHeartCnt;
+        }
+    }
+
+    public function removeLike(Request $request){
+        $userId = Auth::user()->id;
+        $suggestionId = $request->id;
+        $suggestionData = Suggestion::where('id', $suggestionId)->first();
+        $currentLikeCnt = json_decode($suggestionData->like_cnt);
+        if( sizeof($currentLikeCnt) == 1 && $currentLikeCnt[0] == $userId){
+            $currentLikeCnt = null;
+            $suggestionData->like_cnt = $currentLikeCnt;
+            $suggestionData->save();
+        }
+        else{
+            if (($key = array_search($userId, $currentLikeCnt)) !== false) {
+                unset($currentLikeCnt[$key]);
+            }
+            $suggestionData->like_cnt = $currentLikeCnt;
+            $suggestionData->save();
+            return $currentLikeCnt;
+        }
+    }
+
+    public function removeDislike(Request $request){
+        $userId = Auth::user()->id;
+        $suggestionId = $request->id;
+        $suggestionData = Suggestion::where('id', $suggestionId)->first();
+        $currentDislikeCnt = json_decode($suggestionData->dislike_cnt);
+        if( sizeof($currentDislikeCnt) == 1 && $currentDislikeCnt[0] == $userId){
+            $currentDislikeCnt = null;
+            $suggestionData->dislike_cnt = $currentDislikeCnt;
+            $suggestionData->save();
+        }
+        else{
+            if (($key = array_search($userId, $currentDislikeCnt)) !== false) {
+                unset($currentDislikeCnt[$key]);
+            }
+            $suggestionData->dislike_cnt = $currentDislikeCnt;
+            $suggestionData->save();
+            return $currentDislikeCnt;
+        }
+    }
+}

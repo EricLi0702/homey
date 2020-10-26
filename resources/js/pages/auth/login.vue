@@ -1,55 +1,66 @@
 <template>
-  <div class="row m-0 p-0">
-    <div class="col-lg-8 m-auto">
-      <card :title="$t('login').login">
-        <form @submit.prevent="login" @keydown="form.onKeydown($event)">
-          <!-- Email -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('common').email }}</label>
-            <div class="col-md-7">
-              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
-              <has-error :form="form" field="email" />
+  <div class="login-container container-fluid d-flex justify-content-center align-items-center">
+    <div class="login-body text-left">
+      <div class="lc-logo justify-content-center align-items-center d-flex pt-5">
+          <img src="/asset/img/icon/logo.png" alt="">
+      </div>
+      <Divider />
+      <div class="lc-title">
+          <h4 class="p-3"><strong>{{$t('login').login}}</strong></h4>
+      </div>
+      <form @submit.prevent="login" @keydown="form.onKeydown($event)">
+        <div class="lc-form px-4">
+            <div class="m-2">
+                <p class="mt-2">Email </p>
+                <!-- <Input type="email" v-model="data.email" aria-describedby="emailHelp" class="ml-auto" prefix="ios-contact" placeholder="Enter email" style="width: auto" /> -->
+                <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
+                <has-error :form="form" field="email" />
             </div>
-          </div>
-
-          <!-- Password -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('common').password }}</label>
-            <div class="col-md-7">
-              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
-              <has-error :form="form" field="password" />
+            <div class="m-2">
+                <div class="d-flex">
+                    <p class="mt-2">Password </p>
+                    <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto mt-2 ml-auto">
+                      {{ $t('common').forgotPassword }}
+                    </router-link>
+                    <!-- <a class="mt-2 ml-auto">Forgot password?</a> -->
+                </div>
+                <!-- <Input type="password" v-model="data.password" class="ml-auto" prefix="ios-key" placeholder="******" style="width: auto" /> -->
+                <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
+                <has-error :form="form" field="password" />
             </div>
-          </div>
-
-          <!-- Remember Me -->
-          <div class="form-group row">
-            <div class="col-md-3" />
-            <div class="col-md-7 d-flex">
-              <checkbox v-model="remember" name="remember">
-                {{ $t('common').rememberMe }}
-              </checkbox>
-
-              <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto">
-                {{ $t('common').forgotPassword }}
-              </router-link>
+            <div class="m-2">
+                <!-- <Checkbox v-model="rememberMe">Remember Me</Checkbox> -->
+                <checkbox v-model="remember" name="remember">
+                  {{ $t('common').rememberMe }}
+                </checkbox>
             </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-md-7 offset-md-3 d-flex">
-              <!-- Submit Button -->
-              <v-button :loading="form.busy">
+            <div class="m-2">
+              <v-button class="w-100" :loading="form.busy">
                 {{ $t('login').login }}
               </v-button>
-
-              <!-- GitHub Login Button -->
-              <login-with-github />
+                <!-- <Button type="primary" long @click="authenticate"  :loading="form.busy">{{ $t('login').login }}</Button> -->
             </div>
-          </div>
-        </form>
-      </card>
+
+            <div class="m-2 text-center">
+                <p>Login with social</p>
+            </div>
+            <div class="m-2 d-flex justify-content-between">
+                <Button class="w-49 mr-auto facebook-login-btn" icon="logo-facebook">Facebook</Button>
+                <Button class="w-49 ml-auto google-login-btn" icon="logo-google">Google</Button>
+            </div>
+
+            <div class="m-2 text-center py-3">
+                <p>Don't have an account?
+                  <router-link :to="{ name: 'register' }">
+                    create one
+                  </router-link>
+                </p>
+            </div>
+        </div>
+      </form>
     </div>
   </div>
+  
 </template>
 
 <script>

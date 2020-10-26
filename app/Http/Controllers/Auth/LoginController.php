@@ -64,6 +64,7 @@ class LoginController extends Controller
             'token' => $token,
             'token_type' => 'bearer',
             'expires_in' => $expiration - time(),
+            'user' => auth()->user()
         ]);
     }
 

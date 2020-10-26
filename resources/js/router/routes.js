@@ -30,9 +30,28 @@ export default [
       {path:'register', name:  'superManager.register', component: page('superManager/register.vue')},
     ]
   },
-  { path: '/notification',  name:  'notification',  component:  page('notification/notification.vue') },
-  { path: '/community',  name:  'community',  component:  page('community/community.vue') },
-  { path: '/suggestion',  name:  'suggestion',  component:  page('suggestion/suggestion.vue') },
+  { path: '/notification',  name:  'notification',  component:  page('notification/index.vue'),
+    children:[
+      {path:'', name:  'notification', redirect: {name:  'notification.list'}},
+      {path:'index', name:  'notification.list', component: page('notification/list.vue')},
+      {path:'register', name:  'notification.register', component: page('notification/register.vue')},
+    ]
+  },
+  { path: '/community',  name:  'community',  component:  page('community/index.vue'),
+    children:[
+      {path:'', name:  'community', redirect: {name:  'community.list'}},
+      {path:'index', name:  'community.list', component: page('community/list.vue')},
+      {path:'new', name:  'community.create', component: page('community/create.vue')},
+    ] 
+  },
+  { path: '/suggestion',  name:  'suggestion',  component:  page('suggestion/index.vue'),
+    children:[
+      {path:'', name:  'suggestion', redirect: {name:  'suggestion.list'}},
+      {path:'index', name:  'suggestion.list', component: page('suggestion/list.vue')},
+      {path:':id', name:'suggestion.view', component: page('suggestion/view.vue'),props:true},
+      {path:'new', name:  'suggestion.create', component: page('suggestion/create.vue')},
+    ] 
+  },
   { path: '/repair',  name:  'repair',  component:  page('repair/repair.vue') },
   { path: '/facillity',  name:  'facillity',  component:  page('facillity/facillity.vue') },
   { path: '/settings',
