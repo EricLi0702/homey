@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid bg-light-gray m-0 p-0">
-        <div class="apt-img hv-40 noti-apt-img">
-        </div>
+        <!-- <div class="apt-img hv-40 noti-apt-img">
+        </div> -->
         <div class="notification-sub-menu container-fluid bg-white box-block">
             <div class="container d-flex justify-content-between p-0 py-3 ">
                 <Input class="w-40"
