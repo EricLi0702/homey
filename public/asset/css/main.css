@@ -149,6 +149,10 @@ body{
     background: linear-gradient(147deg, #04619f 0%, #000000 74%);
 }
 
+.dropdown-item:hover{
+    text-decoration: none;
+    background-color: #04619F;
+}
 
 .gr-1 {
     background: linear-gradient(147deg, #000000 0%, #04619f 74%);
@@ -261,6 +265,11 @@ body{
     opacity: 0.2;
     color: rgba(255, 255, 255, 1);
     z-index: 0;
+}
+
+.navbar-flag{
+    width:27px; 
+    
 }
 
 .apt-img{
@@ -942,4 +951,13 @@ a.text-dark:hover, a.text-dark:focus {
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: 0, -515px;
+}
+
+.ivu-tabs-nav{
+    font-size: 20px!important;
+}
+
+.ivu-tabs-nav-next, 
+.ivu-tabs-nav-prev{
+    line-height: 50px!important;
 }

@@ -3,12 +3,14 @@
     <a class="nav-link dropdown-toggle" href="#" role="button"
        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
     >
+      <img style="width:27px; margin:3px;" :src="`/asset/img/icon/${locales[locale]}_flag.png`" alt="" />
       {{ locales[locale] }}
     </a>
     <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn">
       <a v-for="(value, key) in locales" :key="key" class="dropdown-item" href="#"
          @click.prevent="setLocale(key)"
       >
+        <img class="navbar-flag" :src="`/asset/img/icon/${value}_flag.png`" alt="" />
         {{ value }}
       </a>
     </div>
@@ -37,3 +39,4 @@ export default {
   }
 }
 </script>
+

@@ -20,10 +20,34 @@ html, body {
   padding: 10px 0;
 }
 .navbar-brand h1{
-  color: tomato;
+  color: white;
 }
 .navbar-nav a {
-  color: tomato!important;
+  color: white!important;
+}
+
+.navbar-nav.ml-auto .ivu-badge .ivu-badge-count{
+  font-family: "Monospaced Number";
+    line-height: 1;
+    vertical-align: middle;
+    position: absolute;
+    transform: translateX(50%);
+    top: -5px;
+    right: 4px;
+    height: 15px;
+    border-radius: 10px;
+    min-width: 6px;
+    background: #ed4014;
+    border: 1px solid transparent;
+    color: #fff;
+    line-height: 15px;
+    text-align: center;
+    padding: 0 3px;
+    font-size: 6px;
+    white-space: nowrap;
+    transform-origin: -10% center;
+    z-index: 10;
+    box-shadow: 0 0 0 1px #fff;
 }
 
 /* jQuery Styles

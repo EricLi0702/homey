@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-dark navbar-scroll fixed-top">
-    <div class="container">
+    <div class="container p-0">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
           <button class="navbar-toggler" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -60,18 +60,19 @@
         <img :src="`${baseUrl}/asset/img/icon/logo.png`" alt="">
       </router-link>
       <ul class="navbar-nav ml-auto">
-        <li class="mr-3 d-flex align-items-center">
+        <locale-dropdown />
+        <li class="mr-2 d-flex align-items-center ml-3">
           <Badge :count="1">
-            <Icon size="25" color="#FF5E14" type="md-notifications" />
+            <Icon size="30" color="#ffffff" type="md-notifications" />
           </Badge>
         </li>
-        <locale-dropdown />
         <!-- Authenticated -->
         <li v-if="user" class="nav-item dropdown mx-3">
           <a class="nav-link dropdown-toggle text-dark"
               href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           >
-            <img :src="user.photo_url" class="rounded-circle profile-photo mr-1">
+            <!-- <img :src="user.photo_url" class="rounded-circle profile-photo mr-1"> -->
+            <img :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
             <!-- <img src="https://i.pravatar.cc/40" alt="" style="border-radius: 50%;"> -->
            
           </a>

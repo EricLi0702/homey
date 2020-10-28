@@ -56,6 +56,7 @@
                         @infinite="infiniteHandlerNotification"
                         spinner="circles"
                     >
+                    
                         <div slot="no-more">no more notification</div>
                     </InfiniteLoading>
                 </div>
