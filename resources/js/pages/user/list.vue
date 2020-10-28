@@ -23,8 +23,8 @@
                 <td>{{user.aptId}}</td>
                 <td>{{user.name}}</td>
                 <td>{{user.email}}</td>
-                <td>{{user.PhoneNumber}}</td>
-                <td>{{user.dong}}</td>
+                <td>{{user.phoneNumber}}</td>
+                <td>{{user.apt.building}}</td>
                 <td>{{user.ho}}</td>
                 <td>{{TimeView(user.created_at)}}</td>
                 <td class="d-flex">
