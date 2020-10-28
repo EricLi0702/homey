@@ -22,13 +22,20 @@
                 </div>
             </div>
         </div>
+        <div class="container p-0 mb-3">
+            <Breadcrumb />
+        </div>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
+import Breadcrumb from '~/components/Breadcrumb'
 export default {
     middleware: 'auth',
+    components:{
+        Breadcrumb,
+    },
     data(){
         return{
             baseUrl:window.base_url,

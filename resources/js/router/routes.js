@@ -67,6 +67,14 @@ export default [
       {path:':id', name:'suggestion.view', component: page('suggestion/view.vue')},
     ] 
   },
+  { path: '/repair',  name:  'repair',  component:  page('repair/index.vue'),
+    children:[
+      {path:'', name:  'repair', redirect: {name:  'repair.list'}},
+      {path:'index', name:  'repair.list', component: page('repair/list.vue')},
+      {path:'create', name:  'repair.create', component: page('repair/create.vue')},
+      {path:':id', name:'repair.view', component: page('repair/view.vue')},
+    ] 
+  },
   { path: '/repair',  name:  'repair',  component:  page('repair/repair.vue') },
 
   { path: '/facility',  name:  'facility',  component:  page('facility/index.vue'),

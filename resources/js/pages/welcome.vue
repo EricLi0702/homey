@@ -13,7 +13,7 @@
                         <h4>Welcome to our V-apartment service system</h4>
                     </div>
                     <div class="btn col-md-12 mt-5">
-                        <Button shape="circle" size="large" type="primary mt-5">Get start</Button>
+                        <Button shape="circle" size="large" type="primary" style="height: 58px; padding: 4px 50px;">Get start</Button>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                             <a href="#">REPAIR</a>
                         </div>
                         <div class="a-button d-flex col-md-12 align-items-center justify-content-center text-center">
-                            <Button shape="circle" size="large" type="primary mt-5">Services Details</Button>
+                            <Button shape="circle" size="large" type="primary mt-5" style="height: 58px; padding: 4px 50px;">Services Details</Button>
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                                 <p>Call or email us to shedule a update today. Come see your updated home and the community features in person.</p>
                             </div>
                             <div class="join-button col-md-12">
-                                <button class="btn btn-outline-white btn-md mb-sm-5 mb-5">Decoration Detail</button>
+                                <Button shape="circle" size="large" type="primary" style="height: 58px; padding: 4px 50px;">Join Community</Button>
                             </div>
                         </div>
                     </div>
@@ -341,7 +341,7 @@
     <div class="container-fluid mt-5">
         <div class="row p-0 m-0">
             <div class="add-title col-md-12 row p-0 m-0">
-                <h2 class="col-md-12 d-flex align-items-center justify-content-center row p-0 m-0">Apartment Living</h2>
+                <h2 class="col-md-12 d-flex align-items-center justify-content-center row p-0 m-0 text-warning">Apartment Living</h2>
             </div>
             <div class="add-content col-md-12 row p-0 mt-5">
                 <p class="col-md-4 offset-md-4 text-center mb-5">Living at Spectrum puts everything that you need and love close at hand. Our central location is within walking distance of two grocery stores, a pharmacy, hospital, and beltway. You'll find a different kind of living here at Spectrum--one characterized by ease and elegance.</p>
