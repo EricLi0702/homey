@@ -7,102 +7,7 @@
         </div>
         <div class="container m-0 p-0 mx-auto">
             <div class="row m-0 p-0">
-                <div class="col-12 col-md-4 m-0 p-0 pr-md-4">
-                    <div class="box-block">
-                        <div class="community-category-title p-3">
-                            Categories
-                        </div>
-                        <div class="community-category-list p-3">
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-block">
-                        <div class="community-category-title p-3">
-                            Categories
-                        </div>
-                        <div class="community-category-list p-3">
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-block">
-                        <div class="community-category-title p-3">
-                            Categories
-                        </div>
-                        <div class="community-category-list p-3">
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                <Category/>
                 <div class="col-12 col-md-8 m-0 p-0">
                     <div class="posted-item" v-for="(notification,i) in notificationList" :key="i" v-if="notificationList.length">
                         <div class="pi-wrap float-left">
@@ -163,9 +68,11 @@
 import InfiniteLoading from 'vue-infinite-loading';
 import axios from 'axios'
 import {getNotificationList,registerNotification,updateNotification,delNotification} from '~/api/notification'
+import Category from './category'
 export default {
     components:{
         InfiniteLoading,
+        Category,
     },
     data(){
         return{

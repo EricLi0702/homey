@@ -21,7 +21,8 @@
                             <div class="emoji-area-popup">
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
-                            <Button class="ml-auto" @click="registerSuggestion" :disabled="isSuggesting" :loading="isSuggesting">Suggest</Button>
+                            <Button icon="ios-briefcase-outline" type="warning" class="ml-auto mr-2" @click="saveToDraftSuggestion" :disabled="isSavingDraft" :loading="isSavingDraft">Draft</Button>
+                            <Button icon="ios-send" type="success" class="" @click="registerSuggestion" :disabled="isSuggesting" :loading="isSuggesting">Suggest</Button>
                         </div>
                         <div class="col-12 uploaded_file">
                             <div class="image-item" v-if="createSuggestionData.file.imgUrl && createSuggestionData.file.imgUrl.length >0">
@@ -35,9 +36,9 @@
                                 </div>
                             </div>
                             <div class="file-item row" v-if="createSuggestionData.file.otherUrl.length &&createSuggestionData.file.otherUrl.length>0">
-                                <div class="col-4" v-for="(otherUrl,j) in createSuggestionData.file.otherUrl" :key="j">
+                                <div class="col-6 col-md-4" v-for="(otherUrl,j) in createSuggestionData.file.otherUrl" :key="j">
                                     <div class="image-upload-list float-left">
-                                        <img src="/img/icon/icon_rar@2x.png" alt="">
+                                        <img src="/asset/img/icon/upload_file_img.png" class="w-100" alt="">
                                         <div class="demo-upload-list-cover">
                                             <Icon type="ios-trash-outline" @click="deleteFile('other',otherUrl)"></Icon>
                                         </div>
@@ -50,9 +51,9 @@
                                 </div>
                             </div>
                             <div class="file-item row" v-if="createSuggestionData.file.videoUrl.length && createSuggestionData.file.videoUrl.length>0">
-                                <div class="col-4" v-for="(videoUrl,j) in createSuggestionData.file.videoUrl" :key="j">
+                                <div class="col-6 col-md-4" v-for="(videoUrl,j) in createSuggestionData.file.videoUrl" :key="j">
                                     <div class="image-upload-list float-left">
-                                        <img src="/img/icon/icon_mp4@2x.png" alt="">
+                                        <img src="/asset/img/icon/upload_video_img.png" class="w-100" alt="">
                                         <div class="demo-upload-list-cover">
                                             <Icon type="ios-trash-outline" @click="deleteFile('video',videoUrl)"></Icon>
                                         </div>
@@ -93,7 +94,6 @@ export default {
 
     data(){
         return{
-            baseUrl:window.base_url,
             createSuggestionData: {
                 title: '',
                 desc: '',
@@ -102,6 +102,7 @@ export default {
                     otherUrl:[],
                     videoUrl:[]
                 },
+                isDraft:null,
             },
 
             //emoji
@@ -110,9 +111,7 @@ export default {
             initPeriod:'forever',
             periodType:'withPeriod',
             isSuggesting:false,
-            typeOfData:[],
-
-
+            isSavingDraft:false,
         }
     },
 
@@ -141,6 +140,7 @@ export default {
 
         async registerSuggestion(){
             this.emoStatus = false;
+            console.log(this.createSuggestionData);
             if(this.createSuggestionData.title.trim() == ''){
                 return this.error('Title is required')
             }
@@ -160,12 +160,40 @@ export default {
                 this.createSuggestionData.file.imgUrl = [];
                 this.createSuggestionData.file.otherUrl = [];
                 this.createSuggestionData.file.videoUrl = [];
+                this.$router.push({path:'/suggestion/index'})
                 
             })
             .catch(err=>{
                 console.log(err);
             })
             this.isSuggesting = false
+        },
+
+        async saveToDraftSuggestion(){
+            this.emoStatus = false;
+            console.log(this.createSuggestionData);
+            if(this.createSuggestionData.title.trim() == ''){
+                return this.error('Title is required')
+            }
+            if(this.createSuggestionData.desc.trim() == ''){
+                return this.error('Description is required')
+            }
+            this.createSuggestionData.isDraft = 1;
+            this.isSavingDraft = true;
+            await registerSuggestion(this.createSuggestionData)
+            .then(res=>{
+                this.createSuggestionData.title = '';
+                this.createSuggestionData.desc = '';
+                this.createSuggestionData.file.imgUrl = [];
+                this.createSuggestionData.file.otherUrl = [];
+                this.createSuggestionData.file.videoUrl = [];
+                // this.$router.push({path:'/suggestion/index'})
+                
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+            this.isSavingDraft = false
         },
 
         async deleteFile(type,fileName){

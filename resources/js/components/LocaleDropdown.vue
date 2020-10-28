@@ -5,7 +5,7 @@
     >
       {{ locales[locale] }}
     </a>
-    <div class="dropdown-menu position-absolute">
+    <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn">
       <a v-for="(value, key) in locales" :key="key" class="dropdown-item" href="#"
          @click.prevent="setLocale(key)"
       >

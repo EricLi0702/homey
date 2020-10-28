@@ -27,7 +27,6 @@
             title="Add Role"
         >
             <Input v-model="addData.roleName" class="mb-2" placeholder="Enter something..."/>
-            
             <div slot="footer">
                 <Button type="default" @click="addModal=false">Close</Button>
                 <Button type="primary" @click="addRole" :disabled="isAdding" :loading="isAdding">{{isAdding ? 'Adding': 'Add Role'}}</Button>
@@ -71,15 +70,17 @@ export default {
     },
     methods:{
         addRole(){
-            if(this.addData.roleName.trim() == ''){
-                return this.warning('roleName is required')
-            }
+            // if(this.addData.roleName.trim() == ''){
+            //     return this.warning('roleName is required')
+            // }
+            console.log(this.addData.roleName)
             this.isAdding = true            
             addUserRole(this.addData)
                 .then(res=>{
                     console.log(res)
                     this.success('Role is Added')
                     this.roleLists.unshift(res.data)
+                    this.addData.roleName = ''
                 })
                 .catch(err=>{
                     this.swr()
@@ -87,7 +88,6 @@ export default {
                 })
             this.isAdding = false
             this.addModal = false
-            this.addData.roleName = ''
         },
         editRole(role,index){
             console.log(role)

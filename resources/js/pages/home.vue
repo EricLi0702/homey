@@ -14,7 +14,7 @@
                         <h4>Welcome to our V-apartment service system</h4>
                     </div>
                     <div class="btn col-md-12 mt-5">
-                        <button class="btn btn-outline-white btn-lg mt-5" type="button">Get starteds</button>
+                        <Button shape="circle" size="large" type="primary mt-5">Get start</Button>
                     </div>
                 </div>
             </div>
@@ -421,18 +421,24 @@
                 <p class="col-md-12 d-flex align-items-center justify-content-center row p-0 m-0">Apartment Living</p>
             </div>
             <div class="add-content col-md-12 row p-0 mt-5">
-                <p class="col-md-4 offset-md-4 text-center">Living at Spectrum puts everything that you need and love close at hand. Our central location is within walking distance of two grocery stores, a pharmacy, hospital, and beltway. You'll find a different kind of living here at Spectrum--one characterized by ease and elegance.</p>
+                <p class="col-md-4 offset-md-4 text-center mb-5">Living at Spectrum puts everything that you need and love close at hand. Our central location is within walking distance of two grocery stores, a pharmacy, hospital, and beltway. You'll find a different kind of living here at Spectrum--one characterized by ease and elegance.</p>
             </div>
         </div>
     </div>
-    
-    <div id="googleMap" style="width:100%;height:600px;"></div>
+    <GmapMap
+      :center="{lat:51.508742, lng:-0.120850}"
+      :zoom="7"
+      map-type-id="terrain"
+      style="width: 100%; height: 300px"
+    >
+    </GmapMap>
   </div>
 </template>
 
 <script>
 // import FetchUsers from '~/components/FetchUsers'
 import {mapGetters} from 'vuex'
+import GoogleMapLoader from '~/components/GoogleMapLoader'
 export default {
   // components: {
   //   FetchUsers,

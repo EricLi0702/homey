@@ -1,16 +1,26 @@
 //Change pos/background/padding/add shadow on nav when scroll event happens 
 $(function(){
 	let navbar = document.getElementsByClassName("navbar");
+	let dropdownMenu = document.getElementsByClassName("dropdown-menu");
+	console.log(dropdownMenu);
 	let last_known_scroll_position = 0;
 	window.addEventListener('scroll', function(e) {
 		last_known_scroll_position = window.scrollY;
 		if (last_known_scroll_position <= 40) {
 			navbar[0].classList.remove('bg-transparent');
 			navbar[0].classList.add('navbar-scroll');
+			for(let i = 0; i < dropdownMenu.length; i++){
+				dropdownMenu[i].classList.add('bg-blue-gradient');
+				dropdownMenu[i].classList.remove('bg-transparent');
+			}
 		}
 		else{
 			navbar[0].classList.remove('navbar-scroll');
 			navbar[0].classList.add('bg-transparent');
+			for(let i = 0; i < dropdownMenu.length; i++){
+				dropdownMenu[i].classList.add('bg-transparent');
+				dropdownMenu[i].classList.remove('bg-blue-gradient');
+			}
 		}
 	});
 });

@@ -35,8 +35,20 @@ function unLikeToSuggestion(payload){
 function unDislikeToSuggestion(payload){
     return axios.post('/api/suggestion/undislike',payload)
 }
+function viewCurrentSuggestion(currentId){
+    let obj = {id : currentId}
+    return axios.post('/api/suggestion/view',obj)
+}
 function getCurrentSuggestionFromServer(currentId){
     return axios.get('/api/suggestion/current',{params: { id: currentId }});
+}
+// function getCommentsOfCurrentSuggestion(page){
+    
+//     return axios.get(`/api/suggestion/comment?page=${page}`)
+// }
+function getCommentsOfCurrentSuggestion(page, currentId){
+    // let obj = {id : currentId}
+    return axios.get(`/api/suggestion/comment?page=${page}`, {params: { id: currentId }})
 }
 function leaveCommentToSuggestion(commentData, suggestionData){
     var obj = {};
@@ -58,5 +70,7 @@ export{
     unLikeToSuggestion,
     unDislikeToSuggestion,
     getCurrentSuggestionFromServer,
+    getCommentsOfCurrentSuggestion,
     leaveCommentToSuggestion,
+    viewCurrentSuggestion,
 }

@@ -12,6 +12,8 @@ class UserRoleController extends Controller
     }
 
     public function addUserRole(Request $request){
+        $name = $request->roleName;
+        $per = $request->permission;
         $this->validate($request,[
             'roleName' => 'required'
         ]);

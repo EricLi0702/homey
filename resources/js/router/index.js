@@ -49,6 +49,8 @@ function createRouter () {
  */
 async function beforeEach (to, from, next) {
   let components = []
+  console.log("awesome",to)
+  
   try {
     // Get the matched components and resolve them.
     components = await resolveComponents(
@@ -64,6 +66,7 @@ async function beforeEach (to, from, next) {
   if (components.length === 0) {
     return next()
   }
+  console.log('@@@@',components)
   // Start the loading bar.
   if (components[components.length - 1].loading !== false) {
     router.app.$nextTick(() => router.app.$loading.start())

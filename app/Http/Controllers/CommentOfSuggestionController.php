@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\CommentOfSuggestion;
+use App\Suggestion;
 
 class CommentOfSuggestionController extends Controller
 {
@@ -13,16 +14,50 @@ class CommentOfSuggestionController extends Controller
     {
         $commentData = $request->commentData;
         $suggestionData = $request->suggestionData;
+        $currentSuggestionId = $suggestionData['id'];
         $userId = Auth::user()->id;
         $comment['userId'] = $userId;
-        $comment['suId'] = $suggestionData['id'];
+        $comment['suId'] = $currentSuggestionId;
         $comment['content'] = $commentData;
-
         $commentToSuggest = CommentOfSuggestion::create($comment); 
-        
+
+        $currentSuggestion = Suggestion::where('id', $currentSuggestionId)->first();
+        $currentCommentCnt = json_decode($currentSuggestion->comment_cnt);
+        if($currentCommentCnt == null){
+            $currentCommentCnt[] = $userId;
+            $currentSuggestion->comment_cnt = $currentCommentCnt;
+            $currentSuggestion->save();
+            return response()->json([
+                'commentToSuggest' => $commentToSuggest
+            ], 201);
+        }
+        else{
+            if (in_array($userId, $currentCommentCnt)) {
+                return response()->json([
+                    'commentToSuggest' => $commentToSuggest
+                ], 201);
+            }
+            else{
+                array_push($currentCommentCnt, $userId);
+                $currentSuggestion->comment_cnt = $currentCommentCnt;
+                $currentSuggestion->save();
+                return response()->json([
+                    'commentToSuggest' => $commentToSuggest
+                ], 201);
+            }
+        }
         return response()->json([
             'commentToSuggest' => $commentToSuggest
-            // 'commentToSuggest' => $commentToSuggest
         ], 201);
+    }
+
+    public function getComment(Request $request)
+    {
+        $userId = Auth::user()->id;
+        $id = $request->id;
+        return CommentOfSuggestion::with('userId')
+                                    ->where('suId', $id)
+                                    ->orderBy('created_at','desc')
+                                    ->paginate(2);
     }
 }

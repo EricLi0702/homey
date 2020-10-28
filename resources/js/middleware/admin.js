@@ -1,9 +1,10 @@
 import store from '~/store'
+import router from '../router'
 
 export default (to, from, next) => {
-  if (store.getters['auth/user'].role !== 'SystemAdmin') {
+  if (store.getters['auth/user'].role.roleName !== 'SystemAdmin') {
     console.log('permission error')
-    next({ name: from.name })
+    router.push({path: '/home'})
   } else {
     next()
   }

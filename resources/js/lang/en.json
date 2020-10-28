@@ -14,7 +14,7 @@
 
     },
     "login":{
-        "login":"login",
+        "login":"Login",
         "successLogin":"You have successfully signed up.",
         "idNotExist":"The ID you entered does not exist.",
         "incorrectPassword":"incorrect",
@@ -23,7 +23,7 @@
         "emailClick":"Pls check your mail to verify you."
     },
     "register":{
-        "register":"register"
+        "register":"Register"
     },
     "memberRegister":{
         "allowRegister":"The registration has been confirmed finally",

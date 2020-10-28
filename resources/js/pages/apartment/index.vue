@@ -7,6 +7,7 @@
 <script>
 import {getAptLists} from '~/api/apartment'
 export default {
+  middleware: 'admin',
   data(){
     return{
       aptList:[],

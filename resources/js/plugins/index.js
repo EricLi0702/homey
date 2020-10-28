@@ -6,5 +6,6 @@ import './infinite'
 import './imageviewer'
 import './videoview'
 import './googleMaps'
+import './timeago'
 import 'bootstrap'
 

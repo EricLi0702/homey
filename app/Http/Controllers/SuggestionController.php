@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Suggestion;
 use App\CommentOfSuggestion;
 use App\User;
+use App\Events\NewSuggestion;
 
 class SuggestionController extends Controller
 {
@@ -21,8 +22,15 @@ class SuggestionController extends Controller
         $suggestionData['title'] = $request->title;
         $suggestionData['content'] = $request->desc;
         $suggestionData['upload_file'] = json_encode($request->file);
-
+        if($request->isDraft !== null){
+            $suggestionData['isDraft'] = 1;
+        }
         $suggestion = Suggestion::create($suggestionData); 
+
+        if($request->isDraft == null){
+            // broadcast Event
+            broadcast(new NewSuggestion($suggestion->load('userId')))->toOthers();
+        }
         return response()->json([
             'suggestion' => $suggestion
         ], 201);
@@ -30,23 +38,48 @@ class SuggestionController extends Controller
 
     public function index(Request $request){
         return Suggestion::with('userId')
+                        ->where([['isDraft','=',0]])
                         ->orderBy('created_at','desc')->paginate(2);
     }
 
     public function getCurrent(Request $request){
+        $userId = Auth::user()->id;
         $id = $request->id;
-        $suggestionData =  Suggestion::where([['id','=',$request->id]])
-                        ->with('userId')
-                        ->get();
-        $commentData = CommentOfSuggestion::where([['suId','=',$request->id]])
-                        ->with('userId')
-                        ->get();
+        $suggestionData =  Suggestion::with('userId')
+                        ->where('id',$id)
+                        ->first();
         return response()->json([
             'suggestionData' => $suggestionData,
-            'commentData' => $commentData
         ], 200);
     }
 
+    public function addView(Request $request)
+    {   
+        $userId = Auth::user()->id;
+        $id = $request->id;
+        $suggestionData =  Suggestion::with('userId')
+                        ->where('id',$id)
+                        ->first();
+        $currentViewCnt = json_decode($suggestionData->view_cnt);
+        if($currentViewCnt == null){
+            $currentViewCnt[] = $userId;
+            $suggestionData->view_cnt = $currentViewCnt;
+            $suggestionData->save();
+            return ;
+        }
+        else{
+            if (in_array($userId, $currentViewCnt)) {
+                return ;
+            }
+            else{
+                array_push($currentViewCnt, $userId);
+                $suggestionData->view_cnt = $currentViewCnt;
+                $suggestionData->save();
+                return ;
+            }
+        }
+        return ;
+    }
     
 
     public function addHeart(Request $request){

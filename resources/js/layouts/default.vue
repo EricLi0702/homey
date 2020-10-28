@@ -1,12 +1,15 @@
 <template>
   <div class="main-layout">
-    <navbar />
+      <navbar />
 
     <div class="container-fluid mt-navbar p-0">
       <child />
       <Footer />
     </div>
+
+    <BackTop></BackTop>
   </div>
+  
 </template>
 
 <script>

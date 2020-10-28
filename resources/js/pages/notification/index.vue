@@ -1,7 +1,6 @@
 <template>
     <div class="container-fluid bg-light-gray m-0 p-0">
-        <div class="apt-img hv-40">
-            <img :src="`${baseUrl}/asset/img/bg/room11.png`">
+        <div class="apt-img hv-40 noti-apt-img">
         </div>
         <div class="notification-sub-menu container-fluid bg-white box-block">
             <div class="container d-flex justify-content-between p-0 py-3 ">
@@ -10,11 +9,15 @@
                 <div class="notification-sub-menu-items">
                     <router-link :to="{ name: 'notification.register' }" class="">
                         <!-- {{ $t('register') }} -->
-                        <Button>New Notification</Button>
+                        <Button type="success" icon="md-add">New</Button>
                     </router-link>
                     <router-link :to="{ name: 'notification.list' }" class="">
                         <!-- {{ $t('register') }} -->
-                        <Button>View Notification</Button>
+                        <Button type="primary" icon="md-list">View</Button>
+                    </router-link>
+                    <router-link :to="{ name: 'notification.list' }" class="">
+                        <!-- {{ $t('register') }} -->
+                        <Button type="primary" icon="md-list">DownGraded</Button>
                     </router-link>
                 </div>
             </div>

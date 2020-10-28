@@ -7,116 +7,22 @@
         </div>
         <div class="container m-0 p-0 mx-auto">
             <div class="row m-0 p-0">
-                <div class="col-12 col-md-4 m-0 p-0 pr-md-4">
-                    <div class="box-block">
-                        <div class="community-category-title p-3">
-                            Categories
-                        </div>
-                        <div class="community-category-list p-3">
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-block">
-                        <div class="community-category-title p-3">
-                            Categories
-                        </div>
-                        <div class="community-category-list p-3">
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-block">
-                        <div class="community-category-title p-3">
-                            Categories
-                        </div>
-                        <div class="community-category-list p-3">
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                <Category/>
                 <div class="col-12 col-md-8 m-0 p-0 pb-4">
                     <div v-if="details !== null" class="posted-item row m-0 p-3">
-                        <div class="col-2">
+                        <div class="col-1">
                             <div class="posted-item-user-info">
-                                <Avatar icon="ios-person" size="large" />
+                                <img src="https://i.pravatar.cc/40" alt="">
                             </div>
                         </div>   
                         
-                        <div class="col-10">
+                        <div class="col-11">
+                            <div class="posted-user-info d-flex justify-content-between">
+                                <p class="mb-2">{{details.user_id.name}}</p>
+                                <p>{{TimeView(details.created_at)}}</p>
+                            </div>
                             <div class="title">
                                 <h3>{{details.title}}</h3>
-                            </div>
-                            <div class="posted-user-info">
-                                <p class="mb-2">posted by {{details.user_id.name}} on {{TimeView(details.created_at)}}</p>
                             </div>
                             <div class="post-content p-2">
                                 <p v-html="details.content"></p>
@@ -128,7 +34,7 @@
                             </div>
 
                             <div v-if="details.upload_file.videoUrl.length !== 0" class="post-video row m-0 p-0 mb-4">
-                                <div v-for="(video,i) in details.upload_file.videoUrl" :key="i" class="post-video-item col-12">
+                                <div v-for="(video,i) in details.upload_file.videoUrl" :key="i" class="post-video-item col-12 p-2">
                                      <video-player  
                                         class="video-player-box vjs-custom-skin w-100"
                                         ref="videoPlayer"
@@ -156,10 +62,27 @@
                             </div>
 
                         </div>    
-                        <div class="offset-2 col-10 d-flex cnt-info">
-                            <div class="cnt d-flex">
-                                <div class="reply d-flex mr-4">
-                                    <Icon size="25" type="ios-undo" @click="toggleReply"/>
+                        <div class="offset-1 col-11 d-flex cnt-info">
+                            <div class="cnt d-flex w-100">
+                                <div v-if="currentUser.id == details.userId" class="remove mr-auto">
+                                    <Poptip
+                                        confirm
+                                        title="Are you sure you want to delete this suggestion?"
+                                        ok-text="Yes"
+                                        cancel-text="Cancel"
+                                        placement="right"
+                                        @on-ok="removeSuggestion"
+                                        @on-cancel="cancelRemoveSuggestion">
+                                        <Icon size="25" class="mr-4" type="md-trash"/>
+                                    </Poptip>
+                                </div>
+                                <div v-else class="reply mr-auto">
+                                    <div v-if="details.comment_cnt !== null && details.comment_cnt.includes(currentUser.id)" class="reply d-flex mr-4">
+                                        <p>You have already commented.</p>
+                                    </div>
+                                    <div v-else class="reply d-flex mr-4">
+                                        <Icon size="25" type="ios-undo" @click="toggleReply"/>
+                                    </div>
                                 </div>
                                 <div class="heart d-flex mr-4">
                                     <Icon class="mr-1" v-if="checkIfHeart(details.heart_cnt)" @click="heartPost(details)" size="25" type="md-heart-outline" />
@@ -182,7 +105,7 @@
                             </div>
                         </div>                 
                     </div>
-                    <div v-if="isCommenting" class="posted-item mt-3 p-2">
+                    <div v-if="isCommenting" id="commentArea" class="posted-item mt-3 p-2 animate__animated animate__fadeIn">
                         <div class="reply-form-comment row p-2">
                             <Input v-model="commentData" type="textarea" placeholder="Leave your comment..." />
                             <div class="d-flex justify-content-between col-12 p-0">
@@ -195,23 +118,34 @@
                         </div>
                     </div>
                     <div v-for="(comment,i) in commentsOfCurrentSuggestion" :key="i" v-if="commentsOfCurrentSuggestion.length"  class="posted-item row m-0 p-3 mt-3">
-                        <div class="col-2">
+                        <div class="col-1">
                             <div class="posted-item-user-info">
-                                <Avatar icon="ios-person" size="large" />
+                                <img src="https://i.pravatar.cc/40" alt="">
                             </div>
                         </div>   
-                        <div class="col-10">
+                        <div class="col-11">
+                            <div class="posted-user-info d-flex justify-content-between">
+                                <p class="mb-2">{{comment.user_id.name}}</p>
+                                <p>{{TimeView(comment.created_at)}}</p>
+                            </div>
                             <div class="comment-content p-2">
                                 <p>{{comment.content}}</p>
                             </div>
                         </div>  
-                        <div class="offset-2 col-10">
+                        <!-- <div class="offset-2 col-10">
                             <div class="user-name">
                                 <p>{{comment.user_id.name}}</p>
                                 <p>{{TimeView(comment.created_at)}}</p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
+                    <InfiniteLoading 
+                        class="pb-3"
+                        @infinite="infiniteHandlerComments"
+                        spinner="circles"
+                    >
+                        <div slot="no-more">no more comments</div>
+                    </InfiniteLoading>
                 </div>
             </div>
         </div>
@@ -226,8 +160,24 @@ import Viewer from 'v-viewer'
 //video viewer
 import 'video.js/dist/video-js.css'
 import { videoPlayer } from 'vue-video-player'
+//infinitLoding
+import InfiniteLoading from 'vue-infinite-loading';
 //import Apis
-import {leaveCommentToSuggestion, getCurrentSuggestionFromServer, heartToSuggestion, unHeartToSuggestion, likeToSuggestion, dislikeToSuggestion, unLikeToSuggestion, unDislikeToSuggestion } from '~/api/suggestion'
+import {
+    viewCurrentSuggestion, 
+    getCommentsOfCurrentSuggestion, 
+    leaveCommentToSuggestion, 
+    getCurrentSuggestionFromServer, 
+    heartToSuggestion, 
+    unHeartToSuggestion, 
+    likeToSuggestion, 
+    dislikeToSuggestion, 
+    unLikeToSuggestion, 
+    unDislikeToSuggestion 
+} from '~/api/suggestion'
+
+import Category from './category'
+
 import { mapGetters } from 'vuex'
 export default {
     // props:{
@@ -237,7 +187,9 @@ export default {
     components:{
         Viewer,
         videoPlayer,
-        Picker
+        Picker,
+        InfiniteLoading,
+        Category
     },
 
     data(){
@@ -266,7 +218,10 @@ export default {
             commentData:null,
             //emoji
             emoStatus:false,
-            commentsOfCurrentSuggestion:null,
+            commentsOfCurrentSuggestion:[],
+            //infinit loading
+            pageOfComments: 1,
+            lastPageOfComments: 0,
         }
     },
     computed:{ 
@@ -300,7 +255,21 @@ export default {
             }
             await leaveCommentToSuggestion(this.commentData, this.details)
             .then(res=>{
-                console.log(res);
+                console.log(res.data.commentToSuggest);
+                let commentCurrently = res.data.commentToSuggest;
+                commentCurrently['created_at'] = Date.now();
+                commentCurrently['user_id'] = {};
+                commentCurrently.user_id['name'] = this.currentUser.name;
+                this.commentData = null;
+                this.commentsOfCurrentSuggestion.unshift(commentCurrently);
+                if(this.details.comment_cnt == null) {
+                    this.details.comment_cnt = [];
+                    this.details.comment_cnt.push(this.currentUser.id);
+                }
+                else{
+                    this.details.comment_cnt.push(this.currentUser.id);
+                }
+                this.isCommenting = false;
             })
         },
 
@@ -340,14 +309,50 @@ export default {
         getCurrentSuggestion(){
             getCurrentSuggestionFromServer(this.suggetionId)
             .then(res=>{
-                this.details = res.data.suggestionData[0];
-                this.commentsOfCurrentSuggestion = res.data.commentData;
-                console.log(this.commentsOfCurrentSuggestion);
+                console.log("ddd",res.data.suggestionData);
+                this.details = res.data.suggestionData;
+                // this.commentsOfCurrentSuggestion = res.data.commentData;
                 this.details.heart_cnt = JSON.parse(this.details.heart_cnt);
                 this.details.like_cnt = JSON.parse(this.details.like_cnt);
                 this.details.dislike_cnt = JSON.parse(this.details.dislike_cnt);
                 this.details.upload_file = JSON.parse(this.details.upload_file);
+                viewCurrentSuggestion(this.details.id);
+                // getCommentsOfCurrentSuggestion(2, this.details.id)
+                // .then(res=>{
+                //     console.log(res)
+                // });
             })
+        },
+
+        infiniteHandlerComments($state){
+            console.log("called");
+            let timeOut = 0;
+            
+            if (this.pageOfComments > 1) {
+                timeOut = 2000;
+            }
+            let vm = this;
+            setTimeout(() => {
+                getCommentsOfCurrentSuggestion(this.pageOfComments, this.suggetionId)
+                .then(res=>{
+                    console.log(res);
+                    vm.lastpageOfComments = res.data.last_page;
+
+                    $.each(res.data.data, function(key, value){
+                        console.log("?????", value);
+                        vm.commentsOfCurrentSuggestion.push(value);
+                        console.log("&&&&", vm.commentsOfCurrentSuggestion); 
+                    });
+                    if (vm.pageOfComments - 1 === vm.lastpageOfComments) {
+                        $state.complete();
+                    }
+                    else {
+                        $state.loaded();
+                    }
+                    vm.pageOfComments = vm.pageOfComments + 1;
+                }); 
+            }, 2000);
+            
         },
         checkIfHeart(heartCntArray){
             if (heartCntArray == null){
@@ -475,3 +480,11 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    .center{
+        width: 300px;
+        margin: 10px auto;
+        overflow: hidden;
+    }
+</style>

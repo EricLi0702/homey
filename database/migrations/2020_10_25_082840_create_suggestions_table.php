@@ -24,6 +24,7 @@ class CreateSuggestionsTable extends Migration
             $table->json('heart_cnt')->nullable();
             $table->json('like_cnt')->nullable();
             $table->json('dislike_cnt')->nullable();
+            $table->json('comment_cnt')->nullable();
             $table->boolean('isDraft')->default('0');
             $table->timestamps();
         });

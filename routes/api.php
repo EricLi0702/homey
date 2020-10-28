@@ -36,13 +36,17 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::post('notification/create', 'NotificationController@store');
     Route::get('notification', 'NotificationController@index');
-
-
+    
+    Route::post('facility/create', 'FacilityController@store');
+    Route::get('facility', 'FacilityController@index');
+    
 
     Route::post('suggestion/create', 'SuggestionController@store');
     Route::get('suggestion', 'SuggestionController@index');
     Route::get('suggestion/current', 'SuggestionController@getCurrent');
     Route::post('suggestion/comment', 'CommentOfSuggestionController@leaveComment');
+    Route::get('suggestion/comment', 'CommentOfSuggestionController@getComment');
+    Route::post('suggestion/view', 'SuggestionController@addView');
     Route::post('suggestion/heart', 'SuggestionController@addHeart');
     Route::post('suggestion/unheart', 'SuggestionController@removeHeart');
     Route::post('suggestion/like', 'SuggestionController@addLike');

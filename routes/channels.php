@@ -20,3 +20,7 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 Broadcast::channel('notification', function ($user) {
     return auth()->check();
 });
+
+Broadcast::channel('suggestion', function ($user) {
+    return auth()->check();
+});

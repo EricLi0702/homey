@@ -63,12 +63,20 @@ export default [
     children:[
       {path:'', name:  'suggestion', redirect: {name:  'suggestion.list'}},
       {path:'index', name:  'suggestion.list', component: page('suggestion/list.vue')},
-      {path:':id', name:'suggestion.view', component: page('suggestion/view.vue'),props:true},
-      {path:'new', name:  'suggestion.create', component: page('suggestion/create.vue')},
+      {path:'create', name:  'suggestion.create', component: page('suggestion/create.vue')},
+      {path:':id', name:'suggestion.view', component: page('suggestion/view.vue')},
     ] 
   },
   { path: '/repair',  name:  'repair',  component:  page('repair/repair.vue') },
-  { path: '/facillity',  name:  'facillity',  component:  page('facillity/facillity.vue') },
+
+  { path: '/facility',  name:  'facility',  component:  page('facility/index.vue'),
+    children:[
+      {path:'', name:  'facility', redirect: {name:  'facility.list'}},
+      {path:'index', name:  'facility.list', component: page('facility/list.vue')},
+      {path:'create', name:  'facility.create', component: page('facility/create.vue')},
+      // {path:':id', name:'facility.view', component: page('facility/view.vue')},
+    ]  
+  },
   { path: '/settings',
     component: page('settings/index.vue'),
     children: [

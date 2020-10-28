@@ -7,110 +7,15 @@
         </div>
         <div class="container m-0 p-0 mx-auto">
             <div class="row m-0 p-0">
-                <div class="col-12 col-md-4 m-0 p-0 pr-md-4">
-                    <div class="box-block">
-                        <div class="community-category-title p-3">
-                            Categories
-                        </div>
-                        <div class="community-category-list p-3">
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-block">
-                        <div class="community-category-title p-3">
-                            Categories
-                        </div>
-                        <div class="community-category-list p-3">
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-block">
-                        <div class="community-category-title p-3">
-                            Categories
-                        </div>
-                        <div class="community-category-list p-3">
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                <Category/>
                 <div class="col-12 col-md-8 m-0 p-0">
-                    <div class="posted-item" v-for="(suggestion,i) in suggestionList" :key="i" v-if="suggestionList.length">
+                    <div class="posted-item position-relative" v-for="(suggestion,i) in suggestionList" :key="i" v-if="suggestionList.length">
                         <router-link :to="{path:`/suggestion/${suggestion.id}`}">
                             
-                            <div class="pi-wrap float-left position-relative">
+                            <div class="pi-wrap float-left ">
                                 <div class="user-info float-left">
                                     <div class="avatar">
-                                        <Avatar icon="ios-person" size="large" />
+                                        <img src="https://i.pravatar.cc/40" alt="">
                                     </div>
                                     <div class="icons text-center">
                                         <p>{{suggestion.id}}</p>
@@ -144,19 +49,21 @@
                             <div class="posted-item-info float-left">
                                 <div class="posted-item-info-comments">
                                     <div class="pii-commentbg">
-                                        44
+                                        <span v-if="suggestion.comment_cnt !== null">{{suggestion.comment_cnt.length}}</span>
+                                        <span v-else>0</span>
                                         <div class="mark">
 
                                         </div>
                                     </div>
                                 </div>
                                 <div class="posted-item-info-views">
-                                <Icon type="md-eye" />
-                                    3452 
+                                    <Icon type="md-eye" />
+                                    <span v-if="suggestion.view_cnt !== null">{{suggestion.view_cnt.length}}</span>
+                                    <span v-else>0</span>
                                 </div>
                                 <div class="posted-item-info-time">
                                     <Icon type="ios-clock-outline" />
-                                    15 min
+                                    <timeago :datetime="suggestion.created_at" :since="suggestion.created_at" :auto-update="60"></timeago>
                                 </div>
                             </div>
                             <div class="clearfix">
@@ -179,11 +86,14 @@
 <script>
 //infinitLoding
 import InfiniteLoading from 'vue-infinite-loading';
-import axios from 'axios'
 import {getSuggestionList,registerSuggestion,updateSuggestion,delSuggestion} from '~/api/suggestion'
+import Category from './category'
+// import VueTimeago from 'vue-timeago'
 export default {
     components:{
         InfiniteLoading,
+        Category,
+        // VueTimeago
     },
     data(){
         return{
@@ -208,7 +118,6 @@ export default {
         },
 
         async infiniteHandlerSuggestion($state){
-            console.log("something")
             let timeOut = 0;
             
             if (this.pageOfSuggestion > 1) {
@@ -217,13 +126,14 @@ export default {
             let vm = this;
             await getSuggestionList(this.pageOfSuggestion)
             .then(res=>{
-                console.log(res);
                 vm.lastpageOfSuggestion = res.data.last_page;
 
                 $.each(res.data.data, function(key, value){
                         value.heart_cnt = JSON.parse(value.heart_cnt);
                         value.like_cnt = JSON.parse(value.like_cnt);
                         value.dislike_cnt = JSON.parse(value.dislike_cnt);
+                        value.comment_cnt = JSON.parse(value.comment_cnt);
+                        value.view_cnt = JSON.parse(value.view_cnt);
                         vm.suggestionList.push(value); 
                     });
                 if (vm.pageOfSuggestion - 1 === vm.lastpageOfSuggestion) {

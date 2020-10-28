@@ -58,7 +58,7 @@
                             <div class="emoji-area-popup">
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
-                            <Button class="ml-auto" @click="registerNotification" :disabled="isRegistering" :loading="isRegistering">something</Button>
+                            <Button icon="ios-send" type="success" class="ml-auto" @click="registerNotification" :disabled="isRegistering" :loading="isRegistering">Register</Button>
                         </div>
                     </div>
                 </Form> 
