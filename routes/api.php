@@ -40,6 +40,13 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('facility/create', 'FacilityController@store');
     Route::get('facility', 'FacilityController@index');
     
+    Route::post('reservation/create', 'ReservationFacilityController@store');
+    Route::get('reservation', 'ReservationFacilityController@index');
+    
+    Route::post('repair/create', 'RepairController@store');
+    Route::get('repair', 'RepairController@index');
+    Route::get('repair/current', 'RepairController@getCurrent');
+
 
     Route::post('suggestion/create', 'SuggestionController@store');
     Route::get('suggestion', 'SuggestionController@index');

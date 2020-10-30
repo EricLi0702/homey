@@ -15,7 +15,8 @@
                             <div class="pi-wrap float-left ">
                                 <div class="user-info float-left">
                                     <div class="avatar">
-                                        <img src="https://i.pravatar.cc/40" alt="">
+                                        <img style="width:40px;" :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
+                                        <!-- <img src="https://i.pravatar.cc/40" alt=""> -->
                                     </div>
                                     <div class="icons text-center">
                                         <p>{{suggestion.id}}</p>
@@ -97,6 +98,7 @@ export default {
     },
     data(){
         return{
+            baseUrl:window.base_url,
             suggestionList : [],
 
             //infinit loading

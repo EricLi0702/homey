@@ -104,75 +104,102 @@
 
                 </div>
                 <div class="col-12 col-md-8 m-0 p-0">
-                    <div class="posted-item" v-for="(notification,i) in notificationList" :key="i" v-if="notificationList.length">
-                        <div class="pi-wrap float-left">
-                            <div class="user-info float-left">
-                                <div class="avatar">
-                                    <Avatar icon="ios-person" size="large" />
-                                </div>
-                                <div class="icons">
-                                    <Icon size="25px" color="#BDC3C7" type="logo-android" />
-                                    <Icon size="25px" color="#BDC3C7" type="logo-android" />
-                                </div>
-                            </div>
-                            <div class="post-text float-left">
-                                <h2>
-                                    <a href="#">{{notification.title}}</a>
-                                </h2>
-                                <p v-html="notification.content"></p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="posted-item-info float-left">
-                            <div class="posted-item-info-comments">
-                                <div class="pii-commentbg">
-                                    44
-                                    <div class="mark">
-
+                    <div class="posted-item position-relative" v-for="(suggestion,i) in suggestionList" :key="i" v-if="suggestionList.length">
+                        <router-link :to="{path:`/suggestion/${suggestion.id}`}">
+                            
+                            <div class="pi-wrap float-left ">
+                                <div class="user-info float-left">
+                                    <div class="avatar">
+                                        <img style="width:40px;" :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
+                                        <!-- <img src="https://i.pravatar.cc/40" alt=""> -->
+                                    </div>
+                                    <div class="icons text-center">
+                                        <p>{{suggestion.id}}</p>
                                     </div>
                                 </div>
+                                <div class="post-text float-left">
+                                    <h2>
+                                        {{suggestion.title}}
+                                    </h2>
+                                    <p v-html="suggestion.content"></p>
+                                    <div class="cnt d-flex position-absolute">
+                                        <div class="heart d-flex mr-4">
+                                            <Icon class="mr-1" size="25" type="md-heart-outline" />
+                                            <span v-if="suggestion.heart_cnt !== null">{{suggestion.heart_cnt.length}}</span>
+                                            <span v-else>0</span>
+                                        </div>
+                                        <div class="like d-flex mr-4">
+                                            <Icon class="mr-1" size="25" type="md-thumbs-up" />
+                                            <span v-if="suggestion.like_cnt !== null">{{suggestion.like_cnt.length}}</span>
+                                            <span v-else>0</span>
+                                        </div>
+                                        <div class="dislike d-flex">
+                                            <Icon class="mr-1" size="25" type="md-thumbs-down" />
+                                            <span v-if="suggestion.dislike_cnt !== null">{{suggestion.dislike_cnt.length}}</span>
+                                            <span v-else>0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="posted-item-info-views">
-                               <Icon type="md-eye" />
-                                3452 
+                            <div class="posted-item-info float-left">
+                                <div class="posted-item-info-comments">
+                                    <div class="pii-commentbg">
+                                        <span v-if="suggestion.comment_cnt !== null">{{suggestion.comment_cnt.length}}</span>
+                                        <span v-else>0</span>
+                                        <div class="mark">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="posted-item-info-views">
+                                    <Icon type="md-eye" />
+                                    <span v-if="suggestion.view_cnt !== null">{{suggestion.view_cnt.length}}</span>
+                                    <span v-else>0</span>
+                                </div>
+                                <div class="posted-item-info-time">
+                                    <Icon type="ios-clock-outline" />
+                                    <timeago :datetime="suggestion.created_at" :since="suggestion.created_at" :auto-update="60"></timeago>
+                                </div>
                             </div>
-                            <div class="posted-item-info-time">
-                                <Icon type="ios-clock-outline" />
-                                15 min
+                            <div class="clearfix">
+                                
                             </div>
-                        </div>
-                        <div class="clearfix">
-                            
-                        </div>
+                        </router-link>
                     </div>
                     <InfiniteLoading 
                         class="pb-3"
-                        @infinite="infiniteHandlerNotification"
+                        @infinite="infiniteHandlerSuggestion"
                         spinner="circles"
                     >
-                        <div slot="no-more">no more notification</div>
+                        <div slot="no-more">no more suggestion</div>
                     </InfiniteLoading>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
 <script>
 //infinitLoding
 import InfiniteLoading from 'vue-infinite-loading';
-import axios from 'axios'
-import {getNotificationList,registerNotification,updateNotification,delNotification} from '~/api/notification'
+import {getSuggestionList,registerSuggestion,updateSuggestion,delSuggestion} from '~/api/suggestion'
+
+// import VueTimeago from 'vue-timeago'
 export default {
     components:{
         InfiniteLoading,
+        
+        // VueTimeago
     },
     data(){
         return{
-            notificationList : [],
+            baseUrl:window.base_url,
+            suggestionList : [],
 
             //infinit loading
-            pageOfNotification: 1,
-            lastPageOfNotification: 0,
+            pageOfSuggestion: 1,
+            lastPageOfSuggestion: 0,
         }
     },
 
@@ -182,35 +209,38 @@ export default {
 
     methods:{
         async start(){
-            await getNotificationList()
+            await getSuggestionList()
             .then(res=>{
                 console.log(res);
             })
         },
 
-        async infiniteHandlerNotification($state){
-            console.log("something")
+        async infiniteHandlerSuggestion($state){
             let timeOut = 0;
             
-            if (this.pageOfNotification > 1) {
+            if (this.pageOfSuggestion > 1) {
                 timeOut = 1000;
             }
             let vm = this;
-            await getNotificationList(this.pageOfNotification)
+            await getSuggestionList(this.pageOfSuggestion)
             .then(res=>{
-                console.log(res);
-                vm.lastpageOfNotification = res.data.last_page;
+                vm.lastpageOfSuggestion = res.data.last_page;
 
                 $.each(res.data.data, function(key, value){
-                        vm.notificationList.push(value); 
+                        value.heart_cnt = JSON.parse(value.heart_cnt);
+                        value.like_cnt = JSON.parse(value.like_cnt);
+                        value.dislike_cnt = JSON.parse(value.dislike_cnt);
+                        value.comment_cnt = JSON.parse(value.comment_cnt);
+                        value.view_cnt = JSON.parse(value.view_cnt);
+                        vm.suggestionList.push(value); 
                     });
-                if (vm.pageOfNotification - 1 === vm.lastpageOfNotification) {
+                if (vm.pageOfSuggestion - 1 === vm.lastpageOfSuggestion) {
                     $state.complete();
                 }
                 else {
                     $state.loaded();
                 }
-                vm.pageOfNotification = vm.pageOfNotification + 1;
+                vm.pageOfSuggestion = vm.pageOfSuggestion + 1;
             });
              
                 

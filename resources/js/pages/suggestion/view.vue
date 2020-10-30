@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
+        <!-- <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
             <div class="p-3 py-5 bg-white">
                 <p>something</p>
             </div>
-        </div>
+        </div> -->
         <div class="container m-0 p-0 mx-auto">
             <div class="row m-0 p-0">
                 <Category/>
@@ -12,7 +12,8 @@
                     <div v-if="details !== null" class="posted-item row m-0 p-3">
                         <div class="col-1">
                             <div class="posted-item-user-info">
-                                <img src="https://i.pravatar.cc/40" alt="">
+                                <img style="width:40px;" :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
+                                <!-- <img src="https://i.pravatar.cc/40" alt=""> -->
                             </div>
                         </div>   
                         
@@ -29,7 +30,7 @@
                             </div>
                             <div v-if="details.upload_file.imgUrl.length !== 0" class="post-img row m-0 p-0 mb-4 d-flex align-items-center">
                                 <div v-for="(image,i) in details.upload_file.imgUrl" :key="i" class="post-img-item col-4 p-0 px-2" v-viewer>
-                                    <img :src="image" alt="" class="w-100 " @click="showImage">
+                                    <img :src="image" alt="" class="w-100 " @click="showImage" style="height: 150px; margin-bottom: 17px">
                                 </div>
                             </div>
 
@@ -120,7 +121,8 @@
                     <div v-for="(comment,i) in commentsOfCurrentSuggestion" :key="i" v-if="commentsOfCurrentSuggestion.length"  class="posted-item row m-0 p-3 mt-3">
                         <div class="col-1">
                             <div class="posted-item-user-info">
-                                <img src="https://i.pravatar.cc/40" alt="">
+                                <img style="width:40px;" :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
+                                <!-- <img src="https://i.pravatar.cc/40" alt=""> -->
                             </div>
                         </div>   
                         <div class="col-11">
@@ -194,6 +196,7 @@ export default {
 
     data(){
         return{
+            baseUrl:window.base_url,
             suggestionItem : [],
             heart_mine:false,
             like_mine:false,

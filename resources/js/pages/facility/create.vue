@@ -14,8 +14,10 @@
                         <div class="col-12 mb-3 gray-input fac-nb">
                             <Input v-model="createFacilityData.nb" placeholder="please enter N.B" />
                         </div>
-                        <div class="col-12 mb-3 gray-input fac-max">
+                        <div class="col-12 mb-3 gray-input fac-max d-flex align-items-center">
+                            <Icon class="mr-2" size="25" type="ios-people" />
                             <InputNumber :max="10" :min="1" v-model="createFacilityData.max"></InputNumber>
+                            <p class="text-secondary ml-4">(Max number of people can use this facility at once.)</p>
                         </div>
                         <div class="col-12 mb-3">
                             <wysiwyg v-model="createFacilityData.outline" placeholder="please enter outline" />
@@ -141,7 +143,6 @@ export default {
 
         async registerNewFacility(){
             this.emoStatus = false;
-            console.log(this.createFacilityData);
             if(this.createFacilityData.name.trim() == ''){
                 return this.error('Name is required')
             }

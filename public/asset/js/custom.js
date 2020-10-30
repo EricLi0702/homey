@@ -2,7 +2,6 @@
 $(function(){
 	let navbar = document.getElementsByClassName("navbar");
 	let dropdownMenu = document.getElementsByClassName("dropdown-menu");
-	console.log(dropdownMenu);
 	let last_known_scroll_position = 0;
 	window.addEventListener('scroll', function(e) {
 		last_known_scroll_position = window.scrollY;

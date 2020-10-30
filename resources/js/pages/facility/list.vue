@@ -17,7 +17,8 @@
                         <div v-else class="facility-category-list p-3">
                             <div v-for="(facility, i) in facilityList" :key="i" class=" ccl-item d-flex justify-content-between">
                                 <p @click="selectFacility(facility)">{{facility.name}}</p>
-                                <Tag v-if="facility.isUsing == 0" color="success">possible to use</Tag>
+                                <Tag v-if="selectedFacilityAlreadyReservated(facility)" color="success">You have already reservated</Tag>
+                                <Tag v-else-if="facility.isUsing == 0" color="success">possible to use</Tag>
                                 <Tag v-else color="warning">impossible to use</Tag>
                             </div>
                         </div>
@@ -92,13 +93,14 @@
                         </div>
                     </div>
                     <div v-else class="posted-item position-relative row m-0 p-2">
-                        <Button class="position-absolute" type="success" icon="md-calendar" style="top:20px; right:20px; z-index:1">Reservate</Button>
-                        <Button class="position-absolute" type="success" icon="md-calendar" style="bottom:20px; left:20px; z-index:1">Reservate</Button>
                         <div class="p-1 pt-3 fac-name col-12 m-0 p-0 text-center">
                             <h1>{{selectedFacility.name}}</h1>
-                            <p>Max:{{selectedFacility.max}}</p>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <p>Max num is {{selectedFacility.max}}</p>
+                                <Icon class="mr-2" size="25" type="ios-people" />
+                            </div>
                         </div>
-                        <div v-if="noFile" class="col-12 row m-0 p-0 pb-5">
+                        <div v-if="noFile" class="col-12 row m-0 p-0">
                             <Tabs class="w-100">
                                 <TabPane label="Outline" icon="ios-paper">
                                     <p class="p-2 w-100" v-html="selectedFacility.outline" ></p>
@@ -111,7 +113,7 @@
                                 </TabPane>
                             </Tabs>
                         </div>
-                        <div v-else class="col-12 row m-0 p-0 pb-5">
+                        <div v-else class="col-12 row m-0 p-0">
                             <div class="col-12 col-lg-7 content-container">
                                 <div class="row m-0 ">
                                     <Tabs class="w-100 mb-3">
@@ -127,7 +129,7 @@
                                     </Tabs>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-5 file-container p-0 pt-4">
+                            <div class="col-12 col-lg-5 file-container p-0">
                                 <div v-if="selectedFacility.upload_file.imgUrl.length !== 0" class="post-img row m-0 p-0 mb-4 d-flex align-items-center">
                                     <div v-for="(image,i) in selectedFacility.upload_file.imgUrl" :key="i" class="post-img-item col-12 p-0 px-2" v-viewer>
                                         <img :src="image" alt="" class="w-100 mb-2" @click="showImage">
@@ -163,6 +165,34 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="px-2 col-12 pb-3">
+                            <p v-if="selectedFacilityAlreadyReservated(selectedFacility)" class="float-right">You have already reservated on this facility.</p>
+                            <p v-else>
+                                <Button v-if="isRegisterToFacility" @click="toggleRegisterForm" class="float-right" type="warning" icon="md-calendar">Abort</Button>
+                                <Button v-else @click="toggleRegisterForm" class="float-right" type="success" icon="md-calendar">Reservate</Button>
+                            </p>
+                        </div>
+                    </div>
+                    <div v-if="isRegisterToFacility" class="bg-white p-2 mt-3 animate__animated animate__fadeIn row m-0"> 
+                        <Form :model="createReservationData" class="w-100">
+                            <div class="col-12 mt-4 mb-3 gray-input">
+                                <Input v-model="createReservationData.title" placeholder="please enter title" />
+                            </div>
+                            <div class="col-12 mb-3 gray-input fac-max d-flex align-items-center">
+                                <Icon class="mr-2" size="25" type="ios-people" />
+                                <InputNumber :max="selectedFacility.max" :min="1" v-model="createReservationData.max"></InputNumber>
+                                <p class="text-secondary ml-4">(Maximum number of users to use this equipment)</p>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <DatePicker class="w-100" :options="disableBeforeDate" @on-change="notiDateChange" type="datetimerange" placeholder="Please check your date"></DatePicker>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <wysiwyg v-model="createReservationData.purpose" placeholder="please enter description" />
+                            </div>
+                        </Form>
+                        <div class="col-12 text-right mb-3">
+                            <Button @click="reservateNew" class="float-right" type="success" icon="md-calendar" :disabled="isReservating" :loading="isReservating" >Rservate</Button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -170,14 +200,16 @@
     </div>
 </template>
 <script>
+import wysiwyg from "vue-wysiwyg"
 import {getFacilityList} from '~/api/facility'
+import {createReservation, getReservationList} from '~/api/reservation'
 //image viewer
 import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
 //video viewer
 import 'video.js/dist/video-js.css'
 import { videoPlayer } from 'vue-video-player'
-
+import { mapGetters } from 'vuex'
 export default {
     components:{
         Viewer,
@@ -201,6 +233,22 @@ export default {
                 }],
                 // poster: "/static/images/author.jpg",
             },
+            isRegisterToFacility:false,
+            //disable before time(TimePicker)
+            disableBeforeDate: {
+                disabledDate (date) {
+                    return date && date.valueOf() < Date.now() - 86400000;
+                }
+            },
+            //createReservationData
+            createReservationData:{
+                title:'',
+                purpose:'',
+                max:1,
+                period:'',
+            },
+            isReservating:false,
+
         }
     },
 
@@ -209,12 +257,71 @@ export default {
     },
 
     computed:{
+        ...mapGetters({
+            currentUser: 'auth/user'
+        }),
         player() {
             return this.$refs.videoPlayer.player
-        }
+        },
     },
 
     methods:{
+        //check if user already reservated to a facility
+        selectedFacilityAlreadyReservated(facility){
+            if(facility.reservation_data.length > 0){
+                for(let i = 0; i < facility.reservation_data.length ; i++){
+                    if(this.currentUser.id == facility.reservation_data[i].userId){
+                        return true;
+                    }
+                }
+            }
+            return false;
+        },
+        notiDateChange(date){
+            this.createReservationData.period = date;
+        },
+
+        async reservateNew(){
+            if(this.createReservationData.title.trim() == ''){
+                return this.error('Title is required')
+            }
+            if(this.createReservationData.period.length == 0){
+                return this.error('Period is required')
+            }
+            if(this.createReservationData.purpose.trim() == ''){
+                return this.error('Purpose is required')
+            }
+            let payload = {
+                reservationData: this.createReservationData,
+                aptId : this.selectedFacility.aptId,
+                facilityId : this.selectedFacility.id,
+            };
+            this.isReservating = true;
+            await createReservation(payload)
+            .then(res=>{
+                this.selectedFacility.reservation_data.push(res.data.reservation);
+                this.createReservationData.title = '';
+                this.createReservationData.purpose = '';
+                this.createReservationData.max = 1;
+                this.createReservationData.period = '';
+                this.isRegisterToFacility = false;
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+            this.isReservating = false;
+        },
+
+        toggleRegisterForm(){
+            if(this.isRegisterToFacility == true){
+                this.createReservationData.title = '';
+                this.createReservationData.purpose = '';
+                this.createReservationData.max = 1;
+                this.createReservationData.period = '';
+            }
+            this.isRegisterToFacility = !this.isRegisterToFacility;
+        },
+
         playerReadied(video){
             this.playerOptions.sources.src = "http://asystem.test/uploads/video/"+video.fileName;
         },
@@ -232,7 +339,6 @@ export default {
         async start(){
             await getFacilityList()
             .then(res=>{
-                console.log(res);
                 if(res.data.length == 0){
                     this.noFacility = true;
                     return;
@@ -250,7 +356,14 @@ export default {
             })
         },
         selectFacility(facility){
+            //init data
+            this.createReservationData.title = '';
+            this.createReservationData.purpose = '';
+            this.createReservationData.max = 1;
+            this.createReservationData.period = '';
+            this.isRegisterToFacility = false;
             this.noFile = false;
+            //
             this.selectedFacility = facility;
             if (this.selectedFacility.upload_file.imgUrl.length == 0 && 
                 this.selectedFacility.upload_file.otherUrl.length == 0 &&

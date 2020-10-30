@@ -3,40 +3,23 @@
         <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
             <div class="p-3 py-5">
                 <h2 class="p-3">New Request</h2>
-                <Form :model="createSuggestionData">
+                <Form :model="createRepairData">
                     <div class="row m-0 p-0">
-                        <Dropdown class="col-3">
-                            <Button long type="primary" size="large">
-                                Type
-                                <Icon type="ios-arrow-down"></Icon>
-                            </Button>
-                            <DropdownMenu slot="list">
-                                <DropdownItem>驴打滚</DropdownItem>
-                                <DropdownItem>炸酱面</DropdownItem>
-                                <DropdownItem disabled>豆汁儿</DropdownItem>
-                                <DropdownItem>冰糖葫芦</DropdownItem>
-                                <DropdownItem divided>北京烤鸭</DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
-                        <Dropdown class="col-3">
-                            <Button long type="primary" size="large">
-                                Object
-                                <Icon type="ios-arrow-down"></Icon>
-                            </Button>
-                            <DropdownMenu slot="list">
-                                <DropdownItem>驴打滚</DropdownItem>
-                                <DropdownItem>炸酱面</DropdownItem>
-                                <DropdownItem disabled>豆汁儿</DropdownItem>
-                                <DropdownItem>冰糖葫芦</DropdownItem>
-                                <DropdownItem divided>北京烤鸭</DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
-                        
-                        <div class="col-6 mb-3 newtopic">
-                            <Input v-model="createSuggestionData.title" placeholder="please enter title" />
+                        <div class="col-12 col-md-6 mb-3 gray-input">
+                            <Select v-model="createRepairData.type" size="large" style="width:100%">
+                                <Option v-for="item in repairType" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                            </Select>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3 gray-input">
+                            <Select v-model="createRepairData.object" size="large" style="width:100%">
+                                <Option v-for="item in repairObject" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                            </Select>
+                        </div>
+                        <div class="col-12 mb-3 newtopic">
+                            <Input v-model="createRepairData.title" placeholder="please enter title" />
                         </div>
                         <div class="col-12 mb-3">
-                            <wysiwyg v-model="createSuggestionData.desc" placeholder="please enter description" />
+                            <wysiwyg v-model="createRepairData.desc" placeholder="please enter description" />
                         </div>
                         <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
                             <Upload
@@ -48,13 +31,17 @@
                             <div class="emoji-area-popup">
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
-                            <Button icon="ios-briefcase-outline" type="warning" class="ml-auto mr-2" @click="saveToDraftSuggestion" :disabled="isSavingDraft" :loading="isSavingDraft">Draft</Button>
-                            <Button icon="ios-send" type="success" class="" @click="registerSuggestion" :disabled="isSuggesting" :loading="isSuggesting">Suggest</Button>
+                            <Checkbox v-model="createRepairData.isShowToProprietor" label="Proprietor" class="ml-auto mr-2">
+                                <Icon type="ios-person" size="25"/>
+                                <span>Show to proprietor</span>
+                            </Checkbox>
+                            <Button icon="ios-briefcase-outline" type="warning" class="mr-2" @click="saveToDraftRequest" :disabled="isSavingDraft" :loading="isSavingDraft">Draft</Button>
+                            <Button icon="ios-send" type="success" class="" @click="requestRepair" :disabled="isRequesting" :loading="isRequesting">Request</Button>
                         </div>
                         <div class="col-12 uploaded_file">
-                            <div class="image-item" v-if="createSuggestionData.file.imgUrl && createSuggestionData.file.imgUrl.length >0">
+                            <div class="image-item" v-if="createRepairData.file.imgUrl && createRepairData.file.imgUrl.length >0">
                                 <div class="image-block">
-                                    <div class="image-upload-list" v-for="(imgUrl,i) in createSuggestionData.file.imgUrl" :key="i">
+                                    <div class="image-upload-list" v-for="(imgUrl,i) in createRepairData.file.imgUrl" :key="i">
                                         <img :src="imgUrl" alt="">
                                         <div class="demo-upload-list-cover">
                                             <Icon  type="ios-trash-outline" @click="deleteFile('image',imgUrl)"></Icon>
@@ -62,8 +49,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="file-item row" v-if="createSuggestionData.file.otherUrl.length &&createSuggestionData.file.otherUrl.length>0">
-                                <div class="col-6 col-md-4" v-for="(otherUrl,j) in createSuggestionData.file.otherUrl" :key="j">
+                            <div class="file-item row" v-if="createRepairData.file.otherUrl.length &&createRepairData.file.otherUrl.length>0">
+                                <div class="col-6 col-md-4" v-for="(otherUrl,j) in createRepairData.file.otherUrl" :key="j">
                                     <div class="image-upload-list float-left">
                                         <img src="/asset/img/icon/upload_file_img.png" class="w-100" alt="">
                                         <div class="demo-upload-list-cover">
@@ -77,8 +64,8 @@
                                     <div class="remark"></div>
                                 </div>
                             </div>
-                            <div class="file-item row" v-if="createSuggestionData.file.videoUrl.length && createSuggestionData.file.videoUrl.length>0">
-                                <div class="col-6 col-md-4" v-for="(videoUrl,j) in createSuggestionData.file.videoUrl" :key="j">
+                            <div class="file-item row" v-if="createRepairData.file.videoUrl.length && createRepairData.file.videoUrl.length>0">
+                                <div class="col-6 col-md-4" v-for="(videoUrl,j) in createRepairData.file.videoUrl" :key="j">
                                     <div class="image-upload-list float-left">
                                         <img src="/asset/img/icon/upload_video_img.png" class="w-100" alt="">
                                         <div class="demo-upload-list-cover">
@@ -108,8 +95,11 @@ import { Picker } from 'emoji-mart-vue'
 //file upload component
 import Upload from '~/components/Upload'
 //import Api
-import {getSuggestionList,registerSuggestion,updateSuggestion,delSuggestion} from '~/api/suggestion'
+import {registerRepair} from '~/api/repair'
 import {delUploadFile} from '~/api/upload'
+//import json
+import repairType from '../../json/repairType';
+import repairObject from '../../json/repairObject.json';
 
 export default {
     middleware: 'auth',
@@ -121,23 +111,26 @@ export default {
 
     data(){
         return{
-            createSuggestionData: {
+            repairType,
+            repairObject,
+            createRepairData: {
                 title: '',
                 desc: '',
+                type:'',
+                object:'',
                 file:{
                     imgUrl:[],
                     otherUrl:[],
                     videoUrl:[]
                 },
                 isDraft:null,
+                isShowToProprietor:false,
             },
 
             //emoji
             emoStatus:false,
 
-            initPeriod:'forever',
-            periodType:'withPeriod',
-            isSuggesting:false,
+            isRequesting:false,
             isSavingDraft:false,
         }
     },
@@ -150,77 +143,79 @@ export default {
             if(!e){
                 return false;
             }
-            if(!this.createSuggestionData.desc){
-                this.createSuggestionData.desc = e.native
+            if(!this.createRepairData.desc){
+                this.createRepairData.desc = e.native
             }else{
-                this.createSuggestionData.desc = this.createSuggestionData.desc + e.native
+                this.createRepairData.desc = this.createRepairData.desc + e.native
             }
         },
 
-        notiDateChange(date){
-            this.createSuggestionData.period = date;
-        },
-
-        setPeriodToBlank(){
-            this.createSuggestionData.period = '';
-        },
-
-        async registerSuggestion(){
+        async requestRepair(){
             this.emoStatus = false;
-            console.log(this.createSuggestionData);
-            if(this.createSuggestionData.title.trim() == ''){
+            if(this.createRepairData.type.trim() == ''){
+                return this.error('Type is required')
+            }
+            if(this.createRepairData.object.trim() == ''){
+                return this.error('Object is required')
+            }
+            if(this.createRepairData.title.trim() == ''){
                 return this.error('Title is required')
             }
-            if(this.createSuggestionData.desc.trim() == ''){
+            if(this.createRepairData.desc.trim() == ''){
                 return this.error('Description is required')
             }
 
-            this.isSuggesting = true;
-            await registerSuggestion(this.createSuggestionData)
+            this.isRequesting = true;
+            await registerRepair(this.createRepairData)
             .then(res=>{
-                // let newSuggestion = res.data.suggestion;
-                // console.log(newSuggestion);
-                // let parsed = JSON.parse(newSuggestion.upload_file);
-                // console.log(parsed);
-                this.createSuggestionData.title = '';
-                this.createSuggestionData.desc = '';
-                this.createSuggestionData.file.imgUrl = [];
-                this.createSuggestionData.file.otherUrl = [];
-                this.createSuggestionData.file.videoUrl = [];
-                this.$router.push({path:'/suggestion/index'})
+                this.createRepairData.title = '';
+                this.createRepairData.desc = '';
+                this.createRepairData.type = '';
+                this.createRepairData.object = '';
+                this.createRepairData.isDraft = null;
+                this.createRepairData.isShowToProprietor = 0;
+                this.createRepairData.file.imgUrl = [];
+                this.createRepairData.file.otherUrl = [];
+                this.createRepairData.file.videoUrl = [];
+                this.$router.push({path:'/repair/index'})
                 
             })
             .catch(err=>{
                 console.log(err);
             })
-            this.isSuggesting = false
+            this.isRequesting = false;
         },
 
-        async saveToDraftSuggestion(){
+        async saveToDraftRequest(){
             this.emoStatus = false;
-            console.log(this.createSuggestionData);
-            if(this.createSuggestionData.title.trim() == ''){
+            if(this.createRepairData.type.trim() == ''){
+                return this.error('Type is required')
+            }
+            if(this.createRepairData.object.trim() == ''){
+                return this.error('Object is required')
+            }
+            if(this.createRepairData.title.trim() == ''){
                 return this.error('Title is required')
             }
-            if(this.createSuggestionData.desc.trim() == ''){
+            if(this.createRepairData.desc.trim() == ''){
                 return this.error('Description is required')
             }
-            this.createSuggestionData.isDraft = 1;
-            this.isSavingDraft = true;
-            await registerSuggestion(this.createSuggestionData)
-            .then(res=>{
-                this.createSuggestionData.title = '';
-                this.createSuggestionData.desc = '';
-                this.createSuggestionData.file.imgUrl = [];
-                this.createSuggestionData.file.otherUrl = [];
-                this.createSuggestionData.file.videoUrl = [];
-                // this.$router.push({path:'/suggestion/index'})
+            this.createRepairData.isDraft = 1;
+            // this.isSavingDraft = true;
+            // await registerSuggestion(this.createRepairData)
+            // .then(res=>{
+            //     this.createRepairData.title = '';
+            //     this.createRepairData.desc = '';
+            //     this.createRepairData.file.imgUrl = [];
+            //     this.createRepairData.file.otherUrl = [];
+            //     this.createRepairData.file.videoUrl = [];
+            //     // this.$router.push({path:'/suggestion/index'})
                 
-            })
-            .catch(err=>{
-                console.log(err);
-            })
-            this.isSavingDraft = false
+            // })
+            // .catch(err=>{
+            //     console.log(err);
+            // })
+            // this.isSavingDraft = false
         },
 
         async deleteFile(type,fileName){
@@ -236,38 +231,27 @@ export default {
             await delUploadFile(file)
             .then(res=>{
                     if(type == 'image'){
-                        this.createSuggestionData.file.imgUrl.pop(fileName)
+                        this.createRepairData.file.imgUrl.pop(fileName)
                     }else if(type == 'other'){
-                        this.createSuggestionData.file.otherUrl.pop(fileName)
+                        this.createRepairData.file.otherUrl.pop(fileName)
                     }else if(type == 'video'){
-                        this.createSuggestionData.file.videoUrl.pop(fileName)
+                        this.createRepairData.file.videoUrl.pop(fileName)
                     }
                 })
             .catch(err=>{
                 console.log(err);
             })
-            // if(res.status == 200){
-            //     if(type == 'image'){
-            //         this.createSuggestionData.file.imgUrl.pop(fileName)
-            //     }else if(type == 'other'){
-            //         this.createSuggestionData.file.otherUrl.pop(fileName)
-            //     }else if(type == 'video'){
-            //         this.createSuggestionData.file.videoUrl.pop(fileName)
-            //     }
-            // }else{
-            //     this.swr();
-            // }
         },
 
         //listen event from Upload
         upImgUrl(value) {
-            this.createSuggestionData.file.imgUrl.push(value);
+            this.createRepairData.file.imgUrl.push(value);
         },
         upFileUrl(value) {
-            this.createSuggestionData.file.otherUrl.push(value);
+            this.createRepairData.file.otherUrl.push(value);
         },
         upVideoUrl(value) {
-            this.createSuggestionData.file.videoUrl.push(value);
+            this.createRepairData.file.videoUrl.push(value);
         },
 
     }

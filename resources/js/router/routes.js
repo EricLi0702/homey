@@ -72,6 +72,7 @@ export default [
       {path:'', name:  'repair', redirect: {name:  'repair.list'}},
       {path:'index', name:  'repair.list', component: page('repair/list.vue')},
       {path:'create', name:  'repair.create', component: page('repair/create.vue')},
+      {path:'type', name:  'repair.type', component: page('repair/type.vue')},
       {path:':id', name:'repair.view', component: page('repair/view.vue')},
     ] 
   },
@@ -82,7 +83,7 @@ export default [
       {path:'', name:  'facility', redirect: {name:  'facility.list'}},
       {path:'index', name:  'facility.list', component: page('facility/list.vue')},
       {path:'create', name:  'facility.create', component: page('facility/create.vue')},
-      // {path:':id', name:'facility.view', component: page('facility/view.vue')},
+      {path:'reservation', name:'facility.reservation', component: page('facility/reservation.vue')},
     ]  
   },
   { path: '/settings',

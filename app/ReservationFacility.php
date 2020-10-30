@@ -4,29 +4,29 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Facility extends Model
+class ReservationFacility extends Model
 {
     protected $fillable = [
         'userId',
-        'aptId',
-        'name', 
-        'equipment',
-        'nb',
-        'outline',
+        'facilityId',
+        'aptId', 
+        'title',
+        'purpose',
         'max',
-        'upload_file',
-        'isUsing',
+        'periodFrom',
+        'periodTo',
     ];
 
     public function userId(){
         return $this->belongsTo(User::class, 'userId');
     }
 
+    public function facilityId(){
+        return $this->belongsTo(Facility::class, 'facilityId');
+    }
+
     public function aptId(){
         return $this->belongsTo(Apartment::class, 'aptId');
     }
 
-    public function reservationData(){
-        return $this->hasMany(ReservationFacility::class,'facilityId');
-    }
 }

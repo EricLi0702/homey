@@ -125,7 +125,6 @@ export default {
     user: 'auth/user'
   }),
   mounted(){
-    console.log("!!!!", this.user);
     this.listenNewNotification();
     this.listenNewSuggestion();
   },

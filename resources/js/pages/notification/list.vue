@@ -98,7 +98,6 @@ export default {
         },
 
         async infiniteHandlerNotification($state){
-            console.log("something")
             let timeOut = 0;
             
             if (this.pageOfNotification > 1) {
@@ -107,7 +106,6 @@ export default {
             let vm = this;
             await getNotificationList(this.pageOfNotification)
             .then(res=>{
-                console.log(res);
                 vm.lastpageOfNotification = res.data.last_page;
 
                 $.each(res.data.data, function(key, value){

@@ -8,6 +8,10 @@
                 <Input class="w-40"
                  search placeholder="Enter something..." />
                 <div class="suggestion-sub-menu-items">
+                    <router-link :to="{ path: '/facility/reservation' }" class="">
+                        <!-- {{ $t('register') }} -->
+                        <Button type="warning" icon="md-checkbox-outline">Reservations</Button>
+                    </router-link>
                     <router-link v-if="currentUser.role.roleName == 'AptAdmin'" :to="{ path: '/facility/create' }" class="">
                         <!-- {{ $t('register') }} -->
                         <Button type="success" icon="md-add">New</Button>
@@ -38,8 +42,14 @@ export default {
         Breadcrumb,
     },
     data(){
+
         return{
             baseUrl:window.base_url,
+        }
+    },
+    methods:{
+        viewList(){
+            this.isViewList = true;
         }
     }
 }

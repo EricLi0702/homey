@@ -41,6 +41,7 @@ class FacilityController extends Controller
     {
         $aptId = Auth::user()->aptId;
         return Facility::where([['aptId', '=', $aptId]])
+                        ->with(['reservationData', 'userId'])
                         ->orderBy('created_at','desc')
                         ->get();
     }

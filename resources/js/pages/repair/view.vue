@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
+        <!-- <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
             <div class="p-3 py-5 bg-white">
                 <p>something</p>
             </div>
-        </div>
+        </div> -->
         <div class="container m-0 p-0 mx-auto">
             <div class="row m-0 p-0">
                 <Category/>
@@ -12,7 +12,8 @@
                     <div v-if="details !== null" class="posted-item row m-0 p-3">
                         <div class="col-1">
                             <div class="posted-item-user-info">
-                                <img src="https://i.pravatar.cc/40" alt="">
+                                <img style="width:40px;" :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
+                                <!-- <img src="https://i.pravatar.cc/40" alt=""> -->
                             </div>
                         </div>   
                         
@@ -25,7 +26,7 @@
                                 <h3>{{details.title}}</h3>
                             </div>
                             <div class="post-content p-2">
-                                <p v-html="details.content"></p>
+                                <p v-html="details.desc"></p>
                             </div>
                             <div v-if="details.upload_file.imgUrl.length !== 0" class="post-img row m-0 p-0 mb-4 d-flex align-items-center">
                                 <div v-for="(image,i) in details.upload_file.imgUrl" :key="i" class="post-img-item col-4 p-0 px-2" v-viewer>
@@ -71,43 +72,25 @@
                                         ok-text="Yes"
                                         cancel-text="Cancel"
                                         placement="right"
-                                        @on-ok="removeSuggestion"
-                                        @on-cancel="cancelRemoveSuggestion">
+                                        @on-ok="removeRequest"
+                                        @on-cancel="cancelRemoveRequest">
                                         <Icon size="25" class="mr-4" type="md-trash"/>
                                     </Poptip>
                                 </div>
-                                <div v-else class="reply mr-auto">
+                                <!-- <div v-else class="reply mr-auto">
                                     <div v-if="details.comment_cnt !== null && details.comment_cnt.includes(currentUser.id)" class="reply d-flex mr-4">
                                         <p>You have already commented.</p>
                                     </div>
                                     <div v-else class="reply d-flex mr-4">
                                         <Icon size="25" type="ios-undo" @click="toggleReply"/>
                                     </div>
-                                </div>
-                                <div class="heart d-flex mr-4">
-                                    <Icon class="mr-1" v-if="checkIfHeart(details.heart_cnt)" @click="heartPost(details)" size="25" type="md-heart-outline" />
-                                    <Icon class="mr-1" v-else  @click="unHeartPost(details)" size="25" type="md-heart" color="#2D8CF0" />
-                                    <span v-if="details.heart_cnt !== null">{{details.heart_cnt.length}}</span>
-                                    <span v-else>0</span>
-                                </div>
-                                <div class="like d-flex mr-4">
-                                    <Icon class="mr-1" v-if="checkIfLike(details.like_cnt)" @click="likePost(details)" size="25" type="md-thumbs-up" />
-                                    <Icon class="mr-1" v-else  @click="unLikePost(details)" size="25" type="md-thumbs-up" color="#2D8CF0" />
-                                    <span v-if="details.like_cnt !== null">{{details.like_cnt.length}}</span>
-                                    <span v-else>0</span>
-                                </div>
-                                <div class="dislike d-flex">
-                                    <Icon class="mr-1" v-if="checkIfDislike(details.dislike_cnt)" @click="dislikePost(details)" size="25" type="md-thumbs-down" />
-                                    <Icon class="mr-1" v-else  @click="unDislikePost(details)" size="25" type="md-thumbs-down" color="#2D8CF0" />
-                                    <span v-if="details.dislike_cnt !== null">{{details.dislike_cnt.length}}</span>
-                                    <span v-else>0</span>
-                                </div>
+                                </div> -->
                             </div>
                         </div>                 
                     </div>
-                    <div v-if="isCommenting" id="commentArea" class="posted-item mt-3 p-2 animate__animated animate__fadeIn">
+                    <!-- <div v-if="isCommenting" id="commentArea" class="posted-item mt-3 p-2 animate__animated animate__fadeIn">
                         <div class="reply-form-comment row p-2">
-                            <Input v-model="commentData" type="textarea" placeholder="Leave your comment..." />
+                            <Input v-model="responseData" type="textarea" placeholder="Leave your comment..." />
                             <div class="d-flex justify-content-between col-12 p-0">
                                 <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                                 <div class="emoji-area-popup">
@@ -116,11 +99,11 @@
                                 <Button @click="leaveComment">Leave</Button>
                             </div>
                         </div>
-                    </div>
-                    <div v-for="(comment,i) in commentsOfCurrentSuggestion" :key="i" v-if="commentsOfCurrentSuggestion.length"  class="posted-item row m-0 p-3 mt-3">
+                    </div> -->
+                    <!-- <div v-for="(comment,i) in commentsOfCurrentSuggestion" :key="i" v-if="commentsOfCurrentSuggestion.length"  class="posted-item row m-0 p-3 mt-3">
                         <div class="col-1">
                             <div class="posted-item-user-info">
-                                <img src="https://i.pravatar.cc/40" alt="">
+                                <img style="width:40px;" :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
                             </div>
                         </div>   
                         <div class="col-11">
@@ -132,12 +115,6 @@
                                 <p>{{comment.content}}</p>
                             </div>
                         </div>  
-                        <!-- <div class="offset-2 col-10">
-                            <div class="user-name">
-                                <p>{{comment.user_id.name}}</p>
-                                <p>{{TimeView(comment.created_at)}}</p>
-                            </div>
-                        </div> -->
                     </div>
                     <InfiniteLoading 
                         class="pb-3"
@@ -145,7 +122,7 @@
                         spinner="circles"
                     >
                         <div slot="no-more">no more comments</div>
-                    </InfiniteLoading>
+                    </InfiniteLoading> -->
                 </div>
             </div>
         </div>
@@ -164,17 +141,9 @@ import { videoPlayer } from 'vue-video-player'
 import InfiniteLoading from 'vue-infinite-loading';
 //import Apis
 import {
-    viewCurrentSuggestion, 
-    getCommentsOfCurrentSuggestion, 
-    leaveCommentToSuggestion, 
-    getCurrentSuggestionFromServer, 
-    heartToSuggestion, 
-    unHeartToSuggestion, 
-    likeToSuggestion, 
-    dislikeToSuggestion, 
-    unLikeToSuggestion, 
-    unDislikeToSuggestion 
-} from '~/api/suggestion'
+    responseToRepairRequest, 
+    getCurrentRepairFromServer, 
+} from '~/api/repair'
 
 import Category from './category'
 
@@ -194,12 +163,10 @@ export default {
 
     data(){
         return{
+            baseUrl:window.base_url,
             suggestionItem : [],
-            heart_mine:false,
-            like_mine:false,
-            dislike_mine:false,
             details:null,
-            suggetionId:null,
+            repairId:null,
             playerOptions: {
             // videojs options
                 height:'350',
@@ -215,7 +182,7 @@ export default {
 
             //comment
             isCommenting:false,
-            commentData:null,
+            responseData:null,
             //emoji
             emoStatus:false,
             commentsOfCurrentSuggestion:[],
@@ -238,8 +205,8 @@ export default {
 
     created(){
         // console.log(this.currentPath)
-        this.suggetionId = this.currentPath.params.id;
-        this.getCurrentSuggestion();
+        this.repairId = this.currentPath.params.id;
+        this.getCurrentRepair();
     },
     mounted(){
         // console.log(this.currentPath)
@@ -248,29 +215,29 @@ export default {
     },
     methods:{
 
-        async leaveComment(){
-            console.log("leaveComment", this.commentData);
-            if(this.commentData == null){
+        async responseToRepairRequest(){
+            console.log("reply to request", this.responseData);
+            if(this.responseData == null){
                 return this.error("Please enter comment");
             }
-            await leaveCommentToSuggestion(this.commentData, this.details)
-            .then(res=>{
-                console.log(res.data.commentToSuggest);
-                let commentCurrently = res.data.commentToSuggest;
-                commentCurrently['created_at'] = Date.now();
-                commentCurrently['user_id'] = {};
-                commentCurrently.user_id['name'] = this.currentUser.name;
-                this.commentData = null;
-                this.commentsOfCurrentSuggestion.unshift(commentCurrently);
-                if(this.details.comment_cnt == null) {
-                    this.details.comment_cnt = [];
-                    this.details.comment_cnt.push(this.currentUser.id);
-                }
-                else{
-                    this.details.comment_cnt.push(this.currentUser.id);
-                }
-                this.isCommenting = false;
-            })
+            // await leaveCommentToSuggestion(this.responseData, this.details)
+            // .then(res=>{
+            //     console.log(res.data.commentToSuggest);
+            //     let commentCurrently = res.data.commentToSuggest;
+            //     commentCurrently['created_at'] = Date.now();
+            //     commentCurrently['user_id'] = {};
+            //     commentCurrently.user_id['name'] = this.currentUser.name;
+            //     this.responseData = null;
+            //     this.commentsOfCurrentSuggestion.unshift(commentCurrently);
+            //     if(this.details.comment_cnt == null) {
+            //         this.details.comment_cnt = [];
+            //         this.details.comment_cnt.push(this.currentUser.id);
+            //     }
+            //     else{
+            //         this.details.comment_cnt.push(this.currentUser.id);
+            //     }
+            //     this.isCommenting = false;
+            // })
         },
 
         toggleEmo(){
@@ -281,10 +248,10 @@ export default {
             if(!e){
                 return false;
             }
-            if(!this.commentData){
-                this.commentData = e.native
+            if(!this.responseData){
+                this.responseData = e.native
             }else{
-                this.commentData = this.commentData + e.native
+                this.responseData = this.responseData + e.native
             }
         },
 
@@ -306,185 +273,15 @@ export default {
             return this.playerOptions
         },
 
-        getCurrentSuggestion(){
-            getCurrentSuggestionFromServer(this.suggetionId)
+        getCurrentRepair(){
+            getCurrentRepairFromServer(this.repairId)
             .then(res=>{
-                console.log("ddd",res.data.suggestionData);
-                this.details = res.data.suggestionData;
-                // this.commentsOfCurrentSuggestion = res.data.commentData;
-                this.details.heart_cnt = JSON.parse(this.details.heart_cnt);
-                this.details.like_cnt = JSON.parse(this.details.like_cnt);
-                this.details.dislike_cnt = JSON.parse(this.details.dislike_cnt);
+                console.log("ddd",res.data.repairData);
+                this.details = res.data.repairData;
                 this.details.upload_file = JSON.parse(this.details.upload_file);
-                viewCurrentSuggestion(this.details.id);
-                // getCommentsOfCurrentSuggestion(2, this.details.id)
-                // .then(res=>{
-                //     console.log(res)
-                // });
             })
         },
-
-        infiniteHandlerComments($state){
-            console.log("called");
-            let timeOut = 0;
-            
-            if (this.pageOfComments > 1) {
-                timeOut = 2000;
-            }
-            let vm = this;
-            setTimeout(() => {
-                getCommentsOfCurrentSuggestion(this.pageOfComments, this.suggetionId)
-                .then(res=>{
-                    console.log(res);
-                    vm.lastpageOfComments = res.data.last_page;
-
-                    $.each(res.data.data, function(key, value){
-                        console.log("?????", value);
-                        vm.commentsOfCurrentSuggestion.push(value);
-                        console.log("&&&&", vm.commentsOfCurrentSuggestion); 
-                    });
-                    if (vm.pageOfComments - 1 === vm.lastpageOfComments) {
-                        $state.complete();
-                    }
-                    else {
-                        $state.loaded();
-                    }
-                    vm.pageOfComments = vm.pageOfComments + 1;
-                }); 
-            }, 2000);
-            
-        },
-        checkIfHeart(heartCntArray){
-            if (heartCntArray == null){
-                return true;
-            }
-            else{
-                let userId = this.currentUser.id;
-                for( let i = 0; i < heartCntArray.length ; i++){
-                    if(heartCntArray[i] == userId){
-                        return false;
-                    }
-                }
-                return true;
-            }
-        },
-        checkIfLike(likeCntArray){
-            if (likeCntArray == null){
-                return true;
-            }
-            else{
-                let userId = this.currentUser.id;
-                for( let i = 0; i < likeCntArray.length ; i++){
-                    if(likeCntArray[i] == userId){
-                        return false;
-                    }
-                }
-                return true;
-            }
-        },
-        checkIfDislike(dislikeCntArray){
-            if (dislikeCntArray == null){
-                return true;
-            }
-            else{
-                let userId = this.currentUser.id;
-                for( let i = 0; i < dislikeCntArray.length ; i++){
-                    if(dislikeCntArray[i] == userId){
-                        return false;
-                    }
-                }
-                return true;
-            }
-        },
-
-        heartPost(suggest){
-            let userId = this.currentUser.id;
-            if(suggest.heart_cnt == null){
-                suggest.heart_cnt = [userId];
-            }
-            else{
-                for(let i = 0; i < suggest.heart_cnt.length ; i++){
-                    if(suggest.heart_cnt[i] == userId){
-                        return;
-                    }
-                }
-                suggest.heart_cnt.push(userId);
-            }
-            heartToSuggestion(suggest)
-        },
-
-        likePost(suggest){
-            let userId = this.currentUser.id;
-            if(suggest.like_cnt == null){
-                suggest.like_cnt = [userId];
-            }
-            else{
-                for(let i = 0; i < suggest.like_cnt.length ; i++){
-                    if(suggest.like_cnt[i] == userId){
-                        return;
-                    }
-                }
-                suggest.like_cnt.push(userId);
-            }
-            likeToSuggestion(suggest)
-        },
-
-        dislikePost(suggest){
-            let userId = this.currentUser.id;
-            if(suggest.dislike_cnt == null){
-                suggest.dislike_cnt = [userId];
-            }
-            else{
-                for(let i = 0; i < suggest.dislike_cnt.length ; i++){
-                    if(suggest.dislike_cnt[i] == userId){
-                        return;
-                    }
-                }
-                suggest.dislike_cnt.push(userId);
-            }
-            dislikeToSuggestion(suggest)
-        },
-
-        unHeartPost(suggest){
-            let userId = this.currentUser.id;
-            if(suggest.heart_cnt.length == 1 && suggest.heart_cnt[0] == userId){
-                suggest.heart_cnt = null;
-            }
-            else{
-                suggest.heart_cnt = suggest.heart_cnt.filter((n) => {return n != userId});
-            }
-            unHeartToSuggestion(suggest)
-        },
-
-        unLikePost(suggest){
-            let userId = this.currentUser.id;
-            if(suggest.like_cnt.length == 1 && suggest.like_cnt[0] == userId){
-                suggest.like_cnt = null;
-            }
-            else{
-                suggest.like_cnt = suggest.like_cnt.filter((n) => {return n != userId});
-            }
-            unLikeToSuggestion(suggest)
-        },
-
-        unDislikePost(suggest){
-            let userId = this.currentUser.id;
-            if(suggest.dislike_cnt.length == 1 && suggest.dislike_cnt[0] == userId){
-                suggest.dislike_cnt = null;
-            }
-            else{
-                suggest.dislike_cnt = suggest.dislike_cnt.filter((n) => {return n != userId});
-            }
-            unDislikeToSuggestion(suggest)
-        },
+        
     }
 }
 </script>
-
-<style scoped>
-    .center{
-        width: 300px;
-        margin: 10px auto;
-        overflow: hidden;
-    }
-</style>

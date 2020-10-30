@@ -29,7 +29,6 @@ export default {
 
   methods: {
     setLocale (locale) {
-      console.log('+++++',locale)
       if (this.$i18n.locale !== locale) {
         loadMessages(locale)
 

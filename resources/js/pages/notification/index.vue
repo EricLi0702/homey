@@ -17,7 +17,7 @@
                     </router-link>
                     <router-link :to="{ name: 'notification.list' }" class="">
                         <!-- {{ $t('register') }} -->
-                        <Button type="primary" icon="md-list">DownGraded</Button>
+                        <Button type="warning" icon="md-code-download">DownGraded</Button>
                     </router-link>
                 </div>
             </div>

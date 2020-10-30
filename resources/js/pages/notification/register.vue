@@ -152,7 +152,6 @@ export default {
             if(this.registerNotificationData.desc.trim() == ''){
                 return this.error('Description is required')
             }
-            console.log(this.registerNotificationData);
             this.isRegistering = true;
 
             await registerNotification(this.registerNotificationData)
