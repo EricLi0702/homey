@@ -15,12 +15,14 @@
                 <div v-if="user.roleId == 1" class="dropdown-divider" />
 
                 <router-link v-if="user.roleId == 1" :to="{ path: '/apartment' }" class="nav-item dropdown-item" active-class="active">
-                  {{ $t('common').apartment }}
+                  <!-- {{ $t('common').apartment }} -->
+                  Apartment
                 </router-link>
                 <div v-if="user.roleId == 1" class="dropdown-divider" />
 
                 <router-link v-if="user.roleId == 2" :to="{ path:'/user' }" class="nav-item dropdown-item" active-class="active">
-                  {{ $t('common').user }}
+                  <!-- {{ $t('common').user }} -->
+                  User
                 </router-link>
                 <div v-if="user.roleId == 2" class="dropdown-divider" />
               </div>
@@ -72,13 +74,13 @@
               href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           >
             <!-- <img :src="user.photo_url" class="rounded-circle profile-photo mr-1"> -->
-            <img :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
+            <img :src="`${baseUrl}${user.user_avatar}`" class="rounded-circle profile-photo mr-1" alt="">
             <!-- <img src="https://i.pravatar.cc/40" alt="" style="border-radius: 50%;"> -->
            
           </a>
           <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn">
             <div class="p-3 text-center">
-              <img :src="user.photo_url" class="rounded-circle profile-photo">
+              <img :src="`${baseUrl}${user.user_avatar}`" class="rounded-circle profile-photo">
               <p>{{ user.name }}</p>
             </div>
             <div class="dropdown-divider" />

@@ -76,8 +76,6 @@ export default [
       {path:':id', name:'repair.view', component: page('repair/view.vue')},
     ] 
   },
-  { path: '/repair',  name:  'repair',  component:  page('repair/repair.vue') },
-
   { path: '/facility',  name:  'facility',  component:  page('facility/index.vue'),
     children:[
       {path:'', name:  'facility', redirect: {name:  'facility.list'}},

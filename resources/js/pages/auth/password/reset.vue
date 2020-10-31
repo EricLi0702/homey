@@ -1,47 +1,46 @@
 <template>
-  <div class="row">
-    <div class="col-lg-8 m-auto">
-      <card :title="$t('reset_password')">
-        <form @submit.prevent="reset" @keydown="form.onKeydown($event)">
-          <alert-success :form="form" :message="status" />
-
-          <!-- Email -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email" readonly>
-              <has-error :form="form" field="email" />
+<div class="reset-pass-container container-fluid d-flex justify-content-center align-items-center">
+    <div class="reset-pass-body text-left">
+      <div class="lc-logo justify-content-center align-items-center d-flex pt-5">
+          <img src="/asset/img/icon/logo.png" alt="">
+      </div>
+      <Divider />
+      <div class="lc-title">
+          <h4 class="p-3"><strong>
+            <!-- {{$t('login').login}} -->
+            Reset Password
+          </strong></h4>
+      </div>
+      <form @submit.prevent="reset" @keydown="form.onKeydown($event)">
+        <div class="lc-form px-4">
+            <alert-success :form="form" :message="status" />
+            <div class="m-2">
+                <p class="mt-2">Email </p>
+                <!-- <Input type="email" v-model="data.email" aria-describedby="emailHelp" class="ml-auto" prefix="ios-contact" placeholder="Enter email" style="width: auto" /> -->
+                <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email" readonly>
+                <has-error :form="form" field="email" />
             </div>
-          </div>
-
-          <!-- Password -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('password') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
-              <has-error :form="form" field="password" />
+            <div class="m-2">
+                <p class="mt-2">Password </p>
+                <!-- <Input type="email" v-model="data.email" aria-describedby="emailHelp" class="ml-auto" prefix="ios-contact" placeholder="Enter email" style="width: auto" /> -->
+                <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
+                <has-error :form="form" field="password" />
             </div>
-          </div>
-
-          <!-- Password Confirmation -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('confirm_password') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.password_confirmation" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" class="form-control" type="password" name="password_confirmation">
-              <has-error :form="form" field="password_confirmation" />
+            <div class="m-2">
+                <p class="mt-2">Confirm Password </p>
+                <!-- <Input type="email" v-model="data.email" aria-describedby="emailHelp" class="ml-auto" prefix="ios-contact" placeholder="Enter email" style="width: auto" /> -->
+                <input v-model="form.password_confirmation" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" class="form-control" type="password" name="password_confirmation">
+                <has-error :form="form" field="password_confirmation" />
             </div>
-          </div>
-
-          <!-- Submit Button -->
-          <div class="form-group row">
-            <div class="col-md-9 ml-md-auto">
-              <v-button :loading="form.busy">
+            
+            <div class="m-2">
+              <v-button :loading="form.busy" class="mt-3 mb-5 w-100">
                 {{ $t('reset_password') }}
               </v-button>
+                <!-- <Button type="primary" long @click="authenticate"  :loading="form.busy">{{ $t('login').login }}</Button> -->
             </div>
-          </div>
-        </form>
-      </card>
+        </div>
+      </form>
     </div>
   </div>
 </template>

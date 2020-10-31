@@ -20,6 +20,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');
     Route::patch('settings/password', 'Settings\PasswordController@update');
+    Route::post('settings/avatar', 'Settings\ProfileController@updateAvatar');
 
     Route::get('users', 'Auth\UserController@userList');
     Route::post('users','Auth\UserController@addUser');
@@ -74,6 +75,9 @@ Route::group(['middleware' => 'auth:api'], function () {
 Route::group(['middleware' => 'guest:api'], function () {
     Route::post('login', 'Auth\LoginController@login');
     Route::post('register', 'Auth\RegisterController@register');
+    Route::post('verify', 'Auth\RegisterController@verify');
+    Route::post('verifycode', 'Auth\RegisterController@verifycode');
+    Route::post('setpassword', 'Auth\RegisterController@setpassword');
 
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');

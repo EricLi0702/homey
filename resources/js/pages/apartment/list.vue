@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <Button type="info" size="small" @click="addApt">Add Apartment</Button>
-        <table class="table">
+    <div class="m-2 py-5">
+        <Button class="mb-4" type="info" size="small" @click="addApt">Add Apartment</Button>
+        <table class="table m-0">
         <tr>
             <th>ID</th>
             <th>AptName</th>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="m-2 py-5 gray-input">
         <div class="form-group row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Representative name</label>
             <div class="col-sm-10">

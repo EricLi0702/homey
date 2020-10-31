@@ -5,7 +5,7 @@
                 <h2 class="p-3">Register New Notification</h2>
                 <Form :model="registerNotificationData">
                     <div class="row m-0 p-0">
-                        <div class="col-md-6 mb-3 ">
+                        <div class="col-md-6 mb-3 gray-input">
                             <p>Title</p>
                             <Input v-model="registerNotificationData.title" placeholder="please enter user name" />
                         </div>

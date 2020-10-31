@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <Button type="info" size="small" @click="addModal = true">Add</Button>
+    <div class="m-2 py-5 gray-input">
+        <Button class="mb-4" type="info" size="small" @click="addModal = true">Add</Button>
         <table class="table">
             <tr>
                 <th>ID</th>

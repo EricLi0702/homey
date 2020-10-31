@@ -71,7 +71,7 @@
                             <a href="#">REPAIR</a>
                         </div>
                         <div class="a-button d-flex col-md-12 align-items-center justify-content-center text-center">
-                            <Button shape="circle" size="large" type="primary mt-5" style="height: 58px; padding: 4px 50px;">Services Details</Button>
+                            <Button shape="circle" size="large" type="primary" class="mt-5" style="height: 58px; padding: 4px 50px;">Services Details</Button>
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,9 @@
         <div class="container">
             <div class="footer-cta pt-5 pb-5">
                 <div class="row d-flex p-0 m-0 ">
+                    <div class="col-12 m-0 p-0 mb-3">
+                        <h1 class="text-bold text-white">Homey Apt</h1>
+                    </div>
                     <div class="col-xl-4 col-md-4 mb-30 p-0">
                         <div class="single-cta d-flex justify-content-start align-items-start ">
                             <i class="fas fa-map-marker-alt"></i>
@@ -37,49 +40,48 @@
                     <div class="col-xl-4 col-lg-4 mb-50">
                         <div class="footer-widget">
                             <div class="footer-logo">
-                                <a href="userlogin.html"><h1>HOMEY</h1></a>
+                                <a href="/">
+                                    <img :src="`${baseUrl}/asset/img/icon/logo.png`" alt="">
+                                </a>
                             </div>
                             <div class="footer-text">
-                                <p>Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do eiusmod tempor incididuntut consec tetur adipisicing
-                                elit,Lorem ipsum dolor sit amet.</p>
-                            </div>
-                            <div class="footer-social-icon">
-                                <span>Follow us</span>
-                                <a href="#"><i class="fab fa-facebook-f facebook-bg"></i></a>
-                                <a href="#"><i class="fab fa-twitter twitter-bg"></i></a>
-                                <a href="#"><i class="fab fa-google-plus-g google-bg"></i></a>
+                                <h3 class="text-gray">We support a happy life.</h3>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
                         <div class="footer-widget">
-                            <div class="footer-widget-heading">
-                                <h3>Useful Links</h3>
+                            <div class="single-cta d-flex justify-content-start align-items-center ">
+                                <Icon type="md-locate" color="#FF5E14" size="30"/>
+                                <div class="cta-text">
+                                    <h4>1010 Avenue, sw 54321, chandigarh</h4>
+                                </div>
                             </div>
-                            <ul>
-                                <li><a href="./userlogin.html">Home</a></li>
-                                <li><a href="/asset/img/bgreeting.html">Greeting</a></li>
-                                <li><a href="/asset/img/bground.html">Ground</a></li>
-                                <li><a href="/asset/img/bgocation.html">Location</a></li>
-                                <li><a href="#">Contact</a></li>
-                                
-                            </ul>
+                            <div class="single-cta d-flex justify-content-start align-items-center ">
+                                <Icon type="ios-person" color="#FF5E14" size="30" />
+                                <div class="cta-text">
+                                    <h4>Sammie</h4>
+                                </div>
+                            </div>
+                            <div class="single-cta d-flex justify-content-start align-items-center ">
+                                <Icon type="ios-mail-open" color="#FF5E14" size="30"/>
+                                <div class="cta-text">
+                                    <h4>Sammie@homey.com</h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
                         <div class="footer-widget">
                             <div class="footer-widget-heading">
-                                <h3>Subscribe</h3>
+                                <a href="#">
+                                    <h3>Terms of Use</h3>
+                                </a>
+                                <a href="#">
+                                    <h3>Privacy Policy</h3>
+                                </a>
                             </div>
-                            <div class="footer-text mb-25">
-                                <p>Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
-                            </div>
-                            <div class="subscribe-form">
-                                <form action="#">
-                                    <input type="text" placeholder="Email Address">
-                                    <button><i class="fab fa-telegram-plane"></i></button>
-                                </form>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -98,3 +100,13 @@
         </div>
     </footer>
 </template>
+
+<script>
+export default {
+    
+    data: () => ({
+        baseUrl:window.base_url,
+
+    }),
+}
+</script>

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <Button type="info" size="small" @click="addUser">Register User</Button>
+    <div class="m-2 py-5 gray-input">
+        <Button class="mb-4" type="info" size="small" @click="addUser">Register User</Button>
         <table class="table">
         <tr>
             <th>No</th>
