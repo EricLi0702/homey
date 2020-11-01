@@ -8,6 +8,7 @@ class Notification extends Model
 {
     protected $fillable = [
         'userId',
+        'aptId',
         'title',
         'type', 
         'status',
@@ -17,6 +18,8 @@ class Notification extends Model
         'content',
         'isDraft',
         'isDowngrade',
+        'upload_file',
+        'view_cnt',
     ];
 
     public function userId(){

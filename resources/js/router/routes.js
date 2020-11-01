@@ -50,6 +50,9 @@ export default [
       {path:'', name:  'notification', redirect: {name:  'notification.list'}},
       {path:'index', name:  'notification.list', component: page('notification/list.vue')},
       {path:'register', name:  'notification.register', component: page('notification/register.vue')},
+      {path:':id', name:'notification.view', component: page('notification/view.vue')},
+      {path:':id/update', name:'notification.update', component: page('notification/update.vue'),props:true},
+      {path:'downgradelist', name:'notification.downgradelist', component: page('notification/downgradelist.vue')},
     ]
   },
   { path: '/community',  name:  'community',  component:  page('community/index.vue'),

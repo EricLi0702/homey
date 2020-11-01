@@ -34,9 +34,16 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('apartment','ApartmentController@addApt');
     Route::put('apartment','ApartmentController@updateApt');
     Route::delete('apartment','ApartmentController@delApt');
-
+    
     Route::post('notification/create', 'NotificationController@store');
     Route::get('notification', 'NotificationController@index');
+    Route::delete('notification', 'NotificationController@delete');
+    Route::get('notification/current', 'NotificationController@getCurrent');
+    Route::post('notification/view', 'NotificationController@addView');
+    Route::put('notification', 'NotificationController@update');
+    Route::put('notification/down', 'NotificationController@downgrade');
+    Route::put('notification/up', 'NotificationController@upgrade');
+    Route::get('notification/downgrade', 'NotificationController@indexDowngrade');
     
     Route::post('facility/create', 'FacilityController@store');
     Route::get('facility', 'FacilityController@index');

@@ -7,17 +7,17 @@
                 <Input class="w-40"
                  search placeholder="Enter something..." />
                 <div class="notification-sub-menu-items">
-                    <router-link :to="{ name: 'notification.register' }" class="">
+                    <router-link v-if="currentUser.roleId == 1 || currentUser.roleId == 2" :to="{ name: 'notification.register' }" class="">
                         <!-- {{ $t('register') }} -->
                         <Button type="success" icon="md-add">New</Button>
+                    </router-link>
+                    <router-link v-if="currentUser.roleId == 1 || currentUser.roleId == 2" :to="{ name: 'notification.downgradelist' }" class="">
+                        <!-- {{ $t('register') }} -->
+                        <Button type="warning" icon="md-trending-down">DownGraded</Button>
                     </router-link>
                     <router-link :to="{ name: 'notification.list' }" class="">
                         <!-- {{ $t('register') }} -->
                         <Button type="primary" icon="md-list">View</Button>
-                    </router-link>
-                    <router-link :to="{ name: 'notification.list' }" class="">
-                        <!-- {{ $t('register') }} -->
-                        <Button type="warning" icon="md-code-download">DownGraded</Button>
                     </router-link>
                 </div>
             </div>
@@ -33,10 +33,16 @@
 
 <script>
 import Breadcrumb from '~/components/Breadcrumb'
+import { mapGetters } from 'vuex'
 export default {
     middleware: 'auth',
     components:{
         Breadcrumb,
+    },
+    computed:{ 
+        ...mapGetters({
+            currentUser: 'auth/user'
+        }),
     },
     data(){
         return{

@@ -70,10 +70,11 @@
 <script>
 //infinitLoding
 import InfiniteLoading from 'vue-infinite-loading';
-import {getNotificationList,registerNotification,updateNotification,delNotification} from '~/api/notification'
+import {getDowngradNotificationList,registerNotification,updateNotification,delNotification} from '~/api/notification'
 import Category from './category'
 import { mapGetters } from 'vuex'
 export default {
+
     components:{
         InfiniteLoading,
         Category,
@@ -100,7 +101,7 @@ export default {
 
     methods:{
         async start(){
-            await getNotificationList()
+            await getDowngradNotificationList()
             .then(res=>{
                 console.log(res);
             })
@@ -113,7 +114,7 @@ export default {
                 timeOut = 1000;
             }
             let vm = this;
-            await getNotificationList(this.pageOfNotification)
+            await getDowngradNotificationList(this.pageOfNotification)
             .then(res=>{
                 vm.lastpageOfNotification = res.data.last_page;
 

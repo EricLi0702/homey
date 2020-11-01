@@ -66,7 +66,7 @@ export default {
             this.isDeleting = true
             delApt(apt)
                 .then(res=>{
-                    this.success('successfully delted')
+                    this.success('successfully deleted')
                     this.aptLists.splice(index,1)
                 })
                 .catch(err=>{
