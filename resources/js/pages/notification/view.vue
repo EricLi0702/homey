@@ -3,7 +3,7 @@
         <div class="row m-0 p-0">
             <Category/>
             <div class="col-12 col-md-8 m-0 p-0 pb-4">
-                <div v-if="details !== null && (currentUser.roleId == 1 || currentUser.roleId == 2)" class="control-notification row m-0 mb-3 d-flex justify-content-between">
+                <div v-if="details !== null && ( currentUser.roleId == 2)" class="control-notification row m-0 mb-3 d-flex justify-content-between">
                     <Button @click="editNotification(details)" icon="md-create" type="info">Update</Button>
                     <Poptip
                         class="ml-auto mr-2"
@@ -246,7 +246,7 @@ export default {
         },
 
         deleteNotification(){
-            this.isDeleting = true
+            this.isDeleting = true;
             deleteNotification(this.details)
             .then(res=>{
                 console.log("res", res);
@@ -260,7 +260,7 @@ export default {
                 console.log(err);
             })
             
-            this.isDeleting = true
+            this.isDeleting = false;
         },
 
         cancelDeleteNotification(){

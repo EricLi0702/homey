@@ -9,14 +9,19 @@
             <div class="row m-0 p-0">
                 <Category/>
                 <div class="col-12 col-md-8 m-0 p-0">
-                    <div class="posted-item position-relative" v-for="(suggestion,i) in suggestionList" :key="i" v-if="suggestionList.length">
+                    <div v-if="noSuggestion" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
+                        <div class="no-fac text-center">
+                            <Icon size="150" type="ios-search" />
+                            <h5>oops! there is no suggestion!</h5>
+                        </div>
+                    </div>
+                    <div v-else-if="suggestionList.length" class="posted-item position-relative" v-for="(suggestion,i) in suggestionList" :key="i" >
                         <router-link :to="{path:`/suggestion/${suggestion.id}`}">
                             
                             <div class="pi-wrap float-left ">
                                 <div class="user-info float-left">
                                     <div class="avatar">
-                                        <img style="width:40px;" :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
-                                        <!-- <img src="https://i.pravatar.cc/40" alt=""> -->
+                                        <img :src="`${baseUrl}${suggestion.user_id.user_avatar}`" class="rounded-circle profile-photo mr-1" alt="">
                                     </div>
                                     <div class="icons text-center">
                                         <p>{{suggestion.id}}</p>
@@ -64,7 +69,7 @@
                                 </div>
                                 <div class="posted-item-info-time">
                                     <Icon type="ios-clock-outline" />
-                                    <timeago :datetime="suggestion.created_at" :since="suggestion.created_at" :auto-update="60"></timeago>
+                                    <timeago :datetime="suggestion.updated_at" :since="suggestion.updated_at" :auto-update="60"></timeago>
                                 </div>
                             </div>
                             <div class="clearfix">
@@ -73,7 +78,7 @@
                         </router-link>
                     </div>
                     <InfiniteLoading 
-                        class="pb-3"
+                        class="p-3"
                         @infinite="infiniteHandlerSuggestion"
                         spinner="circles"
                     >
@@ -100,7 +105,7 @@ export default {
         return{
             baseUrl:window.base_url,
             suggestionList : [],
-
+            noSuggestion:false,
             //infinit loading
             pageOfSuggestion: 1,
             lastPageOfSuggestion: 0,
@@ -128,6 +133,12 @@ export default {
             let vm = this;
             await getSuggestionList(this.pageOfSuggestion)
             .then(res=>{
+                console.log("suggestion", res);
+                if(vm.pageOfSuggestion == 1 && res.data.data.length == 0){
+                    this.noSuggestion = true;
+                    $state.complete();
+                    return;
+                }
                 vm.lastpageOfSuggestion = res.data.last_page;
 
                 $.each(res.data.data, function(key, value){

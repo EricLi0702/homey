@@ -68,6 +68,7 @@ export default [
       {path:'index', name:  'suggestion.list', component: page('suggestion/list.vue')},
       {path:'create', name:  'suggestion.create', component: page('suggestion/create.vue')},
       {path:':id', name:'suggestion.view', component: page('suggestion/view.vue')},
+      {path:':id/update', name:'suggestion.update', component: page('suggestion/update.vue'),props:true},
     ] 
   },
   { path: '/repair',  name:  'repair',  component:  page('repair/index.vue'),

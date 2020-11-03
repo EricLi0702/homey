@@ -873,9 +873,20 @@ body{
   .cnt-info .cnt .remove i{
       color: #515A6E;
       transition: color 0.5s ease;
-  }
-  .cnt-info .cnt .remove i:hover{
+    }
+    .cnt-info .cnt .remove i.ivu-icon-md-trash:hover{
     color: red;
+}
+.remove-comment i.ivu-icon-md-trash:hover{
+    color: red;
+}
+.remove-comment i.ivu-icon-md-trash{
+    color:#515A6E;
+    transition: color 0.5s ease;
+    cursor: pointer;
+  }
+  .cnt-info .cnt .remove i.ivu-icon-md-create:hover{
+    color: #034877;
   }
 
   .cnt-info .cnt .remove .ivu-poptip-popper{

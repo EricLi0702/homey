@@ -12,8 +12,7 @@
                     <div v-if="details !== null" class="posted-item row m-0 p-3">
                         <div class="col-1">
                             <div class="posted-item-user-info">
-                                <img style="width:40px;" :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
-                                <!-- <img src="https://i.pravatar.cc/40" alt=""> -->
+                                <img :src="`${baseUrl}${details.user_id.user_avatar}`" class="rounded-circle profile-photo mr-1" alt="">
                             </div>
                         </div>   
                         
@@ -65,43 +64,46 @@
                         </div>    
                         <div class="offset-1 col-11 d-flex cnt-info">
                             <div class="cnt d-flex w-100">
-                                <div v-if="currentUser.id == details.userId" class="remove mr-auto">
-                                    <Poptip
-                                        confirm
-                                        title="Are you sure you want to delete this suggestion?"
-                                        ok-text="Yes"
-                                        cancel-text="Cancel"
-                                        placement="right"
-                                        @on-ok="removeSuggestion"
-                                        @on-cancel="cancelRemoveSuggestion">
-                                        <Icon size="25" class="mr-4" type="md-trash"/>
-                                    </Poptip>
-                                </div>
-                                <div v-else class="reply mr-auto">
-                                    <div v-if="details.comment_cnt !== null && details.comment_cnt.includes(currentUser.id)" class="reply d-flex mr-4">
-                                        <p>You have already commented.</p>
+                                <div v-if="details.isRemoved !== 1" class="d-flex w-100">
+                                    <div v-if="currentUser.id == details.userId || currentUser.roleId == 2" class="remove mr-auto">
+                                        <Poptip
+                                            confirm
+                                            title="Are you sure you want to delete this suggestion?"
+                                            ok-text="Yes"
+                                            cancel-text="Cancel"
+                                            placement="right"
+                                            @on-ok="removeSuggestion"
+                                            @on-cancel="cancelRemoveSuggestion">
+                                            <Icon size="25" class="mr-4" type="md-trash"/>
+                                        </Poptip>
+                                        <Icon @click="editSuggestion(details)" size="25" class="mr-4" type="md-create"/>
                                     </div>
-                                    <div v-else class="reply d-flex mr-4">
-                                        <Icon size="25" type="ios-undo" @click="toggleReply"/>
+                                    <div v-else class="reply mr-auto">
+                                        <div v-if="details.comment_cnt !== null && details.comment_cnt.includes(currentUser.id)" class="reply d-flex mr-4">
+                                            <p>You have already commented.</p>
+                                        </div>
+                                        <div v-else class="reply d-flex mr-4">
+                                            <Icon size="25" type="ios-undo" @click="toggleReply"/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="heart d-flex mr-4">
-                                    <Icon class="mr-1" v-if="checkIfHeart(details.heart_cnt)" @click="heartPost(details)" size="25" type="md-heart-outline" />
-                                    <Icon class="mr-1" v-else  @click="unHeartPost(details)" size="25" type="md-heart" color="#2D8CF0" />
-                                    <span v-if="details.heart_cnt !== null">{{details.heart_cnt.length}}</span>
-                                    <span v-else>0</span>
-                                </div>
-                                <div class="like d-flex mr-4">
-                                    <Icon class="mr-1" v-if="checkIfLike(details.like_cnt)" @click="likePost(details)" size="25" type="md-thumbs-up" />
-                                    <Icon class="mr-1" v-else  @click="unLikePost(details)" size="25" type="md-thumbs-up" color="#2D8CF0" />
-                                    <span v-if="details.like_cnt !== null">{{details.like_cnt.length}}</span>
-                                    <span v-else>0</span>
-                                </div>
-                                <div class="dislike d-flex">
-                                    <Icon class="mr-1" v-if="checkIfDislike(details.dislike_cnt)" @click="dislikePost(details)" size="25" type="md-thumbs-down" />
-                                    <Icon class="mr-1" v-else  @click="unDislikePost(details)" size="25" type="md-thumbs-down" color="#2D8CF0" />
-                                    <span v-if="details.dislike_cnt !== null">{{details.dislike_cnt.length}}</span>
-                                    <span v-else>0</span>
+                                    <div class="heart d-flex mr-4">
+                                        <Icon class="mr-1" v-if="checkIfHeart(details.heart_cnt)" @click="heartPost(details)" size="25" type="md-heart-outline" />
+                                        <Icon class="mr-1" v-else  @click="unHeartPost(details)" size="25" type="md-heart" color="#2D8CF0" />
+                                        <span v-if="details.heart_cnt !== null">{{details.heart_cnt.length}}</span>
+                                        <span v-else>0</span>
+                                    </div>
+                                    <div class="like d-flex mr-4">
+                                        <Icon class="mr-1" v-if="checkIfLike(details.like_cnt)" @click="likePost(details)" size="25" type="md-thumbs-up" />
+                                        <Icon class="mr-1" v-else  @click="unLikePost(details)" size="25" type="md-thumbs-up" color="#2D8CF0" />
+                                        <span v-if="details.like_cnt !== null">{{details.like_cnt.length}}</span>
+                                        <span v-else>0</span>
+                                    </div>
+                                    <div class="dislike d-flex">
+                                        <Icon class="mr-1" v-if="checkIfDislike(details.dislike_cnt)" @click="dislikePost(details)" size="25" type="md-thumbs-down" />
+                                        <Icon class="mr-1" v-else  @click="unDislikePost(details)" size="25" type="md-thumbs-down" color="#2D8CF0" />
+                                        <span v-if="details.dislike_cnt !== null">{{details.dislike_cnt.length}}</span>
+                                        <span v-else>0</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>                 
@@ -121,8 +123,7 @@
                     <div v-for="(comment,i) in commentsOfCurrentSuggestion" :key="i" v-if="commentsOfCurrentSuggestion.length"  class="posted-item row m-0 p-3 mt-3">
                         <div class="col-1">
                             <div class="posted-item-user-info">
-                                <img style="width:40px;" :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
-                                <!-- <img src="https://i.pravatar.cc/40" alt=""> -->
+                                <img :src="`${baseUrl}${comment.user_id.user_avatar}`" class="rounded-circle profile-photo mr-1" alt="">
                             </div>
                         </div>   
                         <div class="col-11">
@@ -133,6 +134,19 @@
                             <div class="comment-content p-2">
                                 <p>{{comment.content}}</p>
                             </div>
+                            <div v-if="comment.user_id.id == currentUser.id && comment.isRemoved == 0" class="remove-comment">
+                                <Poptip
+                                    class="float-right"
+                                    confirm
+                                    title="Are you sure you want to delete this comment?"
+                                    ok-text="Yes"
+                                    cancel-text="Cancel"
+                                    placement="left"
+                                    @on-ok="removeComment(comment)"
+                                    @on-cancel="cancelRemoveComment">
+                                    <Icon size="25" class="float-right" type="md-trash"/>
+                                </Poptip>
+                            </div>
                         </div>  
                         <!-- <div class="offset-2 col-10">
                             <div class="user-name">
@@ -142,7 +156,7 @@
                         </div> -->
                     </div>
                     <InfiniteLoading 
-                        class="pb-3"
+                        class="p-3"
                         @infinite="infiniteHandlerComments"
                         spinner="circles"
                     >
@@ -175,7 +189,9 @@ import {
     likeToSuggestion, 
     dislikeToSuggestion, 
     unLikeToSuggestion, 
-    unDislikeToSuggestion 
+    unDislikeToSuggestion,
+    deleteSuggestion,
+    deleteComment,
 } from '~/api/suggestion'
 
 import Category from './category'
@@ -250,6 +266,14 @@ export default {
         // this.details = JSON.parse(this.currentPath.query.details)
     },
     methods:{
+        editSuggestion(suggestion){
+            if(suggestion.comment_cnt == null ){
+                this.$router.push({name:'suggestion.update',params:{updateSuggestionData:suggestion}})
+            }
+            else{
+                return this.error("You can no longer update your suggestion.");
+            }
+        },
 
         async leaveComment(){
             console.log("leaveComment", this.commentData);
@@ -263,8 +287,11 @@ export default {
                 commentCurrently['created_at'] = Date.now();
                 commentCurrently['user_id'] = {};
                 commentCurrently.user_id['name'] = this.currentUser.name;
+                commentCurrently.user_id['user_avatar'] = this.currentUser.user_avatar;
+                commentCurrently.user_id['id'] = this.currentUser.id;
                 this.commentData = null;
                 this.commentsOfCurrentSuggestion.unshift(commentCurrently);
+                console.log("this.details.comment_cnt",this.details.comment_cnt);
                 if(this.details.comment_cnt == null) {
                     this.details.comment_cnt = [];
                     this.details.comment_cnt.push(this.currentUser.id);
@@ -319,6 +346,7 @@ export default {
                 this.details.like_cnt = JSON.parse(this.details.like_cnt);
                 this.details.dislike_cnt = JSON.parse(this.details.dislike_cnt);
                 this.details.upload_file = JSON.parse(this.details.upload_file);
+                this.details.comment_cnt = JSON.parse(this.details.comment_cnt);
                 viewCurrentSuggestion(this.details.id);
                 // getCommentsOfCurrentSuggestion(2, this.details.id)
                 // .then(res=>{
@@ -328,7 +356,6 @@ export default {
         },
 
         infiniteHandlerComments($state){
-            console.log("called");
             let timeOut = 0;
             
             if (this.pageOfComments > 1) {
@@ -479,6 +506,47 @@ export default {
                 suggest.dislike_cnt = suggest.dislike_cnt.filter((n) => {return n != userId});
             }
             unDislikeToSuggestion(suggest)
+        },
+
+        removeSuggestion(){
+            this.details.upload_file = {
+                imgUrl: [],
+                otherUrl: [],
+                videoUrl: [],
+            }
+            deleteSuggestion(this.details)
+            .then(res=>{
+                console.log("res", res);
+                if(res.status == 200){
+                    this.success('successfully deleted')
+                    this.$router.push({name:'suggestion.list'});
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
+        cancelRemoveSuggestion(){
+            console.log("cancelremove");
+        },
+        removeComment(comment){
+            deleteComment(comment)
+            .then(res=>{
+                console.log("res", res);
+                if(res.status == 200){
+                    this.success('successfully deleted');
+                    comment.isRemoved = 1;
+                    comment.content = "removed by author"
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
+        cancelRemoveComment(){
+            console.log("cancelremove");
         },
     }
 }

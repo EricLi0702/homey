@@ -59,8 +59,12 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('suggestion/create', 'SuggestionController@store');
     Route::get('suggestion', 'SuggestionController@index');
     Route::get('suggestion/current', 'SuggestionController@getCurrent');
+    Route::put('suggestion/remove', 'SuggestionController@remove');
+    Route::put('suggestion/update', 'SuggestionController@update');
+    
     Route::post('suggestion/comment', 'CommentOfSuggestionController@leaveComment');
     Route::get('suggestion/comment', 'CommentOfSuggestionController@getComment');
+    Route::put('suggestion/comment', 'CommentOfSuggestionController@removeComment');
     Route::post('suggestion/view', 'SuggestionController@addView');
     Route::post('suggestion/heart', 'SuggestionController@addHeart');
     Route::post('suggestion/unheart', 'SuggestionController@removeHeart');

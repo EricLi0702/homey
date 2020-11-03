@@ -9,11 +9,15 @@ function registerSuggestion(payload){
 }
 
 function updateSuggestion(payload){
-    return axios.put('/api/apartment',payload)
+    return axios.put('/api/suggestion/update',payload)
 }
 
-function delSuggestion(payload){
-    return axios.delete('/api/apartment',payload)
+function deleteSuggestion(payload){
+    return axios.put('/api/suggestion/remove',payload)
+}
+
+function deleteComment(payload){
+    return axios.put('/api/suggestion/comment',payload)
 }
 
 function heartToSuggestion(payload){
@@ -62,7 +66,8 @@ export{
     getSuggestionList,
     registerSuggestion,
     updateSuggestion,
-    delSuggestion,
+    deleteSuggestion,
+    deleteComment,
     heartToSuggestion,
     likeToSuggestion,
     dislikeToSuggestion,

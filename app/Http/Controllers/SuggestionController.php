@@ -39,7 +39,25 @@ class SuggestionController extends Controller
     public function index(Request $request){
         return Suggestion::with('userId')
                         ->where([['isDraft','=',0]])
-                        ->orderBy('created_at','desc')->paginate(2);
+                        ->orderBy('updated_at','desc')->paginate(2);
+    }
+
+    public function remove(Request $request)
+    {
+        if($request->userId !== Auth::user()->id){
+            return Suggestion::where('id',$request->id)->update([
+                'content' => "removed by Administrator",
+                'isRemoved' => 1,
+                'upload_file' => json_encode($request->upload_file)
+                ]);
+            }
+            else{
+            return Suggestion::where('id',$request->id)->update([
+                'content' => "removed by Author",
+                'isRemoved' => 1,
+                'upload_file' => json_encode($request->upload_file)
+            ]);
+        }
     }
 
     public function getCurrent(Request $request){
@@ -51,6 +69,32 @@ class SuggestionController extends Controller
         return response()->json([
             'suggestionData' => $suggestionData,
         ], 200);
+    }
+
+    public function update(Request $request)
+    {
+        $this->validate($request,[
+            'title' => 'bail|required',
+            'content' => 'bail|required',
+        ]);
+        
+        $commentOfRequestedUpdate = CommentOfSuggestion::where([['suId', '=', $request->id]])->get();
+        if(sizeof($commentOfRequestedUpdate) == 0){
+            $userId = Auth::user()->id;
+            $suggestionData['userId'] = $userId;
+            $suggestionData['title'] = $request->title;
+            $suggestionData['content'] = $request->content;
+            $suggestionData['upload_file'] = json_encode($request->upload_file);
+            
+            return Suggestion::where('id',$request->id)->update($suggestionData);
+        }
+        else{
+            return response()->json([
+                'msg' => "You can no longer update your suggestion.",
+            ], 423);
+        }
+
+        
     }
 
     public function addView(Request $request)

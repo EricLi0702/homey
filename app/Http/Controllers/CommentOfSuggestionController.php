@@ -60,4 +60,21 @@ class CommentOfSuggestionController extends Controller
                                     ->orderBy('created_at','desc')
                                     ->paginate(2);
     }
+
+    public function removeComment(Request $request)
+    {
+        if($request->userId !== Auth::user()->id){
+            return CommentOfSuggestion::where('id',$request->id)->update([
+                'content' => "removed by Administrator",
+                'isRemoved' => 1,
+                ]);
+            }
+            else{
+            return CommentOfSuggestion::where('id',$request->id)->update([
+                'content' => "removed by Author",
+                'isRemoved' => 1,
+            ]);
+        }
+    }
+    
 }

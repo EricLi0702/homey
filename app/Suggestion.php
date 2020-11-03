@@ -16,6 +16,7 @@ class Suggestion extends Model
         'like_cnt',
         'dislike_cnt',
         'isDraft',
+        'isRemoved',
     ];
 
     public function userId(){
