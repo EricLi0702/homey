@@ -15,13 +15,14 @@ class CreateResponseRepairsTable extends Migration
     {
         Schema::create('response_repairs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('managerId');
+            $table->unsignedBigInteger('managerId')->nullable();
             $table->foreign('managerId')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('repairId');
+            $table->unsignedBigInteger('repairId')->nullable();
             $table->foreign('repairId')->references('id')->on('repairs')->onDelete('cascade');
-            $table->text('replyToClient');
-            $table->text('replyFromClient');
-            $table->unsignedBigInteger('star');
+            $table->unsignedBigInteger('userId')->nullable();
+            $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
+            $table->text('replyToClient')->nullable();
+            $table->text('replyFromClient')->nullable();
             $table->timestamps();
         });
     }

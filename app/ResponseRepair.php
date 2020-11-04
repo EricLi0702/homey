@@ -8,6 +8,7 @@ class ResponseRepair extends Model
 {
     protected $fillable = [
         'managerId',
+        'userId',
         'repairId',
         'replyToClient', 
         'replyFromClient',
@@ -16,6 +17,10 @@ class ResponseRepair extends Model
 
     public function managerId(){
         return $this->belongsTo(User::class, 'managerId');
+    }
+
+    public function userId(){
+        return $this->belongsTo(User::class, 'userId');
     }
 
     public function repairId(){

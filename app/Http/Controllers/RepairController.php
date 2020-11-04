@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repair;
+use App\ResponseRepair;
 use App\User;
+
 
 class RepairController extends Controller
 {
@@ -29,7 +31,7 @@ class RepairController extends Controller
         if($request->isDraft !== null){
             $repairData['isDraft'] = 1;
         }
-        if($request->isShowToProprietor !== false){
+        if($request->isShowToProprietor == true){
             $repairData['isShowToProprietor'] = 1;
         }
         $repair = Repair::create($repairData); 
@@ -40,19 +42,84 @@ class RepairController extends Controller
     }
 
     public function index(Request $request){
-        return Repair::with(['userId', 'repairId'])
-                        ->where([['isDraft','=',0]])
-                        ->orderBy('created_at','desc')->paginate(2);
+        if(Auth::user()->roleId == 2){
+            return Repair::with(['userId', 'repairId.managerId'])
+                            ->where([['isDraft','=',0]])
+                            ->where([['aptId','=',Auth::user()->aptId]])
+                            ->orderBy('created_at','desc')
+                            ->paginate(2);
+
+        }
+        else{
+            return Repair::with(['userId', 'repairId'])
+                            ->where([['isDraft','=',0]])
+                            ->where([['aptId','=',Auth::user()->aptId]])
+                            ->where([['userId','=',Auth::user()->id]])
+                            ->orderBy('created_at','desc')
+                            ->paginate(2);
+        }
     }
 
     public function getCurrent(Request $request){
         $userId = Auth::user()->id;
         $id = $request->id;
-        $repairData =  Repair::with(['userId', 'repairId'])
+        $repairData =  Repair::with(['userId', 'repairId.managerId', 'repairId.userId'])
                         ->where('id',$id)
                         ->first();
         return response()->json([
             'repairData' => $repairData,
         ], 200);
     }
+
+    public function response(Request $request)
+    {
+        $responseData = $request->responseData;
+        $repairData = $request->repairData;
+
+        $updateRepairStatus = Repair::where([['id','=',$repairData['id']]])->first();
+        if($updateRepairStatus->status == 'pending'){
+            $updateRepairStatus->status = 'approved';
+            $updateRepairStatus->save();
+        }
+
+        $responseToRepairData = new ResponseRepair;
+        $responseToRepairData->userId = Auth::user()->id;
+        $responseToRepairData->repairId = $repairData['id'];
+        $responseToRepairData->replyToClient = $responseData;
+        $responseToRepairData->save();
+
+        return response()->json([
+            'responseData' => $responseToRepairData->load(['userId', 'repairId'])
+        ], 201);
+    }
+    
+    public function deleteRepair(Request $request){
+        $id = $request['id'];
+        Repair::where('id',$request->id)->delete();
+        ResponseRepair::where('repairId', $request->id)->delete();
+        return response()->json([
+            'msg' => "removed successfully!"
+        ], 204);
+    }
+
+    public function finish(Request $request){
+        $repairData = $request['repairData'];
+        $id = $repairData['id'];
+        $rating = $request['rating'];
+        $finishRequestData = $request['finishRequestData'];
+        $requestedFinishRepairData = Repair::where('id',$id)->first();
+        $requestedFinishRepairData->status = "finish";
+        $requestedFinishRepairData->star = $rating;
+        $requestedFinishRepairData->save();
+
+        $finishRequestRepairData = new ResponseRepair;
+        $finishRequestRepairData->userId = $repairData['userId'];
+        $finishRequestRepairData->repairId = $repairData['id'];
+        $finishRequestRepairData->replyFromClient = $finishRequestData;
+        $finishRequestRepairData->save();
+        return response()->json([
+            'msg' => "removed successfully!"
+        ], 200);
+    }
+    
 }

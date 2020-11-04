@@ -20,6 +20,7 @@ class CreateCommentOfSuggestionsTable extends Migration
             $table->unsignedBigInteger('suId');
             $table->foreign('suId')->references('id')->on('suggestions')->onDelete('cascade');
             $table->text('content');
+            $table->boolean('isRemoved')->default('0');
             $table->timestamps();
         });
     }

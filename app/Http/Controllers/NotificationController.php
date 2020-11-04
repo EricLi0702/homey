@@ -46,18 +46,18 @@ class NotificationController extends Controller
         } else{
             $notificationData['period'] = $request->period;
             if($request->period == "forever"){
-                $nowTime = date("Y-m-d");
+                $nowTime = date("Y-m-d H:i:s");
                 $notificationData['periodFrom'] = $nowTime;
             }
             elseif($request->period == "week"){
-                $nowTime = date("Y-m-d");
-                $endTime = date('Y-m-d', strtotime($nowTime. ' + 7 days'));
+                $nowTime = date("Y-m-d H:i:s");
+                $endTime = date('Y-m-d H:i:s', strtotime($nowTime. ' + 7 days'));
                 $notificationData['periodFrom'] = $nowTime;
                 $notificationData['periodTo'] = $endTime;
             }
             elseif($request->period == "month"){
-                $nowTime = date("Y-m-d");
-                $endTime = date('Y-m-d', strtotime($nowTime. ' + 30 days'));
+                $nowTime = date("Y-m-d H:i:s");
+                $endTime = date('Y-m-d H:i:s', strtotime($nowTime. ' + 30 days'));
                 $notificationData['periodFrom'] = $nowTime;
                 $notificationData['periodTo'] = $endTime;
             }

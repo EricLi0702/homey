@@ -56,11 +56,13 @@ export default [
     ]
   },
   { path: '/community',  name:  'community',  component:  page('community/index.vue'),
-    children:[
-      {path:'', name:  'community', redirect: {name:  'community.list'}},
-      {path:'index', name:  'community.list', component: page('community/list.vue')},
-      {path:'new', name:  'community.create', component: page('community/create.vue')},
-    ] 
+  children:[
+    {path:'', name:  'community', redirect: {name:  'community.list'}},
+    {path:'index', name:  'community.list', component: page('community/list.vue')},
+    {path:'new', name:  'community.create', component: page('community/create.vue')},
+    {path:':id', name:'community.view', component: page('community/view.vue')},
+    {path:':id/update', name:'community.update', component: page('community/update.vue'),props:true},
+  ] 
   },
   { path: '/suggestion',  name:  'suggestion',  component:  page('suggestion/index.vue'),
     children:[

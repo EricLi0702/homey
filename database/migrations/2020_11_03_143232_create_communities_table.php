@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNotificationsTable extends Migration
+class CreateCommunitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,22 @@ class CreateNotificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('communities', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('userId');
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('aptId')->nullable();
             $table->foreign('aptId')->references('id')->on('apartments')->onDelete('cascade');
             $table->string('title');
-            $table->json('type');
+            $table->text('content');
+            $table->text('upload_file')->nullable();
             $table->enum('status', ['before', 'ongoing', 'finish'])->default('ongoing');
             $table->string('period')->nullable();
             $table->timestamp('periodFrom')->nullable();
             $table->timestamp('periodTo')->nullable();
-            $table->text('content')->nullable();
-            $table->boolean('isDraft')->default('0');
-            $table->boolean('isDowngrade')->default('0');
-            $table->text('upload_file')->nullable();
+            $table->json('comment_cnt')->nullable();
             $table->json('view_cnt')->nullable();
+            $table->boolean('isRemoved')->default('0');
             $table->timestamps();
         });
     }
@@ -41,6 +40,6 @@ class CreateNotificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('communities');
     }
 }

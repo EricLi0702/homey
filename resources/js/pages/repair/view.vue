@@ -12,8 +12,7 @@
                     <div v-if="details !== null" class="posted-item row m-0 p-3">
                         <div class="col-1">
                             <div class="posted-item-user-info">
-                                <img style="width:40px;" :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
-                                <!-- <img src="https://i.pravatar.cc/40" alt=""> -->
+                                <img :src="`${baseUrl}${details.user_id.user_avatar}`" class="rounded-circle profile-photo mr-1" alt="">
                             </div>
                         </div>   
                         
@@ -22,8 +21,12 @@
                                 <p class="mb-2">{{details.user_id.name}}</p>
                                 <p>{{TimeView(details.created_at)}}</p>
                             </div>
-                            <div class="title">
+                            <div class="title d-flex justify-content-between">
                                 <h3>{{details.title}}</h3>
+                                <Tag v-if="details.status == 'pending'" color="warning">{{details.status}}</Tag>
+                                <Tag v-else-if="details.status == 'approved'" color="success">{{details.status}}</Tag>
+                                <Tag v-else-if="details.status == 'ongoing'" color="primary">{{details.status}}</Tag>
+                                <Tag v-else-if="details.status == 'finish'" color="default">{{details.status}}</Tag>
                             </div>
                             <div class="post-content p-2">
                                 <p v-html="details.desc"></p>
@@ -64,65 +67,73 @@
 
                         </div>    
                         <div class="offset-1 col-11 d-flex cnt-info">
-                            <div class="cnt d-flex w-100">
-                                <div v-if="currentUser.id == details.userId" class="remove mr-auto">
+                            <div class=" d-flex w-100">
+                                <div v-if="currentUser.id == details.userId" class="w-100 remove d-flex justify-content-between align-items-center">
                                     <Poptip
                                         confirm
-                                        title="Are you sure you want to delete this suggestion?"
+                                        title="Are you sure you want to delete this request?"
                                         ok-text="Yes"
                                         cancel-text="Cancel"
                                         placement="right"
-                                        @on-ok="removeRequest"
+                                        @on-ok="removeRequest(details)"
                                         @on-cancel="cancelRemoveRequest">
                                         <Icon size="25" class="mr-4" type="md-trash"/>
                                     </Poptip>
+                                    <Icon v-if="details.status !== 'finish'" @click="toggleFinishRequest" size="40" class="mr-4" type="md-power"/>
+                                    <Rate v-else disabled class="w-100 text-right" v-model="details.star" />
                                 </div>
-                                <!-- <div v-else class="reply mr-auto">
-                                    <div v-if="details.comment_cnt !== null && details.comment_cnt.includes(currentUser.id)" class="reply d-flex mr-4">
-                                        <p>You have already commented.</p>
-                                    </div>
-                                    <div v-else class="reply d-flex mr-4">
-                                        <Icon size="25" type="ios-undo" @click="toggleReply"/>
-                                    </div>
-                                </div> -->
+
+                                <div v-else class="reply ml-auto">
+                                    <Icon size="25" type="ios-undo" @click="toggleReply"/>
+                                </div>
                             </div>
                         </div>                 
                     </div>
-                    <!-- <div v-if="isCommenting" id="commentArea" class="posted-item mt-3 p-2 animate__animated animate__fadeIn">
-                        <div class="reply-form-comment row p-2">
-                            <Input v-model="responseData" type="textarea" placeholder="Leave your comment..." />
+                    <div v-if="isResponsing" class="posted-item mt-3 p-2 animate__animated animate__fadeIn">
+                        <div class="reply-form-comment m-0 row p-2">
+                            <Input v-model="responseData" type="textarea" placeholder="Enter Response..." />
                             <div class="d-flex justify-content-between col-12 p-0">
                                 <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                                 <div class="emoji-area-popup">
                                     <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                                 </div>
-                                <Button @click="leaveComment">Leave</Button>
+                                <Button @click="responseToRepairRequest" :loading="isResponsingTo" :disabled="isResponsingTo">Response</Button>
                             </div>
                         </div>
-                    </div> -->
-                    <!-- <div v-for="(comment,i) in commentsOfCurrentSuggestion" :key="i" v-if="commentsOfCurrentSuggestion.length"  class="posted-item row m-0 p-3 mt-3">
+                    </div>
+                    <div v-if="isFinishRequest" class="posted-item mt-3 p-2 animate__animated animate__fadeIn">
+                        <div class="reply-form-comment m-0 row p-2">
+                            <Rate class="w-100 text-center" v-model="rateOfResponse" />
+                            <Input v-model="finishRequestData" type="textarea" placeholder="Enter Review..." />
+                            <div class="d-flex justify-content-between col-12 p-0">
+                                <Icon @click="toggleEmoOfFinishRequestData" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
+                                <div class="emoji-area-popup">
+                                    <Picker v-if="emoStatusOfFinishRequestData" set="emojione" @select="onInputOfFinishRequestData" title="Pick your emoji..." />
+                                </div>
+                                <Button @click="finishRequest(details)" :loading="isFinishingRequest" :disabled="isFinishingRequest">Leave Review</Button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div v-for="(responseComment,i) in responseCommentData" :key="i" v-if="responseCommentData.length"  class="posted-item row m-0 p-3 mt-3">
                         <div class="col-1">
                             <div class="posted-item-user-info">
-                                <img style="width:40px;" :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
+                                <img :src="`${baseUrl}${responseComment.user_id.user_avatar}`" class="rounded-circle profile-photo mr-1" alt="">
                             </div>
                         </div>   
                         <div class="col-11">
                             <div class="posted-user-info d-flex justify-content-between">
-                                <p class="mb-2">{{comment.user_id.name}}</p>
-                                <p>{{TimeView(comment.created_at)}}</p>
+                                <p class="mb-2">{{responseComment.user_id.name}}</p>
+                                <p>{{TimeView(responseComment.created_at)}}</p>
                             </div>
                             <div class="comment-content p-2">
-                                <p>{{comment.content}}</p>
+                                <p>{{responseComment.replyToClient}}</p>
+                            </div>
+                            <div v-if="responseComment.user_id.id !== currentUser.id" class="reply ml-auto">
+                                <Icon size="25" type="ios-undo" @click="toggleReply"/>
                             </div>
                         </div>  
                     </div>
-                    <InfiniteLoading 
-                        class="pb-3"
-                        @infinite="infiniteHandlerComments"
-                        spinner="circles"
-                    >
-                        <div slot="no-more">no more comments</div>
-                    </InfiniteLoading> -->
                 </div>
             </div>
         </div>
@@ -143,6 +154,8 @@ import InfiniteLoading from 'vue-infinite-loading';
 import {
     responseToRepairRequest, 
     getCurrentRepairFromServer, 
+    deleteRequest,
+    finishRequest,
 } from '~/api/repair'
 
 import Category from './category'
@@ -157,7 +170,6 @@ export default {
         Viewer,
         videoPlayer,
         Picker,
-        InfiniteLoading,
         Category
     },
 
@@ -167,6 +179,8 @@ export default {
             suggestionItem : [],
             details:null,
             repairId:null,
+            responseCommentData:null,
+            isFinishRequest:false,
             playerOptions: {
             // videojs options
                 height:'350',
@@ -181,11 +195,16 @@ export default {
             },
 
             //comment
-            isCommenting:false,
+            isResponsing:false,
+            isResponsingTo:false,
             responseData:null,
+            isFinishingRequest:false,
             //emoji
             emoStatus:false,
+            emoStatusOfFinishRequestData:false,
+            finishRequestData:null,
             commentsOfCurrentSuggestion:[],
+            rateOfResponse:0,
             //infinit loading
             pageOfComments: 1,
             lastPageOfComments: 0,
@@ -217,27 +236,22 @@ export default {
 
         async responseToRepairRequest(){
             console.log("reply to request", this.responseData);
+            if(this.details.status == "finish"){
+                return this.error("This thread has been broken.");
+            }
             if(this.responseData == null){
                 return this.error("Please enter comment");
             }
-            // await leaveCommentToSuggestion(this.responseData, this.details)
-            // .then(res=>{
-            //     console.log(res.data.commentToSuggest);
-            //     let commentCurrently = res.data.commentToSuggest;
-            //     commentCurrently['created_at'] = Date.now();
-            //     commentCurrently['user_id'] = {};
-            //     commentCurrently.user_id['name'] = this.currentUser.name;
-            //     this.responseData = null;
-            //     this.commentsOfCurrentSuggestion.unshift(commentCurrently);
-            //     if(this.details.comment_cnt == null) {
-            //         this.details.comment_cnt = [];
-            //         this.details.comment_cnt.push(this.currentUser.id);
-            //     }
-            //     else{
-            //         this.details.comment_cnt.push(this.currentUser.id);
-            //     }
-            //     this.isCommenting = false;
-            // })
+            this.isResponsingTo = true;
+            await responseToRepairRequest(this.responseData, this.details)
+            .then(res=>{
+                console.log(res.data.responseData);
+                let responseCommentCurrently = res.data.responseData;
+                this.responseData = null;
+                this.responseCommentData.unshift(responseCommentCurrently);
+            })
+            this.isResponsing = false;
+            this.isResponsingTo = false;
         },
 
         toggleEmo(){
@@ -254,9 +268,23 @@ export default {
                 this.responseData = this.responseData + e.native
             }
         },
+        toggleEmoOfFinishRequestData(){
+            this.emoStatusOfFinishRequestData = !this.emoStatusOfFinishRequestData;
+        },
+
+        onInputOfFinishRequestData(e){
+            if(!e){
+                return false;
+            }
+            if(!this.finishRequestData){
+                this.finishRequestData = e.native
+            }else{
+                this.finishRequestData = this.finishRequestData + e.native
+            }
+        },
 
         toggleReply(){
-            this.isCommenting = !this.isCommenting;
+            this.isResponsing = !this.isResponsing;
         },
         
         playerReadied(video){
@@ -277,9 +305,68 @@ export default {
             getCurrentRepairFromServer(this.repairId)
             .then(res=>{
                 console.log("ddd",res.data.repairData);
+                this.responseCommentData = res.data.repairData.repair_id;
                 this.details = res.data.repairData;
                 this.details.upload_file = JSON.parse(this.details.upload_file);
             })
+        },
+
+        removeRequest(request){
+            deleteRequest(request)
+            .then(res=>{
+                if(res.status == 204){
+                    this.success('successfully deleted');
+                    this.$router.push({name:'repair.list'})
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
+        cancelRemoveRequest(){
+            console.log("canceled");
+        },
+
+        toggleFinishRequest(){
+            this.isFinishRequest = !this.isFinishRequest;
+            this.rateOfResponse = 0;
+            this.emoStatusOfFinishRequestData = false;
+            this.finishRequestData = null;
+        },
+
+        finishRequest(request){
+            if(request.status == 'finish'){
+                return this.error("This thread has been broken.");
+            }
+            if(this.rateOfResponse == 0){
+                return this.error("Please select rating");
+            }
+            if(this.finishRequestData == null || this.finishRequestData.trim() == ''){
+                return this.error("Please enter your review");
+            }
+
+            let payload = {};
+            payload['repairData'] = request;
+            payload['rating'] = this.rateOfResponse;
+            payload['finishRequestData'] = this.finishRequestData;
+
+            this.isFinishingRequest = true;
+            finishRequest(payload)
+            .then(res=>{
+                if(res.status == 200){
+                    this.success('successfully finished');
+                    this.$router.push({name:'repair.list'})
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+            this.isFinishingRequest = false;
+        },
+
+        cancelFinishRequest(){
+            console.log("canceled");
         },
         
     }

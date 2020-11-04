@@ -54,6 +54,21 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('repair/create', 'RepairController@store');
     Route::get('repair', 'RepairController@index');
     Route::get('repair/current', 'RepairController@getCurrent');
+    Route::post('repair/response', 'RepairController@response');
+    Route::delete('repair','RepairController@deleteRepair');
+    Route::post('repair/finish','RepairController@finish');
+    
+
+    Route::post('community/create', 'CommunityController@store');
+    Route::get('community', 'CommunityController@index');
+    Route::get('community/current', 'CommunityController@getCurrent');
+    Route::put('community/remove', 'CommunityController@remove');
+    Route::put('community/update', 'CommunityController@update');
+    Route::post('community/view', 'CommunityController@addView');
+    Route::post('community/comment', 'CommentOfCommunityController@leaveComment');
+    Route::get('community/comment', 'CommentOfCommunityController@getComment');
+    Route::put('community/comment', 'CommentOfCommunityController@removeComment');
+    Route::post('community/reply', 'CommentOfCommunityController@replyToComment');
 
 
     Route::post('suggestion/create', 'SuggestionController@store');

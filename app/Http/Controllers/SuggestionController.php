@@ -93,8 +93,6 @@ class SuggestionController extends Controller
                 'msg' => "You can no longer update your suggestion.",
             ], 423);
         }
-
-        
     }
 
     public function addView(Request $request)

@@ -1,26 +1,82 @@
 <template>
     <div class="container-fluid bg-light-gray m-0 p-0 pb-5">
         <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
-            <div class="p-3 py-5">
-                <h2 class="p-3">Register New Topic</h2>
-                <Form :model="registerNotificationData">
+            <div class="p-3 pb-5 pt-2">
+                <h2 class="p-3">Create New Topic</h2>
+                <Form :model="registerCommunityData">
                     <div class="row m-0 p-0">
                         <div class="col-12 mb-3 gray-input fac-name">
-                            <Input placeholder="please enter title" />
-                            <!-- <Input v-model="registerNotificationData.title" placeholder="please enter title" /> -->
+                            <Input v-model="registerCommunityData.title" placeholder="please enter topic" />
                         </div>
                         <div class="col-12 mb-3">
-                            <wysiwyg v-model="registerNotificationData.desc" placeholder="please enter description" />
+                            <p class="">Period</p>
+                            <RadioGroup @on-change="setPeriodToBlank" v-model="periodType" class="">
+                                <Radio label="withPeriod">Choose Period</Radio>
+                                <Radio label="withCalendar">Choose period with calendar</Radio>
+                            </RadioGroup>   
+                            <DatePicker v-if="periodType == 'withCalendar'" class="w-50 mx-auto" :options="disableBeforeDate" @on-change="notiDateChange" style="display: block" type="datetimerange" placeholder="Please check your date"></DatePicker>
+                            <RadioGroup v-else v-model="initPeriod" class=" w-50 mx-auto d-flex justify-content-between">
+                                <Radio label="forever">Forever</Radio>
+                                <Radio label="week">One week</Radio>
+                                <Radio label="month">One month</Radio>
+                            </RadioGroup> 
+                        </div>
+                        <div class="col-12 mb-3">
+                            <wysiwyg v-model="registerCommunityData.desc" placeholder="please enter description" />
                         </div>
                         <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
-                            <Icon class="pr-2 noti-upload-icons" size="25" type="ios-image" />
-                            <Icon class="pr-2 noti-upload-icons" size="25" type="ios-folder" />
-                            <Icon class="pr-2 noti-upload-icons" size="25" type="ios-film" />
+                            <Upload
+                                @upImgUrl="upImgUrl"
+                                @upFileUrl="upFileUrl"
+                                @upVideoUrl="upVideoUrl"
+                            />
                             <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                             <div class="emoji-area-popup">
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
-                            <Button icon="md-create" class="ml-auto" @click="registerNotification" :disabled="isRegistering" :loading="isRegistering">Create Topic</Button>
+                            <Button icon="md-create" class="ml-auto" @click="registerCommunity" :disabled="isRegistering" :loading="isRegistering">Create Topic</Button>
+                        </div>
+                        <div class="col-12 uploaded_file">
+                            <div class="image-item" v-if="registerCommunityData.upload_file.imgUrl && registerCommunityData.upload_file.imgUrl.length >0">
+                                <div class="image-block">
+                                    <div class="image-upload-list" v-for="(imgUrl,i) in registerCommunityData.upload_file.imgUrl" :key="i">
+                                        <img :src="imgUrl" alt="">
+                                        <div class="demo-upload-list-cover">
+                                            <Icon  type="ios-trash-outline" @click="deleteFile('image',imgUrl)"></Icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="file-item row" v-if="registerCommunityData.upload_file.otherUrl.length &&registerCommunityData.upload_file.otherUrl.length>0">
+                                <div class="col-6 col-md-4" v-for="(otherUrl,j) in registerCommunityData.upload_file.otherUrl" :key="j">
+                                    <div class="image-upload-list float-left">
+                                        <img src="/asset/img/icon/upload_file_img.png" class="w-100" alt="">
+                                        <div class="demo-upload-list-cover">
+                                            <Icon type="ios-trash-outline" @click="deleteFile('other',otherUrl)"></Icon>
+                                        </div>
+                                    </div>
+                                    <div class="title pt-2">
+                                        <div class="text-break">{{otherUrl.fileOriName}}</div>
+                                        <div class="text-secondary">{{otherUrl.fileSize}}</div>
+                                    </div>
+                                    <div class="remark"></div>
+                                </div>
+                            </div>
+                            <div class="file-item row" v-if="registerCommunityData.upload_file.videoUrl.length && registerCommunityData.upload_file.videoUrl.length>0">
+                                <div class="col-6 col-md-4" v-for="(videoUrl,j) in registerCommunityData.upload_file.videoUrl" :key="j">
+                                    <div class="image-upload-list float-left">
+                                        <img src="/asset/img/icon/upload_video_img.png" class="w-100" alt="">
+                                        <div class="demo-upload-list-cover">
+                                            <Icon type="ios-trash-outline" @click="deleteFile('video',videoUrl)"></Icon>
+                                        </div>
+                                    </div>
+                                    <div class="title pt-2">
+                                        <div class="text-break">{{videoUrl.fileOriName}}</div>
+                                        <div class="text-secondary">{{videoUrl.fileSize}}</div>
+                                    </div>
+                                </div>
+                                <div class="remark"></div>
+                            </div>
                         </div>
                     </div>
                 </Form> 
@@ -34,31 +90,32 @@
 import wysiwyg from "vue-wysiwyg"
 //emoji
 import { Picker } from 'emoji-mart-vue'
+//file upload component
+import Upload from '~/components/Upload'
 //import Api
-import {getNotificationList,registerNotification,updateNotification,delNotification} from '~/api/notification'
+import {getCommunityList,registerCommunity,updateCommunity,delCommunity} from '~/api/community'
 
 export default {
     middleware: 'auth',
 
     components: {
         Picker,     //emoji
+        Upload,
     },
 
     data(){
         return{
             baseUrl:window.base_url,
-            registerNotificationData: {
+            registerCommunityData: {
                 title: '',
                 desc: '',
                 period: '',
-                type: ['common'],
+                upload_file:{
+                    imgUrl:[],
+                    otherUrl:[],
+                    videoUrl:[]
+                },
             },
-            //vueEditor
-            customToolbar: [
-                ["bold", "italic", "underline"],
-                [{ list: "ordered" }, { list: "bullet" }],
-                ["image", "code-block"]
-            ],
 
             //emoji
             emoStatus:false,
@@ -66,7 +123,13 @@ export default {
             initPeriod:'forever',
             periodType:'withPeriod',
             isRegistering:false,
-            typeOfData:[],
+
+            //disable before time(TimePicker)
+            disableBeforeDate: {
+                disabledDate (date) {
+                    return date && date.valueOf() < Date.now() - 86400000;
+                }
+            },
         }
     },
 
@@ -78,53 +141,92 @@ export default {
             if(!e){
                 return false;
             }
-            if(!this.registerNotificationData.desc){
-                this.registerNotificationData.desc = e.native
+            if(!this.registerCommunityData.desc){
+                this.registerCommunityData.desc = e.native
             }else{
-                this.registerNotificationData.desc = this.registerNotificationData.desc + e.native
+                this.registerCommunityData.desc = this.registerCommunityData.desc + e.native
             }
         },
 
         notiDateChange(date){
-            this.registerNotificationData.period = date;
+            this.registerCommunityData.period = date;
         },
 
         setPeriodToBlank(){
-            this.registerNotificationData.period = '';
+            this.registerCommunityData.period = '';
         },
 
-        async registerNotification(){
-            if(this.registerNotificationData.title.trim() == ''){
+        async registerCommunity(){
+            if(this.registerCommunityData.title.trim() == ''){
                 return this.error('Title is required')
             }
-            if(this.registerNotificationData.type.length == 0){
-                return this.error('Type is required')
-            }
             if(this.periodType == 'withPeriod'){
-                this.registerNotificationData.period = this.initPeriod;
-                if(this.registerNotificationData.period.trim() == ''){
+                this.registerCommunityData.period = this.initPeriod;
+                if(this.registerCommunityData.period.trim() == ''){
                     return this.error('Period is required')
                 }
             }
             else{
-                if(this.registerNotificationData.period.length == 0){
+                if(this.registerCommunityData.period.length == 0){
                     return this.error('Period is required')
                 }
             }
-            if(this.registerNotificationData.desc.trim() == ''){
+            if(this.registerCommunityData.desc.trim() == ''){
                 return this.error('Description is required')
             }
             this.isRegistering = true;
 
-            await registerNotification(this.registerNotificationData)
+            await registerCommunity(this.registerCommunityData)
             .then(res=>{
-                console.log(res);
+                this.registerCommunityData.title = '';
+                this.registerCommunityData.period = '';
+                this.registerCommunityData.desc = '';
+                this.$router.push({path:'/community/index'})
             })
             .catch(err=>{
                 console.log(err);
             })
-            this.isRegistering = false
+            this.isRegistering = false;
         },
+
+        async deleteFile(type, fileName){
+            let filePath = '';
+            if(type == 'image'){
+                filePath = fileName
+            }else {
+                filePath = fileName.imgUrl
+            }
+
+            let file = {fileName:filePath}
+
+            await delUploadFile(file)
+            .then(res=>{
+                    if(type == 'image'){
+                        this.registerCommunityData.upload_file.imgUrl.pop(fileName)
+                    }else if(type == 'other'){
+                        this.registerCommunityData.upload_file.otherUrl.pop(fileName)
+                    }else if(type == 'video'){
+                        this.registerCommunityData.upload_file.videoUrl.pop(fileName)
+                    }
+                })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
+        //listen event from Upload
+        upImgUrl(value) {
+            this.registerCommunityData.upload_file.imgUrl.push(value);
+        },
+        upFileUrl(value) {
+            this.registerCommunityData.upload_file.otherUrl.push(value);
+        },
+        upVideoUrl(value) {
+            this.registerCommunityData.upload_file.videoUrl.push(value);
+        },
+
+        
+
     }
 }
 </script>

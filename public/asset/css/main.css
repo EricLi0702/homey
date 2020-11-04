@@ -509,6 +509,26 @@ body{
     height: 50px;
 }
 
+.newtopic .ivu-select-selection{
+    margin-bottom: 20px;
+}
+
+.gray-input .ivu-select-selection{
+    border-radius: 2px;
+    box-shadow: none;
+    border: none;
+    background-color: #f1f1f1;
+    padding: 7px;
+    font-size: 14px;
+    color: #989c9e;
+    font-family: 'Open Sans Light', sans-serif;
+    height: 50px!important;
+    padding-left: 12px;
+}
+
+.gray-input .ivu-select-selection .ivu-select-placeholder{
+    font-size: 14px!important;
+}
 .gray-input .ivu-input-number-input{
     border-radius: 2px;
     box-shadow: none;
@@ -893,6 +913,23 @@ body{
       left: 127px!important;
   }
 
+.remove-community i.ivu-icon-md-trash{
+    color:#515A6E;
+    transition: color 0.5s ease;
+    cursor: pointer;
+}
+.remove-community i.ivu-icon-md-trash:hover{
+    color: red;
+}
+.remove-community i.ivu-icon-md-create{
+    color:#515A6E;
+    transition: color 0.5s ease;
+    cursor: pointer;
+}
+.remove-community i.ivu-icon-md-create:hover{
+    color: #034877;
+}
+
   .login-container{
     height: 94.5vh;
     background-image:  linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(9, 54, 95, 0.73)), url("../img/bg/pool.png") ;
@@ -1033,4 +1070,25 @@ a.text-dark:hover, a.text-dark:focus {
     top: 50%;
     left: 50%;
     transform: translate(-40%, -40%);
+}
+
+.reply-comment i{
+    color: #04619F;
+    cursor: pointer;
+    transition: color 0.5s ease;
+}
+.reply-comment i:hover{
+    color: #023353;
+    text-shadow: 2px 2px 2px gray;
+}
+
+.remove i.ivu-icon-md-power{
+    cursor: pointer;
+    color: #04619F!important;
+    transition: color 0.5s ease;
+}
+
+.remove i.ivu-icon-md-power:hover{
+    color: #023353;
+    text-shadow:  2px 2px 2px gray;
 }

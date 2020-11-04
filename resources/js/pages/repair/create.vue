@@ -1,22 +1,43 @@
 <template>
     <div class="container-fluid bg-light-gray m-0 p-0 pb-5">
         <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
-            <div class="p-3 py-5">
-                <h2 class="p-3">New Request</h2>
+            <div class="p-3 pb-5 pt-2">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 class="p-3">New Request</h2>
+                    <div class="d-flex align-items-center p-4">
+                        <span class="mr-2">Select Mode:</span>
+                        <i-switch @on-change="changeInputType" />
+                    </div>
+                </div>
                 <Form :model="createRepairData">
                     <div class="row m-0 p-0">
-                        <div class="col-12 col-md-6 mb-3 gray-input">
-                            <Select v-model="createRepairData.type" size="large" style="width:100%">
-                                <Option v-for="item in repairType" :value="item.value" :key="item.value">{{ item.label }}</Option>
-                            </Select>
+                        <div v-if="autoInputMode" class="col-12 m-0 p-0 row">
+                            <div class="col-12 col-md-6 mb-3 gray-input">
+                                <Select v-model="createRepairData.type" size="large" style="width:100%" placeholder="please select repair type">
+                                    <Option v-for="item in repairType" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                                </Select>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 gray-input">
+                                <Select v-model="createRepairData.object" size="large" style="width:100%" placeholder="please select repair object">
+                                    <Option v-for="item in repairObject" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                                </Select>
+                            </div>
+                            <div class="col-12 mb-3 newtopic gray-input">
+                                <Select v-model="createRepairData.title" size="large" style="width:100%" placeholder="please select repair title">
+                                    <Option v-for="item in repairTitle" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                                </Select>
+                            </div>
                         </div>
-                        <div class="col-12 col-md-6 mb-3 gray-input">
-                            <Select v-model="createRepairData.object" size="large" style="width:100%">
-                                <Option v-for="item in repairObject" :value="item.value" :key="item.value">{{ item.label }}</Option>
-                            </Select>
-                        </div>
-                        <div class="col-12 mb-3 newtopic">
-                            <Input v-model="createRepairData.title" placeholder="please enter title" />
+                        <div v-else class="col-12 m-0 p-0 row">
+                            <div class="col-12 col-md-6 mb-3 gray-input">
+                                <Input v-model="createRepairData.type" placeholder="please enter type" />
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 gray-input">
+                                <Input v-model="createRepairData.object" placeholder="please enter object" />
+                            </div>
+                            <div class="col-12 mb-3 newtopic gray-input">
+                                <Input v-model="createRepairData.title" placeholder="please enter title" />
+                            </div>
                         </div>
                         <div class="col-12 mb-3">
                             <wysiwyg v-model="createRepairData.desc" placeholder="please enter description" />
@@ -100,6 +121,7 @@ import {delUploadFile} from '~/api/upload'
 //import json
 import repairType from '../../json/repairType';
 import repairObject from '../../json/repairObject.json';
+import repairTitle from '../../json/repairTitle.json';
 
 export default {
     middleware: 'auth',
@@ -111,8 +133,10 @@ export default {
 
     data(){
         return{
+            autoInputMode: false,
             repairType,
             repairObject,
+            repairTitle,
             createRepairData: {
                 title: '',
                 desc: '',
@@ -173,7 +197,7 @@ export default {
                 this.createRepairData.type = '';
                 this.createRepairData.object = '';
                 this.createRepairData.isDraft = null;
-                this.createRepairData.isShowToProprietor = 0;
+                this.createRepairData.isShowToProprietor = false;
                 this.createRepairData.file.imgUrl = [];
                 this.createRepairData.file.otherUrl = [];
                 this.createRepairData.file.videoUrl = [];
@@ -253,7 +277,17 @@ export default {
         upVideoUrl(value) {
             this.createRepairData.file.videoUrl.push(value);
         },
-
+        changeInputType(){
+            if(this.autoInputMode == false){
+                this.autoInputMode = true;
+            }
+            else{
+                this.autoInputMode = false;
+            }
+            this.createRepairData.title = '';
+            this.createRepairData.type = '';
+            this.createRepairData.object = '';
+        }
     }
 }
 </script>

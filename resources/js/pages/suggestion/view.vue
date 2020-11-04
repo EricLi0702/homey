@@ -177,7 +177,7 @@ import Viewer from 'v-viewer'
 import 'video.js/dist/video-js.css'
 import { videoPlayer } from 'vue-video-player'
 //infinitLoding
-import InfiniteLoading from 'vue-infinite-loading';
+import InfiniteLoading from 'vue-infinite-loading'
 //import Apis
 import {
     viewCurrentSuggestion, 
@@ -365,13 +365,10 @@ export default {
             setTimeout(() => {
                 getCommentsOfCurrentSuggestion(this.pageOfComments, this.suggetionId)
                 .then(res=>{
-                    console.log(res);
                     vm.lastpageOfComments = res.data.last_page;
 
                     $.each(res.data.data, function(key, value){
-                        console.log("?????", value);
                         vm.commentsOfCurrentSuggestion.push(value);
-                        console.log("&&&&", vm.commentsOfCurrentSuggestion); 
                     });
                     if (vm.pageOfComments - 1 === vm.lastpageOfComments) {
                         $state.complete();

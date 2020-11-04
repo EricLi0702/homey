@@ -1,8 +1,8 @@
 <template>
     <div class="container-fluid bg-light-gray m-0 p-0 pb-5">
         <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
-            <div class="p-3 py-5">
-                <h2 class="p-3">New Suggestion</h2>
+            <div class="p-3 pb-5 pt-2">
+                <h2 class="p-3">Update Suggestion</h2>
                 <Form :model="updateSuggestionData" v-if=" updateSuggestionData !== null">
                     <div class="row m-0 p-0">
                         <div class="col-12 mb-3 newtopic">

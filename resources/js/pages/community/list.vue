@@ -7,159 +7,50 @@
         </div> -->
         <div class="container m-0 p-0 mx-auto">
             <div class="row m-0 p-0">
-                <div class="col-12 col-md-4 m-0 p-0 pr-md-4">
-                    <div class="box-block">
-                        <div class="community-category-title p-3">
-                            Categories
-                        </div>
-                        <div class="community-category-list p-3">
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>(1)	What comes to mind when you hear the word ‘rent’?</p>
-                                <Badge type="primary" :count="64"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>(2)	Do you think landlords charge too much for rent?</p>
-                                <Badge type="primary" :count="37"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>(3)	Is it better to rent or buy property?</p>
-                                <Badge type="primary" :count="15"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>(4)	Should kids with jobs pay rent to their parents?</p>
-                                <Badge type="primary" :count="48"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>(5)	What do you need to think about before renting a place to live?</p>
-                                <Badge type="primary" :count="12"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>(6)	How important are rent agreements?</p>
-                                <Badge type="primary" :count="52"></Badge>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-block">
-                        <div class="community-category-title p-3">
-                            Services
-                        </div>
-                        <div class="community-category-list p-3">
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>Asset Management</p>
-                                <Badge type="primary" :count="43"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>Facilities Management</p>
-                                <Badge type="primary" :count="65"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>International Residential</p>
-                                <Badge type="primary" :count="12"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>Research & Consultancy</p>
-                                <Badge type="primary" :count="42"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>Residential</p>
-                                <Badge type="primary" :count="51"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>Serviced Apartment</p>
-                                <Badge type="primary" :count="24"></Badge>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="box-block">
-                        <div class="community-category-title p-3">
-                            POPULAR SEARCHES
-                        </div>
-                        <div class="community-category-list p-3">
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>Pet Friendly Apartments</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                            <div class=" ccl-item d-flex justify-content-between">
-                                <p>something</p>
-                                <Badge type="primary" :count="10"></Badge>
-                            </div>
-                        </div>
-                    </div> -->
-
-                </div>
+                <Category/>
                 <div class="col-12 col-md-8 m-0 p-0">
-                    <div class="posted-item position-relative" v-for="(suggestion,i) in suggestionList" :key="i" v-if="suggestionList.length">
-                        <router-link :to="{path:`/suggestion/${suggestion.id}`}">
-                            
+                    <div v-if="noCommunity" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
+                        <div class="no-fac text-center">
+                            <Icon size="150" type="ios-search" />
+                            <h5>oops! there is no community!</h5>
+                        </div>
+                    </div>
+                    <div v-else-if="communityList.length" class="posted-item position-relative" v-for="(community,i) in communityList" :key="i" >
+                        <router-link :to="{path:`/community/${community.id}`}">
                             <div class="pi-wrap float-left ">
                                 <div class="user-info float-left">
                                     <div class="avatar">
-                                        <img style="width:40px;" :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
-                                        <!-- <img src="https://i.pravatar.cc/40" alt=""> -->
+                                        <img :src="`${baseUrl}${community.user_id.user_avatar}`" class="rounded-circle profile-photo mr-1" alt="">
                                     </div>
                                     <div class="icons text-center">
-                                        <p>{{suggestion.id}}</p>
+                                        <p>{{community.id}}</p>
                                     </div>
                                 </div>
                                 <div class="post-text float-left">
                                     <h2>
-                                        {{suggestion.title}}
+                                        {{community.title}}
                                     </h2>
-                                    <p v-html="suggestion.content"></p>
-                                    <div class="cnt d-flex position-absolute">
-                                        <div class="heart d-flex mr-4">
-                                            <Icon class="mr-1" size="25" type="md-heart-outline" />
-                                            <span v-if="suggestion.heart_cnt !== null">{{suggestion.heart_cnt.length}}</span>
-                                            <span v-else>0</span>
-                                        </div>
-                                        <div class="like d-flex mr-4">
-                                            <Icon class="mr-1" size="25" type="md-thumbs-up" />
-                                            <span v-if="suggestion.like_cnt !== null">{{suggestion.like_cnt.length}}</span>
-                                            <span v-else>0</span>
-                                        </div>
-                                        <div class="dislike d-flex">
-                                            <Icon class="mr-1" size="25" type="md-thumbs-down" />
-                                            <span v-if="suggestion.dislike_cnt !== null">{{suggestion.dislike_cnt.length}}</span>
-                                            <span v-else>0</span>
-                                        </div>
-                                    </div>
+                                    <p v-html="community.content"></p>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="posted-item-info float-left">
                                 <div class="posted-item-info-comments">
                                     <div class="pii-commentbg">
-                                        <span v-if="suggestion.comment_cnt !== null">{{suggestion.comment_cnt.length}}</span>
+                                        <span v-if="community.comment_cnt !== null">{{community.comment_cnt.length}}</span>
                                         <span v-else>0</span>
                                         <div class="mark">
-
                                         </div>
                                     </div>
                                 </div>
                                 <div class="posted-item-info-views">
                                     <Icon type="md-eye" />
-                                    <span v-if="suggestion.view_cnt !== null">{{suggestion.view_cnt.length}}</span>
+                                    <span v-if="community.view_cnt !== null">{{community.view_cnt.length}}</span>
                                     <span v-else>0</span>
                                 </div>
                                 <div class="posted-item-info-time">
                                     <Icon type="ios-clock-outline" />
-                                    <timeago :datetime="suggestion.created_at" :since="suggestion.created_at" :auto-update="60"></timeago>
+                                    <timeago :datetime="community.updated_at" :since="community.updated_at" :auto-update="60"></timeago>
                                 </div>
                             </div>
                             <div class="clearfix">
@@ -169,10 +60,10 @@
                     </div>
                     <InfiniteLoading 
                         class="pb-3"
-                        @infinite="infiniteHandlerSuggestion"
+                        @infinite="infiniteHandlerCommunity"
                         spinner="circles"
                     >
-                        <div slot="no-more">no more suggestion</div>
+                        <div slot="no-more">no more community</div>
                     </InfiniteLoading>
                 </div>
             </div>
@@ -183,23 +74,25 @@
 <script>
 //infinitLoding
 import InfiniteLoading from 'vue-infinite-loading';
-import {getSuggestionList,registerSuggestion,updateSuggestion,delSuggestion} from '~/api/suggestion'
-
+import {getCommunityList} from '~/api/community'
+import Category from './category'
 // import VueTimeago from 'vue-timeago'
 export default {
     components:{
         InfiniteLoading,
-        
+        Category,
         // VueTimeago
     },
     data(){
         return{
             baseUrl:window.base_url,
-            suggestionList : [],
+            communityList : [],
+
+            noCommunity:false,
 
             //infinit loading
-            pageOfSuggestion: 1,
-            lastPageOfSuggestion: 0,
+            pageOfCommunity: 1,
+            lastPageOfCommunity: 0,
         }
     },
 
@@ -209,38 +102,41 @@ export default {
 
     methods:{
         async start(){
-            await getSuggestionList()
+            await getCommunityList()
             .then(res=>{
                 console.log(res);
             })
         },
 
-        async infiniteHandlerSuggestion($state){
+        async infiniteHandlerCommunity($state){
             let timeOut = 0;
             
-            if (this.pageOfSuggestion > 1) {
+            if (this.pageOfCommunity > 1) {
                 timeOut = 1000;
             }
             let vm = this;
-            await getSuggestionList(this.pageOfSuggestion)
+            await getCommunityList(this.pageOfCommunity)
             .then(res=>{
-                vm.lastpageOfSuggestion = res.data.last_page;
+                if(vm.pageOfCommunity == 1 && res.data.data.length == 0){
+                    this.noCommunity = true;
+                    $state.complete();
+                    return;
+                }
+                vm.lastpageOfCommunity = res.data.last_page;
 
                 $.each(res.data.data, function(key, value){
-                        value.heart_cnt = JSON.parse(value.heart_cnt);
-                        value.like_cnt = JSON.parse(value.like_cnt);
-                        value.dislike_cnt = JSON.parse(value.dislike_cnt);
+                        
                         value.comment_cnt = JSON.parse(value.comment_cnt);
                         value.view_cnt = JSON.parse(value.view_cnt);
-                        vm.suggestionList.push(value); 
+                        vm.communityList.push(value); 
                     });
-                if (vm.pageOfSuggestion - 1 === vm.lastpageOfSuggestion) {
+                if (vm.pageOfCommunity - 1 === vm.lastpageOfCommunity) {
                     $state.complete();
                 }
                 else {
                     $state.loaded();
                 }
-                vm.pageOfSuggestion = vm.pageOfSuggestion + 1;
+                vm.pageOfCommunity = vm.pageOfCommunity + 1;
             });
              
                 

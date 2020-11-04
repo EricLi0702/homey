@@ -1,0 +1,61 @@
+import axios from 'axios'
+
+function getCommunityList(page){
+   return axios.get(`/api/community?page=${page}`)
+}
+
+function registerCommunity(payload){
+    return axios.post('/api/community/create',payload)
+}
+
+function updateCommunity(payload){
+    return axios.put('/api/community/update',payload)
+}
+
+function deleteCommunity(payload){
+    return axios.put('/api/community/remove',payload)
+}
+
+function deleteComment(payload){
+    return axios.put('/api/community/comment',payload)
+}
+
+function replyToComment(payload){
+    return axios.post('/api/community/reply',payload)
+}
+
+function viewCurrentCommunity(currentId){
+    let obj = {id : currentId}
+    return axios.post('/api/community/view',obj)
+}
+function getCurrentCommunityFromServer(currentId){
+    return axios.get('/api/community/current',{params: { id: currentId }});
+}
+// function getCommentsOfCurrentCommunity(page){
+    
+//     return axios.get(`/api/community/comment?page=${page}`)
+// }
+function getCommentsOfCurrentCommunity(page, currentId){
+    // let obj = {id : currentId}
+    return axios.get(`/api/community/comment?page=${page}`, {params: { id: currentId }})
+}
+function leaveCommentToCommunity(commentData, communityData){
+    var obj = {};
+    obj['commentData'] = commentData;
+    obj['communityData'] = communityData;
+    return axios.post('/api/community/comment', obj );
+}
+
+
+export{
+    getCommunityList,
+    registerCommunity,
+    updateCommunity,
+    deleteCommunity,
+    deleteComment,
+    replyToComment,
+    getCurrentCommunityFromServer,
+    getCommentsOfCurrentCommunity,
+    leaveCommentToCommunity,
+    viewCurrentCommunity,
+}

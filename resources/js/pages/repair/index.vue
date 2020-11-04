@@ -11,10 +11,10 @@
                         <!-- {{ $t('register') }} -->
                         <Button type="success" icon="md-add">New</Button>
                     </router-link>
-                    <router-link :to="{ path: '/repair/type' }" class="">
-                        <!-- {{ $t('register') }} -->
+                    <!-- <router-link :to="{ path: '/repair/type' }" class="">
+                        {{ $t('register') }}
                         <Button type="warning" icon="logo-buffer">Type</Button>
-                    </router-link>
+                    </router-link> -->
                     <router-link :to="{ path: '/repair/index' }" class="">
                         <!-- {{ $t('register') }} -->
                         <Button type="primary" icon="md-list">View</Button>

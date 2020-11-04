@@ -12,13 +12,23 @@ function getCurrentRepairFromServer(currentId){
     return axios.get('/api/repair/current',{params: { id: currentId }});
 }
 
+function responseToRepairRequest(responseData, repairData){
+    var obj = {};
+    obj['responseData'] = responseData;
+    obj['repairData'] = repairData;
+    return axios.post('/api/repair/response', obj );
+}
 
 function updateRepair(payload){
     return axios.put('/api/apartment',payload)
 }
 
-function delRepair(payload){
-    return axios.delete('/api/apartment',payload)
+function deleteRequest(payload){
+    return axios.delete('/api/repair',{data: payload})
+}
+
+function finishRequest(payload){
+    return axios.post('/api/repair/finish',payload)
 }
 
 export{
@@ -26,5 +36,7 @@ export{
     registerRepair,
     getCurrentRepairFromServer,
     updateRepair,
-    delRepair,
+    deleteRequest,
+    responseToRepairRequest,
+    finishRequest,
 }

@@ -133,7 +133,6 @@ export default {
             let vm = this;
             await getSuggestionList(this.pageOfSuggestion)
             .then(res=>{
-                console.log("suggestion", res);
                 if(vm.pageOfSuggestion == 1 && res.data.data.length == 0){
                     this.noSuggestion = true;
                     $state.complete();

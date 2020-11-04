@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid bg-light-gray m-0 p-0 pb-5">
         <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
-            <div class="p-3 py-5">
+            <div class="p-3 pb-5 pt-2">
                 <h2 class="p-3">New Facility</h2>
                 <Form :model="createFacilityData">
                     <div class="row m-0 p-0">
@@ -16,7 +16,7 @@
                         </div>
                         <div class="col-12 mb-3 gray-input fac-max d-flex align-items-center">
                             <Icon class="mr-2" size="25" type="ios-people" />
-                            <InputNumber :max="10" :min="1" v-model="createFacilityData.max"></InputNumber>
+                            <InputNumber :max="100" :min="1" v-model="createFacilityData.max"></InputNumber>
                             <p class="text-secondary ml-4">(Max number of people can use this facility at once.)</p>
                         </div>
                         <div class="col-12 mb-3">

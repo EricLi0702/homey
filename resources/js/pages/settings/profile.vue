@@ -18,7 +18,7 @@
                 :on-format-error="handleFormatError"
                 :on-exceeded-size="handleMaxSize"
                 action="/api/fileUpload/image">
-                  <Icon class="pr-2 noti-upload-icons profile-upload-avatar-icon" color="" size="25" type="md-cloud-upload" />
+                  <Icon class="pr-2 noti-upload-icons profile-upload-avatar-icon" color="" size="45" type="md-cloud-upload" />
               </Upload>
             </div>
           </div>

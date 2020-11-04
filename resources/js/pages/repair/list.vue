@@ -9,14 +9,19 @@
             <div class="row m-0 p-0">
                 <Category/>
                 <div class="col-12 col-md-8 m-0 p-0">
-                    <div class="posted-item position-relative" v-for="(repair,i) in repairList" :key="i" v-if="repairList.length">
+                    <div v-if="noRequest" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
+                        <div class="no-fac text-center">
+                            <Icon size="150" type="ios-search" />
+                            <h5>oops! there is no Request!</h5>
+                        </div>
+                    </div>
+
+                    <div v-else-if="repairList.length" class="posted-item position-relative" v-for="(repair,i) in repairList" :key="i" >
                         <router-link :to="{path:`/repair/${repair.id}`}">
-                            
                             <div class="pi-wrap float-left ">
                                 <div class="user-info float-left">
                                     <div class="avatar">
-                                        <img style="width:40px;" :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
-                                        <!-- <img src="https://i.pravatar.cc/40" alt=""> -->
+                                        <img :src="`${baseUrl}${repair.user_id.user_avatar}`" class="rounded-circle profile-photo mr-1" alt="">
                                     </div>
                                     <div class="icons text-center">
                                         <p>{{repair.id}}</p>
@@ -79,7 +84,7 @@ export default {
         return{
             baseUrl:window.base_url,
             repairList : [],
-
+            noRequest:false,
             //infinit loading
             pageOfRepair: 1,
             lastPageOfRepair: 0,
@@ -107,13 +112,16 @@ export default {
             let vm = this;
             await getRepairList(this.pageOfRepair)
             .then(res=>{
-                console.log("ohohoh",res);
+                if(vm.pageOfRepair == 1 && res.data.data.length == 0){
+                    this.noRequest = true;
+                    $state.complete();
+                    return;
+                }
                 vm.lastpageOfRepair = res.data.last_page;
 
                 $.each(res.data.data, function(key, value){
                         value.upload_file = JSON.parse(value.upload_file);
                         vm.repairList.push(value); 
-                        console.log("wow",vm.repairList);
                     });
                 if (vm.pageOfRepair - 1 === vm.lastpageOfRepair) {
                     $state.complete();

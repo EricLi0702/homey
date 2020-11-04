@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSuggestionsTable extends Migration
+class CreateCommentOfCommunitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,16 @@ class CreateSuggestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('suggestions', function (Blueprint $table) {
+        Schema::create('comment_of_communities', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('userId');
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
-            $table->string('title');
+            $table->unsignedBigInteger('coId');
+            $table->foreign('coId')->references('id')->on('communities')->onDelete('cascade');
+            $table->unsignedBigInteger('parentId')->nullable();
             $table->text('content');
-            $table->text('upload_file')->nullable();
-            $table->json('view_cnt')->nullable();
-            $table->json('heart_cnt')->nullable();
-            $table->json('like_cnt')->nullable();
-            $table->json('dislike_cnt')->nullable();
-            $table->json('comment_cnt')->nullable();
-            $table->boolean('isDraft')->default('0');
+            $table->unsignedBigInteger('seq')->default('0');
+            $table->unsignedBigInteger('lvl')->default('0');
             $table->boolean('isRemoved')->default('0');
             $table->timestamps();
         });
@@ -38,6 +35,6 @@ class CreateSuggestionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('suggestions');
+        Schema::dropIfExists('comment_of_communities');
     }
 }

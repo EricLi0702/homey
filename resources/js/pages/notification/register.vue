@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid bg-light-gray m-0 p-0 pb-5">
         <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
-            <div class="p-3 py-5">
+            <div class="p-3 pb-5 pt-2">
                 <h2 class="p-3">Register New Notification</h2>
                 <Form :model="registerNotificationData">
                     <div class="row m-0 p-0">
@@ -159,7 +159,6 @@ export default {
             initPeriod:'forever',
             periodType:'withPeriod',
             isRegistering:false,
-            typeOfData:[],
 
             //draft
             isSavingDraft: false,
