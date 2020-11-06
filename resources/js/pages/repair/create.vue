@@ -3,9 +3,9 @@
         <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
             <div class="p-3 pb-5 pt-2">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="p-3">New Request</h2>
+                    <h2 class="p-3">{{$t('repair').NewRequest}}</h2>
                     <div class="d-flex align-items-center p-4">
-                        <span class="mr-2">Select Mode:</span>
+                        <span class="mr-2">{{$t('repair').SelectMode}}</span>
                         <i-switch @on-change="changeInputType" />
                     </div>
                 </div>
@@ -13,34 +13,34 @@
                     <div class="row m-0 p-0">
                         <div v-if="autoInputMode" class="col-12 m-0 p-0 row">
                             <div class="col-12 col-md-6 mb-3 gray-input">
-                                <Select v-model="createRepairData.type" size="large" style="width:100%" placeholder="please select repair type">
+                                <Select v-model="createRepairData.type" size="large" style="width:100%" :placeholder="$t('repair').selectRepairType">
                                     <Option v-for="item in repairType" :value="item.value" :key="item.value">{{ item.label }}</Option>
                                 </Select>
                             </div>
                             <div class="col-12 col-md-6 mb-3 gray-input">
-                                <Select v-model="createRepairData.object" size="large" style="width:100%" placeholder="please select repair object">
+                                <Select v-model="createRepairData.object" size="large" style="width:100%" :placeholder="$t('repair').selectRepairObject">
                                     <Option v-for="item in repairObject" :value="item.value" :key="item.value">{{ item.label }}</Option>
                                 </Select>
                             </div>
                             <div class="col-12 mb-3 newtopic gray-input">
-                                <Select v-model="createRepairData.title" size="large" style="width:100%" placeholder="please select repair title">
+                                <Select v-model="createRepairData.title" size="large" style="width:100%" :placeholder="$t('repair').selectRepairTitle">
                                     <Option v-for="item in repairTitle" :value="item.value" :key="item.value">{{ item.label }}</Option>
                                 </Select>
                             </div>
                         </div>
                         <div v-else class="col-12 m-0 p-0 row">
                             <div class="col-12 col-md-6 mb-3 gray-input">
-                                <Input v-model="createRepairData.type" placeholder="please enter type" />
+                                <Input v-model="createRepairData.type" :placeholder="$t('repair').enterType" />
                             </div>
                             <div class="col-12 col-md-6 mb-3 gray-input">
-                                <Input v-model="createRepairData.object" placeholder="please enter object" />
+                                <Input v-model="createRepairData.object" :placeholder="$t('repair').enterObject" />
                             </div>
                             <div class="col-12 mb-3 newtopic gray-input">
-                                <Input v-model="createRepairData.title" placeholder="please enter title" />
+                                <Input v-model="createRepairData.title" :placeholder="$t('facility').enterTitle" />
                             </div>
                         </div>
                         <div class="col-12 mb-3">
-                            <wysiwyg v-model="createRepairData.desc" placeholder="please enter description" />
+                            <wysiwyg v-model="createRepairData.desc" :placeholder="$t('facility').enterDescription" />
                         </div>
                         <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
                             <Upload
@@ -54,10 +54,10 @@
                             </div>
                             <Checkbox v-model="createRepairData.isShowToProprietor" label="Proprietor" class="ml-auto mr-2">
                                 <Icon type="ios-person" size="25"/>
-                                <span>Show to proprietor</span>
+                                <span>{{$t('repair').ShowProprietor}}</span>
                             </Checkbox>
-                            <Button icon="ios-briefcase-outline" type="warning" class="mr-2" @click="saveToDraftRequest" :disabled="isSavingDraft" :loading="isSavingDraft">Draft</Button>
-                            <Button icon="ios-send" type="success" class="" @click="requestRepair" :disabled="isRequesting" :loading="isRequesting">Request</Button>
+                            <Button icon="ios-briefcase-outline" type="warning" class="mr-2" @click="saveToDraftRequest" :disabled="isSavingDraft" :loading="isSavingDraft">{{$t('notification').Draft}}</Button>
+                            <Button icon="ios-send" type="success" class="" @click="requestRepair" :disabled="isRequesting" :loading="isRequesting">{{$t('repair').Request}}</Button>
                         </div>
                         <div class="col-12 uploaded_file">
                             <div class="image-item" v-if="createRepairData.file.imgUrl && createRepairData.file.imgUrl.length >0">

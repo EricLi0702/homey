@@ -7,13 +7,13 @@
             <div class="h-100 d-flex text-center align-items-center justify-content-center ">
                 <div class="title row m-0 p-0">
                     <div class="subtitle col-md-12 mb-5">
-                        <h1>V Apartment</h1>
+                        <h1>{{$t('welcome').Vapartment}}</h1>
                     </div>
                     <div class="description col-md-12 mt-5">
-                        <h4>Welcome to our V-apartment service system</h4>
+                        <h4>{{$t('welcome').WelcomeV-apartment}}</h4>
                     </div>
                     <div class="btn col-md-12 mt-5">
-                        <Button shape="circle" size="large" type="primary" style="height: 58px; padding: 4px 50px;">Get start</Button>
+                        <Button shape="circle" size="large" type="primary" style="height: 58px; padding: 4px 50px;">{{$t('welcome').GetStart}}</Button>
                     </div>
                 </div>
             </div>
@@ -26,9 +26,9 @@
                   <router-link :to="{ name: 'notification' }" class="col-6 col-sm-6 col-md-6 col-lg-4 column" >
                     <div class="card-hero gr-1">
                       <div class="txt">
-                        <h1>Notification</h1>
+                        <h1>{{$t('welcome').Notification}}</h1>
                       </div>
-                      <a href="#">detail</a>
+                      <a href="#">{{$t('welcome').detail}}</a>
                       <div class="ico-card-hero">
                         <i class="fas fa-exclamation-circle"></i>
                       </div>
@@ -37,9 +37,9 @@
                   <div class="col-6 col-sm-6 col-md-6 col-lg-4 column">
                     <div class="card-hero gr-1">
                         <div class="txt">
-                            <h1>Community</h1>
+                            <h1>{{$t('community').cummunity}}</h1>
                         </div>
-                        <a href="#">detail</a>
+                        <a href="#">{{$t('welcome').detail}}</a>
                         <div class="ico-card-hero">
                         <i class="fas fa-users"></i>
                         </div>
@@ -48,9 +48,9 @@
                   <div class="col-6 col-sm-6 col-md-6 col-lg-4 column">
                     <div class="card-hero gr-1">
                         <div class="txt">
-                            <h1>Public Facility</h1>
+                            <h1>{{$t('welcome').PublicFacility}}</h1>
                         </div>
-                        <a href="#">detail</a>
+                        <a href="#">{{$t('welcome').detail}}</a>
                         <div class="ico-card-hero">
                         <i class="fas fa-building"></i>
                         </div>
@@ -59,9 +59,9 @@
                   <div class="col-6 col-sm-6 col-md-6 col-lg-4 column">
                     <div class="card-hero gr-1">
                       <div class="txt">
-                        <h1>advise</h1>
+                        <h1>{{$t('welcome').advise}}</h1>
                       </div>
-                      <a href="#">detail</a>
+                      <a href="#">{{$t('welcome').detail}}</a>
                       <div class="ico-card-hero">
                         <i class="fab fa-tripadvisor"></i>
                       </div>
@@ -70,9 +70,9 @@
                   <div class="col-6 col-sm-6 col-md-6 col-lg-4 column">
                     <div class="card-hero gr-1">
                         <div class="txt">
-                            <h1>repair request</h1>
+                            <h1>{{$t('repair').repairRequest}}</h1>
                         </div>
-                        <a href="#">detail</a>
+                        <a href="#">{{$t('welcome').detail}}</a>
                         <div class="ico-card-hero">
                         <i class="fas fa-tools"></i>
                         </div>
@@ -81,9 +81,9 @@
                   <div class="col-6 col-sm-6 col-md-6 col-lg-4 column">
                     <div class="card-hero gr-1">
                         <div class="txt">
-                            <h1>advertisement</h1>
+                            <h1>{{$t('welcome').advertisement}}</h1>
                         </div>
-                        <a href="#">detail</a>
+                        <a href="#">{{$t('welcome').detail}}</a>
                         <div class="ico-card-hero">
                         <i class="fas fa-ad"></i>
                         </div>
@@ -97,29 +97,26 @@
         <div class="row m-0 p-0">
             <div class="col-md-12 col-sm-12 col-12">
                 <div class="content-title col-md-12 d-flex  align-items-center justify-content-center text-center">
-                    <h2 class="m-5">V-Apartment Management System</h2>
+                    <h2 class="m-5">{{$t('welcome').V-ApartmentManagementSystem}}</h2>
                 </div>
             </div>
             <div class="col-md-8 col-sm-12 col-12">
                 <div class="main-content col-md-12 d-flex  align-items-center justify-content-center mb-5">
-                    <h5>Ladies and gentle men.
-                        This time our apartment has opened an apartment application for the convenience of residents. Through more transparent and clean apartment management, we will make apartments that residents can live in. V-Apartment system brings luxury and convenience to your front door. Located in west Las Vegas, NV, near Spring Valley, Spectrum is ideal for those seeking comfort, those looking for a higher level in apartment elegance, and those who simply want a better apartment experience. You deserve not just a house, but a home, a community, and peace of mind. Find all those at Spectrum. Our one and two bedroom town home floor plans welcome you home with thoughtful touches, including air conditioning, spacious walk-in closets, a well-equipped kitchen, ceiling fans, and intrusion alarms.
-                        Every great apartment has a great location. We ask for your generous support for the development of apartment management in the future. Dear residents who love and care for our Miding Florence, I hope you will always be healthy and happy.
-                        Thank you.</h5>
+                    <h5>{{$t('welcome').LadiesAndGentleMen}}</h5>
                 </div>
             </div>
             <div class="col-md-4 col-am-12 col-12">
                 <div class="conten-list col-md-12 d-flex  align-items-center justify-content-center">
                     <ul class="">
-                        <li>Private Balconies/Patios</li>
-                        <li>Air conditioning</li>
-                        <li>Cable Ready</li>
-                        <li>Ceiling Fans</li>
-                        <li>Stainless Steel Appliances</li>
-                        <li>Extra Storage</li>
-                        <li>Spacious Walk In Closets & strorage</li>
-                        <li>9ft Ceilings</li>
-                        <li>Spectacular Views Available</li>
+                        <li>{{$t('welcome').PrivateBalconies}}</li>
+                        <li>{{$t('welcome').AirConditioning}}</li>
+                        <li>{{$t('welcome').CableReady}}</li>
+                        <li>{{$t('welcome').CeilingFans}}</li>
+                        <li>{{$t('welcome').StainlessSteelAppliances}}</li>
+                        <li>{{$t('welcome').ExtraStorage}}</li>
+                        <li>{{$t('welcome').SpaciousWalk}}</li>
+                        <li>{{$t('welcome').Ceilings}}</li>
+                        <li>{{$t('welcome').SpectacularViews}}</li>
                     </ul>
                 </div>
             </div>
@@ -133,19 +130,19 @@
                 <div class="attraction">
                     <div class="row p-0 m-0">
                         <div class="a-title col-md-12">
-                            <h1 class="text-white">V-Apartement Awesome</h1>
+                            <h1 class="text-white">{{$t('welcome').V-ApartmentManagementSystem}}</h1>
                         </div>
                         <div class="a-description col-md-12 mt-5">
-                            <h4 class="text-white">V-apartment Services</h4>
+                            <h4 class="text-white">{{$t('welcome').V-apartmentServices}}</h4>
                         </div>
                         <hr>
                         <div class="a-link col-md-12 d-flex justify-content-center mt-5">
-                            <a href="#" class="mr-5">UPDATE</a>
-                            <a href="#" class="mr-5">DECORATION</a>
-                            <a href="#">REPAIR</a>
+                            <a href="#" class="mr-5">{{$t('welcome').UPDATE}}</a>
+                            <a href="#" class="mr-5">{{$t('welcome').DECORATION}}</a>
+                            <a href="#">{{$t('repair').repair}}</a>
                         </div>
                         <div class="a-button d-flex col-md-12 align-items-center justify-content-center text-center">
-                            <Button shape="circle" size="large" type="primary" class="mt-5" style="height: 58px; padding: 4px 50px;">Services Details</Button>
+                            <Button shape="circle" size="large" type="primary" class="mt-5" style="height: 58px; padding: 4px 50px;">{{$t('welcome').ServicesDetails}}</Button>
                         </div>
                     </div>
                 </div>
@@ -156,7 +153,7 @@
     <div class="service container">
         <div class="service-video row p-0 m-0">
             <div class="video-title col-md-12 text-center mt-5">
-                <h2>V-apartment Video</h2>
+                <h2>{{$t('welcome').V-apartmentVideo}}</h2>
             </div>
             <div class="video-intro col-md-12 mt-5">
                 <div class="embed-responsive embed-responsive-16by9">
@@ -165,21 +162,21 @@
             </div>
             <div class="service-detail col-md-12 mt-5 row p-0 m-0">
                 <div class="detail-title col-md-12 d-flex justify-content-center align-items-center text-center row p-0 m-0">
-                    <h2>Other Features & Services</h2>
+                    <h2>{{$t('welcome').OtherFeatures}}</h2>
                 </div>
                 <div class="col-md-8 d-flex row p-0 mt-5 mx-auto mb-5">
                     <div class="service-list col-md-6 col-sm-12 col-12 d-flex justify-content-center">
                         <ul>
-                            <li>Guest Parking</li>
-                            <li>Easy Freeway Access</li>
-                            <li>High Speed Internet Available</li>
+                            <li>{{$t('welcome').GuestParking}}</li>
+                            <li>{{$t('welcome').EasyFreewayAccess}}</li>
+                            <li>{{$t('welcome').HighSpeed}}</li>
                         </ul>
                     </div>
                     <div class="service-list col-md-6 col-sm-12 col-12 d-flex justify-content-center">
                         <ul>
-                            <li>Guest Parking</li>
-                            <li>Easy Freeway Access</li>
-                            <li>High Speed Internet Available</li>
+                            <li>{{$t('welcome').GuestParking}}</li>
+                            <li>{{$t('welcome').EasyFreewayAccess}}</li>
+                            <li>{{$t('welcome').HighSpeed}}</li>
                         </ul>
                     </div>
                 </div>
@@ -195,13 +192,13 @@
                     <div class="join col-md-6 d-flex row p-0  text-md-left text-center align-items-center">
                         <div class="row">
                             <div class="join-title col-md-12">
-                                <p class="m-0 p-0">Join Our Community</p>
+                                <p class="m-0 p-0">{{$t('welcome').JoinOurCommunity}}</p>
                             </div>
                             <div class="join-content col-md-12">
-                                <p>Call or email us to shedule a update today. Come see your updated home and the community features in person.</p>
+                                <p>{{$t('welcome').CallOrEmail}}</p>
                             </div>
                             <div class="join-button col-md-12">
-                                <Button shape="circle" size="large" type="primary" style="height: 58px; padding: 4px 50px;">Join Community</Button>
+                                <Button shape="circle" size="large" type="primary" style="height: 58px; padding: 4px 50px;">{{$t('welcome').JoinCommunity}}</Button>
                             </div>
                         </div>
                     </div>
@@ -217,10 +214,10 @@
     <div class="gallery container-fluid">
         <div class="row p-0 m-0">
             <div class="gallery-title col-md-12 d-flex text-center mt-5">
-                <h2 class="col-md-12 m-0 p-0">GALLERY OF V APARTMENTS</h2> 
+                <h2 class="col-md-12 m-0 p-0">{{$t('welcome').GALLERY}}</h2> 
             </div>
             <div class="gallery-content col-md-12 d-flex text-center mt-5">
-                <p class="col-md-12 m-0 p-0">Take an online Photos of our V-apartments for your requirements we can help you.</p>
+                <p class="col-md-12 m-0 p-0">{{$t('welcome').OnlinePhots}}</p>
             </div>
         </div>
         <section id="gallery">
@@ -272,10 +269,10 @@
     <div class="container-fluid mt-5">
         <div class="row p-0 m-0">
             <div class="add-title col-md-12 row p-0 m-0">
-                <h2 class="col-md-12 d-flex align-items-center justify-content-center row p-0 m-0 text-warning">Apartment Living</h2>
+                <h2 class="col-md-12 d-flex align-items-center justify-content-center row p-0 m-0 text-warning">{{$t('welcome').ApartmentLiving}}</h2>
             </div>
             <div class="add-content col-md-12 row p-0 mt-5">
-                <p class="col-md-4 offset-md-4 text-center mb-5">Living at Spectrum puts everything that you need and love close at hand. Our central location is within walking distance of two grocery stores, a pharmacy, hospital, and beltway. You'll find a different kind of living here at Spectrum--one characterized by ease and elegance.</p>
+                <p class="col-md-4 offset-md-4 text-center mb-5">{{$t('welcome').Spectrum}}</p>
             </div>
         </div>
     </div>
