@@ -99,6 +99,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     
     //PushNotification
     Route::post('newPush','Auth\UserController@newPush');
+    Route::post('removePushNotification','Auth\UserController@removePushNotification');
+    Route::post('removePushSuggestion','Auth\UserController@removePushSuggestion');
+    Route::post('removePushCommunity','Auth\UserController@removePushCommunity');
+    
     Route::get('newPush','Auth\UserController@getNewPush');
 });
 

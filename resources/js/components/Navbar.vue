@@ -6,7 +6,7 @@
           <button class="navbar-toggler" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="navbar-toggler-icon" />
           </button>
-          <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn">
+          <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn mt-1rem">
             <ul class="navbar-nav flex-column">
               <div v-if="user !== null">
                 <router-link v-if="user.roleId == 1" :to="{ path:'/UserRole' }" class="nav-item dropdown-item" active-class="active">
@@ -63,17 +63,39 @@
       </router-link>
       <ul class="navbar-nav ml-auto">
         <locale-dropdown />
-        <li class="mr-2 d-flex align-items-center ml-3">
+        <li class="mr-2 d-flex align-items-center ml-3 nav-item">
           <Badge :count="pushNotificationCnt">
-            <Icon size="30" color="#ffffff" type="md-notifications" class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
-            <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn">
+            <Icon size="30" color="#ffffff" type="md-notifications" class="navbar-notification-icon nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+            <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn mt-1rem">
               <ul class="navbar-nav flex-column">
                 <div v-if="user !== null">
-                  <div v-if="pushNotification.notification && pushNotification.notification.length >0">
-                    <div class="dropdown-divider" />
-                    <router-link v-for="(notification,i) in pushNotification.notification" :key="i" :to="{ path:`/notification/${notification.id}` }" class="nav-item dropdown-item" active-class="active">
-                      <p>{{notification.title}}</p>
-                    </router-link>
+                  <div v-if="pushNotificationCnt == 0">
+                    <div class="nav-item dropdown-item d-flex" active-class="active">
+                      <Icon size="25" class="mr-1" type="md-beer" />
+                    </div>
+                  </div>
+                  <div v-else>
+                    <div v-if="pushNotification.notification && pushNotification.notification.length >0">
+                      <div class="dropdown-divider" />
+                      <div @click="removeNotificationFromNew(notification)" v-for="(notification,i) in pushNotification.notification" :key="i" class="nav-item dropdown-item d-flex" active-class="active">
+                        <Icon size="25" class="mr-1" type="ios-clipboard" />
+                        <p>{{notification.title}}</p>
+                      </div>
+                    </div>
+                    <div v-if="pushNotification.suggestion && pushNotification.suggestion.length >0">
+                      <div class="dropdown-divider" />
+                      <div @click="removeSuggestionFromNew(suggestion)" v-for="(suggestion,i) in pushNotification.suggestion" :key="i" :to="{ path:`/suggestion/${suggestion.id}` }" class="nav-item dropdown-item d-flex" active-class="active">
+                        <Icon size="25" class="mr-1" type="md-chatbubbles" />
+                        <p>{{suggestion.title}}</p>
+                      </div>
+                    </div>
+                    <div v-if="pushNotification.community && pushNotification.community.length >0">
+                      <div class="dropdown-divider" />
+                      <div @click="removeCommunityFromNew(community)" v-for="(community,i) in pushNotification.community" :key="i" :to="{ path:`/community/${community.id}` }" class="nav-item dropdown-item d-flex" active-class="active">
+                        <Icon size="25" class="mr-1" type="ios-people" />
+                        <p>{{community.title}}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </ul>
@@ -90,10 +112,10 @@
             <!-- <img src="https://i.pravatar.cc/40" alt="" style="border-radius: 50%;"> -->
            
           </a>
-          <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn">
-            <div class="p-3 text-center">
-              <img :src="`${baseUrl}${user.user_avatar}`" class="rounded-circle profile-photo">
-              <p>{{ user.name }}</p>
+          <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn mt-1rem">
+            <div class="pt-3 text-center">
+              <img :src="`${baseUrl}${user.user_avatar}`" class="rounded-circle profile-photo menu-profile-photo">
+              <p class="dropdown-item">{{ user.name }}</p>
             </div>
             <div class="dropdown-divider" />
             <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
@@ -127,7 +149,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import LocaleDropdown from './LocaleDropdown'
-import {newPush, getNewPush} from '~/api/push'
+import {
+  newPush, 
+  getNewPush, 
+  removeNotificationFromNewGroup,
+  removeSuggestionFromNewGroup,
+  removeCommunityFromNewGroup,
+} from '~/api/push'
 export default {
   components: {
     LocaleDropdown
@@ -151,6 +179,7 @@ export default {
   mounted(){
     this.listenNewNotification();
     this.listenNewSuggestion();
+    this.listenNewCommunity();
   },
   methods: {
     async logout () {
@@ -170,10 +199,50 @@ export default {
 
       })
     },
+    removeNotificationFromNew(notification){
+      this.pushNotification.notification.pop(notification);
+      this.pushNotificationCnt--;
+      let updatePushData = {}
+      updatePushData.postUpdatePushData = this.pushNotification;
+      removeNotificationFromNewGroup(updatePushData)
+      .then(res=>{
+        this.$router.push({ path:`/notification/${notification.id}` })
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+    },
+    removeSuggestionFromNew(suggestion){
+      this.pushNotification.suggestion.pop(suggestion);
+      this.pushNotificationCnt--;
+      let updatePushData = {}
+      updatePushData.postUpdatePushData = this.pushNotification;
+      removeNotificationFromNewGroup(updatePushData)
+      .then(res=>{
+        this.$router.push({ path:`/suggestion/${suggestion.id}` })
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+    },
+    removeCommunityFromNew(community){
+      this.pushNotification.community.pop(community);
+      this.pushNotificationCnt--;
+      let updatePushData = {}
+      updatePushData.postUpdatePushData = this.pushNotification;
+      removeNotificationFromNewGroup(updatePushData)
+      .then(res=>{
+        this.$router.push({ path:`/community/${community.id}` })
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+    },
 
     listenNewNotification(){
       Echo.private('notification')
           .listen('NewNotification', (newNotification) => {
+            console.log("newNotification", newNotification)
               if(newNotification.notification.userId == this.user.id){
                 return;
               }
@@ -196,6 +265,22 @@ export default {
           .listen('NewSuggestion', (newSuggestion) => {
               console.log("wow, greate!!",newSuggestion.suggestion);
               this.pushNotification.suggestion.push(newSuggestion.suggestion);
+              this.pushNotificationCnt++;
+              let newPushData = {}
+              newPushData.postNewPushData = this.pushNotification;
+              newPush(newPushData)
+              .then(res=>{
+                console.log("$$$$$", this.pushNotification);
+              })
+              .catch(err=>{
+              })
+          });
+    },
+    listenNewCommunity(){
+      Echo.private('community')
+          .listen('NewCommunity', (newCommunity) => {
+              console.log("wow, greate!!",newCommunity.community);
+              this.pushNotification.community.push(newCommunity.community);
               this.pushNotificationCnt++;
               let newPushData = {}
               newPushData.postNewPushData = this.pushNotification;

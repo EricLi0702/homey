@@ -154,7 +154,7 @@
                 <div class="row">
                   <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
                     <div class="img-wrapper">
-                      <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room12.png`" class="img-responsive"></a>
+                      <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room1.jpg`" class="img-responsive"></a>
                       <div class="img-overlay">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         <p>Bedroom</p>
@@ -163,43 +163,7 @@
                   </div>
                   <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
                     <div class="img-wrapper">
-                      <a href="/asset/img/bg/room2.png"><img :src="`${baseUrl}/asset/img/bg/room2.png`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Living room</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/room3.jpg"><img :src="`${baseUrl}/asset/img/bg/room3.jpg`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Guest room</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/room4.png"><img :src="`${baseUrl}/asset/img/bg/room4.png`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Dining room</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/room5.png"><img :src="`${baseUrl}/asset/img/bg/room5.png`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Pool</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/room6.png"><img :src="`${baseUrl}/asset/img/bg/room6.png`" class="img-responsive"></a>
+                      <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room4.png`" class="img-responsive"></a>
                       <div class="img-overlay">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         <p>Bedroom</p>
@@ -208,116 +172,7 @@
                   </div>
                   <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
                     <div class="img-wrapper">
-                      <a href="/asset/img/bg/room7.png"><img :src="`${baseUrl}/asset/img/bg/room7.png`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Living room</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/room8.png"><img :src="`${baseUrl}/asset/img/bg/room8.png`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Living room</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/room9.jpg"><img :src="`${baseUrl}/asset/img/bg/room9.jpg`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Entertainment room</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/bathroom.png"><img :src="`${baseUrl}/asset/img/bg/bathroom.png`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Bathroom</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/bathroom1.png"><img :src="`${baseUrl}/asset/img/bg/bathroom1.png`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Bathroom</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/entrance.jpg"><img :src="`${baseUrl}/asset/img/bg/entrance.jpg`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Entrance</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/gym.png"><img :src="`${baseUrl}/asset/img/bg/gym.png`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Gym</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/interior.png"><img :src="`${baseUrl}/asset/img/bg/interior.png`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Balcony</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/outside.jpg"><img :src="`${baseUrl}/asset/img/bg/outside.jpg`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Outside</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/outside1.jpg"><img :src="`${baseUrl}/asset/img/bg/outside1.jpg`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Park</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/pool.png"><img :src="`${baseUrl}/asset/img/bg/pool.png`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Pool</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/room1.jpg"><img :src="`${baseUrl}/asset/img/bg/room1.jpg`" class="img-responsive"></a>
-                      <div class="img-overlay">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Living room</p>
-                        <p></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/room10.png"><img :src="`${baseUrl}/asset/img/bg/room10.png`" class="img-responsive"></a>
+                      <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room3.jpg`" class="img-responsive"></a>
                       <div class="img-overlay">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         <p>Bedroom</p>
@@ -326,13 +181,14 @@
                   </div>
                   <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
                     <div class="img-wrapper">
-                      <a href="/asset/img/bg/room11.png"><img :src="`${baseUrl}/asset/img/bg/room11.png`" class="img-responsive"></a>
+                      <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room2.jpg`" class="img-responsive"></a>
                       <div class="img-overlay">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <p>Kitchen</p>
+                        <p>Bedroom</p>
                       </div>
                     </div>
                   </div>
+                  
                 </div><!-- End row -->
               </div><!-- End image gallery -->
             </div><!-- End container --> 

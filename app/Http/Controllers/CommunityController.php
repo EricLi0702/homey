@@ -8,6 +8,7 @@ use DateTime;
 use App\User;
 use App\Community;
 use App\CommentOfCommunity;
+use App\Events\NewCommunity;
 
 
 class CommunityController extends Controller
@@ -62,6 +63,8 @@ class CommunityController extends Controller
             }
         }
         $community = Community::create($communityData); 
+        
+        broadcast(new NewCommunity($community))->toOthers();
 
         return response()->json([
             'community' => $community

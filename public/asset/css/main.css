@@ -164,9 +164,23 @@ body{
     background: linear-gradient(147deg, #04619f 0%, #000000 74%);
 }
 
+.dropdown-item{
+    color: white;
+}
+
+.menu-profile-photo{
+    width: 3rem!important;
+    height: 3rem!important;
+}
+
+.navbar-notification-icon:hover{
+    cursor: pointer;
+}
+
 .dropdown-item:hover{
     text-decoration: none;
     background-color: #04619F;
+    cursor: pointer;
 }
 
 .gr-1 {

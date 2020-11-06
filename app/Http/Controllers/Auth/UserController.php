@@ -70,4 +70,15 @@ class UserController extends Controller
             'pushData' => $pushData,
         ], 200);
     }
+
+    public function removePushNotification(Request $request){
+        $userId = Auth::user()->id;
+        $currentUser = User::where('id',$userId)->first();
+        $pushData = json_encode($request->postUpdatePushData);
+        $currentUser->newPush = $pushData;
+        $currentUser->save();
+        return response()->json([
+            'pushData' => $pushData,
+        ], 200);
+    }
 }

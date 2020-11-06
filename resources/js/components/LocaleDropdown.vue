@@ -6,7 +6,7 @@
       <img style="width:27px; margin:3px;" :src="`/asset/img/icon/${locales[locale]}_flag.png`" alt="" />
       {{ locales[locale] }}
     </a>
-    <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn">
+    <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn mt-1rem">
       <a v-for="(value, key) in locales" :key="key" class="dropdown-item" href="#"
          @click.prevent="setLocale(key)"
       >
