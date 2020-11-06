@@ -4,7 +4,7 @@
             <div class="p-3 pb-5 pt-2">
                 <h2 class="p-3">Request Type</h2>
                 <div class="col-6 mb-3 gray-input">
-                    <Input placeholder="please enter title" />
+                    <Input :placeholder=" $t('facility').enterTitle " />
                 </div>
             </div>
         </div>

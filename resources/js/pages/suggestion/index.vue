@@ -9,11 +9,11 @@
                 <div class="suggestion-sub-menu-items">
                     <router-link :to="{ path: '/suggestion/create' }" class="">
                         <!-- {{ $t('register') }} -->
-                        <Button type="success" icon="md-add">New</Button>
+                        <Button type="success" icon="md-add">{{ $t('community').New }}</Button>
                     </router-link>
                     <router-link :to="{ path: '/suggestion/index' }" class="">
                         <!-- {{ $t('register') }} -->
-                        <Button type="primary" icon="md-list">View</Button>
+                        <Button type="primary" icon="md-list">{{ $t('community').View }}</Button>
                     </router-link>
                 </div>
             </div>

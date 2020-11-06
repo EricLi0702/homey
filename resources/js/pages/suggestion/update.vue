@@ -2,14 +2,14 @@
     <div class="container-fluid bg-light-gray m-0 p-0 pb-5">
         <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
             <div class="p-3 pb-5 pt-2">
-                <h2 class="p-3">Update Suggestion</h2>
+                <h2 class="p-3">{{ $t('suggest').UpdateSuggestion }}</h2>
                 <Form :model="updateSuggestionData" v-if=" updateSuggestionData !== null">
                     <div class="row m-0 p-0">
                         <div class="col-12 mb-3 newtopic">
-                            <Input v-model="updateSuggestionData.title" placeholder="please enter title" />
+                            <Input v-model="updateSuggestionData.title" :placeholder=" $t('facility').enterTitle " />
                         </div>
                         <div class="col-12 mb-3">
-                            <wysiwyg v-model="updateSuggestionData.content" placeholder="please enter description" />
+                            <wysiwyg v-model="updateSuggestionData.content" :placeholder=" $t('facility').enterDescription " />
                         </div>
                         <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
                             <Upload
@@ -21,7 +21,7 @@
                             <div class="emoji-area-popup">
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
-                            <Button icon="md-create" type="success" class="ml-auto" @click="updateSuggestion" :disabled="isUpdating" :loading="isUpdating">Update Suggestion</Button>
+                            <Button icon="md-create" type="success" class="ml-auto" @click="updateSuggestion" :disabled="isUpdating" :loading="isUpdating">{{ $t('suggest').UpdateSuggestion }}</Button>
                         </div>
                         <div class="col-12 uploaded_file">
                             <div class="image-item" v-if="updateSuggestionData.upload_file.imgUrl && updateSuggestionData.upload_file.imgUrl.length >0">

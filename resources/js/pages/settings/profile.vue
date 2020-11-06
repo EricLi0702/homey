@@ -22,7 +22,7 @@
               </Upload>
             </div>
           </div>
-          <Button class="mt-3 mb-5" type="success" icon="md-contact" @click="updateAvatar" :disabled="isUpdatingAvatar" :loading="isUpdatingAvatar">update</Button>
+          <Button class="mt-3 mb-5" type="success" icon="md-contact" @click="updateAvatar" :disabled="isUpdatingAvatar" :loading="isUpdatingAvatar">{{ $t('auth').update }}</Button>
 
         </div>
         <form @submit.prevent="update" @keydown="form.onKeydown($event)">
