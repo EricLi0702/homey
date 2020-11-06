@@ -87,7 +87,8 @@
         "back":"Back",
         "noNotification":"There is no any notification",
         "archive":"Archive",
-        "saveAs":"Save as"
+        "saveAs":"Save as",
+        "DownGraded":"DownGraded"
     },
     "community":{
         "cummunity":"Community",
