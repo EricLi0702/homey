@@ -26,33 +26,33 @@
                 </router-link>
                 <div v-if="user.roleId == 2" class="dropdown-divider" />
               </div>
-              <router-link :to="{ name: 'notification' }" class="nav-item dropdown-item" active-class="active">
-                <!-- {{ $t('register') }} -->
+              <router-link :to="{ name: 'notification' }" class="d-flex nav-item dropdown-item" active-class="active">
+                <Icon size="25" class="mr-1" type="ios-clipboard-outline" />
                 {{$t('notification').notification}}
               </router-link>
               <div class="dropdown-divider" />
 
-              <router-link :to="{ name: 'community' }" class="nav-item dropdown-item" active-class="active">
-                <!-- {{ $t('register') }} -->
+              <router-link :to="{ name: 'community' }" class="d-flex nav-item dropdown-item" active-class="active">
+                <Icon size="25" class="mr-1" type="ios-people" />
                 {{$t('community').cummunity}}
               </router-link>
               <div class="dropdown-divider" />
 
-              <router-link :to="{ name: 'suggestion' }" class="nav-item dropdown-item" active-class="active">
-                <!-- {{ $t('register') }} -->
+              <router-link :to="{ name: 'suggestion' }" class="d-flex nav-item dropdown-item" active-class="active">
+                <Icon size="25" class="mr-1" type="md-chatbubbles" />
                 {{$t('suggest').suggest}}
               </router-link>
               <div class="dropdown-divider" />
 
-              <router-link :to="{ name: 'repair' }" class="nav-item dropdown-item" active-class="active">
-                <!-- {{ $t('register') }} -->
+              <router-link :to="{ name: 'repair' }" class="d-flex nav-item dropdown-item" active-class="active">
+                <Icon size="25" class="mr-1" type="ios-construct" />
                 {{$t('repair').repair}}
               </router-link>
               <div class="dropdown-divider" />
               
-              <router-link :to="{ name: 'facility' }" class="nav-item dropdown-item" active-class="active">
-                <!-- {{ $t('register') }} -->
-                {{$t('Facility').Facility}}
+              <router-link :to="{ name: 'facility' }" class="d-flex nav-item dropdown-item" active-class="active">
+                <Icon size="25" class="mr-1" type="md-share" />
+                {{$t('facility').Facility}}
               </router-link>
             </ul>
           </div>
@@ -120,12 +120,12 @@
             <div class="dropdown-divider" />
             <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
               <fa icon="cog" fixed-width />
-              {{ $t('settings') }}
+              {{ $t('common').setting }}
             </router-link>
             <div class="dropdown-divider" />
             <a href="#" class="dropdown-item pl-3" @click.prevent="logout">
               <fa icon="sign-out-alt" fixed-width />
-              {{ $t('logout') }}
+              {{ $t('common').logout }}
             </a>
           </div>
         </li>

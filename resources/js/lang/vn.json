@@ -91,11 +91,12 @@
         "Youhaveaccount":"Bạn đã có tài khoản?",
         "loginHere":"đăng nhập tại đây",
         "enterPass":"Nhập mật khẩu",
-        "enterEmail":"Nhập email"
+        "enterEmail":"Nhập email",
+        "enterConfirmPass":"Nhập mật khẩu xác nhận"
     },
     "common":{
         "name":"tên",
-        "email":"email",
+        "email":"E-mail",
         "password":"mật khẩu",
         "phone":"phone",
         "confirmPassword":"Xác nhận mật khẩu",
@@ -105,7 +106,13 @@
         "superManager":"người quản lý cấp cao",
         "userRole":"Vai trò người dùng",
         "user":"người dùng",
-        "request":"Yêu cầu"
+        "request":"Yêu cầu",
+        "setting":"Cài đặt",
+        "logout":"Đăng xuất",
+        "resetPass":"Đặt lại mật khẩu",
+        "sendResetPassLink":"Gửi liên kết đặt lại mật khẩu",
+        "and":"và",
+        "setPassword": "Đặt mật khẩu"
     },
     "login":{
         "login":"Đăng nhập",

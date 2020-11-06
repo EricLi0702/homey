@@ -11,14 +11,14 @@
       <form @submit.prevent="login" @keydown="form.onKeydown($event)">
         <div class="lc-form px-4">
             <div class="m-2">
-                <p class="mt-2">Email </p>
+                <p class="mt-2">{{ $t('common').email }} </p>
                 <!-- <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email"> -->
                 <Input prefix="ios-mail-outline" v-model="form.email" type="email" name="email" :class="{ 'is-invalid': form.errors.has('email') }" :placeholder="$t('auth').enterEmail"/>
                 <has-error :form="form" field="email" />
             </div>
             <div class="m-2">
                 <div class="d-flex">
-                    <p class="mt-2">Password </p>
+                    <p class="mt-2">{{ $t('common').password }} </p>
                     <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto mt-2 ml-auto">
                       {{ $t('common').forgotPassword }}
                     </router-link>

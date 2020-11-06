@@ -4,7 +4,7 @@
             <img :src="`${baseUrl}/asset/img/icon/logo.png`" alt="" style="width:200px;">
         </div>
         <div class="container m-0 p-0 mx-auto advice-to-customers mt-3 mb-3 box-block">
-            <div class="p-3 pb-5 pt-2">
+            <div class="px-3 pb-5 pt-2">
                 <div class="d-flex justify-content-center align-items-center">
                     <h3 class="p-3 text-center">{{ $t('term').titleOfTerm }}</h3>
                 </div>
@@ -59,3 +59,13 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    
+    data: () => ({
+        baseUrl:window.base_url,
+
+    }),
+}
+</script>

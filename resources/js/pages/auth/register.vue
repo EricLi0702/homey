@@ -40,18 +40,18 @@
                 <Button class="mt-3" icon="ios-send" type="success" long @click="verifyingCode" :disabled="isVerifying||isFinishVerify" :loading="isVerifying">{{ $t('auth').verify }}</Button>
             </div>
             <div class="m-2 animate__animated animate__fadeIn" v-if="isFinishVerify">
-                <p class="mt-2">password{{ $t('common').rememberMe }}</p>
-                <Input prefix="ios-key-outline" v-model="password.password" type="password" password name="password" placeholder="Enter password"/>
+                <p class="mt-2">{{ $t('common').password }}</p>
+                <Input prefix="ios-key-outline" v-model="password.password" type="password" password name="password" :placeholder="$t('auth').enterPass"/>
             </div>
             <div class="m-2 animate__animated animate__fadeIn" v-if="isFinishVerify">
                 <p class="mt-2">{{ $t('common').confirmPassword }}</p>
-                <Input prefix="ios-key-outline" v-model="password.confirmpassword" type="password" password name="confirmpassword" placeholder="Enter confirm password"/>
+                <Input prefix="ios-key-outline" v-model="password.confirmpassword" type="password" password name="confirmpassword" :placeholder="$t('auth').enterConfirmPass"/>
             </div>
             <div class="m-2 animate__animated animate__fadeIn" v-if="isFinishVerify" style="width:200px;">
-                <Checkbox v-model="isAgree">{{ $t('auth').IagreeHomey }} <router-link :to="{ name: 'term' }" target='_blank'>{{ $t('auth').TermsofService }}</router-link> and {{ $t('common').rememberMe }}<router-link :to="{ name: 'privacy' }" target= '_blank'>{{ $t('auth').PrivacyPolicy }}</router-link></Checkbox>
+                <Checkbox v-model="isAgree">{{ $t('auth').IagreeHomey }} <router-link :to="{ name: 'term' }" target='_blank'>{{ $t('auth').TermsofService }}</router-link> {{ $t('common').and }}<router-link :to="{ name: 'privacy' }" target= '_blank'>{{ $t('auth').PrivacyPolicy }}</router-link></Checkbox>
             </div>
             <div class="m-2 animate__animated animate__fadeIn">
-              <Button v-if="isFinishVerify" class="mt-3 " icon="ios-send" type="success" long @click="setPassword" :disabled="isSettingPassword" :loading="isSettingPassword">Set Password</Button>
+              <Button v-if="isFinishVerify" class="mt-3 " icon="ios-send" type="success" long @click="setPassword" :disabled="isSettingPassword" :loading="isSettingPassword">{{ $t('common').setPassword }}</Button>
             </div>
         </div>
       </Form>
