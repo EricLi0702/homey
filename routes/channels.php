@@ -24,3 +24,7 @@ Broadcast::channel('notification', function ($user) {
 Broadcast::channel('suggestion', function ($user) {
     return auth()->check();
 });
+
+Broadcast::channel('community', function ($user) {
+    return auth()->check();
+});

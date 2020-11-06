@@ -2,6 +2,8 @@
 $(function(){
 	let navbar = document.getElementsByClassName("navbar");
 	let dropdownMenu = document.getElementsByClassName("dropdown-menu");
+	let dropdownItem = document.getElementsByClassName("dropdown-item");
+
 	let last_known_scroll_position = 0;
 	window.addEventListener('scroll', function(e) {
 		last_known_scroll_position = window.scrollY;
@@ -11,6 +13,12 @@ $(function(){
 			for(let i = 0; i < dropdownMenu.length; i++){
 				dropdownMenu[i].classList.add('bg-blue-gradient');
 				dropdownMenu[i].classList.remove('bg-transparent');
+				dropdownMenu[i].classList.remove('bg-opacity');
+				dropdownMenu[i].classList.remove('mt-05rem');
+				dropdownMenu[i].classList.add('mt-1rem');
+			}
+			for(let i = 0; i < dropdownItem.length; i++){
+				dropdownItem[i].classList.remove('color-bold-font');
 			}
 		}
 		else{
@@ -18,7 +26,14 @@ $(function(){
 			navbar[0].classList.add('bg-transparent');
 			for(let i = 0; i < dropdownMenu.length; i++){
 				dropdownMenu[i].classList.add('bg-transparent');
+				dropdownMenu[i].classList.add('bg-opacity');
 				dropdownMenu[i].classList.remove('bg-blue-gradient');
+				dropdownMenu[i].classList.remove('mt-1rem');
+				dropdownMenu[i].classList.add('mt-05rem');
+			}
+			for(let i = 0; i < dropdownItem.length; i++){
+				dropdownItem[i].classList.add('color-bold-font');
+				
 			}
 		}
 	});

@@ -5,19 +5,19 @@
         <div class="notification-sub-menu container-fluid bg-white box-block">
             <div class="container d-flex justify-content-between p-0 py-3 ">
                 <Input class="w-40"
-                 search placeholder="Enter something..." />
+                 search :placeholder="$t('facility').EnterSomething" />
                 <div class="notification-sub-menu-items">
                     <router-link v-if="currentUser.roleId == 2" :to="{ name: 'notification.register' }" class="">
                         <!-- {{ $t('register') }} -->
-                        <Button type="success" icon="md-add">New</Button>
+                        <Button type="success" icon="md-add">{{$t('community').New}}</Button>
                     </router-link>
                     <router-link v-if="currentUser.roleId == 2" :to="{ name: 'notification.downgradelist' }" class="">
                         <!-- {{ $t('register') }} -->
-                        <Button type="warning" icon="md-trending-down">DownGraded</Button>
+                        <Button type="warning" icon="md-trending-down">{{$t('notification').DownGraded}}</Button>
                     </router-link>
                     <router-link :to="{ name: 'notification.list' }" class="">
                         <!-- {{ $t('register') }} -->
-                        <Button type="primary" icon="md-list">View</Button>
+                        <Button type="primary" icon="md-list">{{$t('community').View}}</Button>
                     </router-link>
                 </div>
             </div>

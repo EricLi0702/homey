@@ -30,7 +30,7 @@ class SuggestionController extends Controller
 
         if($request->isDraft == null){
             // broadcast Event
-            broadcast(new NewSuggestion($suggestion->load('userId')))->toOthers();
+            broadcast(new NewSuggestion($suggestion))->toOthers();
         }
         return response()->json([
             'suggestion' => $suggestion

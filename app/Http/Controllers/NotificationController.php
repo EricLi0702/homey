@@ -71,7 +71,7 @@ class NotificationController extends Controller
 
         if($request->isDraft == null){
             // broadcast Event
-            broadcast(new NewNotification($notification->load('userId')))->toOthers();
+            broadcast(new NewNotification($notification))->toOthers();
         }
 
         return response()->json([

@@ -4,7 +4,7 @@
             <Category/>
             <div class="col-12 col-md-8 m-0 p-0 pb-4">
                 <div v-if="details !== null && ( currentUser.roleId == 2)" class="control-notification row m-0 mb-3 d-flex justify-content-between">
-                    <Button @click="editNotification(details)" icon="md-create" type="info">Update</Button>
+                    <Button @click="editNotification(details)" icon="md-create" type="info">{{$t('notification').update}}</Button>
                     <Poptip
                         class="ml-auto mr-2"
                         confirm
@@ -14,7 +14,7 @@
                         placement="bottom"
                         @on-ok="deleteNotification"
                         @on-cancel="cancelDeleteNotification">
-                        <Button icon="md-trash" type="error" :loading="isDeleting" :disabled="isDeleting">Remove</Button>
+                        <Button icon="md-trash" type="error" :loading="isDeleting" :disabled="isDeleting">{{$t('notification').Remove}}</Button>
                     </Poptip>
                     <Poptip
                         v-if="details.isDowngrade == 0"
@@ -25,7 +25,7 @@
                         placement="bottom"
                         @on-ok="downgradeNotification"
                         @on-cancel="cancelDowngradeNotification">
-                        <Button icon="md-trending-down" type="warning">DownGrade</Button>
+                        <Button icon="md-trending-down" type="warning">{{$t('notification').DownGrade}}</Button>
                     </Poptip>
                     <Poptip
                         v-if="details.isDowngrade == 1"
@@ -36,7 +36,7 @@
                         placement="bottom"
                         @on-ok="upgradeNotification"
                         @on-cancel="cancelUpgradeNotification">
-                        <Button icon="md-trending-up" type="success">UpGrade</Button>
+                        <Button icon="md-trending-up" type="success">{{$t('notification').UpGrade}}</Button>
                     </Poptip>
                 </div>
                 <div v-if="details !== null" class="posted-item row m-0 p-2 py-3">

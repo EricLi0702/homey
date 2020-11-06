@@ -19,12 +19,29 @@ html, body {
 .bg-transparent{
   padding: 10px 0;
 }
+.color-bold-font{
+  font-weight: bold!important;
+  color: #FF5E14!important;
+}
+
+.nav-item .dropdown-menu.mt-1rem{
+  margin-top: 1rem!important;
+}
+
+.mt-05rem{
+  margin-top: 0.5rem!important;
+}
+
+.bg-opacity{
+  background-color: rgba(15, 76, 129, 0.15)!important;
+  backdrop-filter: blur(6px)!important;
+}
 .navbar-brand h1{
   color: white;
 }
-.navbar-nav a {
+/* .navbar-nav a {
   color: white!important;
-}
+} */
 
 /* .navbar-nav.ml-auto .ivu-badge .ivu-badge-count{
   font-family: "Monospaced Number";
