@@ -1,4 +1,45 @@
 {
+    "welcome":{
+        "Vapartment": "039ut0"
+    },
+    "apartment":{
+        "representativeName":"Tên đại diện",
+        "buildingNumber":"Số tòa nhà",
+        "display":"Hiển thị",
+        "dong":"Dong",
+        "AptName":"Tên Căn hộ",
+        "address":"Tên Căn hộ",
+        "phoneNumber":"Phone Number",
+        "eMail":"Email",
+        "edit":"Edit",
+        "id":"ID",
+        "createdAt":"Được tạo lúc",
+        "action":"Hành động",
+        "delete":"Xóa",
+        "registerSuperManager":"Đăng ký Super Manager",
+        "registerBuilding":"Đăng ký Tòa nhà",
+        "representName":"Tên đại diện",
+        "superManger":"Siêu Manger",
+        "superMangerId":"Super Manger Id",
+        "superMangerPWD":"Super Manger PWD"
+    },
+    "auth":{
+        "resetPassword":"Đặt lại mật khẩu",
+        "update":"Cập nhật",
+        "close":"Đóng",
+        "loginWithSocial":"Đăng nhập bằng mạng xã hội",
+        "facebook":"Facebook",
+        "google":"Google",
+        "DontHaveAnAccount":"Đăng nhập bằng mạng xã hội",
+        "createOne":"Tạo một",
+        "verificationCode":"mã xác minh",
+        "verify":"Xác minh",
+        "IagreeHomey":"Tôi đồng ý với Homey",
+        "TermsofService":"Điều khoản Dịch vụ",
+        "PrivacyPolicy":"Chính sách Bảo mật",
+        "Youhaveaccount":"Bạn đã có tài khoản?",
+        "loginHere":"đăng nhập tại đây"
+    },
     "common":{
         "name":"tên",
         "email":"email",
@@ -10,7 +51,8 @@
         "apartment":"apartment",
         "superManager":"super Manager",
         "userRole":"vn_UserRole",
-        "user":"vn_user"
+        "user":"vn_user",
+        "request":"Request"
     },
     "login":{
         "login":"Đăng nhập",

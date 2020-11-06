@@ -3,14 +3,14 @@
         <Button class="mb-4" type="info" size="small" @click="addApt">Add Apartment</Button>
         <table class="table m-0">
         <tr>
-            <th>ID</th>
-            <th>AptName</th>
-            <th>Address</th>
-            <th>Representive Name</th>
-            <th>PhoneNumber</th>
-            <th>Email</th>
-            <th>Crated at</th>
-            <th>Action</th>
+            <th>{{ $t('apartment').id }}</th>
+            <th>{{ $t('apartment').AptName }}</th>
+            <th>{{ $t('apartment').address }}</th>
+            <th>{{ $t('apartment').representativeName }}</th>
+            <th>{{ $t('apartment').phoneNumber }}</th>
+            <th>{{ $t('apartment').eMail }}</th>
+            <th>{{ $t('apartment').createdAt }}</th>
+            <th>{{ $t('apartment').action }}</th>
         </tr>
         <template v-if="aptLists && aptLists.length > 0">
             <tr v-for="(apt,i) in aptLists" :key="i">
@@ -24,11 +24,11 @@
                 <td class="d-flex">
                     <Button type="info" size="small" @click="editApt(apt,i)">Edit</Button>
                     &nbsp;&nbsp;
-                    <Button type="error" size="small" @click="delApt(apt,i)" :loading="isDeleting" :disabled="isDeleting">Delete</Button>
+                    <Button type="error" size="small" @click="delApt(apt,i)" :loading="isDeleting" :disabled="isDeleting">{{ $t('apartment').delete }}</Button>
                     &nbsp;&nbsp;
-                    <Button type="error" size="small" @click="registerSuperMng(apt)" :loading="isDeleting" :disabled="isDeleting">Register Super Manager</Button>
+                    <Button type="error" size="small" @click="registerSuperMng(apt)" :loading="isDeleting" :disabled="isDeleting">{{ $t('apartment').registerSuperManager }}</Button>
                     &nbsp;&nbsp;
-                    <Button type="error" size="small" @click="registerBuilding(apt)" :loading="isDeleting" :disabled="isDeleting">Register Building</Button>
+                    <Button type="error" size="small" @click="registerBuilding(apt)" :loading="isDeleting" :disabled="isDeleting">{{ $t('apartment').registerBuilding }}</Button>
                 </td>
             </tr>
         </template>

@@ -24,7 +24,7 @@
                 <Input prefix="ios-mail-outline" v-model="verifyData.email" type="email" name="email" :disabled="isSentVercode" />
             </div>
             <div class="m-2">
-                <p class="mt-2">phone number</p>
+                <p class="mt-2">{{ $t('apartment').phoneNumber }}</p>
                 <Input prefix="ios-phone-portrait" v-model="verifyData.phone" type="tel" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" :disabled="isSentVercode" />
             </div>
             <div class="m-2">
@@ -32,23 +32,23 @@
                 {{ $t('register').register }}
                 confirm
               </v-button> -->
-              <Button v-if="isSentVercode == false" class="mt-3" long icon="ios-send" type="success" @click="verifyUserInfo" :disabled="isConfirming" :loading="isConfirming">Request</Button>
+              <Button v-if="isSentVercode == false" class="mt-3" long icon="ios-send" type="success" @click="verifyUserInfo" :disabled="isConfirming" :loading="isConfirming">{{ $t('common').request }}</Button>
             </div>
             <div class="m-2 animate__animated animate__fadeIn" v-if="isSentVercode">
-                <p class="mt-2">verification code</p>
+                <p class="mt-2">{{ $t('auth').verificationCode }}</p>
                 <Input prefix="md-finger-print" class="d-block" v-model="verifyCode.code" name="vercode" maxlength="6" :disabled="isFinishVerify" />
-                <Button class="mt-3" icon="ios-send" type="success" long @click="verifyingCode" :disabled="isVerifying||isFinishVerify" :loading="isVerifying">Verify</Button>
+                <Button class="mt-3" icon="ios-send" type="success" long @click="verifyingCode" :disabled="isVerifying||isFinishVerify" :loading="isVerifying">{{ $t('auth').verify }}</Button>
             </div>
             <div class="m-2 animate__animated animate__fadeIn" v-if="isFinishVerify">
-                <p class="mt-2">password</p>
+                <p class="mt-2">password{{ $t('common').rememberMe }}</p>
                 <Input prefix="ios-key-outline" v-model="password.password" type="password" password name="password" placeholder="Enter password"/>
             </div>
             <div class="m-2 animate__animated animate__fadeIn" v-if="isFinishVerify">
-                <p class="mt-2">confirm password</p>
+                <p class="mt-2">{{ $t('common').confirmPassword }}</p>
                 <Input prefix="ios-key-outline" v-model="password.confirmpassword" type="password" password name="confirmpassword" placeholder="Enter confirm password"/>
             </div>
             <div class="m-2 animate__animated animate__fadeIn" v-if="isFinishVerify" style="width:200px;">
-                <Checkbox v-model="isAgree">I agree to the Homey <router-link :to="{ name: 'term' }" target='_blank'>Terms of Service</router-link> and <router-link :to="{ name: 'privacy' }" target= '_blank'>Privacy Policy</router-link></Checkbox>
+                <Checkbox v-model="isAgree">{{ $t('auth').IagreeHomey }} <router-link :to="{ name: 'term' }" target='_blank'>{{ $t('auth').TermsofService }}</router-link> and {{ $t('common').rememberMe }}<router-link :to="{ name: 'privacy' }" target= '_blank'>{{ $t('auth').PrivacyPolicy }}</router-link></Checkbox>
             </div>
             <div class="m-2 animate__animated animate__fadeIn">
               <Button v-if="isFinishVerify" class="mt-3 " icon="ios-send" type="success" long @click="setPassword" :disabled="isSettingPassword" :loading="isSettingPassword">Set Password</Button>
@@ -56,9 +56,9 @@
         </div>
       </Form>
       <div class="m-2 text-center py-3">
-          <p>You have already account?
+          <p>{{ $t('auth').Youhaveaccount }}
             <router-link :to="{ name: 'login' }">
-              login here
+              {{ $t('auth').loginHere }}
             </router-link>
           </p>
       </div>
