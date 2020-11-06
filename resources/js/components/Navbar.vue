@@ -61,7 +61,7 @@
       <router-link :to="{ name: user ? 'home' : 'welcome' }" class="navbar-brand mx-auto">
         <img :src="`${baseUrl}/asset/img/icon/logo.png`" alt="">
       </router-link>
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto d-flex align-items-center">
         <locale-dropdown />
         <li class="mr-2 d-flex align-items-center ml-3 nav-item">
           <Badge :count="pushNotificationCnt">

@@ -12,7 +12,7 @@
                     <div v-if="noSuggestion" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
                         <div class="no-fac text-center">
                             <Icon size="150" type="ios-search" />
-                            <h5>oops! there is no suggestion!</h5>
+                            <h5>{{ $t('suggest').oopsNoSuggestion }}</h5>
                         </div>
                     </div>
                     <div v-else-if="suggestionList.length" class="posted-item position-relative" v-for="(suggestion,i) in suggestionList" :key="i" >
@@ -82,7 +82,7 @@
                         @infinite="infiniteHandlerSuggestion"
                         spinner="circles"
                     >
-                        <div slot="no-more">no more suggestion</div>
+                        <div slot="no-more">{{ $t('suggest').noMoreSuggestion }}</div>
                     </InfiniteLoading>
                 </div>
             </div>

@@ -97,20 +97,20 @@
                                 <div class="emoji-area-popup">
                                     <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                                 </div>
-                                <Button @click="responseToRepairRequest" :loading="isResponsingTo" :disabled="isResponsingTo">Response</Button>
+                                <Button @click="responseToRepairRequest" :loading="isResponsingTo" :disabled="isResponsingTo">{{ $t('repair').Response }}</Button>
                             </div>
                         </div>
                     </div>
                     <div v-if="isFinishRequest" class="posted-item mt-3 p-2 animate__animated animate__fadeIn">
                         <div class="reply-form-comment m-0 row p-2">
                             <Rate class="w-100 text-center" v-model="rateOfResponse" />
-                            <Input v-model="finishRequestData" type="textarea" placeholder="Enter Review..." />
+                            <Input v-model="finishRequestData" type="textarea" :placeholder=" $t('repair').EnterReview " />
                             <div class="d-flex justify-content-between col-12 p-0">
                                 <Icon @click="toggleEmoOfFinishRequestData" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                                 <div class="emoji-area-popup">
                                     <Picker v-if="emoStatusOfFinishRequestData" set="emojione" @select="onInputOfFinishRequestData" title="Pick your emoji..." />
                                 </div>
-                                <Button @click="finishRequest(details)" :loading="isFinishingRequest" :disabled="isFinishingRequest">Leave Review</Button>
+                                <Button @click="finishRequest(details)" :loading="isFinishingRequest" :disabled="isFinishingRequest">{{ $t('repair').LeaveReview }}</Button>
                             </div>
                         </div>
                     </div>

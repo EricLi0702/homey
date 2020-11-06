@@ -10,7 +10,7 @@
                         <h1>{{ $t('welcome').Vapartment }}</h1>
                     </div>
                     <div class="description col-md-12 mt-5">
-                        <h4>{{ $t('welcome').WelcomeV-apartment }}</h4>
+                        <h4>{{ $t('welcome').WelcomeVapartment }}</h4>
                     </div>
                     <div class="btn col-md-12 mt-5">
                         <Button shape="circle" size="large" type="primary" style="height: 58px; padding: 4px 50px;" @click="getStart">{{ $t('welcome').GetStart }}</Button>
@@ -23,7 +23,7 @@
         <div class="row m-0 p-0">
             <div class="col-md-12 col-sm-12 col-12">
                 <div class="content-title col-md-12 d-flex  align-items-center justify-content-center text-center">
-                    <h2 class="m-5">{{ $t('welcome').V-ApartmentManagementSystem }}</h2>
+                    <h2 class="m-5">{{ $t('welcome').VApartmentManagementSystem }}</h2>
                 </div>
             </div>
             <div class="col-md-8 col-sm-12 col-12">
@@ -56,10 +56,10 @@
                 <div class="attraction">
                     <div class="row p-0 m-0">
                         <div class="a-title col-md-12">
-                            <h1 class="text-white">{{$t('welcome').V-ApartmentManagementSystem}}</h1>
+                            <h1 class="text-white">{{$t('welcome').VApartmentManagementSystem}}</h1>
                         </div>
                         <div class="a-description col-md-12 mt-5">
-                            <h4 class="text-white">{{$t('welcome').V-apartmentServices}}</h4>
+                            <h4 class="text-white">{{$t('welcome').VapartmentServices}}</h4>
                         </div>
                         <hr>
                         <div class="a-link col-md-12 d-flex justify-content-center mt-5">

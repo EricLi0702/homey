@@ -1,16 +1,15 @@
 {
     "welcome":{
         "Vapartment": "V Apartment",
-        "WelcomeV-apartment":"Welcome to our V-apartment service system",
+        "WelcomeVapartment":"Welcome to our V apartment service system",
         "GetStart":"Get start",
         "Notification":"Notification",
         "detail":"detail",
         "PublicFacility":"Public Facility",
-        "advise":"advise",
         "advertisement":"advertisement",
-        "V-ApartmentManagementSystem":"V-Apartment Management System",
+        "VApartmentManagementSystem":"V Apartment Management System",
         "LadiesAndGentleMen":"Ladies and gentle men. This time our apartment has opened an apartment application for the convenience of residents. Through more transparent and clean apartment management, we will make apartments that residents can live in. V-Apartment system brings luxury and convenience to your front door. Located in west Las Vegas, NV, near Spring Valley, Spectrum is ideal for those seeking comfort, those looking for a higher level in apartment elegance, and those who simply want a better apartment experience. You deserve not just a house, but a home, a community, and peace of mind. Find all those at Spectrum. Our one and two bedroom town home floor plans welcome you home with thoughtful touches, including air conditioning, spacious walk-in closets, a well-equipped kitchen, ceiling fans, and intrusion alarms. Every great apartment has a great location. We ask for your generous support for the development of apartment management in the future. Dear residents who love and care for our Miding Florence, I hope you will always be healthy and happy. Thank you.",
-        "PrivateBalconies":"Private Balconies/Patios",
+        "PrivateBalconies":"Private Balconies_Patios",
         "AirConditioning":"Air conditioning",
         "CableReady":"Cable Ready",
         "CeilingFans":"Ceiling Fans",
@@ -19,11 +18,11 @@
         "SpaciousWalk":"Spacious Walk In Closets & strorage",
         "Ceilings":"9ft Ceilings",
         "SpectacularViews":"Spectacular Views Available",
-        "V-apartmentServices":"V-apartment Services",
+        "VapartmentServices":"V-apartment Services",
         "UPDATE":"UPDATE",
         "DECORATION":"DECORATION",
         "ServicesDetails":"Services Details",
-        "V-apartmentVideo":"V-apartment Video",
+        "VapartmentVideo":"V-apartment Video",
         "OtherFeatures":"Other Features & Services",
         "GuestParking":"Guest Parking",
         "EasyFreewayAccess":"Easy Freeway Access",
@@ -46,6 +45,11 @@
         "NName":"Sammie",
         "TermsUse":"Terms of Use",
         "PrivacyPolicy":"Privacy Policy"
+        
+    },
+    "setting":{
+        "Profile":"Profile",
+        "Password":"Password"
     },
     "apartment":{
         "representativeName":"Representative name",
@@ -64,9 +68,9 @@
         "registerSuperManager":"Register Super Manager",
         "registerBuilding":"Register Building",
         "representName":"Represent Name",
-        "superManger":"Super Manger",
-        "superMangerId":"Super Manger Id",
-        "superMangerPWD":"Super Manger PWD",
+        "superManger":"Super Manager",
+        "superMangerId":"Super Manager Id",
+        "superMangerPWD":"Super Manager PWD",
         "Apartment":"Apartment",
         "User":"User"
     },
@@ -85,7 +89,9 @@
         "TermsofService":"Terms of Service",
         "PrivacyPolicy":"Privacy Policy",
         "Youhaveaccount":"You have already account?",
-        "loginHere":"login here"
+        "loginHere":"login here",
+        "enterPass":"Enter password",
+        "enterEmail":"Enter email"
     },
     "common":{
         "name":"name",
@@ -100,7 +106,6 @@
         "userRole":"UserRole",
         "user":"user",
         "request":"Request"
-
     },
     "login":{
         "login":"Login",
@@ -221,8 +226,13 @@
         "before":"Before",
         "back":"Back",
         "createSuggestContent":"Please write your comment",
-        "noSuggest":"There is no any comment"
-        
+        "noSuggest":"There is no any comment",
+        "NewSuggestion":"New Suggestion",
+        "oopsNoSuggestion":"oops! there is no suggestion!",
+        "noMoreSuggestion":"no more suggestion",
+        "UpdateSuggestion":"Update Suggestion",
+        "alreadyCommented.":"You have already commented.",
+        "noMoreComments":"no more comments"
     },
     "repair":{
         "repair":"Repair",
@@ -257,7 +267,10 @@
         "ShowProprietor":"Show to proprietor",
         "Request":"Request",
         "oopsThere":"oops! there is no Request!",
-        "noMoreRequest":"no more request"
+        "noMoreRequest":"no more request",
+        "Response":"Response",
+        "EnterReview":"Enter Review...",
+        "LeaveReview":"Leave Review"
     },
     "publicFacility":{
         "facilityName":"Facility",

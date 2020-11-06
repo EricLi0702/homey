@@ -47,9 +47,8 @@ html{
     font-size: 1.2rem;
 }
 body{
-    font-family: 'Times New Roman', Times, serif!important;
+    font-family: 'Times New Roman', Times, serif, 'Malgun Gothic'!important;
     overflow: auto!important;
-
 }
 
 .mt-navbar{

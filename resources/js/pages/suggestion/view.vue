@@ -80,7 +80,7 @@
                                     </div>
                                     <div v-else class="reply mr-auto">
                                         <div v-if="details.comment_cnt !== null && details.comment_cnt.includes(currentUser.id)" class="reply d-flex mr-4">
-                                            <p>You have already commented.</p>
+                                            <p>{{ $t('suggest').alreadyCommented }}</p>
                                         </div>
                                         <div v-else class="reply d-flex mr-4">
                                             <Icon size="25" type="ios-undo" @click="toggleReply"/>
@@ -110,7 +110,7 @@
                     </div>
                     <div v-if="isCommenting" id="commentArea" class="posted-item mt-3 p-2 animate__animated animate__fadeIn">
                         <div class="reply-form-comment row p-2">
-                            <Input v-model="commentData" type="textarea" placeholder="Leave your comment..." />
+                            <Input v-model="commentData" type="textarea" :placeholder="$t('suggest').UpdateSuggestion" />
                             <div class="d-flex justify-content-between col-12 p-0">
                                 <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                                 <div class="emoji-area-popup">
@@ -160,7 +160,7 @@
                         @infinite="infiniteHandlerComments"
                         spinner="circles"
                     >
-                        <div slot="no-more">no more comments</div>
+                        <div slot="no-more">{{ $t('suggest').noMoreComments }}</div>
                     </InfiniteLoading>
                 </div>
             </div>
