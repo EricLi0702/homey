@@ -198,8 +198,13 @@ export default {
     getNewPush(){
       getNewPush()
       .then(res=>{
-        this.pushNotification = JSON.parse(res.data.pushData);
-        this.pushNotificationCnt = this.pushNotification.notification.length + this.pushNotification.community.length + this.pushNotification.suggestion.length;
+        if(res.data.pushData ==  null){
+          this.pushNotificationCnt = 0;
+        }
+        else{
+          this.pushNotification = JSON.parse(res.data.pushData);
+          this.pushNotificationCnt = this.pushNotification.notification.length + this.pushNotification.community.length + this.pushNotification.suggestion.length;
+        }
       })
       .catch(err=>{
 
@@ -269,7 +274,9 @@ export default {
     listenNewSuggestion(){
       Echo.private('suggestion')
           .listen('NewSuggestion', (newSuggestion) => {
-              console.log("wow, greate!!",newSuggestion.suggestion);
+              if(newSuggestion.suggestion.userId == this.user.id){
+                return;
+              }
               this.pushNotification.suggestion.push(newSuggestion.suggestion);
               this.pushNotificationCnt++;
               let newPushData = {}
@@ -285,7 +292,9 @@ export default {
     listenNewCommunity(){
       Echo.private('community')
           .listen('NewCommunity', (newCommunity) => {
-              console.log("wow, greate!!",newCommunity.community);
+              if(newCommunity.community.userId == this.user.id){
+                return;
+              }
               this.pushNotification.community.push(newCommunity.community);
               this.pushNotificationCnt++;
               let newPushData = {}
