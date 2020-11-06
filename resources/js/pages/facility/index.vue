@@ -12,7 +12,7 @@
                         <!-- {{ $t('register') }} -->
                         <Button type="warning" icon="md-checkbox-outline">{{$t('publicFacility').reservation}}</Button>
                     </router-link>
-                    <router-link v-if="currentUser.role.roleName == 'AptAdmin'" :to="{ path: '/facility/create' }" class="">
+                    <router-link v-if="currentUser.role.roleName == 'SuperManager'" :to="{ path: '/facility/create' }" class="">
                         <!-- {{ $t('register') }} -->
                         <Button type="success" icon="md-add">{{$t('community').New}}</Button>
                     </router-link>

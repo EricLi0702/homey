@@ -89,7 +89,9 @@
         "TermsofService":"Điều khoản Dịch vụ",
         "PrivacyPolicy":"Chính sách Bảo mật",
         "Youhaveaccount":"Bạn đã có tài khoản?",
-        "loginHere":"đăng nhập tại đây"
+        "loginHere":"đăng nhập tại đây",
+        "enterPass":"Nhập mật khẩu",
+        "enterEmail":"Nhập email"
     },
     "common":{
         "name":"tên",

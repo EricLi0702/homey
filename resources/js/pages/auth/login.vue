@@ -12,8 +12,8 @@
         <div class="lc-form px-4">
             <div class="m-2">
                 <p class="mt-2">Email </p>
-                <!-- <Input type="email" v-model="data.email" aria-describedby="emailHelp" class="ml-auto" prefix="ios-contact" placeholder="Enter email" style="width: auto" /> -->
-                <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
+                <!-- <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email"> -->
+                <Input prefix="ios-mail-outline" v-model="form.email" type="email" name="email" :class="{ 'is-invalid': form.errors.has('email') }" :placeholder="$t('auth').enterEmail"/>
                 <has-error :form="form" field="email" />
             </div>
             <div class="m-2">
@@ -25,7 +25,8 @@
                     <!-- <a class="mt-2 ml-auto">Forgot password?</a> -->
                 </div>
                 <!-- <Input type="password" v-model="data.password" class="ml-auto" prefix="ios-key" placeholder="******" style="width: auto" /> -->
-                <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
+                <!-- <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password"> -->
+                <Input prefix="ios-key-outline" v-model="form.password" type="password" password name="password" :placeholder="$t('auth').enterPass" :class="{ 'is-invalid': form.errors.has('password') }"/>
                 <has-error :form="form" field="password" />
             </div>
             <div class="m-2">
@@ -45,9 +46,11 @@
                 <p>{{ $t('auth').loginWithSocial }}</p>
             </div>
             <div class="m-2 d-flex justify-content-between">
-                <Button class="w-49 mr-auto facebook-login-btn" icon="logo-facebook">{{ $t('auth').facebook }}v</Button>
-                <Button class="w-49 ml-auto google-login-btn" icon="logo-google">{{ $t('auth').google }}</Button>
+                <Button class="w-49 mr-auto facebook-login-btn" icon="logo-facebook">{{ $t('auth').facebook }}</Button>
+                <login-with-google />
             </div>
+            <!-- GitHub Login Button -->
+              <!-- <login-with-github /> -->
 
             <div class="m-2 text-center py-3">
                 <p>{{ $t('auth').DontHaveAnAccount }}
@@ -66,12 +69,14 @@
 <script>
 import Form from 'vform'
 import LoginWithGithub from '~/components/LoginWithGithub'
+import LoginWithGoogle from '~/components/LoginWithGoogle'
 
 export default {
   middleware: 'guest',
 
   components: {
-    LoginWithGithub
+    LoginWithGithub,
+    LoginWithGoogle
   },
 
   metaInfo () {

@@ -89,7 +89,9 @@
         "TermsofService":"Terms of Service",
         "PrivacyPolicy":"Privacy Policy",
         "Youhaveaccount":"You have already account?",
-        "loginHere":"login here"
+        "loginHere":"login here",
+        "enterPass":"Enter password",
+        "enterEmail":"Enter email"
     },
     "common":{
         "name":"name",

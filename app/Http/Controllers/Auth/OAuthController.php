@@ -8,6 +8,8 @@ use App\OAuthProvider;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
+use DateTime;
+use Laravolt\Avatar\Avatar;
 
 class OAuthController extends Controller
 {
@@ -22,6 +24,8 @@ class OAuthController extends Controller
     {
         config([
             'services.github.redirect' => route('oauth.callback', 'github'),
+            'services.google.redirect' => route('oauth.callback', 'google'),
+            // 'services.facebook.redirect' => route('oauth.callback', 'facebook'),
         ]);
     }
 
@@ -32,7 +36,7 @@ class OAuthController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function redirectToProvider($provider)
-    {
+    {  
         return [
             'url' => Socialite::driver($provider)->stateless()->redirect()->getTargetUrl(),
         ];
@@ -94,11 +98,22 @@ class OAuthController extends Controller
      */
     protected function createUser($provider, $sUser)
     {
+        $nowTime = date("Y-m-d H:i:s");
         $user = User::create([
             'name' => $sUser->getName(),
             'email' => $sUser->getEmail(),
-            'email_verified_at' => now(),
+            'email_verified_at' => $nowTime,
         ]);
+        //set avatar
+        $email = $sUser->getEmail();
+        $name = date('YmdHis') . ".png";
+        $destinationPath = ('/uploads/avatar/user/'); 
+        $avatar = new Avatar;
+        $avatarImage = $avatar->create($email)->toBase64();
+        // $avatar->create($email)->save( $destinationPath.$name, $quality = 90);
+        $avatarImage->save(public_path('/uploads/avatar/user/'.$name), $quality = 90);
+        $user['user_avatar'] = $destinationPath.$name;
+        $user->save();
 
         $user->oauthProviders()->create([
             'provider' => $provider,

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Repair;
 use App\ResponseRepair;
 use App\User;
-
+use Carbon\Carbon;
 
 class RepairController extends Controller
 {
@@ -126,5 +126,16 @@ class RepairController extends Controller
     public function getTop5Repair(Request $request){
         $userId = $request->id;
         return Repair::where('userId',$userId)->orderBy('created_at','desc')->take(5)->get();
+    }
+
+    public function getRepairCnt(Request $requset){
+        $weekData = Repair::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
+        $todayData = Repair::whereDate('created_at', Carbon::today())->count();
+        $monthData = Repair::whereYear('created_at',Carbon::now()->year)->whereMonth('created_at',Carbon::now()->month)->count();
+        return response()->json([
+            'today'=>$todayData,
+            'week'=>$weekData,
+            'month'=>$monthData
+        ]);
     }
 }
