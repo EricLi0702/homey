@@ -215,4 +215,9 @@ class NotificationController extends Controller
             'isDowngrade' => 0
         ]);
     }
+
+    public function getTop5Notification(Request $request){
+        $userId = $request->id;
+        return Notification::where('userId',$userId)->orderBy('created_at','desc')->take(5)->get();
+    }
 }

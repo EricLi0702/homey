@@ -122,4 +122,9 @@ class RepairController extends Controller
         ], 200);
     }
     
+
+    public function getTop5Repair(Request $request){
+        $userId = $request->id;
+        return Repair::where('userId',$userId)->orderBy('created_at','desc')->take(5)->get();
+    }
 }

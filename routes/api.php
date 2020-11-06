@@ -100,6 +100,12 @@ Route::group(['middleware' => 'auth:api'], function () {
     //PushNotification
     Route::post('newPush','Auth\UserController@newPush');
     Route::get('newPush','Auth\UserController@getNewPush');
+
+    //get top 5 categories
+    Route::get('top5Notification','NotificationController@getTop5Notification');
+    Route::get('top5Community','CommunityController@getTop5Coummunity');
+    Route::get('top5Suggestion','SuggestionController@getTop5Suggestion');
+    Route::get('top5Repair','RepairController@getTop5Repair');
 });
 
 Route::group(['middleware' => 'guest:api'], function () {

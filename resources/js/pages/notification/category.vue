@@ -67,31 +67,42 @@
                 My Activity Thread
             </div>
             <div class="community-category-list p-3">
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>This Dock Turns Your iPhone Into a Bedside Lamp</p>
-                </div>
-                <Divider />
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>Who Wins in the Battle for Power on the Internet?</p>
-                </div>
-                <Divider />
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>Sony QX10: A Funky, Overpriced Lens Camera for Your Smartphone</p>
-                </div>
-                <Divider />
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>FedEx Simplifies Shipping for Small Businesses</p>
-                </div>
-                <Divider />
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>Loud and Brave: Saudi Women Set to Protest Driving Ban</p>
-                </div>
-                <Divider />
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <div v-for="notification in notificationData" :key="notification.id" >
+                    <div class=" ccl-item d-flex justify-content-between">
+                        <router-link :to="{path:`/notification/${notification.id}`}">
+                            <p>{{notification.title}}</p>
+                        </router-link>
+                    </div>
+                    <Divider />
                 </div>
             </div>
         </div>
 
     </div>
 </template>
+
+<script>
+import {mapGetters} from 'vuex'
+import {getTop5Notification} from '~/api/notification'
+export default {
+    data(){
+        return{
+            notificationData:[],
+        }
+    },
+    computed:{
+    ...mapGetters({
+      currentUser:'auth/user'
+    })
+    },
+    async mounted(){
+        console.log('++++notification+++',this.currentUser)
+        await getTop5Notification(this.currentUser.id).then(res=>{
+            console.log('----res',res)
+            this.notificationData = res.data
+        }).catch(err=>{
+            console.log(err)
+        })
+    },
+}
+</script>

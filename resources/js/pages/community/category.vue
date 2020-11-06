@@ -64,34 +64,42 @@
         </div>
         <div class="box-block">
             <div class="community-category-title p-3">
-                POPULAR SEARCHES
+                My Activity Thread
             </div>
             <div class="community-category-list p-3">
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>Pet Friendly Apartments</p>
-                    <Badge type="primary" :count="10"></Badge>
-                </div>
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>something</p>
-                    <Badge type="primary" :count="10"></Badge>
-                </div>
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>something</p>
-                    <Badge type="primary" :count="10"></Badge>
-                </div>
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>something</p>
-                    <Badge type="primary" :count="10"></Badge>
-                </div>
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>something</p>
-                    <Badge type="primary" :count="10"></Badge>
-                </div>
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>something</p>
-                    <Badge type="primary" :count="10"></Badge>
+                <div v-for="community in communityData" :key="community.id" >
+                    <div class=" ccl-item d-flex justify-content-between">
+                        <router-link :to="{path:`/notification/${community.id}`}">
+                            <p>{{community.title}}</p>
+                        </router-link>
+                    </div>
+                    <Divider />
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+import {getTop5Community} from '~/api/community'
+import {mapGetters} from 'vuex'
+export default {
+    data(){
+        return{
+            communityData:[]
+        }
+    },
+    computed:{
+        ...mapGetters({
+        currentUser:'auth/user'
+        })
+    },
+    async mounted(){
+        getTop5Community(this.currentUser.id).then(res=>{
+            this.communityData = res.data
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+}
+</script>

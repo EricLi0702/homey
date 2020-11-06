@@ -193,4 +193,9 @@ class CommunityController extends Controller
         }
     }
 
+    public function getTop5Coummunity(Request $request){
+        $userId = $request->id;
+        return Community::where('userId',$userId)->orderBy('created_at','desc')->take(5)->get();
+    }
+
 }
