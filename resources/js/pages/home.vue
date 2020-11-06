@@ -12,9 +12,6 @@
                     <div class="description col-md-12 mt-5">
                         <h4>{{$t('welcome').WelcomeVapartment}}</h4>
                     </div>
-                    <div class="btn col-md-12 mt-5">
-                        <Button shape="circle" size="large" type="primary" style="height: 58px; padding: 4px 50px;">{{$t('welcome').GetStart}}</Button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -34,61 +31,61 @@
                       </div>
                     </div>
                   </router-link>
-                  <div class="col-6 col-sm-6 col-md-6 col-lg-4 column">
-                    <div class="card-hero gr-1">
-                        <div class="txt">
-                            <h1>{{$t('community').cummunity}}</h1>
-                        </div>
-                        <a href="#">{{$t('welcome').detail}}</a>
-                        <div class="ico-card-hero">
-                        <i class="fas fa-users"></i>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col-6 col-sm-6 col-md-6 col-lg-4 column">
-                    <div class="card-hero gr-1">
-                        <div class="txt">
-                            <h1>{{$t('welcome').PublicFacility}}</h1>
-                        </div>
-                        <a href="#">{{$t('welcome').detail}}</a>
-                        <div class="ico-card-hero">
-                        <i class="fas fa-building"></i>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col-6 col-sm-6 col-md-6 col-lg-4 column">
-                    <div class="card-hero gr-1">
-                      <div class="txt">
-                        <h1>{{$t('welcome').advise}}</h1>
+                  <router-link :to="{ name: 'community' }" class="col-6 col-sm-6 col-md-6 col-lg-4 column" >
+                      <div class="card-hero gr-1">
+                          <div class="txt">
+                              <h1>{{$t('community').cummunity}}</h1>
+                          </div>
+                          <a href="#">{{$t('welcome').detail}}</a>
+                          <div class="ico-card-hero">
+                          <i class="fas fa-users"></i>
+                          </div>
                       </div>
-                      <a href="#">{{$t('welcome').detail}}</a>
-                      <div class="ico-card-hero">
-                        <i class="fab fa-tripadvisor"></i>
+                  </router-link>
+                  <router-link :to="{ name: 'facility' }" class="col-6 col-sm-6 col-md-6 col-lg-4 column" >
+                      <div class="card-hero gr-1">
+                          <div class="txt">
+                              <h1>{{$t('welcome').PublicFacility}}</h1>
+                          </div>
+                          <a href="#">{{$t('welcome').detail}}</a>
+                          <div class="ico-card-hero">
+                          <i class="fas fa-building"></i>
+                          </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-6 col-sm-6 col-md-6 col-lg-4 column">
-                    <div class="card-hero gr-1">
+                  </router-link>
+                  <router-link :to="{ name: 'suggestion' }" class="col-6 col-sm-6 col-md-6 col-lg-4 column" >
+                      <div class="card-hero gr-1">
                         <div class="txt">
-                            <h1>{{$t('repair').repairRequest}}</h1>
+                          <h1>{{$t('welcome').advise}}</h1>
                         </div>
                         <a href="#">{{$t('welcome').detail}}</a>
                         <div class="ico-card-hero">
-                        <i class="fas fa-tools"></i>
+                          <i class="fab fa-tripadvisor"></i>
                         </div>
-                    </div>
-                  </div>
-                  <div class="col-6 col-sm-6 col-md-6 col-lg-4 column">
-                    <div class="card-hero gr-1">
-                        <div class="txt">
-                            <h1>{{$t('welcome').advertisement}}</h1>
-                        </div>
-                        <a href="#">{{$t('welcome').detail}}</a>
-                        <div class="ico-card-hero">
-                        <i class="fas fa-ad"></i>
-                        </div>
-                    </div>
-                  </div>
+                      </div>
+                  </router-link>
+                  <router-link :to="{ name: 'repair' }" class="col-6 col-sm-6 col-md-6 col-lg-4 column" >
+                      <div class="card-hero gr-1">
+                          <div class="txt">
+                              <h1>{{$t('repair').repairRequest}}</h1>
+                          </div>
+                          <a href="#">{{$t('welcome').detail}}</a>
+                          <div class="ico-card-hero">
+                          <i class="fas fa-tools"></i>
+                          </div>
+                      </div>
+                  </router-link>
+                  <router-link :to="{ name: 'home' }" class="col-6 col-sm-6 col-md-6 col-lg-4 column" >
+                      <div class="card-hero gr-1">
+                          <div class="txt">
+                              <h1>{{$t('welcome').advertisement}}</h1>
+                          </div>
+                          <a href="#">{{$t('welcome').detail}}</a>
+                          <div class="ico-card-hero">
+                          <i class="fas fa-ad"></i>
+                          </div>
+                      </div>
+                  </router-link>
                 </div>
             </div>
         </div>
@@ -314,6 +311,9 @@ export default {
   mounted(){
     console.log(this.currentUser)
   },
+  methods:{
+    
+  }
 
 }
 </script>

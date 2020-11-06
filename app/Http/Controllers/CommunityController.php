@@ -207,10 +207,17 @@ class CommunityController extends Controller
         $weekData = Community::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
         $todayData = Community::whereDate('created_at', Carbon::today())->count();
         $monthData = Community::whereYear('created_at',Carbon::now()->year)->whereMonth('created_at',Carbon::now()->month)->count();
+        $userId = $request->id;
+        $aptId = User::select('aptId')->where('id',$userId)->get();
+        $id = $aptId[0]->aptId;
+        $registerUserCnt = User::where('aptId',$id)->count();
+        $currentUserCnt = User::where([['aptId','=',$id],['email_verified_at','<>',null]])->count();
         return response()->json([
             'today'=>$todayData,
             'week'=>$weekData,
-            'month'=>$monthData
+            'month'=>$monthData,
+            'registerCnt'=>$registerUserCnt,
+            'currentCnt'=>$currentUserCnt
         ]);
     }   
 }

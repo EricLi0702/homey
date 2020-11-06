@@ -40,8 +40,8 @@ function getTop5Notification(currentId){
     return axios.get('/api/top5Notification',{params: {id:currentId}})
 }
 
-function getNotificationCnt(){
-    return axios.get('/api/notificationCnt')
+function getNotificationCnt(userId){
+    return axios.get('/api/notificationCnt',{params:{id:userId}})
 }
 
 export{

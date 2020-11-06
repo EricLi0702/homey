@@ -163,6 +163,7 @@ export default {
                 // poster: "/static/images/author.jpg",
             },
             isDeleting:false,
+            baseUrl:window.base_url
         }
     },
 
@@ -189,7 +190,7 @@ export default {
         },
 
         playerReadied(video){
-            this.playerOptions.sources.src = "http://asystem.test/uploads/video/"+video.fileName;
+            this.playerOptions.sources[0].src = this.baseUrl+'/uploads/video/' + video.fileName;
         },
 
         showImage(){
@@ -198,10 +199,16 @@ export default {
         },
 
         getEachVideoSrc(video){
-            this.playerOptions.sources.src = "http://asystem.test/uploads/video/"+video.fileName;
+            this.playerOptions.sources[0].src = this.baseUrl+'/uploads/video/'+video.fileName;
             return this.playerOptions
         },
-
+        // onPlayerPlay($event,video){
+        //     console.log($event)
+        //     console.log('====')
+        //     console.log(video)
+        //     this.playerOptions.sources[0].src = "http://localhost:8000/uploads/video/"+video.fileName;
+        //     console.log(this.playerOptions)
+        // },
         getCurrentNotification(){
             getCurrentNotificationFromServer(this.notificationId)
             .then(res=>{

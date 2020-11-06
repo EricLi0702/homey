@@ -13,7 +13,7 @@
                         <h4>{{ $t('welcome').WelcomeVapartment }}</h4>
                     </div>
                     <div class="btn col-md-12 mt-5">
-                        <Button shape="circle" size="large" type="primary" style="height: 58px; padding: 4px 50px;">{{ $t('welcome').GetStart }}</Button>
+                        <Button shape="circle" size="large" type="primary" style="height: 58px; padding: 4px 50px;" @click="getStart">{{ $t('welcome').GetStart }}</Button>
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@
                             <div class="join-content col-md-12">
                                 <p>{{$t('welcome').CallOrEmail}}</p>
                             </div>
-                            <div class="join-button col-md-12">
+                            <div class="join-button col-md-12 mt-5">
                                 <Button shape="circle" size="large" type="primary" style="height: 58px; padding: 4px 50px;">{{$t('welcome').JoinCommunity}}</Button>
                             </div>
                         </div>
@@ -234,6 +234,11 @@ export default {
   }),
   mounted(){
     
+  },
+  methods:{
+      getStart(){
+          this.$router.push({path:'/login'})
+      }
   }
 }
 </script>

@@ -6,24 +6,24 @@
             </div>
             <div class="community-category-list p-3">
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>1. Notice to Pay or Quit</p>
-                    <Badge type="normal" :count="17"></Badge>
+                    <p>1. The count of notification of this month</p>
+                    <Badge type="normal" :count="monthData"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>2. Notice to Cure or Quit</p>
-                    <Badge type="normal" :count="5"></Badge>
+                    <p>2. The count of notification of this week</p>
+                    <Badge type="normal" :count="weekData"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>3. Unconditional Quit Notice</p>
-                    <Badge type="normal" :count="23"></Badge>
+                    <p>3. The count of notification of today</p>
+                    <Badge type="normal" :count="todayData"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>4. Notice of Transfer of Ownership/Management</p>
-                    <Badge type="normal" :count="56"></Badge>
+                    <p>4. The count of registerd user</p>
+                    <Badge type="normal" :count="registerCnt"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>5. Notice of Non-Renewal</p>
-                    <Badge type="normal" :count="19"></Badge>
+                    <p>5. The count of current user</p>
+                    <Badge type="normal" :count="currentCnt"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
                     <p>6. Notice of Rent Increase</p>
@@ -43,6 +43,10 @@
                 <div class=" ccl-item">
                     <p>CurrentWeek notification percent of this month</p>
                     <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
+                </div>
+                <div class=" ccl-item">
+                    <p>CurrentUser :: RegisterUser</p>
+                    <Progress class="w-100" :percent="userPro" :stroke-width="20" stroke-color="#19be6b" status="active" text-inside />
                 </div>
             </div>
         </div>
@@ -86,12 +90,20 @@ export default {
             fourWeekAgo:0,
             todayPro:0,
             weekPro:0,
+            userPro:0,
+            registerCnt:0,
+            currentCnt:0,
         }
     },
     computed:{
     ...mapGetters({
       currentUser:'auth/user'
     })
+    },
+    watch:{
+        $route(to,from){
+            this.$router.go()
+        }
     },
     async mounted(){
         console.log('++++notification+++',this.currentUser)
@@ -101,12 +113,14 @@ export default {
         }).catch(err=>{
             console.log(err)
         })
-        await getNotificationCnt().then(res=>{
+        await getNotificationCnt(this.currentUser.id).then(res=>{
             console.log(res)
             this.todayData = res.data.today;
             this.weekData = res.data.week;
             this.monthData = res.data.month;
-            console.l
+            this.currentCnt = res.data.currentCnt
+            this.registerCnt = res.data.registerCnt
+            this.userPro = parseFloat((this.currentCnt/this.registerCnt*100).toFixed(2))
             this.todayPro = parseFloat((this.todayData/this.monthData*100).toFixed(2))
             this.weekPro = parseFloat((this.weekData/this.monthData*100).toFixed(2))
             // this.firstWeek = res.data.firstWeek;
