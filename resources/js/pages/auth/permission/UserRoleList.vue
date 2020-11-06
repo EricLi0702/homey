@@ -3,10 +3,10 @@
         <Button class="mb-4" type="info" size="small" @click="addModal = true">Add</Button>
         <table class="table">
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Crated at</th>
-                <th>Action</th>
+                <th>{{ $t('apartment').id }}</th>
+                <th>{{ $t('common').name }}</th>
+                <th>{{ $t('apartment').createdAt }}</th>
+                <th>{{ $t('apartment').action }}</th>
             </tr>
             <template v-if="roleLists && roleLists.length > 0">
                 <tr v-for="(role,i) in roleLists" :key="i">
@@ -15,9 +15,9 @@
                     <td v-else-if="role.isEditing == true"><Input v-model="role.roleName" style="width:220px"/></td>
                     <td>{{TimeView(role.created_at)}}</td>
                     <td class="d-flex">
-                        <Button v-if="role.isEditing == undefined || role.isEditing == false" type="info" size="small" @click="editRole(role,i)">Edit</Button>
-                        <Button v-else-if="role.isEditing == true" type="info" size="small" @click="updateRole(role,i)" :disabled="isEditing" :loading="isEditing">Update</Button>
-                        <Button type="error" size="small" @click="delRole(role,i)">Delete</Button>
+                        <Button v-if="role.isEditing == undefined || role.isEditing == false" type="info" size="small" @click="editRole(role,i)">{{ $t('apartment').edit }}</Button>
+                        <Button v-else-if="role.isEditing == true" type="info" size="small" @click="updateRole(role,i)" :disabled="isEditing" :loading="isEditing">{{ $t('auth').update }}</Button>
+                        <Button type="error" size="small" @click="delRole(role,i)">{{ $t('apartment').delete }}</Button>
                     </td>
                 </tr>
             </template>
@@ -28,7 +28,7 @@
         >
             <Input v-model="addData.roleName" class="mb-2" placeholder="Enter something..."/>
             <div slot="footer">
-                <Button type="default" @click="addModal=false">Close</Button>
+                <Button type="default" @click="addModal=false">{{ $t('auth').close }}</Button>
                 <Button type="primary" @click="addRole" :disabled="isAdding" :loading="isAdding">{{isAdding ? 'Adding': 'Add Role'}}</Button>
             </div>
         </Modal>

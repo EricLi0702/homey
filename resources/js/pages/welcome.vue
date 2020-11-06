@@ -7,7 +7,7 @@
             <div class="h-100 d-flex text-center align-items-center justify-content-center ">
                 <div class="title row m-0 p-0">
                     <div class="subtitle col-md-12 mb-5">
-                        <h1>V Apartment</h1>
+                        <h1>{{ $t('welcome').Vapartment }}</h1>
                     </div>
                     <div class="description col-md-12 mt-5">
                         <h4>Welcome to our V-apartment service system</h4>

@@ -12,7 +12,7 @@
                     <div v-if="noCommunity" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
                         <div class="no-fac text-center">
                             <Icon size="150" type="ios-search" />
-                            <h5>oops! there is no community!</h5>
+                            <h5>{{ $t('community').oopsNoCommunity }}</h5>
                         </div>
                     </div>
                     <div v-else-if="communityList.length" class="posted-item position-relative" v-for="(community,i) in communityList" :key="i" >
@@ -63,7 +63,7 @@
                         @infinite="infiniteHandlerCommunity"
                         spinner="circles"
                     >
-                        <div slot="no-more">no more community</div>
+                        <div slot="no-more">{{ $t('community').noMoreCommunity }}</div>
                     </InfiniteLoading>
                 </div>
             </div>

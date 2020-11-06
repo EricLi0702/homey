@@ -60,7 +60,7 @@
                         spinner="circles"
                     >
                     
-                        <div slot="no-more">no more notification</div>
+                        <div slot="no-more">no more notification{{$t('facility').CalendarView}}</div>
                     </InfiniteLoading>
                 </div>
             </div>

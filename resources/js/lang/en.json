@@ -1,4 +1,45 @@
 {
+    "welcome":{
+        "Vapartment": "V Apartment"
+    },
+    "apartment":{
+        "representativeName":"Representative name",
+        "buildingNumber":"Building Number",
+        "display":"Display",
+        "dong":"Dong",
+        "AptName":"Apartment Name",
+        "address":"Address",
+        "phoneNumber":"Phone Number",
+        "eMail":"Email",
+        "edit":"Edit",
+        "id":"ID",
+        "createdAt":"Created at",
+        "action":"Action",
+        "delete":"Delete",
+        "registerSuperManager":"Register Super Manager",
+        "registerBuilding":"Register Building",
+        "representName":"Represent Name",
+        "superManger":"Super Manger",
+        "superMangerId":"Super Manger Id",
+        "superMangerPWD":"Super Manger PWD"
+    },
+    "auth":{
+        "resetPassword":"Reset Password",
+        "update":"Update",
+        "close":"Close",
+        "loginWithSocial":"Login with social",
+        "facebook":"Facebook",
+        "google":"Google",
+        "DontHaveAnAccount":"Don't have an account?",
+        "createOne":"Create one",
+        "verificationCode":"verification code",
+        "verify":"Verify",
+        "IagreeHomey":"I agree to the Homey",
+        "TermsofService":"Terms of Service",
+        "PrivacyPolicy":"Privacy Policy",
+        "Youhaveaccount":"You have already account?",
+        "loginHere":"login here"
+    },
     "common":{
         "name":"name",
         "email":"email",
@@ -10,7 +51,8 @@
         "apartment":"apartment",
         "superManager":"super Manager",
         "userRole":"UserRole",
-        "user":"user"
+        "user":"user",
+        "request":"Request"
 
     },
     "login":{
@@ -62,7 +104,43 @@
         "content":"Description",
         "createPost":"Please write your comment",
         "noPost":"There is no post",
-        "saveAs":"Save as"
+        "saveAs":"Save as",
+        "CreateNewTopic":"Create New Topic",
+        "ChoosePeriod":"Choose Period",
+        "ChooseCalendar":"Choose period with calendar",
+        "Forever":"Forever",
+        "OneWeek":"One week",
+        "OneMonth":"One month",
+        "CreateTopic":"Create Topic",
+        "New":"New",
+        "View":"View",
+        "oopsNoCommunity":"oops! there is no community!",
+        "noMoreCommunity":"no more community",
+        "UpdateTopic":"Update Topic",
+        "Leave":"Leave"
+    },
+    "facility":{
+        "NewFacility":"New Facility",
+        "enterName":"please enter name",
+        "enterNB":"please enter N.B",
+        "enterEquipments":"please enter equipments",
+        "MaxNumberPeople":"Max number of people can use this facility at once.",
+        "enterOutline":"please enter outline",
+        "EnterSomething":"Enter something...",
+        "Facilities":"Facilities",
+        "alreadyReservated":"You have already reservated",
+        "possibleToUse":"possible to use",
+        "impossibleToUse":"impossible to use",
+        "YouAlready":"You have already reservated on this facility.",
+        "Abort":"Abort",
+        "Reservate":"Reservate",
+        "enterTitle":"please enter title",
+        "MaximumEquipment":"Maximum number of users to use this equipment",
+        "checkYourDate":"Please check your date",
+        "enterDescription":"please enter description",
+        "oopsNoFacility":"oops! there is no facility",
+        "ListView":"List View",
+        "CalendarView":"Calendar View"
     },
     "suggest":{
         "suggest":"Suggestion",
@@ -82,6 +160,7 @@
         "back":"Back",
         "createSuggestContent":"Please write your comment",
         "noSuggest":"There is no any comment"
+        
     },
     "repair":{
         "repair":"Repair",
