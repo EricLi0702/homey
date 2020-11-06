@@ -14,6 +14,7 @@
 <script>
 //import Api
 import {} from '~/api/suggestion'
+import {delUploadFile} from '~/api/upload'
 
 export default {
     middleware: 'auth',
