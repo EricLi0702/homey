@@ -1,55 +1,55 @@
 <template>
     <div class="m-2 py-5 gray-input">
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">AptName</label>
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ $t('apartment').AptName }}</label>
             <div class="col-sm-10">
                 {{aptData.aptName}}
             </div>
         </div>        
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Address</label>
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ $t('apartment').address }}</label>
             <div class="col-sm-10">
                 {{aptData.address}}
             </div>
         </div>        
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Represent Name</label>
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ $t('apartment').representName }}</label>
             <div class="col-sm-10">
                 {{aptData.repreName}}
             </div>
         </div>        
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">SuperManger</label>
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ $t('apartment').superManger }}</label>
             <div class="col-sm-10">
                 <input type="text" id="aptName" v-model="superManager.mngName" class="form-control" placeholder="">
             </div>
         </div>
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Phone Number</label>
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ $t('apartment').phoneNumber }}</label>
             <div class="col-sm-10">
                 <input type="text" id="aptName" v-model="superManager.mngPhoneNumber" class="form-control" placeholder="">
             </div>
         </div>
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ $t('apartment').eMail }}</label>
             <div class="col-sm-10">
                 <input type="email" id="aptName" v-model="superManager.mngEmail" class="form-control" placeholder="">
             </div>
         </div>
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">SuperManger Id</label>
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ $t('apartment').superMangerId }}</label>
             <div class="col-sm-10">
                 <input type="text" id="aptName" v-model="superManager.mngId" class="form-control" placeholder="">
             </div>
         </div>
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">SuperMangerPWD</label>
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ $t('apartment').superMangerPWD }}</label>
             <div class="col-sm-10">
                 <input type="text" id="aptName" v-model="superManager.mngPassword" class="form-control" placeholder="">
             </div>
         </div>
         <div class="form-group row">
-            <Button type="success" @click="addSuperMng" :loading="isAdding" :disabled="isAdding">Register</Button>
+            <Button type="success" @click="addSuperMng" :loading="isAdding" :disabled="isAdding">{{ $t('register').register }}</Button>
         </div>
     </div>
 </template>

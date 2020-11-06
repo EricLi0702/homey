@@ -42,17 +42,17 @@
             </div>
 
             <div class="m-2 text-center">
-                <p>Login with social</p>
+                <p>{{ $t('auth').loginWithSocial }}</p>
             </div>
             <div class="m-2 d-flex justify-content-between">
-                <Button class="w-49 mr-auto facebook-login-btn" icon="logo-facebook">Facebook</Button>
-                <Button class="w-49 ml-auto google-login-btn" icon="logo-google">Google</Button>
+                <Button class="w-49 mr-auto facebook-login-btn" icon="logo-facebook">{{ $t('auth').facebook }}v</Button>
+                <Button class="w-49 ml-auto google-login-btn" icon="logo-google">{{ $t('auth').google }}</Button>
             </div>
 
             <div class="m-2 text-center py-3">
-                <p>Don't have an account?
+                <p>{{ $t('auth').DontHaveAnAccount }}
                   <router-link :to="{ name: 'register' }">
-                    create one
+                    {{ $t('auth').createOne }}
                   </router-link>
                 </p>
             </div>

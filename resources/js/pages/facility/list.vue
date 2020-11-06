@@ -10,16 +10,16 @@
                 <div class="col-12 col-md-4 m-0 p-0 pr-md-4">
                     <div class="box-block">
                         <div class="facility-category-title p-3">
-                            Facilities
+                            {{$t('facility').Facilities}}
                         </div>
                         <div v-if="noFacility" class="facility-category-list p-3">
                         </div>
                         <div v-else class="facility-category-list p-3">
                             <div v-for="(facility, i) in facilityList" :key="i" class=" ccl-item d-flex justify-content-between">
                                 <p @click="selectFacility(facility)">{{facility.name}}</p>
-                                <Tag v-if="selectedFacilityAlreadyReservated(facility)" color="success">You have already reservated</Tag>
-                                <Tag v-else-if="facility.isUsing == 0" color="success">possible to use</Tag>
-                                <Tag v-else color="warning">impossible to use</Tag>
+                                <Tag v-if="selectedFacilityAlreadyReservated(facility)" color="success">{{$t('facility').alreadyReservated}}</Tag>
+                                <Tag v-else-if="facility.isUsing == 0" color="success">{{$t('facility').possibleToUse}}</Tag>
+                                <Tag v-else color="warning">{{$t('facility').impossibleToUse}}</Tag>
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                     <div v-if="noFacility" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
                         <div class="no-fac text-center">
                             <Icon size="150" type="ios-search" />
-                            <h5>oops! there is no facility!</h5>
+                            <h5>oops! there is no facility!{{$t('community').View}}</h5>
                         </div>
                     </div>
                     <div v-else class="posted-item position-relative row m-0 p-2">
@@ -166,32 +166,32 @@
                             </div>
                         </div>
                         <div class="px-2 col-12 pb-3">
-                            <p v-if="selectedFacilityAlreadyReservated(selectedFacility)" class="float-right">You have already reservated on this facility.</p>
+                            <p v-if="selectedFacilityAlreadyReservated(selectedFacility)" class="float-right">{{$t('facility').YouAlready}}</p>
                             <p v-else>
-                                <Button v-if="isRegisterToFacility" @click="toggleRegisterForm" class="float-right" type="warning" icon="md-calendar">Abort</Button>
-                                <Button v-else @click="toggleRegisterForm" class="float-right" type="success" icon="md-calendar">Reservate</Button>
+                                <Button v-if="isRegisterToFacility" @click="toggleRegisterForm" class="float-right" type="warning" icon="md-calendar">{{$t('facility').Abort}}</Button>
+                                <Button v-else @click="toggleRegisterForm" class="float-right" type="success" icon="md-calendar">{{$t('facility').Reservate}}</Button>
                             </p>
                         </div>
                     </div>
                     <div v-if="isRegisterToFacility" class="bg-white p-2 mt-3 animate__animated animate__fadeIn row m-0"> 
                         <Form :model="createReservationData" class="w-100">
                             <div class="col-12 mt-4 mb-3 gray-input">
-                                <Input v-model="createReservationData.title" placeholder="please enter title" />
+                                <Input v-model="createReservationData.title" :placeholder="$t('facility').enterTitle" />
                             </div>
                             <div class="col-12 mb-3 gray-input fac-max d-flex align-items-center">
                                 <Icon class="mr-2" size="25" type="ios-people" />
                                 <InputNumber :max="selectedFacility.max" :min="1" v-model="createReservationData.max"></InputNumber>
-                                <p class="text-secondary ml-4">(Maximum number of users to use this equipment)</p>
+                                <p class="text-secondary ml-4">({{$t('facility').MaximumEquipment}})</p>
                             </div>
                             <div class="col-12 mb-3">
-                                <DatePicker class="w-100" :options="disableBeforeDate" @on-change="notiDateChange" type="datetimerange" placeholder="Please check your date"></DatePicker>
+                                <DatePicker class="w-100" :options="disableBeforeDate" @on-change="notiDateChange" type="datetimerange" :placeholder="$t('facility').checkYourDate"></DatePicker>
                             </div>
                             <div class="col-12 mb-3">
-                                <wysiwyg v-model="createReservationData.purpose" placeholder="please enter description" />
+                                <wysiwyg v-model="createReservationData.purpose" :placeholder="$t('facility').enterDescription" />
                             </div>
                         </Form>
                         <div class="col-12 text-right mb-3">
-                            <Button @click="reservateNew" class="float-right" type="success" icon="md-calendar" :disabled="isReservating" :loading="isReservating" >Rservate</Button>
+                            <Button @click="reservateNew" class="float-right" type="success" icon="md-calendar" :disabled="isReservating" :loading="isReservating" >{{$t('facility').Reservate}}</Button>
                         </div>
                     </div>
                 </div>

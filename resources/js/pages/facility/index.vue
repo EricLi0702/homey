@@ -6,19 +6,19 @@
         <div class="suggestion-sub-menu container-fluid bg-white box-block">
             <div class="container d-flex justify-content-between p-0 py-3 ">
                 <Input class="w-40"
-                 search placeholder="Enter something..." />
+                 search :placeholder="$t('facility').EnterSomething" />
                 <div class="suggestion-sub-menu-items">
                     <router-link :to="{ path: '/facility/reservation' }" class="">
                         <!-- {{ $t('register') }} -->
-                        <Button type="warning" icon="md-checkbox-outline">Reservations</Button>
+                        <Button type="warning" icon="md-checkbox-outline">{{$t('publicFacility').reservation}}</Button>
                     </router-link>
                     <router-link v-if="currentUser.role.roleName == 'AptAdmin'" :to="{ path: '/facility/create' }" class="">
                         <!-- {{ $t('register') }} -->
-                        <Button type="success" icon="md-add">New</Button>
+                        <Button type="success" icon="md-add">{{$t('community').New}}</Button>
                     </router-link>
                     <router-link :to="{ path: '/facility/index' }" class="">
                         <!-- {{ $t('register') }} -->
-                        <Button type="primary" icon="md-list">View</Button>
+                        <Button type="primary" icon="md-list">{{$t('community').View}}</Button>
                     </router-link>
                 </div>
             </div>

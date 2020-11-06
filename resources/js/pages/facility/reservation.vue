@@ -10,16 +10,16 @@
                 <div class="col-12 col-md-4 m-0 p-0 pr-md-4">
                     <div class="box-block">
                         <div class="facility-category-title p-3">
-                            Facilities
+                            {{$t('facility').Facilities}}
                         </div>
                         <div v-if="noFacility" class="facility-category-list p-3">
                         </div>
                         <div v-else class="facility-category-list p-3">
                             <div v-for="(facility, m) in facilityList" :key="m" class=" ccl-item d-flex justify-content-between">
                                 <p>{{facility.name}}</p>
-                                <Tag v-if="selectedFacilityAlreadyReservated(facility)" color="success">You have already reservated</Tag>
-                                <Tag v-else-if="facility.isUsing == 0" color="success">possible to use</Tag>
-                                <Tag v-else color="warning">impossible to use</Tag>
+                                <Tag v-if="selectedFacilityAlreadyReservated(facility)" color="success">{{$t('facility').alreadyReservated}}</Tag>
+                                <Tag v-else-if="facility.isUsing == 0" color="success">{{$t('facility').possibleToUse}}</Tag>
+                                <Tag v-else color="warning">{{$t('facility').impossibleToUse}}</Tag>
                             </div>
                         </div>
                     </div>
@@ -89,13 +89,13 @@
                     <div v-if="noFacility" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
                         <div class="no-fac text-center">
                             <Icon size="150" type="ios-search" />
-                            <h5>oops! there is no facility!</h5>
+                            <h5>{{$t('facility').oopsNoFacility}}</h5>
                         </div>
                     </div>
                     <div v-else class="position-relative row m-0 p-0">
                         <div class="control-view-type col-12 mb-3 p-0">
-                            <Button @click="toggleViewType" v-if="calendarView" type="warning" icon="ios-calendar-outline">List View</Button>
-                            <Button @click="toggleViewType" v-else type="warning" icon="md-paper">Calendar View</Button>
+                            <Button @click="toggleViewType" v-if="calendarView" type="warning" icon="ios-calendar-outline">{{$t('facility').ListView}}</Button>
+                            <Button @click="toggleViewType" v-else type="warning" icon="md-paper">{{$t('facility').CalendarView}}</Button>
                         </div>
                         <div v-if="calendarView" v-for="(facility, j) in facilityList" :key="j" class="col-12 m-0 row calendar-view-container posted-item">
                             

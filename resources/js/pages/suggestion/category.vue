@@ -67,31 +67,40 @@
                 My Activity Thread
             </div>
             <div class="community-category-list p-3">
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>This Dock Turns Your iPhone Into a Bedside Lamp</p>
-                </div>
-                <Divider />
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>Who Wins in the Battle for Power on the Internet?</p>
-                </div>
-                <Divider />
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>Sony QX10: A Funky, Overpriced Lens Camera for Your Smartphone</p>
-                </div>
-                <Divider />
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>FedEx Simplifies Shipping for Small Businesses</p>
-                </div>
-                <Divider />
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>Loud and Brave: Saudi Women Set to Protest Driving Ban</p>
-                </div>
-                <Divider />
-                <div class=" ccl-item d-flex justify-content-between">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <div v-for="suggestion in suggestionData" :key="suggestion.id" >
+                    <div class=" ccl-item d-flex justify-content-between">
+                        <router-link :to="{path:`/notification/${suggestion.id}`}">
+                            <p>{{suggestion.title}}</p>
+                        </router-link>
+                    </div>
+                    <Divider />
                 </div>
             </div>
         </div>
 
     </div>
 </template>
+
+<script>
+import {getTop5Suggestion} from '~/api/suggestion'
+import {mapGetters} from 'vuex'
+export default {
+    data(){
+        return{
+            suggestionData:[]
+        }
+    },
+    computed:{
+        ...mapGetters({
+        currentUser:'auth/user'
+        })
+    },
+    async mounted(){
+        getTop5Suggestion(this.currentUser.id).then(res=>{
+            this.suggestionData = res.data
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+}
+</script>

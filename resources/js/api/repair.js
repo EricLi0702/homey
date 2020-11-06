@@ -31,6 +31,11 @@ function finishRequest(payload){
     return axios.post('/api/repair/finish',payload)
 }
 
+function getTop5Repair(userId){
+    return axios.get('/api/top5Repair',{params:{id:userId}})
+}
+
+
 export{
     getRepairList,
     registerRepair,
@@ -39,4 +44,5 @@ export{
     deleteRequest,
     responseToRepairRequest,
     finishRequest,
+    getTop5Repair
 }
