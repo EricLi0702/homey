@@ -491,6 +491,11 @@ body{
     top: 62px;
     z-index: 111;
 }
+.community-sub-menu{
+    position: sticky;
+    top: 62px;
+    z-index: 111;
+}
 
 .emoji-area-popup{
     position: absolute;
