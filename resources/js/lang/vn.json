@@ -38,7 +38,9 @@
         "TermsofService":"Điều khoản Dịch vụ",
         "PrivacyPolicy":"Chính sách Bảo mật",
         "Youhaveaccount":"Bạn đã có tài khoản?",
-        "loginHere":"đăng nhập tại đây"
+        "loginHere":"đăng nhập tại đây",
+        "enterPass":"Nhập mật khẩu",
+        "enterEmail":"Nhập email"
     },
     "common":{
         "name":"tên",
@@ -46,7 +48,7 @@
         "password":"mật khẩu",
         "phone":"phone",
         "confirmPassword":"Xác nhận mật khẩu",
-        "rememberMe":"remember me",
+        "rememberMe":"nhớ tôi",
         "forgotPassword":"forgot password",
         "apartment":"apartment",
         "superManager":"super Manager",
