@@ -10,11 +10,11 @@
                 <div class="community-sub-menu-items">
                     <router-link :to="{ name: 'community.create' }" class="">
                         <!-- {{ $t('register') }} -->
-                        <Button type="success" icon="md-add">New</Button>
+                        <Button type="success" icon="md-add">{{ $t('community').New }}</Button>
                     </router-link>
                     <router-link :to="{ name: 'community.list' }" class="">
                         <!-- {{ $t('register') }} -->
-                        <Button type="primary" icon="md-list">View</Button>
+                        <Button type="primary" icon="md-list">{{ $t('community').View }}</Button>
                     </router-link>
                 </div>
             </div>

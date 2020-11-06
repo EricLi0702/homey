@@ -104,7 +104,43 @@
         "content":"Description",
         "createPost":"Please write your comment",
         "noPost":"There is no post",
-        "saveAs":"Save as"
+        "saveAs":"Save as",
+        "CreateNewTopic":"Create New Topic",
+        "ChoosePeriod":"Choose Period",
+        "ChooseCalendar":"Choose period with calendar",
+        "Forever":"Forever",
+        "OneWeek":"One week",
+        "OneMonth":"One month",
+        "CreateTopic":"Create Topic",
+        "New":"New",
+        "View":"View",
+        "oopsNoCommunity":"oops! there is no community!",
+        "noMoreCommunity":"no more community",
+        "UpdateTopic":"Update Topic",
+        "Leave":"Leave"
+    },
+    "facility":{
+        "NewFacility":"New Facility",
+        "enterName":"please enter name",
+        "enterNB":"please enter N.B",
+        "enterEquipments":"please enter equipments",
+        "MaxNumberPeople":"Max number of people can use this facility at once.",
+        "enterOutline":"please enter outline",
+        "EnterSomething":"Enter something...",
+        "Facilities":"Facilities",
+        "alreadyReservated":"You have already reservated",
+        "possibleToUse":"possible to use",
+        "impossibleToUse":"impossible to use",
+        "YouAlready":"You have already reservated on this facility.",
+        "Abort":"Abort",
+        "Reservate":"Reservate",
+        "enterTitle":"please enter title",
+        "MaximumEquipment":"Maximum number of users to use this equipment",
+        "checkYourDate":"Please check your date",
+        "enterDescription":"please enter description",
+        "oopsNoFacility":"oops! there is no facility",
+        "ListView":"List View",
+        "CalendarView":"Calendar View"
     },
     "suggest":{
         "suggest":"Suggestion",
@@ -124,6 +160,7 @@
         "back":"Back",
         "createSuggestContent":"Please write your comment",
         "noSuggest":"There is no any comment"
+        
     },
     "repair":{
         "repair":"Repair",

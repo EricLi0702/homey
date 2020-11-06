@@ -84,7 +84,7 @@
                             <div class="emoji-area-popup">
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
-                            <Button :disabled="isLeaving" :loading="isLeaving" @click="leaveComment">Leave</Button>
+                            <Button :disabled="isLeaving" :loading="isLeaving" @click="leaveComment">{{ $t('community').Leave }}</Button>
                         </div>
                     </div>
                 </div>
@@ -138,7 +138,7 @@
                                 <div class="emoji-area-popup">
                                     <Picker v-if="emoStatusOfReply" set="emojione" @select="onInputOfReply" title="Pick your emoji..." />
                                 </div>
-                                <Button :disabled="isReplyToCommentBtn" :loading="isReplyToCommentBtn" @click="replyToComment(comment)">Reply</Button>
+                                <Button :disabled="isReplyToCommentBtn" :loading="isReplyToCommentBtn" @click="replyToComment(comment)">{{ $t('community').reply }}</Button>
                             </div>
                         </div>
                     </div>

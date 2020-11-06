@@ -2,7 +2,7 @@
     <div class="container-fluid bg-light-gray m-0 p-0 pb-5">
         <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
             <div class="p-3 pb-5 pt-2">
-                <h2 class="p-3">Update Topic</h2>
+                <h2 class="p-3">{{ $t('community').UpdateTopic }}</h2>
                 <Form :model="updateCommunityData">
                     <div class="row m-0 p-0">
                         <div class="col-12 mb-3 gray-input fac-name">
@@ -11,14 +11,14 @@
                         <div class="col-12 mb-3">
                             <p class="">Period</p>
                             <RadioGroup @on-change="setPeriodToBlank" v-model="periodType" class="">
-                                <Radio label="withPeriod">Choose Period</Radio>
-                                <Radio label="withCalendar">Choose period with calendar</Radio>
+                                <Radio label="withPeriod">{{ $t('community').ChoosePeriod }}</Radio>
+                                <Radio label="withCalendar">{{ $t('community').ChooseCalendar }}</Radio>
                             </RadioGroup>   
                             <DatePicker v-if="periodType == 'withCalendar'" class="w-50 mx-auto" :options="disableBeforeDate" @on-change="notiDateChange" style="display: block" type="datetimerange" placeholder="Please check your date"></DatePicker>
                             <RadioGroup v-else v-model="initPeriod" class=" w-50 mx-auto d-flex justify-content-between">
-                                <Radio label="forever">Forever</Radio>
-                                <Radio label="week">One week</Radio>
-                                <Radio label="month">One month</Radio>
+                                <Radio label="forever">{{ $t('community').Forever }}</Radio>
+                                <Radio label="week">{{ $t('community').OneWeek }}</Radio>
+                                <Radio label="month">{{ $t('community').OneMonth }}</Radio>
                             </RadioGroup> 
                         </div>
                         <div class="col-12 mb-3">
