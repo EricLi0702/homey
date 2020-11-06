@@ -128,14 +128,21 @@ class RepairController extends Controller
         return Repair::where('userId',$userId)->orderBy('created_at','desc')->take(5)->get();
     }
 
-    public function getRepairCnt(Request $requset){
+    public function getRepairCnt(Request $request){
         $weekData = Repair::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
         $todayData = Repair::whereDate('created_at', Carbon::today())->count();
         $monthData = Repair::whereYear('created_at',Carbon::now()->year)->whereMonth('created_at',Carbon::now()->month)->count();
+        $userId = $request->id;
+        $aptId = User::select('aptId')->where('id',$userId)->get();
+        $id = $aptId[0]->aptId;
+        $registerUserCnt = User::where('aptId',$id)->count();
+        $currentUserCnt = User::where([['aptId','=',$id],['email_verified_at','<>',null]])->count();
         return response()->json([
             'today'=>$todayData,
             'week'=>$weekData,
-            'month'=>$monthData
+            'month'=>$monthData,
+            'registerCnt'=>$registerUserCnt,
+            'currentCnt'=>$currentUserCnt
         ]);
     }
 }

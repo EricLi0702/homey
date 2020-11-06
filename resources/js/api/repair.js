@@ -35,8 +35,8 @@ function getTop5Repair(userId){
     return axios.get('/api/top5Repair',{params:{id:userId}})
 }
 
-function getRepairCnt(){
-    return axios.get('/api/repairCnt')
+function getRepairCnt(userId){
+    return axios.get('/api/repairCnt',{params:{id:userId}})
 }
 
 export{

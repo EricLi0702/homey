@@ -181,6 +181,12 @@ export default {
     this.listenNewSuggestion();
     this.listenNewCommunity();
   },
+  // watch:{
+  //   $route(to,from){
+  //         this.$router.go()
+  //     }
+  // },
+
   methods: {
     async logout () {
       // Log out the user.

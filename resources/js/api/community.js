@@ -50,8 +50,8 @@ function getTop5Community(userId){
     return axios.get('/api/top5Community',{params:{id:userId}})
 }
 
-function getCommunityCnt(){
-    return axios.get('/api/communityCnt');
+function getCommunityCnt(userId){
+    return axios.get('/api/communityCnt',{params:{id:userId}});
 }
 
 export{

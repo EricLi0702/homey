@@ -6,27 +6,27 @@
             </div>
             <div class="community-category-list p-3">
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>Request repair</p>
-                    <Badge type="normal" :count="17"></Badge>
+                    <p>1. The count of repair of this month</p>
+                    <Badge type="normal" :count="monthData"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>Fix Problem</p>
-                    <Badge type="normal" :count="5"></Badge>
+                    <p>2. The count of repair of this week</p>
+                    <Badge type="normal" :count="weekData"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>Covid</p>
-                    <Badge type="normal" :count="23"></Badge>
+                    <p>3. The count of repair of today</p>
+                    <Badge type="normal" :count="todayData"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>Health</p>
-                    <Badge type="normal" :count="56"></Badge>
+                    <p>4. The count of registerd user</p>
+                    <Badge type="normal" :count="registerCnt"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>Children</p>
-                    <Badge type="normal" :count="19"></Badge>
+                    <p>5. The count of current user</p>
+                    <Badge type="normal" :count="currentCnt"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>Food</p>
+                    <p>6. Notice of Rent Increase</p>
                     <Badge type="normal" :count="38"></Badge>
                 </div>
             </div>
@@ -75,6 +75,10 @@
                     <p>CurrentWeek notification percent of this month</p>
                     <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
                 </div>
+                <div class=" ccl-item">
+                    <p>CurrentUser :: RegisterUser</p>
+                    <Progress class="w-100" :percent="userPro" :stroke-width="20" status="active" text-inside />
+                </div>
             </div>
         </div>
         <div class="box-block">
@@ -108,6 +112,9 @@ export default {
             weekData:0,
             todayPro:0,
             weekPro:0,
+            userPro:0,
+            registerCnt:0,
+            currentCnt:0,
         }
     },
     computed:{
@@ -115,6 +122,12 @@ export default {
       currentUser:'auth/user'
     })
     },
+    watch:{
+        $route(to,from){
+            this.$router.go()
+        }
+    },
+
     async mounted(){
         // console.log('++++notification+++',this.currentUser)
         await getTop5Repair(this.currentUser.id).then(res=>{
@@ -123,10 +136,13 @@ export default {
         }).catch(err=>{
             console.log(err)
         })
-        getRepairCnt().then(res=>{
+        getRepairCnt(this.currentUser.id).then(res=>{
             this.todayData = res.data.today
             this.weekData = res.data.week
             this.monthData = res.data.month
+            this.currentCnt = res.data.currentCnt
+            this.registerCnt = res.data.registerCnt
+            this.userPro = parseFloat((this.currentCnt/this.registerCnt*100).toFixed(2))
             this.todayPro = parseFloat((this.todayData/this.monthData*100).toFixed(2))
             this.weekPro = parseFloat((this.weekData/this.monthData*100).toFixed(2))
         })

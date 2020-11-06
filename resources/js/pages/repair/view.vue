@@ -208,6 +208,7 @@ export default {
             //infinit loading
             pageOfComments: 1,
             lastPageOfComments: 0,
+            baseUrl:window.base_url
         }
     },
     computed:{ 
@@ -288,7 +289,7 @@ export default {
         },
         
         playerReadied(video){
-            this.playerOptions.sources.src = "http://asystem.test/uploads/video/"+video.fileName;
+            this.playerOptions.sources[0].src = this.baseUrl+'/uploads/video/'+video.fileName;
         },
 
         showImage(){
@@ -297,7 +298,7 @@ export default {
         },
 
         getEachVideoSrc(video){
-            this.playerOptions.sources.src = "http://asystem.test/uploads/video/"+video.fileName;
+            this.playerOptions.sources[0].src = this.baseUrl+'/uploads/video/'+video.fileName;
             return this.playerOptions
         },
 

@@ -323,7 +323,7 @@ export default {
         },
 
         playerReadied(video){
-            this.playerOptions.sources.src = "http://asystem.test/uploads/video/"+video.fileName;
+            this.playerOptions.sources[0].src = "http://asystem.test/uploads/video/"+video.fileName;
         },
 
         showImage(){
@@ -332,7 +332,7 @@ export default {
         },
 
         getEachVideoSrc(video){
-            this.playerOptions.sources.src = "http://asystem.test/uploads/video/"+video.fileName;
+            this.playerOptions.sources[0].src = "http://asystem.test/uploads/video/"+video.fileName;
             return this.playerOptions
         },
 

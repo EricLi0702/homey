@@ -6,28 +6,28 @@
             </div>
             <div class="community-category-list p-3">
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>(1)	What comes to mind when you hear the word ‘rent’?</p>
-                    <Badge type="primary" :count="64"></Badge>
+                    <p>1. The count of community of this month</p>
+                    <Badge type="normal" :count="monthData"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>(2)	Do you think landlords charge too much for rent?</p>
-                    <Badge type="primary" :count="37"></Badge>
+                    <p>2. The count of community of this week</p>
+                    <Badge type="normal" :count="weekData"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>(3)	Is it better to rent or buy property?</p>
-                    <Badge type="primary" :count="15"></Badge>
+                    <p>3. The count of community of today</p>
+                    <Badge type="normal" :count="todayData"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>(4)	Should kids with jobs pay rent to their parents?</p>
-                    <Badge type="primary" :count="48"></Badge>
+                    <p>4. The count of registerd user</p>
+                    <Badge type="normal" :count="registerCnt"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>(5)	What do you need to think about before renting a place to live?</p>
-                    <Badge type="primary" :count="12"></Badge>
+                    <p>5. The count of current user</p>
+                    <Badge type="normal" :count="currentCnt"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>(6)	How important are rent agreements?</p>
-                    <Badge type="primary" :count="52"></Badge>
+                    <p>6. Notice of Rent Increase</p>
+                    <Badge type="normal" :count="38"></Badge>
                 </div>
             </div>
         </div>
@@ -73,7 +73,11 @@
                 </div>
                 <div class=" ccl-item">
                     <p>CurrentWeek notification percent of this month</p>
-                    <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
+                    <Progress class="w-100" :percent="weekPro" :stroke-width="20" status="active" text-inside />
+                </div>
+                <div class=" ccl-item">
+                    <p>CurrentUser :: RegisterUser</p>
+                    <Progress class="w-100" :percent="userPro" :stroke-width="20" status="active" text-inside />
                 </div>
             </div>
         </div>
@@ -107,6 +111,9 @@ export default {
             weekData:0,
             todayPro:0,
             weekPro:0,
+            userPro:0,
+            registerCnt:0,
+            currentCnt:0,
         }
     },
     computed:{
@@ -114,16 +121,25 @@ export default {
         currentUser:'auth/user'
         })
     },
+    watch:{
+        $route(to,from){
+            this.$router.go()
+        }
+    },
+
     mounted(){
         getTop5Community(this.currentUser.id).then(res=>{
             this.communityData = res.data
         }).catch(err=>{
             console.log(err)
         })
-        getCommunityCnt().then(res=>{
+        getCommunityCnt(this.currentUser.id).then(res=>{
             this.todayData = res.data.today
             this.weekData = res.data.week
             this.monthData = res.data.month
+            this.currentCnt = res.data.currentCnt
+            this.registerCnt = res.data.registerCnt
+            this.userPro = parseFloat((this.currentCnt/this.registerCnt*100).toFixed(2))
             this.todayPro = parseFloat((this.todayData/this.monthData*100).toFixed(2))
             this.weekPro = parseFloat((this.weekData/this.monthData*100).toFixed(2))
         })

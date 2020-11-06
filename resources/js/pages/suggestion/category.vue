@@ -6,27 +6,27 @@
             </div>
             <div class="community-category-list p-3">
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>Request repair</p>
-                    <Badge type="normal" :count="17"></Badge>
+                    <p>1. The count of suggestion of this month</p>
+                    <Badge type="normal" :count="monthData"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>Fix Problem</p>
-                    <Badge type="normal" :count="5"></Badge>
+                    <p>2. The count of suggestion of this week</p>
+                    <Badge type="normal" :count="weekData"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>Covid</p>
-                    <Badge type="normal" :count="23"></Badge>
+                    <p>3. The count of suggestion of today</p>
+                    <Badge type="normal" :count="todayData"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>Health</p>
-                    <Badge type="normal" :count="56"></Badge>
+                    <p>4. The count of registerd user</p>
+                    <Badge type="normal" :count="registerCnt"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>Children</p>
-                    <Badge type="normal" :count="19"></Badge>
+                    <p>5. The count of current user</p>
+                    <Badge type="normal" :count="currentCnt"></Badge>
                 </div>
                 <div class=" ccl-item d-flex justify-content-between">
-                    <p>Food</p>
+                    <p>6. Notice of Rent Increase</p>
                     <Badge type="normal" :count="38"></Badge>
                 </div>
             </div>
@@ -43,6 +43,10 @@
                 <div class=" ccl-item">
                     <p>CurrentWeek notification percent of this month</p>
                     <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
+                </div>
+                <div class=" ccl-item">
+                    <p>CurrentUser :: RegisterUser</p>
+                    <Progress class="w-100" :percent="userPro" :stroke-width="20" status="active" text-inside />
                 </div>
             </div>
         </div>
@@ -76,7 +80,10 @@ export default {
             weekData:0,
             monthData:1,
             todayPro:0,
-            weekPro:0
+            weekPro:0,
+            userPro:0,
+            registerCnt:0,
+            currentCnt:0,
         }
     },
     computed:{
@@ -84,17 +91,26 @@ export default {
         currentUser:'auth/user'
         })
     },
+    watch:{
+        $route(to,from){
+            this.$router.go()
+        }
+    },
+
     mounted(){
         getTop5Suggestion(this.currentUser.id).then(res=>{
             this.suggestionData = res.data
         }).catch(err=>{
             console.log(err)
         })
-        getSuggestionCnt().then(res=>{
+        getSuggestionCnt(this.currentUser.id).then(res=>{
             console.log(res)
             this.todayData = res.data.today
             this.weekData = res.data.week
             this.monthData = res.data.month
+            this.currentCnt = res.data.currentCnt
+            this.registerCnt = res.data.registerCnt
+            this.userPro = parseFloat((this.currentCnt/this.registerCnt*100).toFixed(2))
             this.todayPro = parseFloat((this.todayData/this.monthData*100).toFixed(2))
             this.weekPro = parseFloat((this.weekData/this.monthData*100).toFixed(2))
         })
