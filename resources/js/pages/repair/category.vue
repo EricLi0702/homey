@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="box-block">
+        <!-- <div class="box-block">
             <div class="community-category-title p-3">
                 Importantance on this week
             </div>
@@ -61,6 +61,21 @@
                     <Progress class="w-100" :percent="23" :stroke-width="20" stroke-color="#F6684E" status="active" text-inside />
                 </div>
             </div>
+        </div> -->
+        <div class="box-block">
+            <div class="community-category-title p-3">
+                The count of communtiy on this month:{{this.monthData}}
+            </div>
+            <div class="community-category-list p-3">
+                <div class=" ccl-item">
+                    <p>Today notification percent of this month.</p>
+                    <Progress class="w-100" :percent="todayPro" :stroke-width="20" status="active" text-inside />
+                </div>
+                <div class=" ccl-item">
+                    <p>CurrentWeek notification percent of this month</p>
+                    <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
+                </div>
+            </div>
         </div>
         <div class="box-block">
             <div class="community-category-title p-3">
@@ -83,11 +98,16 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import {getTop5Repair} from '~/api/repair'
+import {getTop5Repair,getRepairCnt} from '~/api/repair'
 export default {
     data(){
         return{
             repairData:[],
+            monthData:1,
+            todayData:0,
+            weekData:0,
+            todayPro:0,
+            weekPro:0,
         }
     },
     computed:{
@@ -102,6 +122,13 @@ export default {
             this.repairData = res.data
         }).catch(err=>{
             console.log(err)
+        })
+        getRepairCnt().then(res=>{
+            this.todayData = res.data.today
+            this.weekData = res.data.week
+            this.monthData = res.data.month
+            this.todayPro = parseFloat((this.todayData/this.monthData*100).toFixed(2))
+            this.weekPro = parseFloat((this.weekData/this.monthData*100).toFixed(2))
         })
     },
 }

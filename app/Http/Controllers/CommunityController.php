@@ -8,7 +8,7 @@ use DateTime;
 use App\User;
 use App\Community;
 use App\CommentOfCommunity;
-
+use Carbon\Carbon;
 
 class CommunityController extends Controller
 {
@@ -198,4 +198,15 @@ class CommunityController extends Controller
         return Community::where('userId',$userId)->orderBy('created_at','desc')->take(5)->get();
     }
 
+    public function getCommunityCnt(Request $request){
+        $today = Carbon::today();
+        $weekData = Community::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
+        $todayData = Community::whereDate('created_at', Carbon::today())->count();
+        $monthData = Community::whereYear('created_at',Carbon::now()->year)->whereMonth('created_at',Carbon::now()->month)->count();
+        return response()->json([
+            'today'=>$todayData,
+            'week'=>$weekData,
+            'month'=>$monthData
+        ]);
+    }   
 }

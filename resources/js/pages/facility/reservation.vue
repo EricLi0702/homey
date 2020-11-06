@@ -100,7 +100,7 @@
                         <div v-if="calendarView" v-for="(facility, j) in facilityList" :key="j" class="col-12 m-0 row calendar-view-container posted-item">
                             
                         </div>
-                        <div v-else>
+                        <div class="control-view-type col-12 mb-3 p-0" v-else>
                             <div  v-for="(facility, i) in facilityList" :key="i" v-if="facility.reservation_data.length" class="col-12 m-0 row list-view-container posted-item p-2 mb-3">
                                 <div v-for="(reservation, k) in facility.reservation_data"  :key="k" v-if="facility.reservation_data.length" class="row col-12 m-0">
                                     <div class="col-1">

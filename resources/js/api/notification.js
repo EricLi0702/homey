@@ -39,6 +39,11 @@ function viewedCurrentNotification(currentId){
 function getTop5Notification(currentId){
     return axios.get('/api/top5Notification',{params: {id:currentId}})
 }
+
+function getNotificationCnt(){
+    return axios.get('/api/notificationCnt')
+}
+
 export{
     getNotificationList,
     registerNotification,
@@ -50,4 +55,5 @@ export{
     upgradeNotification,
     getDowngradNotificationList,
     getTop5Notification,
+    getNotificationCnt,
 }

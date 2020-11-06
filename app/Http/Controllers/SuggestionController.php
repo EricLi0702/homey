@@ -8,6 +8,7 @@ use App\Suggestion;
 use App\CommentOfSuggestion;
 use App\User;
 use App\Events\NewSuggestion;
+use Carbon\Carbon;
 
 class SuggestionController extends Controller
 {
@@ -259,5 +260,16 @@ class SuggestionController extends Controller
     public function getTop5Suggestion(Request $request){
         $userId = $request->id;
         return Suggestion::where('userId',$userId)->orderBy('created_at','desc')->take(5)->get();
+    }
+
+    public function getSuggestionCnt(Request $request){
+        $weekData = Suggestion::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
+        $todayData = Suggestion::whereDate('created_at', Carbon::today())->count();
+        $monthData = Suggestion::whereYear('created_at',Carbon::now()->year)->whereMonth('created_at',Carbon::now()->month)->count();
+        return response()->json([
+            'today'=>$todayData,
+            'week'=>$weekData,
+            'month'=>$monthData
+        ]);
     }
 }

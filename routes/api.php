@@ -106,6 +106,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('top5Community','CommunityController@getTop5Coummunity');
     Route::get('top5Suggestion','SuggestionController@getTop5Suggestion');
     Route::get('top5Repair','RepairController@getTop5Repair');
+
+    Route::get('notificationCnt','NotificationController@getNotificationCnt');
+    Route::get('communityCnt','CommunityController@getCommunityCnt');
+    Route::get('suggestionCnt','SuggestionController@getSuggestionCnt');
+    Route::get('repairCnt','RepairController@getRepairCnt');
 });
 
 Route::group(['middleware' => 'guest:api'], function () {
