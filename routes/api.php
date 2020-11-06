@@ -96,6 +96,10 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('aptBuilding','BuildingController@getBuildingList');
     Route::post('aptBuilding','BuildingController@addBuilding');
+    
+    //PushNotification
+    Route::post('newPush','Auth\UserController@newPush');
+    Route::get('newPush','Auth\UserController@getNewPush');
 });
 
 Route::group(['middleware' => 'guest:api'], function () {

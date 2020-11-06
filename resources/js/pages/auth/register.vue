@@ -47,6 +47,9 @@
                 <p class="mt-2">confirm password</p>
                 <Input prefix="ios-key-outline" v-model="password.confirmpassword" type="password" password name="confirmpassword" placeholder="Enter confirm password"/>
             </div>
+            <div class="m-2 animate__animated animate__fadeIn" v-if="isFinishVerify" style="width:200px;">
+                <Checkbox v-model="isAgree">I agree to the Homey <router-link :to="{ name: 'term' }" target='_blank'>Terms of Service</router-link> and <router-link :to="{ name: 'privacy' }" target= '_blank'>Privacy Policy</router-link></Checkbox>
+            </div>
             <div class="m-2 animate__animated animate__fadeIn">
               <Button v-if="isFinishVerify" class="mt-3 " icon="ios-send" type="success" long @click="setPassword" :disabled="isSettingPassword" :loading="isSettingPassword">Set Password</Button>
             </div>
@@ -82,7 +85,7 @@ export default {
   data: () => ({
     
     isConfirming:false,
-
+    isAgree:false,
     verifyData:{
       name:'',
       email:'',
@@ -146,6 +149,9 @@ export default {
     },
 
     async setPassword(){
+      if(this.isAgree == false){
+        return this.error('please agree to our Terms of Service and Privacy Policy');
+      }
       if(this.password.password.trim() == ''){
         return this.error('Password is required');
       }

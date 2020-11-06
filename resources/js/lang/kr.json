@@ -164,6 +164,9 @@
         "badNetwork":"네트워크 상태가 원할하지 않습니다",
         "badServerConnection":"서버 연결이 원할하지 않습니다",
         "serviceStop":"잠시 서비스 중단중입니다"
+    },
+    "term":{
+        "titleOfTerm": "이용약관"
     }
 
 

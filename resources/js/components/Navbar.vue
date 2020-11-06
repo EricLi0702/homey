@@ -64,8 +64,20 @@
       <ul class="navbar-nav ml-auto">
         <locale-dropdown />
         <li class="mr-2 d-flex align-items-center ml-3">
-          <Badge :count="1">
-            <Icon size="30" color="#ffffff" type="md-notifications" />
+          <Badge :count="pushNotificationCnt">
+            <Icon size="30" color="#ffffff" type="md-notifications" class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+            <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn">
+              <ul class="navbar-nav flex-column">
+                <div v-if="user !== null">
+                  <div v-if="pushNotification.notification && pushNotification.notification.length >0">
+                    <div class="dropdown-divider" />
+                    <router-link v-for="(notification,i) in pushNotification.notification" :key="i" :to="{ path:`/notification/${notification.id}` }" class="nav-item dropdown-item" active-class="active">
+                      <p>{{notification.title}}</p>
+                    </router-link>
+                  </div>
+                </div>
+              </ul>
+            </div>
           </Badge>
         </li>
         <!-- Authenticated -->
@@ -115,17 +127,27 @@
 <script>
 import { mapGetters } from 'vuex'
 import LocaleDropdown from './LocaleDropdown'
+import {newPush, getNewPush} from '~/api/push'
 export default {
   components: {
     LocaleDropdown
   },
   data: () => ({
     appName: window.config.appName,
-    baseUrl:window.base_url
+    baseUrl:window.base_url,
+    pushNotification:{
+      notification:[],
+      community:[],
+      suggestion:[]
+    },
+    pushNotificationCnt: 0,
   }),
   computed: mapGetters({
     user: 'auth/user'
   }),
+  created(){
+    this.getNewPush();
+  },
   mounted(){
     this.listenNewNotification();
     this.listenNewSuggestion();
@@ -138,45 +160,51 @@ export default {
       this.$router.push({ name: 'login' })
     },
 
+    getNewPush(){
+      getNewPush()
+      .then(res=>{
+        this.pushNotification = JSON.parse(res.data.pushData);
+        this.pushNotificationCnt = this.pushNotification.notification.length + this.pushNotification.community.length + this.pushNotification.suggestion.length;
+      })
+      .catch(err=>{
+
+      })
+    },
+
     listenNewNotification(){
       Echo.private('notification')
           .listen('NewNotification', (newNotification) => {
-              console.log("wow, greate!!",newNotification);
-              // this.$store.commit('setNewNotificationCnt', this.getCurrentUser.new_noti_cnt + 1);
-              // this.notificationList.unshift(newNotification.notification);
-              // Notification.requestPermission( permission => {
-              //     let notification = new Notification('New post alert!', {
-              //         body: newNotification.notification.title, // content for the alert
-              //         icon: "http://127.0.0.1:8000/images/icons/mainPage-phone.png" // optional image url
-              //     });
+              if(newNotification.notification.userId == this.user.id){
+                return;
+              }
+              this.pushNotification.notification.push(newNotification.notification);
+              this.pushNotificationCnt++;
+              let newPushData = {}
+              newPushData.postNewPushData = this.pushNotification;
+              newPush(newPushData)
+              .then(res=>{
+                console.log("$$$$$", this.pushNotification);
+              })
+              .catch(err=>{
 
-              //     // link to page on clicking the notification
-              //     notification.onclick = () => {
-              //         window.open(window.location.href);
-              //     };
-              // });
-              // const res = this.callApi('post','/api/users/newVideoCount',{new_video_cnt:this.$store.state.user.new_video_cnt});
+              })
           });
     },
 
     listenNewSuggestion(){
       Echo.private('suggestion')
           .listen('NewSuggestion', (newSuggestion) => {
-              console.log("wow, greate!!",newSuggestion);
-              // this.$store.commit('setNewNotificationCnt', this.getCurrentUser.new_noti_cnt + 1);
-              // this.notificationList.unshift(newNotification.notification);
-              // Notification.requestPermission( permission => {
-              //     let notification = new Notification('New post alert!', {
-              //         body: newNotification.notification.title, // content for the alert
-              //         icon: "http://127.0.0.1:8000/images/icons/mainPage-phone.png" // optional image url
-              //     });
-
-              //     // link to page on clicking the notification
-              //     notification.onclick = () => {
-              //         window.open(window.location.href);
-              //     };
-              // });
-              // const res = this.callApi('post','/api/users/newVideoCount',{new_video_cnt:this.$store.state.user.new_video_cnt});
+              console.log("wow, greate!!",newSuggestion.suggestion);
+              this.pushNotification.suggestion.push(newSuggestion.suggestion);
+              this.pushNotificationCnt++;
+              let newPushData = {}
+              newPushData.postNewPushData = this.pushNotification;
+              newPush(newPushData)
+              .then(res=>{
+                console.log("$$$$$", this.pushNotification);
+              })
+              .catch(err=>{
+              })
           });
     },
   }

@@ -26,7 +26,7 @@ html, body {
   color: white!important;
 }
 
-.navbar-nav.ml-auto .ivu-badge .ivu-badge-count{
+/* .navbar-nav.ml-auto .ivu-badge .ivu-badge-count{
   font-family: "Monospaced Number";
     line-height: 1;
     vertical-align: middle;
@@ -48,7 +48,7 @@ html, body {
     transform-origin: -10% center;
     z-index: 10;
     box-shadow: 0 0 0 1px #fff;
-}
+} */
 
 /* jQuery Styles
 ===================================*/

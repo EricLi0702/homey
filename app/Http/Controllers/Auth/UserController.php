@@ -48,4 +48,26 @@ class UserController extends Controller
             'roleId'=>$request->roleId
         ]);
     }
+
+    public function newPush(Request $request)
+    {
+        $userId = Auth::user()->id;
+        $currentUser = User::where('id',$userId)->first();
+        $pushData = json_encode($request->postNewPushData);
+        $currentUser->newPush = $pushData;
+        $currentUser->save();
+        return response()->json([
+            'pushData' => $pushData,
+        ], 200);
+    }
+
+    public function getNewPush()
+    {
+        $userId = Auth::user()->id;
+        $currentUser = User::where('id',$userId)->first();
+        $pushData = $currentUser->newPush;
+        return response()->json([
+            'pushData' => $pushData,
+        ], 200);
+    }
 }
