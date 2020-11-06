@@ -49,6 +49,11 @@ function leaveCommentToCommunity(commentData, communityData){
 function getTop5Community(userId){
     return axios.get('/api/top5Community',{params:{id:userId}})
 }
+
+function getCommunityCnt(){
+    return axios.get('/api/communityCnt');
+}
+
 export{
     getCommunityList,
     registerCommunity,
@@ -61,4 +66,5 @@ export{
     leaveCommentToCommunity,
     viewCurrentCommunity,
     getTop5Community,
+    getCommunityCnt,
 }

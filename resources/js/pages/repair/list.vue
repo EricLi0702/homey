@@ -12,7 +12,7 @@
                     <div v-if="noRequest" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
                         <div class="no-fac text-center">
                             <Icon size="150" type="ios-search" />
-                            <h5>oops! there is no Request!</h5>
+                            <h5>{{ $t('repair').oopsThere }}</h5>
                         </div>
                     </div>
 
@@ -61,7 +61,7 @@
                         @infinite="infiniteHandlerRepairRequest"
                         spinner="circles"
                     >
-                        <div slot="no-more">no more request</div>
+                        <div slot="no-more">{{ $t('welcome').noMoreRequest }}</div>
                     </InfiniteLoading>
                 </div>
             </div>

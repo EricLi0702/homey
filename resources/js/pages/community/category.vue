@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="box-block">
+        <!-- <div class="box-block">
             <div class="community-category-title p-3">
                 Services
             </div>
@@ -61,6 +61,21 @@
                     <Badge type="primary" :count="24"></Badge>
                 </div>
             </div>
+        </div> -->
+        <div class="box-block">
+            <div class="community-category-title p-3">
+                The count of communtiy on this month:{{this.monthData}}
+            </div>
+            <div class="community-category-list p-3">
+                <div class=" ccl-item">
+                    <p>Today notification percent of this month.</p>
+                    <Progress class="w-100" :percent="todayPro" :stroke-width="20" status="active" text-inside />
+                </div>
+                <div class=" ccl-item">
+                    <p>CurrentWeek notification percent of this month</p>
+                    <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
+                </div>
+            </div>
         </div>
         <div class="box-block">
             <div class="community-category-title p-3">
@@ -81,12 +96,17 @@
 </template>
 
 <script>
-import {getTop5Community} from '~/api/community'
+import {getTop5Community,getCommunityCnt} from '~/api/community'
 import {mapGetters} from 'vuex'
 export default {
     data(){
         return{
-            communityData:[]
+            communityData:[],
+            monthData:1,
+            todayData:0,
+            weekData:0,
+            todayPro:0,
+            weekPro:0,
         }
     },
     computed:{
@@ -94,11 +114,18 @@ export default {
         currentUser:'auth/user'
         })
     },
-    async mounted(){
+    mounted(){
         getTop5Community(this.currentUser.id).then(res=>{
             this.communityData = res.data
         }).catch(err=>{
             console.log(err)
+        })
+        getCommunityCnt().then(res=>{
+            this.todayData = res.data.today
+            this.weekData = res.data.week
+            this.monthData = res.data.month
+            this.todayPro = parseFloat((this.todayData/this.monthData*100).toFixed(2))
+            this.weekPro = parseFloat((this.weekData/this.monthData*100).toFixed(2))
         })
     }
 }

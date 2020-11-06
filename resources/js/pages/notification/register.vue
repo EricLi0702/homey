@@ -2,53 +2,53 @@
     <div class="container-fluid bg-light-gray m-0 p-0 pb-5">
         <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
             <div class="p-3 pb-5 pt-2">
-                <h2 class="p-3">Register New Notification</h2>
+                <h2 class="p-3">{{$t('notification').RegisterNewNotification}}</h2>
                 <Form :model="registerNotificationData">
                     <div class="row m-0 p-0">
                         <div class="col-md-6 mb-3 gray-input">
-                            <p>Title</p>
-                            <Input v-model="registerNotificationData.title" placeholder="please enter title of notification" />
+                            <p>{{$t('notification').title}}</p>
+                            <Input v-model="registerNotificationData.title" :placeholder="$t('notification').enterTitleNotification" />
                         </div>
                         <div class="col-md-6 mb-3 ">
-                            <p>Type</p>
+                            <p>{{$t('notification').Type}}</p>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
                                     <input type="checkbox" class="form-check-input" value="common" v-model="registerNotificationData.type">
                                     <Icon size="35" type="md-hand" color="#BFD23A"/>
-                                    <span style="color:#BFD23A">Common</span>
+                                    <span style="color:#BFD23A">{{$t('notification').Common}}</span>
                                 </label>
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
                                     <input type="checkbox" class="form-check-input" value="urgent" v-model="registerNotificationData.type">
                                     <Icon size="35" type="md-stopwatch" color="#F4B894" />
-                                    <span style="color:#F4B894">Urgent</span>
+                                    <span style="color:#F4B894">{{$t('notification').Urgent}}</span>
                                 </label>
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
                                     <input type="checkbox" class="form-check-input" value="important" v-model="registerNotificationData.type">
                                     <Icon size="35" type="ios-warning-outline" color="#F26A5A" />
-                                    <span style="color:#F26A5A">Important</span>
+                                    <span style="color:#F26A5A">{{$t('notification').Important}}</span>
                                 </label>
                             </div>
                         </div>
                         <div class="col-12 mb-3">
-                            <p class="">Period</p>
+                            <p class="">Period{{$t('community').View}}</p>
                             <RadioGroup @on-change="setPeriodToBlank" v-model="periodType" class="">
-                                <Radio label="withPeriod">Choose Period</Radio>
-                                <Radio label="withCalendar">Choose period with calendar</Radio>
+                                <Radio label="withPeriod">{{$t('community').ChoosePeriod}}</Radio>
+                                <Radio label="withCalendar">{{$t('community').ChooseCalendar}}</Radio>
                             </RadioGroup>   
 
                             <DatePicker v-if="periodType == 'withCalendar' " class="w-50 mx-auto"  type="daterange" @on-change="notiDateChange" placeholder="please select the date" style="display: block" placement="bottom-end"></DatePicker>
                             <RadioGroup v-else v-model="initPeriod" class=" w-50 mx-auto d-flex justify-content-between">
-                                <Radio label="forever">Forever</Radio>
-                                <Radio label="week">One week</Radio>
-                                <Radio label="month">One month</Radio>
+                                <Radio label="forever">{{$t('community').Forever}}</Radio>
+                                <Radio label="week">{{$t('community').OneWeek}}</Radio>
+                                <Radio label="month">{{$t('community').OneMonth}}</Radio>
                             </RadioGroup> 
                         </div>
                         <div class="col-12 mb-3">
-                            <wysiwyg v-model="registerNotificationData.desc" placeholder="please enter description" />
+                            <wysiwyg v-model="registerNotificationData.desc" :placeholder="$t('facility').enterDescription" />
                         </div>
                         <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
                             <Upload
@@ -60,8 +60,8 @@
                             <div class="emoji-area-popup">
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
-                            <Button icon="ios-briefcase-outline" type="warning" class="ml-auto mr-2" @click="saveToDraftNotification" :disabled="isSavingDraft" :loading="isSavingDraft">Draft</Button>
-                            <Button icon="ios-send" type="success" class="" @click="registerNotification" :disabled="isRegistering" :loading="isRegistering">Register</Button>
+                            <Button icon="ios-briefcase-outline" type="warning" class="ml-auto mr-2" @click="saveToDraftNotification" :disabled="isSavingDraft" :loading="isSavingDraft">{{$t('notification').Draft}}</Button>
+                            <Button icon="ios-send" type="success" class="" @click="registerNotification" :disabled="isRegistering" :loading="isRegistering">{{$t('register').register}}</Button>
                         </div>
                         <div class="col-12 uploaded_file">
                             <div class="image-item" v-if="registerNotificationData.file.imgUrl && registerNotificationData.file.imgUrl.length >0">

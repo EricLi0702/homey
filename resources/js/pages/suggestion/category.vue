@@ -33,32 +33,16 @@
         </div>
         <div class="box-block">
             <div class="community-category-title p-3">
-                Importantance on this week
+                The count of suggestion on this month:{{this.monthData}}
             </div>
             <div class="community-category-list p-3">
                 <div class=" ccl-item">
-                    <p>Repair Lamps</p>
-                    <Progress class="w-100" :percent="45" :stroke-width="20" status="active" text-inside />
+                    <p>Today notification percent of this month.</p>
+                    <Progress class="w-100" :percent="todayPro" :stroke-width="20" status="active" text-inside />
                 </div>
                 <div class=" ccl-item">
-                    <p>Look up broken equipment</p>
-                    <Progress class="w-100" :percent="78" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
-                </div>
-                <div class=" ccl-item">
-                    <p>Lorem ipsum dolor sit amet.</p>
-                    <Progress class="w-100" :percent="96" :stroke-width="20" stroke-color="#04619F" status="active" text-inside />
-                </div>
-                <div class=" ccl-item ">
-                    <p>Lorem ipsum dolor sit amet.</p>
-                    <Progress class="w-100" :percent="63" :stroke-width="20" stroke-color="#000000" status="active" text-inside />
-                </div>
-                <div class=" ccl-item">
-                    <p>Lorem ipsum dolor sit amet.</p>
-                    <Progress class="w-100" :percent="89" :stroke-width="20" stroke-color="#737375" status="active" text-inside />
-                </div>
-                <div class=" ccl-item">
-                    <p>Lorem ipsum dolor sit amet.</p>
-                    <Progress class="w-100" :percent="23" :stroke-width="20" stroke-color="#F6684E" status="active" text-inside />
+                    <p>CurrentWeek notification percent of this month</p>
+                    <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
                 </div>
             </div>
         </div>
@@ -82,12 +66,17 @@
 </template>
 
 <script>
-import {getTop5Suggestion} from '~/api/suggestion'
+import {getTop5Suggestion,getSuggestionCnt} from '~/api/suggestion'
 import {mapGetters} from 'vuex'
 export default {
     data(){
         return{
-            suggestionData:[]
+            suggestionData:[],
+            todayData:0,
+            weekData:0,
+            monthData:1,
+            todayPro:0,
+            weekPro:0
         }
     },
     computed:{
@@ -95,11 +84,19 @@ export default {
         currentUser:'auth/user'
         })
     },
-    async mounted(){
+    mounted(){
         getTop5Suggestion(this.currentUser.id).then(res=>{
             this.suggestionData = res.data
         }).catch(err=>{
             console.log(err)
+        })
+        getSuggestionCnt().then(res=>{
+            console.log(res)
+            this.todayData = res.data.today
+            this.weekData = res.data.week
+            this.monthData = res.data.month
+            this.todayPro = parseFloat((this.todayData/this.monthData*100).toFixed(2))
+            this.weekPro = parseFloat((this.weekData/this.monthData*100).toFixed(2))
         })
     }
 }

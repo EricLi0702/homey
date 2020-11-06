@@ -33,33 +33,17 @@
         </div>
         <div class="box-block">
             <div class="community-category-title p-3">
-                Importantance on this month
+                The count of notification on this month:{{this.monthData}}
             </div>
             <div class="community-category-list p-3">
                 <div class=" ccl-item">
-                    <p>Architecture.</p>
-                    <Progress class="w-100" :percent="45" :stroke-width="20" status="active" text-inside />
+                    <p>Today notification percent of this month.</p>
+                    <Progress class="w-100" :percent="todayPro" :stroke-width="20" status="active" text-inside />
                 </div>
                 <div class=" ccl-item">
-                    <p>House.</p>
-                    <Progress class="w-100" :percent="78" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
+                    <p>CurrentWeek notification percent of this month</p>
+                    <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
                 </div>
-                <div class=" ccl-item">
-                    <p>Property.</p>
-                    <Progress class="w-100" :percent="96" :stroke-width="20" stroke-color="#04619F" status="active" text-inside />
-                </div>
-                <div class=" ccl-item ">
-                    <p>Real Estate.</p>
-                    <Progress class="w-100" :percent="63" :stroke-width="20" stroke-color="#000000" status="active" text-inside />
-                </div>
-                <div class=" ccl-item">
-                    <p>Residence.</p>
-                    <Progress class="w-100" :percent="89" :stroke-width="20" stroke-color="#737375" status="active" text-inside />
-                </div>
-                <!-- <div class=" ccl-item">
-                    <p>Lorem ipsum dolor sit amet.</p>
-                    <Progress class="w-100" :percent="23" :stroke-width="20" stroke-color="#F6684E" status="active" text-inside />
-                </div> -->
             </div>
         </div>
         <div class="box-block">
@@ -83,11 +67,25 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import {getTop5Notification} from '~/api/notification'
+import {getTop5Notification,getNotificationCnt} from '~/api/notification'
 export default {
     data(){
         return{
             notificationData:[],
+            todayData:0,
+            weekData:0,
+            monthData:1,
+            firstWeek:0,
+            secondWeek:0,
+            thirdWeek:0,
+            forthWeek:0,
+            todayPro:0,
+            oneWeekAgo:0,
+            twoWeekAgo:0,
+            threeWeekAgo:0,
+            fourWeekAgo:0,
+            todayPro:0,
+            weekPro:0,
         }
     },
     computed:{
@@ -100,6 +98,26 @@ export default {
         await getTop5Notification(this.currentUser.id).then(res=>{
             console.log('----res',res)
             this.notificationData = res.data
+        }).catch(err=>{
+            console.log(err)
+        })
+        await getNotificationCnt().then(res=>{
+            console.log(res)
+            this.todayData = res.data.today;
+            this.weekData = res.data.week;
+            this.monthData = res.data.month;
+            console.l
+            this.todayPro = parseFloat((this.todayData/this.monthData*100).toFixed(2))
+            this.weekPro = parseFloat((this.weekData/this.monthData*100).toFixed(2))
+            // this.firstWeek = res.data.firstWeek;
+            // this.secondWeek = res.data.secondWeek;
+            // this.thirdWeek = res.data.thirdWeek;
+            // this.forthWeek = res.data.forthWeek;
+            // this.oneWeekAgo = parseInt(this.firstWeek / this.monthData * 100)
+            // this.twoWeekAgo = parseInt((this.secondWeek - this.firstWeek) / this.monthData * 100)
+            // this.threeWeekAgo = parseInt((this.thirdWeek -this.secondWeek) / this.monthData * 100)
+            // this.fourWeekAgo = parseInt((this.forthWeek -this.thirdWeek) / this.monthData * 100)
+
         }).catch(err=>{
             console.log(err)
         })

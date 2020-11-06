@@ -64,6 +64,11 @@ function leaveCommentToSuggestion(commentData, suggestionData){
 function getTop5Suggestion(userId){
     return axios.get('/api/top5Suggestion',{params:{id:userId}});
 }
+
+function getSuggestionCnt(){
+    return axios.get('/api/suggestionCnt');
+}
+
 export{
     getSuggestionList,
     registerSuggestion,
@@ -81,4 +86,5 @@ export{
     leaveCommentToSuggestion,
     viewCurrentSuggestion,
     getTop5Suggestion,
+    getSuggestionCnt,
 }

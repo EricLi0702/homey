@@ -16,43 +16,43 @@
 
                 <router-link v-if="user.roleId == 1" :to="{ path: '/apartment' }" class="nav-item dropdown-item" active-class="active">
                   <!-- {{ $t('common').apartment }} -->
-                  Apartment
+                 {{$t('apartment').Apartment}}
                 </router-link>
                 <div v-if="user.roleId == 1" class="dropdown-divider" />
 
                 <router-link v-if="user.roleId == 2" :to="{ path:'/user' }" class="nav-item dropdown-item" active-class="active">
                   <!-- {{ $t('common').user }} -->
-                  User
+                  {{$t('apartment').User}}
                 </router-link>
                 <div v-if="user.roleId == 2" class="dropdown-divider" />
               </div>
               <router-link :to="{ name: 'notification' }" class="nav-item dropdown-item" active-class="active">
                 <!-- {{ $t('register') }} -->
-                Notification
+                {{$t('notification').notification}}
               </router-link>
               <div class="dropdown-divider" />
 
               <router-link :to="{ name: 'community' }" class="nav-item dropdown-item" active-class="active">
                 <!-- {{ $t('register') }} -->
-                Community
+                {{$t('community').cummunity}}
               </router-link>
               <div class="dropdown-divider" />
 
               <router-link :to="{ name: 'suggestion' }" class="nav-item dropdown-item" active-class="active">
                 <!-- {{ $t('register') }} -->
-                Suggestion
+                {{$t('suggest').suggest}}
               </router-link>
               <div class="dropdown-divider" />
 
               <router-link :to="{ name: 'repair' }" class="nav-item dropdown-item" active-class="active">
                 <!-- {{ $t('register') }} -->
-                Repair
+                {{$t('repair').repair}}
               </router-link>
               <div class="dropdown-divider" />
               
               <router-link :to="{ name: 'facility' }" class="nav-item dropdown-item" active-class="active">
                 <!-- {{ $t('register') }} -->
-                Facility
+                {{$t('Facility').Facility}}
               </router-link>
             </ul>
           </div>
