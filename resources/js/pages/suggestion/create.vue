@@ -2,14 +2,14 @@
     <div class="container-fluid bg-light-gray m-0 p-0 pb-5">
         <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
             <div class="p-3 pb-5 pt-2">
-                <h2 class="p-3">New Suggestion</h2>
+                <h2 class="p-3">{{ $t('suggest').NewSuggestion }}</h2>
                 <Form :model="createSuggestionData">
                     <div class="row m-0 p-0">
                         <div class="col-12 mb-3 newtopic">
-                            <Input v-model="createSuggestionData.title" placeholder="please enter title" />
+                            <Input v-model="createSuggestionData.title" :placeholder=" $t('facility').enterTitle " />
                         </div>
                         <div class="col-12 mb-3">
-                            <wysiwyg v-model="createSuggestionData.desc" placeholder="please enter description" />
+                            <wysiwyg v-model="createSuggestionData.desc" :placeholder=" $t('facility').enterDescription " />
                         </div>
                         <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
                             <Upload
@@ -22,7 +22,7 @@
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
                             <Button icon="ios-briefcase-outline" type="warning" class="ml-auto mr-2" @click="saveToDraftSuggestion" :disabled="isSavingDraft" :loading="isSavingDraft">Draft</Button>
-                            <Button icon="ios-send" type="success" class="" @click="registerSuggestion" :disabled="isSuggesting" :loading="isSuggesting">Suggest</Button>
+                            <Button icon="ios-send" type="success" class="" @click="registerSuggestion" :disabled="isSuggesting" :loading="isSuggesting">{{ $t('suggest').suggest }}</Button>
                         </div>
                         <div class="col-12 uploaded_file">
                             <div class="image-item" v-if="createSuggestionData.file.imgUrl && createSuggestionData.file.imgUrl.length >0">
