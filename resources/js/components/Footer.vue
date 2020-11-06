@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-content pt-5 pb-5">
+            <div class="footer-content pt-1 pb-1">
                 <div class="row">
                     <div class="col-xl-4 col-lg-4 mb-50">
                         <div class="footer-widget">
@@ -74,12 +74,12 @@
                     <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
                         <div class="footer-widget">
                             <div class="footer-widget-heading">
-                                <a href="#">
+                                <router-link :to="{ name: 'term' }">
                                     <h3>{{ $t('welcome').TermsUse }}</h3>
-                                </a>
-                                <a href="#">
+                                </router-link>
+                                <router-link :to="{ name: 'privacy' }">
                                     <h3>{{ $t('welcome').PrivacyPolicy }}</h3>
-                                </a>
+                                </router-link>
                             </div>
                             
                         </div>

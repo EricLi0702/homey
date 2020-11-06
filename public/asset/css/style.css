@@ -435,7 +435,7 @@ ul {
   position: relative;
 }
 .footer-cta {
-  border-bottom: 1px solid white;
+  /* border-bottom: 1px solid white; */
 }
 .single-cta i {
   color: #ff5e14;
@@ -568,7 +568,7 @@ ul {
 }
 .copyright-area{
   background: #202020;
-  padding: 25px 0;
+  padding: 10px 0;
 }
 .copyright-text p {
   margin: 0;

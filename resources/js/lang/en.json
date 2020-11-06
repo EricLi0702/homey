@@ -91,21 +91,28 @@
         "Youhaveaccount":"You have already account?",
         "loginHere":"login here",
         "enterPass":"Enter password",
-        "enterEmail":"Enter email"
+        "enterEmail":"Enter email",
+        "enterConfirmPass":"Enter confirm password"
     },
     "common":{
         "name":"name",
-        "email":"email",
-        "password":"password",
+        "email":"Email",
+        "password":"Password",
         "phone":"phone",
-        "confirmPassword":"confirm password",
+        "confirmPassword":"Confirm Password",
         "rememberMe":"remember me",
-        "forgotPassword":"forgot password",
+        "forgotPassword":"Forgot password",
         "apartment":"apartment",
         "superManager":"super Manager",
         "userRole":"UserRole",
         "user":"user",
-        "request":"Request"
+        "request":"Request",
+        "setting":"Settings",
+        "logout":"Logout",
+        "resetPass":"Reset Password",
+        "sendResetPassLink":"Send reset password link",
+        "and":"and",
+        "setPassword": "Set password"
     },
     "login":{
         "login":"Login",

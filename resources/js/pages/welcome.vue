@@ -202,7 +202,7 @@
         </div>
     </div>
     <GmapMap
-      :center="{lat:51.508742, lng:-0.120850}"
+      :center="{lat:10.8231, lng:106.6297}"
       :zoom="7"
       map-type-id="terrain"
       style="width: 100%; height: 300px"
