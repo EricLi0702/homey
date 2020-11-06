@@ -8,6 +8,7 @@ use DateTime;
 use App\User;
 use App\Community;
 use App\CommentOfCommunity;
+use App\Events\NewCommunity;
 
 
 class CommunityController extends Controller
@@ -62,6 +63,8 @@ class CommunityController extends Controller
             }
         }
         $community = Community::create($communityData); 
+        
+        broadcast(new NewCommunity($community))->toOthers();
 
         return response()->json([
             'community' => $community
@@ -191,6 +194,11 @@ class CommunityController extends Controller
                 'upload_file' => json_encode($request->upload_file)
             ]);
         }
+    }
+
+    public function getTop5Coummunity(Request $request){
+        $userId = $request->id;
+        return Community::where('userId',$userId)->orderBy('created_at','desc')->take(5)->get();
     }
 
 }

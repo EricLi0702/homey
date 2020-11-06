@@ -36,7 +36,9 @@ function viewedCurrentNotification(currentId){
     let obj = {id : currentId}
     return axios.post('/api/notification/view',obj)
 }
-
+function getTop5Notification(currentId){
+    return axios.get('/api/top5Notification',{params: {id:currentId}})
+}
 export{
     getNotificationList,
     registerNotification,
@@ -47,4 +49,5 @@ export{
     downgradeNotification,
     upgradeNotification,
     getDowngradNotificationList,
+    getTop5Notification,
 }

@@ -29,7 +29,7 @@ class SuggestionController extends Controller
 
         if($request->isDraft == null){
             // broadcast Event
-            broadcast(new NewSuggestion($suggestion->load('userId')))->toOthers();
+            broadcast(new NewSuggestion($suggestion))->toOthers();
         }
         return response()->json([
             'suggestion' => $suggestion
@@ -254,5 +254,10 @@ class SuggestionController extends Controller
             $suggestionData->save();
             return $currentDislikeCnt;
         }
+    }
+
+    public function getTop5Suggestion(Request $request){
+        $userId = $request->id;
+        return Suggestion::where('userId',$userId)->orderBy('created_at','desc')->take(5)->get();
     }
 }

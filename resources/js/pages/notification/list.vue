@@ -7,7 +7,7 @@
         </div> -->
         <div class="container m-0 p-0 mx-auto">
             <div class="row m-0 p-0">
-                <Category/>
+                <Category />
                 <div class="col-12 col-md-8 m-0 p-0">
                     <div class="posted-item" v-for="(notification,i) in notificationList" :key="i" v-if="notificationList.length">
                         <router-link :to="{path:`/notification/${notification.id}`}">

@@ -71,7 +71,7 @@ class NotificationController extends Controller
 
         if($request->isDraft == null){
             // broadcast Event
-            broadcast(new NewNotification($notification->load('userId')))->toOthers();
+            broadcast(new NewNotification($notification))->toOthers();
         }
 
         return response()->json([
@@ -214,5 +214,10 @@ class NotificationController extends Controller
         return Notification::where('id',$request->id)->update([
             'isDowngrade' => 0
         ]);
+    }
+
+    public function getTop5Notification(Request $request){
+        $userId = $request->id;
+        return Notification::where('userId',$userId)->orderBy('created_at','desc')->take(5)->get();
     }
 }
