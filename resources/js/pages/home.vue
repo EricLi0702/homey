@@ -56,7 +56,7 @@
                   <router-link :to="{ name: 'suggestion' }" class="col-6 col-sm-6 col-md-6 col-lg-4 column" >
                       <div class="card-hero gr-1">
                         <div class="txt">
-                          <h1>{{$t('welcome').advise}}</h1>
+                          <h1>{{$t('welcome').suggestion}}</h1>
                         </div>
                         <a href="#">{{$t('welcome').detail}}</a>
                         <div class="ico-card-hero">
@@ -231,8 +231,8 @@
                     </div>
                   </div>
                   <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room4.png`" class="img-responsive"></a>
+                    <div class="img-wrapper" style="height:95%">
+                      <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room4.png`" class="img-responsive" style="height:100%"></a>
                       <div class="img-overlay">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         <p>Bedroom</p>
@@ -240,8 +240,8 @@
                     </div>
                   </div>
                   <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room3.jpg`" class="img-responsive"></a>
+                    <div class="img-wrapper" style="height:95%">
+                      <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room3.jpg`" class="img-responsive" style="height:100%"></a>
                       <div class="img-overlay">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         <p>Bedroom</p>
@@ -249,8 +249,8 @@
                     </div>
                   </div>
                   <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
-                    <div class="img-wrapper">
-                      <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room2.jpg`" class="img-responsive"></a>
+                    <div class="img-wrapper" style="height:95%">
+                      <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room2.jpg`" class="img-responsive" style="height:100%"></a>
                       <div class="img-overlay">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         <p>Bedroom</p>
