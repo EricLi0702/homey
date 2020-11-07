@@ -97,7 +97,7 @@ export default {
         return this.error("please enter fields");
       }
       // Submit the form.
-      await this.form.post('/api/login')
+      const { data } = await this.form.post('/api/login')
         .then(res=>{
           console.log(res)
         })
