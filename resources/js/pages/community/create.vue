@@ -94,6 +94,7 @@ import { Picker } from 'emoji-mart-vue'
 import Upload from '~/components/Upload'
 //import Api
 import {getCommunityList,registerCommunity,updateCommunity,delCommunity} from '~/api/community'
+import {delUploadFile} from '~/api/upload'
 
 export default {
     middleware: 'auth',

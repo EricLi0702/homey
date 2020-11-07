@@ -157,7 +157,7 @@
                                                 <p><strong>{{file.fileOriName}}</strong></p>
                                                 <p><small>{{file.fileSize}}</small></p>
                                             </div>
-                                            <a class="download-icon" :href="`http://asystem.test/upload/other/${file.fileName}`" :download="file.fileOriName">
+                                            <a class="download-icon" :href="`${baseUrl}/upload/other/${file.fileName}`" :download="file.fileOriName">
                                                 <Icon size="25" class="msg-file-download-ico msg-file-download-ico-send" type="md-download" />
                                             </a>
                                         </div>
@@ -217,6 +217,7 @@ export default {
     },
     data(){
         return{
+            baseUrl:window.base_url,
             facilityList : [],
             selectedFacility : {},
             noFile:false,
