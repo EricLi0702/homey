@@ -93,8 +93,17 @@ export default {
 
   methods: {
     async login () {
+      if (this.form.password.trim() == '' || this.form.email.trim() == ''){
+        return this.error("please enter fields");
+      }
       // Submit the form.
-      const { data } = await this.form.post('/api/login')
+      await this.form.post('/api/login')
+        .then(res=>{
+          console.log(res)
+        })
+        .catch(err=>{
+          this.error("email or password incorrect")
+        })
       console.log('----',data);
       // Save the token.
       this.$store.dispatch('auth/saveToken', {
