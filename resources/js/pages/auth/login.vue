@@ -88,7 +88,8 @@ export default {
       email: '',
       password: ''
     }),
-    remember: false
+    remember: false,
+    resData:null
   }),
 
   methods: {
@@ -97,17 +98,19 @@ export default {
         return this.error("please enter fields");
       }
       // Submit the form.
-      const { data } = await this.form.post('/api/login')
+      const data = {}
+      await this.form.post('/api/login')
         .then(res=>{
           console.log(res)
+          this.resData  = res.data
         })
         .catch(err=>{
           this.error("email or password incorrect")
         })
-      console.log('----',data);
+      console.log('----',this.resData);
       // Save the token.
       this.$store.dispatch('auth/saveToken', {
-        token: data.token,
+        token: this.resData.token,
         remember: this.remember
       })
 
