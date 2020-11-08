@@ -13,6 +13,20 @@
                             <p>Type</p>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
+                                    <i-switch v-model="isUrgent" @on-change="insertTypeUrgent" class="mb-2" />
+                                    <Icon size="35" type="md-stopwatch" color="#F4B894" />
+                                    <span style="color:#F4B894">{{$t('notification').Urgent}}</span>
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <i-switch v-model="isImportant" @on-change="insertTypeImportant" class="mb-2" />
+                                    <Icon size="35" type="ios-warning-outline" color="#F26A5A" />
+                                    <span style="color:#F26A5A">{{$t('notification').Important}}</span>
+                                </label>
+                            </div>
+                            <!-- <div class="form-check-inline">
+                                <label class="form-check-label">
                                     <input type="checkbox" class="form-check-input" value="common" v-model="updateNotificationData.type">
                                     <Icon size="35" type="md-hand" color="#BFD23A"/>
                                     <span style="color:#BFD23A">{{$t('notification').Common}}</span>
@@ -31,7 +45,7 @@
                                     <Icon size="35" type="ios-warning-outline" color="#F26A5A" />
                                     <span style="color:#F26A5A">{{$t('notification').Important}}</span>
                                 </label>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-12 mb-3">
                             <p class="">Period</p>
@@ -172,7 +186,23 @@ export default {
     },
 
     mounted(){
-        this.updateNotificationData.type = JSON.parse(this.updateNotificationData.type);
+        // this.updateNotificationData.type = JSON.parse(this.updateNotificationData.type);
+        if(this.updateNotificationData.type == 0){
+            this.isUrgent = false;
+            this.isImportant = false;
+        }
+        if(this.updateNotificationData.type == 1){
+            this.isUrgent = true;
+            this.isImportant = false;
+        }
+        if(this.updateNotificationData.type == 2){
+            this.isUrgent = false;
+            this.isImportant = true;
+        }
+        if(this.updateNotificationData.type == 3){
+            this.isUrgent = true;
+            this.isImportant = true;
+        }
     },
 
     data(){
@@ -188,6 +218,8 @@ export default {
             periodType:'withPeriod',
             isUpdating:false,
             typeOfData:[],
+            isUrgent: false,
+            isImportant:false
         }
     },
 
@@ -199,12 +231,36 @@ export default {
 
     methods:{
 
+        insertTypeUrgent(status){
+            this.isUrgent = status;
+        },
+
+        insertTypeImportant(status){
+            this.isImportant = status;
+        },
+
+
         getCurrentNotification(){
             getCurrentNotificationFromServer(this.notificationId)
             .then(res=>{
                 this.updateNotificationData = res.data.notificationData;
-                this.updateNotificationData.type = JSON.parse(this.updateNotificationData.type);
                 this.updateNotificationData.upload_file = JSON.parse(this.updateNotificationData.upload_file);
+                if(this.updateNotificationData.type == 0){
+                    this.isUrgent = false;
+                    this.isImportant = false;
+                }
+                if(this.updateNotificationData.type == 1){
+                    this.isUrgent = true;
+                    this.isImportant = false;
+                }
+                if(this.updateNotificationData.type == 2){
+                    this.isUrgent = false;
+                    this.isImportant = true;
+                }
+                if(this.updateNotificationData.type == 3){
+                    this.isUrgent = true;
+                    this.isImportant = true;
+                }
             })
         },
         toggleEmo(){
@@ -233,9 +289,7 @@ export default {
             if(this.updateNotificationData.title.trim() == ''){
                 return this.error('Title is required')
             }
-            if(this.updateNotificationData.type.length == 0){
-                return this.error('Type is required')
-            }
+            
             if(this.periodType == 'withPeriod'){
                 this.updateNotificationData.period = this.initPeriod;
                 if(this.updateNotificationData.period.trim() == ''){
@@ -250,6 +304,21 @@ export default {
             if(this.updateNotificationData.content.trim() == ''){
                 return this.error('Description is required')
             }
+
+            if(this.isUrgent == true){
+                this.updateNotificationData.type = 1;
+            }
+            if(this.isImportant == true){
+                this.updateNotificationData.type = 2;
+            }
+            if(this.isUrgent == true && this.isImportant == true){
+                this.updateNotificationData.type = 3;
+            }
+
+            if(this.isUrgent == false && this.isImportant == false){
+                this.updateNotificationData.type = 0;
+            }
+            
             this.isUpdating = true;
 
             await updateNotification(this.updateNotificationData)
@@ -257,7 +326,7 @@ export default {
                 this.updateNotificationData.title = '';
                 this.updateNotificationData.desc = '';
                 this.updateNotificationData.period = '';
-                this.updateNotificationData.type =  ['common'];
+                this.updateNotificationData.type =  0;
                 this.$router.push({path:'/notification/index'})
             })
             .catch(err=>{
@@ -274,9 +343,9 @@ export default {
                 filePath = fileName.imgUrl
             }
 
-            let file = {fileName:filePath}
+            
 
-            await delUploadFile(file)
+            await delUploadFile(filePath)
             .then(res=>{
                     if(type == 'image'){
                         this.updateNotificationData.upload_file.imgUrl.pop(fileName)

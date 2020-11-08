@@ -348,6 +348,7 @@ export default {
                 this.details.dislike_cnt = JSON.parse(this.details.dislike_cnt);
                 this.details.upload_file = JSON.parse(this.details.upload_file);
                 this.details.comment_cnt = JSON.parse(this.details.comment_cnt);
+                console.log("this.details",this.details);
                 viewCurrentSuggestion(this.details.id);
                 // getCommentsOfCurrentSuggestion(2, this.details.id)
                 // .then(res=>{

@@ -118,7 +118,7 @@ class RepairController extends Controller
         $finishRequestRepairData->replyFromClient = $finishRequestData;
         $finishRequestRepairData->save();
         return response()->json([
-            'msg' => "removed successfully!"
+            'msg' => "finished successfully!"
         ], 200);
     }
     

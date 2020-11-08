@@ -68,11 +68,13 @@ export default {
             this.$emit('upImgUrl',res)
         },
         otherSuccess (res, file) {
-            let url = `/uploads/other/${res}`;
+            let url = `/uploads/other/${res.fileName}`;
+            this.$set(res,'imgUrl',url)
             this.$emit('upFileUrl',res)
         },
         videoSuccess(res,file){
-            let url = `uploads/video/${res}`
+            let url = `/uploads/video/${res.fileName}`
+            this.$set(res,'imgUrl',url)
             this.$emit('upVideoUrl',res)
         },
     }

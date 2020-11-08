@@ -261,6 +261,7 @@ export default {
               this.pushNotificationCnt++;
               let newPushData = {}
               newPushData.postNewPushData = this.pushNotification;
+              console.log("]]]",newPushData);
               newPush(newPushData)
               .then(res=>{
                 console.log("$$$$$", this.pushNotification);

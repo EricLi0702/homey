@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RemoveNewPushFromUsersTable extends Migration
+class RemoveTypeFromNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class RemoveNewPushFromUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('newPush');
+        Schema::table('notifications', function (Blueprint $table) {
+            $table->dropColumn('type');
         });
     }
 
@@ -25,8 +25,8 @@ class RemoveNewPushFromUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->text('newPush');
+        Schema::table('notifications', function (Blueprint $table) {
+            $table->json('type');
         });
     }
 }

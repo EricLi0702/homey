@@ -31,14 +31,22 @@
                             </div>
                             <div class="posted-item-info float-left">
                                 <div class="posted-item-info-comments row m-0">
-                                    <div class="col-6 p-0">
-                                        <Icon v-if="notification.type.includes('common')" size="30" type="md-hand" color="#BFD23A"/>
+                                    <div v-if="notification.type == 0" class="col-12 p-0">
+                                        <Icon size="30" type="md-hand" color="#BFD23A"/>
                                     </div>
-                                    <div class="col-6 p-0">
-                                        <Icon v-if="notification.type.includes('urgent')" size="30" type="md-stopwatch" color="#F4B894" />
+                                    <div v-else-if="notification.type == 1" class="col-12 p-0">
+                                        <Icon size="30" type="md-stopwatch" color="#F4B894" />
                                     </div>
-                                    <div class="col-6 p-0">
-                                        <Icon v-if="notification.type.includes('important')" size="30" type="ios-warning-outline" color="#F26A5A" />
+                                    <div v-else-if="notification.type == 2" class="col-12 p-0">
+                                        <Icon size="30" type="ios-warning-outline" color="#F26A5A" />
+                                    </div>
+                                    <div v-else-if="notification.type == 3" class="col-12 p-0 row m-0">
+                                        <div class="col-6">
+                                            <Icon size="30" type="md-stopwatch" color="#F4B894" />
+                                        </div>
+                                        <div class="col-6">
+                                            <Icon size="30" type="ios-warning-outline" color="#F26A5A" />
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="posted-item-info-views">

@@ -37,9 +37,9 @@ class NotificationController extends Controller
             $calcPeriod = date_diff($from, $to)->days;
             $notificationData['period'] = $calcPeriod;
             //set status of notification by comparing now and StartTime
-            $nowTime = date("Y-m-d");
-            $pieces = explode(" ", $from->date);
-            if ( $pieces[0] > $nowTime) 
+            $nowTime = new DateTime(date("Y-m-d H:i:s"));
+            // $pieces = explode(" ", $from->date);
+            if ( $from > $nowTime) 
                     $notificationData['status'] = "before";
                 else
                     $notificationData['status'] = "ongoing";
@@ -156,7 +156,7 @@ class NotificationController extends Controller
         $notificationData['aptId'] = $aptId;
         $notificationData['title'] = $request->title;
         $notificationData['content'] = $request->content;
-        $notificationData['type'] = json_encode($request->type);
+        $notificationData['type'] = $request->type;
         $notificationData['upload_file'] = json_encode($request->upload_file);
         if(is_array($request->period)){
             $notificationData['periodFrom'] = $request->period[0];
@@ -167,26 +167,26 @@ class NotificationController extends Controller
             $calcPeriod = date_diff($from, $to)->days;
             $notificationData['period'] = $calcPeriod;
             //set status of notification by comparing now and StartTime
-            $nowTime = date("Y-m-d");
-            $pieces = explode(" ", $from->date);
-            if ( $pieces[0] > $nowTime) 
+            $nowTime = new DateTime(date("Y-m-d H:i:s"));
+            // $pieces = explode(" ", $from->date);
+            if ( $from > $nowTime) 
                     $notificationData['status'] = "before";
                 else
                     $notificationData['status'] = "ongoing";
         } else{
             $notificationData['period'] = $request->period;
             if($request->period == "forever"){
-                $nowTime = date("Y-m-d");
+                $nowTime = new DateTime(date("Y-m-d H:i:s"));
                 $notificationData['periodFrom'] = $nowTime;
             }
             elseif($request->period == "week"){
-                $nowTime = date("Y-m-d");
+                $nowTime = new DateTime(date("Y-m-d H:i:s"));
                 $endTime = date('Y-m-d', strtotime($nowTime. ' + 7 days'));
                 $notificationData['periodFrom'] = $nowTime;
                 $notificationData['periodTo'] = $endTime;
             }
             elseif($request->period == "month"){
-                $nowTime = date("Y-m-d");
+                $nowTime = new DateTime(date("Y-m-d H:i:s"));
                 $endTime = date('Y-m-d', strtotime($nowTime. ' + 30 days'));
                 $notificationData['periodFrom'] = $nowTime;
                 $notificationData['periodTo'] = $endTime;

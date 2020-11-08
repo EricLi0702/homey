@@ -33,6 +33,6 @@ class ProfileController extends Controller
         $user->save();
         return response()->json([
             'msg' => "ok"
-        ], 204);
+        ], 200);
     }
 }

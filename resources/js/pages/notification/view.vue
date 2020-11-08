@@ -45,9 +45,13 @@
                             <img :src="`${baseUrl}${details.user_id.user_avatar}`" class="rounded-circle profile-photo mr-1" alt="">
                         </div>
                         <div class="icons">
-                            <Icon v-if="details.type.includes('common')" size="21" type="md-hand" color="#BFD23A"/>
-                            <Icon v-if="details.type.includes('urgent')" size="21" type="md-stopwatch" color="#F4B894" />
-                            <Icon v-if="details.type.includes('important')" size="21" type="ios-warning-outline" color="#F26A5A" />
+                            <Icon v-if="details.type == 0" size="21" type="md-hand" color="#BFD23A"/>
+                            <Icon v-else-if="details.type == 1" size="21" type="md-stopwatch" color="#F4B894" />
+                            <Icon v-else-if="details.type == 2" size="21" type="ios-warning-outline" color="#F26A5A" />
+                            <div v-else-if="details.type == 3">
+                                <Icon size="21" type="md-stopwatch" color="#F4B894" />
+                                <Icon size="21" type="ios-warning-outline" color="#F26A5A" />
+                            </div>
                         </div>
                     </div>
                     

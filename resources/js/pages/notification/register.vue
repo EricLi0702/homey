@@ -13,21 +13,14 @@
                             <p>{{$t('notification').Type}}</p>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" value="common" v-model="registerNotificationData.type">
-                                    <Icon size="35" type="md-hand" color="#BFD23A"/>
-                                    <span style="color:#BFD23A">{{$t('notification').Common}}</span>
-                                </label>
-                            </div>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" value="urgent" v-model="registerNotificationData.type">
+                                    <i-switch @on-change="insertTypeUrgent" class="mb-2" />
                                     <Icon size="35" type="md-stopwatch" color="#F4B894" />
                                     <span style="color:#F4B894">{{$t('notification').Urgent}}</span>
                                 </label>
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" value="important" v-model="registerNotificationData.type">
+                                    <i-switch @on-change="insertTypeImportant" class="mb-2" />
                                     <Icon size="35" type="ios-warning-outline" color="#F26A5A" />
                                     <span style="color:#F26A5A">{{$t('notification').Important}}</span>
                                 </label>
@@ -138,7 +131,7 @@ export default {
                 title: '',
                 desc: '',
                 period: '',
-                type: ['common'],
+                type: 0,
                 isDraft: null,
                 file:{
                     imgUrl:[],
@@ -162,10 +155,21 @@ export default {
 
             //draft
             isSavingDraft: false,
+            //fix type
+            isUrgent:  false,
+            isImportant: false
         }
     },
 
     methods:{
+        insertTypeUrgent(){
+            this.isUrgent = !this.isUrgent;
+        },
+
+        insertTypeImportant(){
+            this.isImportant = !this.isImportant;
+        },
+
         toggleEmo(){
             this.emoStatus = !this.emoStatus;
         },
@@ -192,9 +196,7 @@ export default {
             if(this.registerNotificationData.title.trim() == ''){
                 return this.error('Title is required')
             }
-            if(this.registerNotificationData.type.length == 0){
-                return this.error('Type is required')
-            }
+        
             if(this.periodType == 'withPeriod'){
                 this.registerNotificationData.period = this.initPeriod;
                 if(this.registerNotificationData.period.trim() == ''){
@@ -209,14 +211,30 @@ export default {
             if(this.registerNotificationData.desc.trim() == ''){
                 return this.error('Description is required')
             }
+
+            if(this.isUrgent == true){
+                this.registerNotificationData.type = 1;
+            }
+            if(this.isImportant == true){
+                this.registerNotificationData.type = 2;
+            }
+            if(this.isUrgent == true && this.isImportant == true){
+                this.registerNotificationData.type = 3;
+            }
+
+            if(this.isUrgent == false && this.isImportant == false){
+                this.registerNotificationData.type = 0;
+            }
+
             this.isRegistering = true;
+
 
             await registerNotification(this.registerNotificationData)
             .then(res=>{
                 this.registerNotificationData.title = '';
                 this.registerNotificationData.desc = '';
                 this.registerNotificationData.period = '';
-                this.registerNotificationData.type =  ['common'];
+                this.registerNotificationData.type =  0;
                 this.$router.push({path:'/notification/index'})
             })
             .catch(err=>{
@@ -229,9 +247,6 @@ export default {
             if(this.registerNotificationData.title.trim() == ''){
                 return this.error('Title is required')
             }
-            if(this.registerNotificationData.type.length == 0){
-                return this.error('Type is required')
-            }
             if(this.periodType == 'withPeriod'){
                 this.registerNotificationData.period = this.initPeriod;
                 if(this.registerNotificationData.period.trim() == ''){
@@ -246,6 +261,20 @@ export default {
             if(this.registerNotificationData.desc.trim() == ''){
                 return this.error('Description is required')
             }
+            if(this.isUrgent == true){
+                this.registerNotificationData.type = 1;
+            }
+            if(this.isImportant == true){
+                this.registerNotificationData.type = 2;
+            }
+            if(this.isUrgent == true && this.isImportant == true){
+                this.registerNotificationData.type = 3;
+            }
+
+            if(this.isUrgent == false && this.isImportant == false){
+                this.registerNotificationData.type = 0;
+            }
+
             this.registerNotificationData.isDraft = true;
             this.isSavingDraft = true;
 
@@ -254,7 +283,7 @@ export default {
                 this.registerNotificationData.title = '';
                 this.registerNotificationData.desc = '';
                 this.registerNotificationData.period = '';
-                this.registerNotificationData.type =  ['common'];
+                this.registerNotificationData.type =  0;
                 this.$router.push({path:'/notification/index'})
             })
             .catch(err=>{
@@ -271,9 +300,9 @@ export default {
                 filePath = fileName.imgUrl
             }
 
-            let file = {fileName:filePath}
+            
 
-            await delUploadFile(file)
+            await delUploadFile(filePath)
             .then(res=>{
                     if(type == 'image'){
                         this.registerNotificationData.file.imgUrl.pop(fileName)

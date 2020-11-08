@@ -96,9 +96,9 @@ export default {
                 filePath = fileName.imgUrl
             }
 
-            let file = {fileName:filePath}
+            
 
-            await delUploadFile(file)
+            await delUploadFile(filePath)
             .then(res=>{
                     if(type == 'image'){
                         this.createSuggestionData.file.imgUrl.pop(fileName)

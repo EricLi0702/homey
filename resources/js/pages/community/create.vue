@@ -197,10 +197,9 @@ export default {
             }else {
                 filePath = fileName.imgUrl
             }
-
-            let file = {fileName:filePath}
-
-            await delUploadFile(file)
+            
+            
+            await delUploadFile(filePath)
             .then(res=>{
                     if(type == 'image'){
                         this.registerCommunityData.upload_file.imgUrl.pop(fileName)

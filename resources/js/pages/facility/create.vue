@@ -184,9 +184,9 @@ export default {
                 filePath = fileName.imgUrl
             }
 
-            let file = {fileName:filePath}
+            
 
-            await delUploadFile(file)
+            await delUploadFile(filePath)
             .then(res=>{
                     if(type == 'image'){
                         this.createFacilityData.file.imgUrl.pop(fileName)
