@@ -76,6 +76,14 @@
                         </div>
                     </div>
                 </div>
+                <div v-if="details !== null" class="navigte-item d-flex justify-content-center mt-3">
+                        <ButtonGroup shape="circle">
+                            <Button @click="getFirstItem" type="primary" icon="ios-skip-backward"></Button>
+                            <Button @click="getPreviousItem" type="primary" icon="md-arrow-round-back"></Button>
+                            <Button @click="getNextItem" type="primary" icon="md-arrow-round-forward"></Button>
+                            <Button @click="getLastItem" type="primary" icon="ios-skip-forward"></Button>
+                        </ButtonGroup>
+                    </div>
                 <div v-if="isCommenting" class="posted-item mt-3 p-2 animate__animated animate__fadeIn">
                     <div class="reply-form-comment row p-2">
                         <Input v-model="commentData" type="textarea" placeholder="Leave your comment..." />
@@ -175,6 +183,10 @@ import {
     deleteCommunity,
     deleteComment,
     replyToComment,
+    getFirstItem,
+    getLastItem,
+    getPreviousItem,
+    getNextItem
 } from '~/api/community'
 
 export default {
@@ -246,6 +258,51 @@ export default {
     },
 
     methods:{
+        getPreviousItem(){
+            getPreviousItem(this.communityId)
+            .then(res=>{
+                if(res.data == ""){
+                    return this.error("This is the first.");
+                }
+                this.$router.push({ path:`/community/${res.data}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+        
+        getNextItem(){
+            getNextItem(this.communityId)
+            .then(res=>{
+                if(res.data == ""){
+                    return this.error("This is the last.");
+                }
+                this.$router.push({ path:`/community/${res.data}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
+        getFirstItem(){
+            getFirstItem()
+            .then(res=>{
+                this.$router.push({ path:`/community/${res.data}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
+        getLastItem(){
+            getLastItem()
+            .then(res=>{
+                this.$router.push({ path:`/community/${res.data}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
 
         editCommunity(community){
             if(community.comment_cnt == null ){

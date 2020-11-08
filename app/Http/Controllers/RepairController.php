@@ -47,7 +47,7 @@ class RepairController extends Controller
                             ->where([['isDraft','=',0]])
                             ->where([['aptId','=',Auth::user()->aptId]])
                             ->orderBy('created_at','desc')
-                            ->paginate(2);
+                            ->paginate(5);
 
         }
         else{
@@ -56,7 +56,7 @@ class RepairController extends Controller
                             ->where([['aptId','=',Auth::user()->aptId]])
                             ->where([['userId','=',Auth::user()->id]])
                             ->orderBy('created_at','desc')
-                            ->paginate(2);
+                            ->paginate(5);
         }
     }
 

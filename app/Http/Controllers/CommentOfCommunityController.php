@@ -51,7 +51,7 @@ class CommentOfCommunityController extends Controller
                                     ->where('coId', $id)
                                     ->orderby('parentId', 'desc')
                                     ->orderby('seq')
-                                    ->paginate(2);
+                                    ->paginate(5);
     }
 
     public function removeComment(Request $request)

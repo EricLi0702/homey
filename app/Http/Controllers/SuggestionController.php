@@ -40,7 +40,7 @@ class SuggestionController extends Controller
     public function index(Request $request){
         return Suggestion::with('userId')
                         ->where([['isDraft','=',0]])
-                        ->orderBy('updated_at','desc')->paginate(2);
+                        ->orderBy('updated_at','desc')->paginate(5);
     }
 
     public function remove(Request $request)
@@ -278,5 +278,37 @@ class SuggestionController extends Controller
             'registerCnt'=>$registerUserCnt,
             'currentCnt'=>$currentUserCnt
         ]);
+    }
+
+    public function getFirstItemID()
+    {
+        return Suggestion::first()->id;
+    }
+
+    public function getLastItemID()
+    {
+        return Suggestion::orderBy('id', 'desc')->first()->id;
+    }
+
+    public function getPreviousItemID(Request $request)
+    {
+        $previousItem = Suggestion::where('id', '<', $request->id)->orderBy('id','desc')->first();
+        if($previousItem == null){
+            return null;
+        }
+        else{
+            return $previousItem->id;
+        }
+    }
+
+    public function getNextItemID(Request $request)
+    {
+        $nextItem = Suggestion::where('id', '>', $request->id)->orderBy('id')->first();
+        if($nextItem == null){
+            return null;
+        }
+        else{
+            return $nextItem->id;
+        }
     }
 }

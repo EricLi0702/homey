@@ -44,6 +44,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('notification/down', 'NotificationController@downgrade');
     Route::put('notification/up', 'NotificationController@upgrade');
     Route::get('notification/downgrade', 'NotificationController@indexDowngrade');
+    Route::get('notification/first', 'NotificationController@getFirstItemID');
+    Route::get('notification/last', 'NotificationController@getLastItemID');
+    Route::get('notification/previous', 'NotificationController@getPreviousItemID');
+    Route::get('notification/next', 'NotificationController@getNextItemID');
     
     Route::post('facility/create', 'FacilityController@store');
     Route::get('facility', 'FacilityController@index');
@@ -65,10 +69,15 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('community/remove', 'CommunityController@remove');
     Route::put('community/update', 'CommunityController@update');
     Route::post('community/view', 'CommunityController@addView');
+    Route::get('community/first', 'CommunityController@getFirstItemID');
+    Route::get('community/last', 'CommunityController@getLastItemID');
+    Route::get('community/previous', 'CommunityController@getPreviousItemID');
+    Route::get('community/next', 'CommunityController@getNextItemID');
     Route::post('community/comment', 'CommentOfCommunityController@leaveComment');
     Route::get('community/comment', 'CommentOfCommunityController@getComment');
     Route::put('community/comment', 'CommentOfCommunityController@removeComment');
     Route::post('community/reply', 'CommentOfCommunityController@replyToComment');
+    
 
 
     Route::post('suggestion/create', 'SuggestionController@store');
@@ -76,6 +85,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('suggestion/current', 'SuggestionController@getCurrent');
     Route::put('suggestion/remove', 'SuggestionController@remove');
     Route::put('suggestion/update', 'SuggestionController@update');
+    Route::get('suggestion/first', 'SuggestionController@getFirstItemID');
+    Route::get('suggestion/last', 'SuggestionController@getLastItemID');
+    Route::get('suggestion/previous', 'SuggestionController@getPreviousItemID');
+    Route::get('suggestion/next', 'SuggestionController@getNextItemID');
     
     Route::post('suggestion/comment', 'CommentOfSuggestionController@leaveComment');
     Route::get('suggestion/comment', 'CommentOfSuggestionController@getComment');

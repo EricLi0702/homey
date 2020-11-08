@@ -1110,3 +1110,7 @@ a.text-dark:hover, a.text-dark:focus {
     color: #023353;
     text-shadow:  2px 2px 2px gray;
 }
+
+.post-content img{
+    width: 100%;
+}

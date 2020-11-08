@@ -108,6 +108,14 @@
                             </div>
                         </div>                 
                     </div>
+                    <div v-if="details !== null" class="navigte-item d-flex justify-content-center mt-3">
+                        <ButtonGroup shape="circle">
+                            <Button @click="getFirstItem" type="primary" icon="ios-skip-backward"></Button>
+                            <Button @click="getPreviousItem" type="primary" icon="md-arrow-round-back"></Button>
+                            <Button @click="getNextItem" type="primary" icon="md-arrow-round-forward"></Button>
+                            <Button @click="getLastItem" type="primary" icon="ios-skip-forward"></Button>
+                        </ButtonGroup>
+                    </div>
                     <div v-if="isCommenting" id="commentArea" class="posted-item mt-3 p-2 animate__animated animate__fadeIn">
                         <div class="reply-form-comment row p-2">
                             <Input v-model="commentData" type="textarea" :placeholder="$t('suggest').UpdateSuggestion" />
@@ -192,6 +200,10 @@ import {
     unDislikeToSuggestion,
     deleteSuggestion,
     deleteComment,
+    getFirstItem,
+    getLastItem,
+    getPreviousItem,
+    getNextItem
 } from '~/api/suggestion'
 
 import Category from './category'
@@ -218,7 +230,7 @@ export default {
             like_mine:false,
             dislike_mine:false,
             details:null,
-            suggetionId:null,
+            suggestionId:null,
             playerOptions: {
             // videojs options
                 height:'350',
@@ -258,7 +270,7 @@ export default {
 
     created(){
         // console.log(this.currentPath)
-        this.suggetionId = this.currentPath.params.id;
+        this.suggestionId = this.currentPath.params.id;
         this.getCurrentSuggestion();
     },
     mounted(){
@@ -267,6 +279,53 @@ export default {
         // this.details = JSON.parse(this.currentPath.query.details)
     },
     methods:{
+
+        getPreviousItem(){
+            getPreviousItem(this.suggestionId)
+            .then(res=>{
+                if(res.data == ""){
+                    return this.error("This is the first.");
+                }
+                this.$router.push({ path:`/suggestion/${res.data}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+        
+        getNextItem(){
+            getNextItem(this.suggestionId)
+            .then(res=>{
+                if(res.data == ""){
+                    return this.error("This is the last.");
+                }
+                this.$router.push({ path:`/suggestion/${res.data}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
+        getFirstItem(){
+            getFirstItem()
+            .then(res=>{
+                this.$router.push({ path:`/suggestion/${res.data}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
+        getLastItem(){
+            getLastItem()
+            .then(res=>{
+                this.$router.push({ path:`/suggestion/${res.data}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
         editSuggestion(suggestion){
             if(suggestion.comment_cnt == null ){
                 this.$router.push({name:'suggestion.update',params:{updateSuggestionData:suggestion}})
@@ -338,7 +397,7 @@ export default {
         },
 
         getCurrentSuggestion(){
-            getCurrentSuggestionFromServer(this.suggetionId)
+            getCurrentSuggestionFromServer(this.suggestionId)
             .then(res=>{
                 console.log("ddd",res.data.suggestionData);
                 this.details = res.data.suggestionData;
@@ -365,7 +424,7 @@ export default {
             }
             let vm = this;
             setTimeout(() => {
-                getCommentsOfCurrentSuggestion(this.pageOfComments, this.suggetionId)
+                getCommentsOfCurrentSuggestion(this.pageOfComments, this.suggestionId)
                 .then(res=>{
                     vm.lastpageOfComments = res.data.last_page;
 

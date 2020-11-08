@@ -69,6 +69,19 @@ function getSuggestionCnt(userId){
     return axios.get('/api/suggestionCnt',{params:{id:userId}});
 }
 
+function getFirstItem(){
+    return axios.get('/api/suggestion/first')
+}
+function getLastItem(){
+    return axios.get('/api/suggestion/last')
+}
+function getPreviousItem(notificationId){
+    return axios.get('/api/suggestion/previous', {params:{id:notificationId}})
+}
+function getNextItem(notificationId){
+    return axios.get('/api/suggestion/next', {params:{id:notificationId}})
+}
+
 export{
     getSuggestionList,
     registerSuggestion,
@@ -87,4 +100,8 @@ export{
     viewCurrentSuggestion,
     getTop5Suggestion,
     getSuggestionCnt,
+    getFirstItem,
+    getLastItem,
+    getPreviousItem,
+    getNextItem,
 }

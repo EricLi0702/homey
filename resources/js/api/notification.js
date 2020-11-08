@@ -44,6 +44,19 @@ function getNotificationCnt(userId){
     return axios.get('/api/notificationCnt',{params:{id:userId}})
 }
 
+function getFirstItem(){
+    return axios.get('/api/notification/first')
+}
+function getLastItem(){
+    return axios.get('/api/notification/last')
+}
+function getPreviousItem(notificationId){
+    return axios.get('/api/notification/previous', {params:{id:notificationId}})
+}
+function getNextItem(notificationId){
+    return axios.get('/api/notification/next', {params:{id:notificationId}})
+}
+
 export{
     getNotificationList,
     registerNotification,
@@ -56,4 +69,8 @@ export{
     getDowngradNotificationList,
     getTop5Notification,
     getNotificationCnt,
+    getFirstItem,
+    getLastItem,
+    getPreviousItem,
+    getNextItem,
 }

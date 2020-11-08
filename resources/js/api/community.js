@@ -54,6 +54,20 @@ function getCommunityCnt(userId){
     return axios.get('/api/communityCnt',{params:{id:userId}});
 }
 
+function getFirstItem(){
+    return axios.get('/api/community/first')
+}
+function getLastItem(){
+    return axios.get('/api/community/last')
+}
+function getPreviousItem(notificationId){
+    return axios.get('/api/community/previous', {params:{id:notificationId}})
+}
+function getNextItem(notificationId){
+    return axios.get('/api/community/next', {params:{id:notificationId}})
+}
+
+
 export{
     getCommunityList,
     registerCommunity,
@@ -67,4 +81,8 @@ export{
     viewCurrentCommunity,
     getTop5Community,
     getCommunityCnt,
+    getFirstItem,
+    getLastItem,
+    getPreviousItem,
+    getNextItem,
 }

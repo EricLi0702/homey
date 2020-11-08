@@ -58,7 +58,7 @@ class CommentOfSuggestionController extends Controller
         return CommentOfSuggestion::with('userId')
                                     ->where('suId', $id)
                                     ->orderBy('created_at','desc')
-                                    ->paginate(2);
+                                    ->paginate(5);
     }
 
     public function removeComment(Request $request)

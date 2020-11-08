@@ -76,7 +76,7 @@ class CommunityController extends Controller
         return Community::with('userId')
                         ->where([['aptId', '=', Auth::user()->aptId]])
                         ->where([['status', '=', 'ongoing']])
-                        ->orderBy('updated_at','desc')->paginate(2);
+                        ->orderBy('updated_at','desc')->paginate(5);
     }
 
     public function getCurrent(Request $request){
@@ -146,7 +146,7 @@ class CommunityController extends Controller
         }
         else{
             return response()->json([
-                'msg' => "You can no longer update your suggestion.",
+                'msg' => "You can no longer update your Community.",
             ], 423);
         }
     }
@@ -220,4 +220,36 @@ class CommunityController extends Controller
             'currentCnt'=>$currentUserCnt
         ]);
     }   
+
+    public function getFirstItemID()
+    {
+        return Community::first()->id;
+    }
+
+    public function getLastItemID()
+    {
+        return Community::orderBy('id', 'desc')->first()->id;
+    }
+
+    public function getPreviousItemID(Request $request)
+    {
+        $previousItem = Community::where('id', '<', $request->id)->orderBy('id','desc')->first();
+        if($previousItem == null){
+            return null;
+        }
+        else{
+            return $previousItem->id;
+        }
+    }
+
+    public function getNextItemID(Request $request)
+    {
+        $nextItem = Community::where('id', '>', $request->id)->orderBy('id')->first();
+        if($nextItem == null){
+            return null;
+        }
+        else{
+            return $nextItem->id;
+        }
+    }
 }

@@ -118,6 +118,14 @@
                         </div>
                     </div>                  -->
                 </div>
+                <div v-if="details !== null" class="navigte-item d-flex justify-content-center mt-3">
+                    <ButtonGroup shape="circle">
+                        <Button @click="getFirstItem" type="primary" icon="ios-skip-backward"></Button>
+                        <Button @click="getPreviousItem" type="primary" icon="md-arrow-round-back"></Button>
+                        <Button @click="getNextItem" type="primary" icon="md-arrow-round-forward"></Button>
+                        <Button @click="getLastItem" type="primary" icon="ios-skip-forward"></Button>
+                    </ButtonGroup>
+                </div>
             </div>
         </div>
     </div>
@@ -138,7 +146,11 @@ import {
     viewedCurrentNotification, 
     downgradeNotification, 
     upgradeNotification,
-    deleteNotification
+    deleteNotification,
+    getFirstItem,
+    getLastItem,
+    getPreviousItem,
+    getNextItem
 } from '~/api/notification'
 
 export default {
@@ -189,6 +201,52 @@ export default {
     },
 
     methods:{
+        getPreviousItem(){
+            getPreviousItem(this.notificationId)
+            .then(res=>{
+                if(res.data == ""){
+                    return this.error("This is the first.");
+                }
+                this.$router.push({ path:`/notification/${res.data}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+        
+        getNextItem(){
+            getNextItem(this.notificationId)
+            .then(res=>{
+                if(res.data == ""){
+                    return this.error("This is the last.");
+                }
+                this.$router.push({ path:`/notification/${res.data}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
+        getFirstItem(){
+            getFirstItem()
+            .then(res=>{
+                this.$router.push({ path:`/notification/${res.data}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
+        getLastItem(){
+            getLastItem()
+            .then(res=>{
+                this.$router.push({ path:`/notification/${res.data}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
         editNotification(notification){
             this.$router.push({name:'notification.update',params:{updateNotificationData:notification}})
         },
