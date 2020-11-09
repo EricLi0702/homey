@@ -64,8 +64,13 @@ class CommunityController extends Controller
             }
         }
         $community = Community::create($communityData); 
-        
-        broadcast(new NewCommunity($community))->toOthers();
+
+        $broadcastingData['id'] = $community->id;
+        $broadcastingData['userId'] = Auth::user()->id;
+        $broadcastingData['userName'] = Auth::user()->name;
+        $broadcastingData['userAvatar'] = Auth::user()->user_avatar;
+        $broadcastingData['title'] = $request->title;
+        broadcast(new NewCommunity($broadcastingData))->toOthers();
 
         return response()->json([
             'community' => $community

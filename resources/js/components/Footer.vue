@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-xl-4 col-md-4 mb-30 p-0">
                         <div class="single-cta d-flex justify-content-start align-items-start ">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <Icon type="md-locate" color="#FF5E14" size="30"/>
                             <div class="cta-text">
                                 <h4>{{ $t('welcome').FindUs }}</h4>
                                 <span>{{ $t('welcome').AvenueAddress }}</span>
@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-xl-4 col-md-4 mb-30 p-0 pl-md-2">
                         <div class="single-cta d-flex justify-content-start align-items-start">
-                            <i class="fas fa-phone"></i>
+                            <Icon type="ios-phone-portrait" color="#FF5E14" size="30" />
                             <div class="cta-text">
                                 <h4>{{ $t('welcome').CallUs }}</h4>
                                 <span>{{ $t('welcome').CellNum }}</span>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-xl-4 col-md-4 mb-30 p-0 pl-md-3">
                         <div class="single-cta d-flex justify-content-start align-items-start">
-                            <i class="far fa-envelope-open"></i>
+                            <Icon type="md-mail-open" color="#FF5E14" size="30" />
                             <div class="cta-text">
                                 <h4>{{ $t('welcome').MailUs }}</h4>
                                 <span>{{ $t('welcome').HomeyCom }}</span>

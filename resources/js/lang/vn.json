@@ -1,14 +1,14 @@
 {
     "welcome":{
-        "Vapartment": "Căn hộ V",
-        "WelcomeVapartment":"Chào mừng đến với hệ thống dịch vụ căn hộ V của chúng tôi",
+        "Vapartment": "The Link 345",
+        "WelcomeVapartment":"Chào mừng đến với hệ thống dịch vụ The Link 345 của chúng tôi",
         "GetStart":"Bắt đầu",
         "Notification":"Thông báo",
         "detail":"chi tiết",
         "PublicFacility":"Cơ sở công cộng",
-        "advertisement":"quảng cáo",
-        "VApartmentManagementSystem":"Hệ thống quản lý căn hộ V",
-        "LadiesAndGentleMen":"Thưa quý vị và các đấng mày râu. Lần này chung cư chúng tôi đã mở đơn đăng ký căn hộ để thuận tiện cho cư dân. Thông qua việc quản lý chung cư minh bạch và sạch sẽ hơn, chúng tôi sẽ tạo ra những căn hộ mà cư dân có thể ở. Hệ thống V-Apartment mang đến sự sang trọng Nằm ở phía tây Las Vegas, NV, gần Thung lũng Mùa xuân, Spectrum là nơi lý tưởng cho những ai tìm kiếm sự thoải mái, những người tìm kiếm một đẳng cấp cao hơn trong sự sang trọng của căn hộ và những người chỉ đơn giản muốn có một trải nghiệm căn hộ tốt hơn. Bạn xứng đáng không chỉ một ngôi nhà, nhưng là một tổ ấm, một cộng đồng và sự yên tâm. Hãy tìm tất cả những điều đó tại Spectrum. Sơ đồ mặt bằng nhà phố một và hai phòng ngủ của chúng tôi chào đón bạn về nhà với những chi tiết chu đáo, bao gồm máy lạnh, tủ quần áo không cửa ngăn rộng rãi, một giếng- bếp được trang bị, quạt trần và thiết bị báo động đột nhập. Mỗi căn hộ đều có vị trí tuyệt vời. Chúng tôi xin quý vị ủng hộ rộng rãi cho sự phát triển của ban quản lý chung cư trong tương lai. Kính gửi quý cư dân yêu mến và quan tâm đối với Miding Florence của chúng tôi, tôi hy vọng bạn sẽ luôn khỏe mạnh và hạnh phúc. Cảm ơn bạn.",
+        "advertisement":"Giới thiệu căn hộ",
+        "VApartmentManagementSystem":"Hệ thống quản lý The Link 345",
+        "LadiesAndGentleMen":"Thưa quý vị và các đấng mày râu. Lần này chung cư chúng tôi đã mở đơn đăng ký căn hộ để thuận tiện cho cư dân. Thông qua việc quản lý chung cư minh bạch và sạch sẽ hơn, chúng tôi sẽ tạo ra những căn hộ mà cư dân có thể ở. Hệ thống The Link 345 mang đến sự sang trọng Nằm ở phía tây Las Vegas, NV, gần Thung lũng Mùa xuân, Spectrum là nơi lý tưởng cho những ai tìm kiếm sự thoải mái, những người tìm kiếm một đẳng cấp cao hơn trong sự sang trọng của The Link 345à những người chỉ đơn giản muốn có một trải nghiệm căn hộ tốt hơn. Bạn xứng đáng không chỉ một ngôi nhà, nhưng là một tổ ấm, một cộng đồng và sự yên tâm. Hãy tìm tất cả những điều đó tại Spectrum. Sơ đồ mặt bằng nhà phố một và hai phòng ngủ của chúng tôi chào đón bạn về nhà với những chi tiết chu đáo, bao gồm máy lạnh, tủ quần áo không cửa ngăn rộng rãi, một giếng- bếp được trang bị, quạt trần và thiết bị báo động đột nhập. Mỗi căn hộ đều có vị trí tuyệt vời. Chúng tôi xin quý vị ủng hộ rộng rãi cho sự phát triển của ban quản lý chung cư trong tương lai. Kính gửi quý cư dân yêu mến và quan tâm đối với Miding Florence của chúng tôi, tôi hy vọng bạn sẽ luôn khỏe mạnh và hạnh phúc. Cảm ơn bạn.",
         "PrivateBalconies":"Ban công riêng_Patios",
         "AirConditioning":"Điều hòa nhiệt độ",
         "CableReady":"Sẵn sàng cho cáp",
@@ -18,11 +18,11 @@
         "SpaciousWalk":"Đi bộ rộng rãi trong tủ và đi dạo",
         "Ceilings":"Trần nhà 9ft",
         "SpectacularViews":"Có sẵn lượt xem ngoạn mục",
-        "VapartmentServices":"Dịch vụ căn hộ V",
+        "VapartmentServices":"Dịch vụ The Link 345",
         "UPDATE":"CẬP NHẬT",
         "DECORATION":"TRANG TRÍ",
         "ServicesDetails":"Chi tiết dịch vụ",
-        "VapartmentVideo":"Video căn hộ V",
+        "VapartmentVideo":"Video The Link 345",
         "OtherFeatures":"Các tính năng & dịch vụ khác",
         "GuestParking":"Chỗ đậu xe cho khách",
         "EasyFreewayAccess":"Truy cập đường cao tốc dễ dàng",
@@ -30,8 +30,8 @@
         "JoinOurCommunity":"Tham gia cộng đồng của chúng tôi",
         "CallOrEmail":"Gọi hoặc gửi email cho chúng tôi để cập nhật ngay hôm nay. Hãy đến xem trực tiếp trang chủ cập nhật của bạn và các tính năng cộng đồng.",
         "JoinCommunity":"Tham gia cộng đồng",
-        "GALLERY":"GALLERY OF V CĂN HỘ",
-        "OnlinePhots":"Chụp ảnh trực tuyến các căn hộ V của chúng tôi theo yêu cầu của bạn, chúng tôi có thể giúp bạn.",
+        "GALLERY":"GALLERY OF The Link 345",
+        "OnlinePhots":"Chụp ảnh trực tuyến các The Link 345 của chúng tôi theo yêu cầu của bạn, chúng tôi có thể giúp bạn.",
         "ApartmentLiving":"Căn hộ sống",
         "Spectrum":"Sống tại Spectrum đặt mọi thứ bạn cần và yêu thích trong tầm tay. Vị trí trung tâm của chúng tôi nằm trong khoảng cách đi bộ đến hai cửa hàng tạp hóa, hiệu thuốc, bệnh viện và đường vành đai. Bạn sẽ tìm thấy một kiểu sống khác ở đây tại Spectrum - một đặc trưng bởi sự dễ dàng và sang trọng.",
         "HomeyApt":"Ứng dụng gia đình",
@@ -45,7 +45,11 @@
         "NName":"Sammie",
         "TermsUse":"Điều khoản Sử dụng",
         "PrivacyPolicy":"Chính sách Bảo mật",
-        "suggestion":"Đề xuất"
+        "suggestion":"Đề xuất",
+        "readmore":"đọc thêm",
+        "readless":"đọc ít hơn",
+        "REPAIR":"SỬA",
+        "APTservice":"Homey đã được thành lập bởi Dịch vụ Căn hộ để cung cấp một giải pháp chỗ ở tại các điểm đến mà các lựa chọn phù hợp hiện không tồn tại và để giảm chi phí nhà ở tạm thời. Homey sẽ tạo nguồn, tạo và quản lý chỗ ở phù hợp chính xác với vị trí và thời gian lưu trú theo yêu cầu của cả cá nhân và nhóm trên khắp Việt Nam."
         
     },
     "setting":{
@@ -93,7 +97,10 @@
         "loginHere":"đăng nhập tại đây",
         "enterPass":"Nhập mật khẩu",
         "enterEmail":"Nhập email",
-        "enterConfirmPass":"Nhập mật khẩu xác nhận"
+        "enterConfirmPass":"Nhập mật khẩu xác nhận",
+        "verificationEmailCode": "Nhập mã được gửi đến email",
+        "dong": "-dong",
+        "ho": "-ho"
     },
     "common":{
         "name":"tên",

@@ -1,6 +1,7 @@
 //Change pos/background/padding/add shadow on nav when scroll event happens 
-$(function(){
-	let navbar = document.getElementsByClassName("navbar");
+
+$( document ).ready(function() {
+    let navbar = document.getElementsByClassName("navbar");
 	let dropdownMenu = document.getElementsByClassName("dropdown-menu");
 	let dropdownItem = document.getElementsByClassName("dropdown-item");
 
@@ -38,6 +39,7 @@ $(function(){
 		}
 	});
 });
+
 
 
 // Y axis scroll speed

@@ -13,25 +13,23 @@
                         <h4>{{ $t('welcome').WelcomeVapartment }}</h4>
                     </div>
                     <div class="btn col-md-12 mt-5">
-                        <Button shape="circle" size="large" type="primary" style="height: 58px; padding: 4px 50px;" @click="getStart">{{ $t('welcome').GetStart }}</Button>
+                        <Button shape="circle" size="large" type="primary" class="wel-btn"  @click="getStart">{{ $t('welcome').GetStart }}</Button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="content container d-flex align-items-center justify-content-center my-4">
+    <div class="content container d-flex align-items-center justify-content-center my-4 pt-4">
         <div class="row m-0 p-0">
-            <div class="col-md-12 col-sm-12 col-12">
-                <div class="content-title col-md-12 d-flex  align-items-center justify-content-center text-center">
-                    <h2 class="m-5">{{ $t('welcome').VApartmentManagementSystem }}</h2>
-                </div>
+            <div class="col-12 text-center mb-3">
+                <h2 class="section-title">{{ $t('welcome').VApartmentManagementSystem }}</h2>
             </div>
             <div class="col-md-8 col-sm-12 col-12">
                 <div class="main-content col-md-12 d-flex  align-items-center justify-content-center mb-5">
-                    <h5>{{ $t('welcome').LadiesAndGentleMen }}</h5>
+                    <read-more :more-str="$t('welcome').readmore" :text="$t('welcome').LadiesAndGentleMen" link="#" :less-str="$t('welcome').readless" :max-chars="150"></read-more>
                 </div>
             </div>
-            <div class="col-md-4 col-am-12 col-12">
+            <div class="col-md-4 col-sm-12 col-12">
                 <div class="conten-list col-md-12 d-flex  align-items-center justify-content-center">
                     <ul class="">
                         <li>{{ $t('welcome').PrivateBalconies }}</li>
@@ -48,37 +46,67 @@
             </div>
         </div>
     </div>
+    <!--start app video section-->
+    <div id="video-app" class="video-app-1">
+        <div class="overlay-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="video-play-button">
+                            <a @click="openVideoPlayModal" class="video video-play mfp-iframe d-flex align-items-center justify-content-center">
+                                <Icon type="md-play" size="27" class="ml-1"/>
+                            </a>
+                            <Modal
+                                footer-hide	
+                                :mask-closable="false"
+                                v-model="videoPlayModal"
+                                class-name="vertical-center-modal video-play-modal"
+                                >
+                                <video-player  
+                                    class="video-player-box vjs-custom-skin w-100"
+                                    ref="videoPlayer"
+                                    :options="playerOptions"
+                                    :playsinline="true"
+                                    >
+                                </video-player>
+                            </Modal>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img :src="`${baseUrl}/asset/img/bg/bg-wave-sym.png`" alt="shape image" class="img-responsive">
+        </div><!-- end overlay -->
+    </div>
+    <!--end app video section-->
     <div class="second-background container-fluid">
         <div class="second-wrap">
-            <div class="second">  
-            </div>
+            <!-- <div class="second">  
+            </div> -->
             <div class="h-100 d-flex text-center align-items-center justify-content-center ">
                 <div class="attraction">
                     <div class="row p-0 m-0">
                         <div class="a-title col-md-12">
-                            <h1 class="text-white">{{$t('welcome').VApartmentManagementSystem}}</h1>
+                            <h2 class="section-title">{{$t('welcome').VapartmentServices}}</h2>
                         </div>
-                        <div class="a-description col-md-12 mt-5">
-                            <h4 class="text-white">{{$t('welcome').VapartmentServices}}</h4>
-                        </div>
+                        <p class="col-md-6 offset-md-3 col-8 offset-2 pt-2">{{$t('welcome').APTservice}}</p>
                         <hr>
-                        <div class="a-link col-md-12 d-flex justify-content-center mt-5">
-                            <a href="#" class="mr-5">{{$t('welcome').UPDATE}}</a>
-                            <a href="#" class="mr-5">{{$t('welcome').DECORATION}}</a>
-                            <a href="#">{{$t('repair').repair}}</a>
+                        <div class="container d-flex justify-content-between mt-5">
+                            <p class="">{{$t('welcome').UPDATE}}</p>
+                            <p class="">{{$t('welcome').DECORATION}}</p>
+                            <p>{{$t('welcome').REPAIR}}</p>
                         </div>
                         <div class="a-button d-flex col-md-12 align-items-center justify-content-center text-center">
-                            <Button shape="circle" size="large" type="primary" class="mt-5" style="height: 58px; padding: 4px 50px;">{{$t('welcome').ServicesDetails}}</Button>
+                            <Button shape="circle" size="large" type="primary" class="mt-5 wel-btn" >{{$t('welcome').ServicesDetails}}</Button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="service container">
+    <!-- <div class="service container">
         <div class="service-video row p-0 m-0">
             <div class="video-title col-md-12 text-center mt-5">
-                <h2>V-apartment Video{{ $t('welcome').Vapartment }}</h2>
+                <h2>{{ $t('welcome').Vapartment }}</h2>
             </div>
             <div class="video-intro col-md-12 mt-5">
                 <div class="embed-responsive embed-responsive-16by9">
@@ -107,29 +135,29 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="third-background container-fluid">
         <div class="third-wrap">
             <div class="third">  
             </div>
             <div class="h-100 container">
                 <div class="row p-0 m-0">
-                    <div class="join col-md-6 d-flex row p-0  text-md-left text-center align-items-center">
+                    <div class="join col-md-6 d-flex row p-0 m-0 text-md-left text-center align-items-center">
                         <div class="row">
                             <div class="join-title col-md-12">
-                                <p class="m-0 p-0">{{$t('welcome').JoinOurCommunity}}</p>
+                                <p class="m-0 p-0 pt-4">{{$t('welcome').JoinOurCommunity}}</p>
                             </div>
                             <div class="join-content col-md-12">
                                 <p>{{$t('welcome').CallOrEmail}}</p>
                             </div>
                             <div class="join-button col-md-12 mt-5">
-                                <Button shape="circle" size="large" type="primary" style="height: 58px; padding: 4px 50px;">{{$t('welcome').JoinCommunity}}</Button>
+                                <Button shape="circle" size="large" type="primary" class="wel-btn" >{{$t('welcome').JoinCommunity}}</Button>
                             </div>
                         </div>
                     </div>
                     <div class="structure col-md-6 row p-0 mt-2 animate__backInUp animate__animated ">
                         <div class="home-structure col-md-12">
-                            <img :src="`${baseUrl}/asset/img/bg/room-structure.png`" alt="">
+                            <img :src="`${baseUrl}/asset/img/bg/room-structure.png`" alt="" class="p-4">
                         </div>
                     </div>
                 </div>
@@ -139,7 +167,7 @@
     <div class="gallery container-fluid">
         <div class="row p-0 m-0">
             <div class="gallery-title col-md-12 d-flex text-center mt-5">
-                <h2 class="col-md-12 m-0 p-0">{{$t('welcome').GALLERY}}</h2> 
+                <h2 class="col-md-12 m-0 p-0 section-title">{{$t('welcome').GALLERY}}</h2> 
             </div>
             <div class="gallery-content col-md-12 d-flex text-center mt-5">
                 <p class="col-md-12 m-0 p-0">{{$t('welcome').OnlinePhots}}</p>
@@ -194,7 +222,7 @@
     <div class="container-fluid mt-5">
         <div class="row p-0 m-0">
             <div class="add-title col-md-12 row p-0 m-0">
-                <h2 class="col-md-12 d-flex align-items-center justify-content-center row p-0 m-0 text-warning">Apartment Living{{ $t('welcome').Vapartment }}</h2>
+                <h2 class="col-md-12 d-flex align-items-center justify-content-center row p-0 m-0 section-title">{{ $t('welcome').Vapartment }}</h2>
             </div>
             <div class="add-content col-md-12 row p-0 mt-5">
                 <p class="col-md-4 offset-md-4 text-center mb-5">{{$t('welcome').Spectrum}}</p>
@@ -215,7 +243,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import GoogleMapLoader from '~/components/GoogleMapLoader'
-
+import 'video.js/dist/video-js.css'
+import { videoPlayer } from 'vue-video-player'
 export default {
 
   layout: 'default',
@@ -223,21 +252,48 @@ export default {
   metaInfo () {
     return { title: this.$t('home') }
   },
+  components:{
+    videoPlayer,
+  },
 
   data: () => ({
     title: window.config.appName,
     baseUrl:window.base_url,
+    videoPlayModal:false,
+    playerOptions: {
+    // videojs options
+        // autoplay: true,
+        preload: "auto",
+        fluid: true,
+        height:'350',
+        language: 'en',
+        playbackRates: [0.7, 1.0, 1.5, 2.0],
+        sources: [{
+            type: "video/mp4",
+            src: "http://asystem.test/asset/video/bgvideo.mp4"
+            // src: "http://18.183.106.31/asset/video/bgvideo.mp4"
+        }],
+        // poster: "/static/images/author.jpg",
+    },
   }),
 
-  computed: mapGetters({
-    authenticated: 'auth/check'
-  }),
+  computed:{ 
+        ...mapGetters({
+            authenticated: 'auth/check'
+        }),
+        player() {
+            return this.$refs.videoPlayer.player
+        }
+    },
   mounted(){
     
   },
   methods:{
       getStart(){
           this.$router.push({path:'/login'})
+      },
+      openVideoPlayModal(){
+          this.videoPlayModal = true;
       }
   }
 }

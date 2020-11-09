@@ -44,20 +44,6 @@
         <input type="text" v-model="user.ho" class="form-control" id="phoneNumber" placeholder="">
       </div>
     </div>
-    <!-- <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">UserRole</label>
-      <div class="col-sm-10">
-        <select class="mdb-select md-form" v-model="user.buildingId">
-          <option v-for="building in currentUser.apt.building" :key="building.id" :value="building.id">{{building.name}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">Ho</label>
-      <div class="col-sm-10">
-        <input type="email" v-model="user.email" class="form-control" id="email" placeholder="">
-      </div>
-    </div> -->
     <div class="form-group row">
       <label for="inputPassword" class="col-sm-2 col-form-label">UserRole</label>
       <div class="col-sm-10">
@@ -111,6 +97,25 @@ export default {
   },
   methods:{
     async  addUser(){
+      if(this.user.name.trim() == ''){
+        return this.error('Name is required')
+      }
+      if(this.user.email.trim() == ''){
+        return this.error('Email is required')
+      }
+      if(this.user.phoneNumber.trim() == ''){
+        return this.error('Phone number is required')
+      }
+      if(this.user.buildingId == ''){
+        return this.error('Dong is required')
+      }
+      if(this.user.ho.trim() == ''){
+        return this.error('Ho is required')
+      }
+      if(this.user.roleId == ''){
+        return this.error('Role of this user is required')
+      }
+
       this.user.aptId = this.currentUser.apt.id
       console.log('!!!!!!',this.user)
       this.isAdding = true
@@ -128,7 +133,7 @@ export default {
           }
         })
         .catch(err=>{
-          console.log(err)
+          console.log(err);
         })
       this.isAdding = false
     },

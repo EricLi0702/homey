@@ -3,59 +3,53 @@
     <div class="container p-0">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
-          <button class="navbar-toggler" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <!-- <button class="navbar-toggler" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="navbar-toggler-icon" />
-          </button>
-          <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn mt-1rem">
-            <ul class="navbar-nav flex-column">
-              <div v-if="user !== null">
-                <router-link v-if="user.roleId == 1" :to="{ path:'/UserRole' }" class="nav-item dropdown-item" active-class="active">
-                  {{ $t('common').userRole }}
-                </router-link>
-                <div v-if="user.roleId == 1" class="dropdown-divider" />
-
-                <router-link v-if="user.roleId == 1" :to="{ path: '/apartment' }" class="nav-item dropdown-item" active-class="active">
-                  <!-- {{ $t('common').apartment }} -->
-                 {{$t('apartment').Apartment}}
-                </router-link>
-                <div v-if="user.roleId == 1" class="dropdown-divider" />
-
-                <router-link v-if="user.roleId == 2" :to="{ path:'/user' }" class="nav-item dropdown-item" active-class="active">
-                  <!-- {{ $t('common').user }} -->
-                  {{$t('apartment').User}}
-                </router-link>
-                <div v-if="user.roleId == 2" class="dropdown-divider" />
+          </button> -->
+          <Icon @click="openMenu" size="25" type="md-menu" />
+          <Drawer placement="left" :closable="false" v-model="isOpenMenu" class-name="hamburger-menu-left">
+            <slot name="header">
+              <div class="w-100 text-center p-4">
+                <img :src="`${baseUrl}/asset/img/icon/logo.png`" alt="" class="brand mx-auto">
               </div>
-              <router-link :to="{ name: 'notification' }" class="d-flex nav-item dropdown-item" active-class="active">
-                <Icon size="25" class="mr-1" type="ios-clipboard-outline" />
-                {{$t('notification').notification}}
-              </router-link>
-              <div class="dropdown-divider" />
-
-              <router-link :to="{ name: 'community' }" class="d-flex nav-item dropdown-item" active-class="active">
-                <Icon size="25" class="mr-1" type="ios-people" />
-                {{$t('community').cummunity}}
-              </router-link>
-              <div class="dropdown-divider" />
-
-              <router-link :to="{ name: 'suggestion' }" class="d-flex nav-item dropdown-item" active-class="active">
-                <Icon size="25" class="mr-1" type="md-chatbubbles" />
-                {{$t('suggest').suggest}}
-              </router-link>
-              <div class="dropdown-divider" />
-
-              <router-link :to="{ name: 'repair' }" class="d-flex nav-item dropdown-item" active-class="active">
-                <Icon size="25" class="mr-1" type="ios-construct" />
-                {{$t('repair').repair}}
-              </router-link>
-              <div class="dropdown-divider" />
-              
-              <router-link :to="{ name: 'facility' }" class="d-flex nav-item dropdown-item" active-class="active">
-                <Icon size="25" class="mr-1" type="md-share" />
-                {{$t('facility').Facility}}
-              </router-link>
-            </ul>
-          </div>
+            </slot>
+            <div v-if="user !== null">
+              <div v-if="user.roleId == 1" @click="navigateToRouterLink('UserRole')" :class="{ active : active_el == 'UserRole' }" class="d-flex m-1 p-2 drawer-menu-item">
+                <Icon size="25" class="mr-1" type="md-man" />
+                {{ $t('common').userRole }}
+              </div>
+              <div v-if="user.roleId == 1" @click="navigateToRouterLink('apartment')" :class="{ active : active_el == 'apartment' }" class="d-flex m-1 p-2 drawer-menu-item">
+                <Icon size="25" class="mr-1" type="md-home" />
+              {{$t('apartment').Apartment}}
+              </div>
+              <div v-if="user.roleId == 2" @click="navigateToRouterLink('user')" :class="{ active : active_el == 'user' }" class="d-flex m-1 p-2 drawer-menu-item">
+                <Icon size="25" class="mr-1" type="md-people" />
+                {{$t('apartment').User}}
+              </div>
+            </div>
+            <div @click="navigateToRouterLink('notification')" :class="{ active : active_el == 'notification' }" class="d-flex m-1 p-2 drawer-menu-item">
+              <Icon size="25" class="mr-1" type="ios-clipboard-outline" />
+              {{$t('notification').notification}}
+            </div>
+            <div @click="navigateToRouterLink('community')" :class="{ active : active_el == 'community' }" class="d-flex m-1 p-2 drawer-menu-item">
+              <Icon size="25" class="mr-1" type="ios-people" />
+              {{$t('community').cummunity}}
+            </div>
+            <div @click="navigateToRouterLink('facility')" :class="{ active : active_el == 'facility' }" class="d-flex m-1 p-2 drawer-menu-item">
+              <Icon size="25" class="mr-1" type="md-share" />
+              {{$t('facility').Facility}}
+            </div>
+            <div @click="navigateToRouterLink('suggestion')" :class="{ active : active_el == 'suggestion' }" class="d-flex m-1 p-2 drawer-menu-item">
+              <Icon size="25" class="mr-1" type="md-chatbubbles" />
+              {{$t('suggest').suggest}}
+            </div>
+            <div @click="navigateToRouterLink('repair')" :class="{ active : active_el == 'repair' }" class="d-flex m-1 p-2 drawer-menu-item">
+              <Icon size="25" class="mr-1" type="ios-construct" />
+              {{$t('repair').repair}}
+            </div>
+            
+            <img :src="`${baseUrl}/asset/img/bg/introducerGuide.png`" alt="" class="drawer-img">
+          </Drawer>
         </li>
       </ul>
       <router-link :to="{ name: user ? 'home' : 'welcome' }" class="navbar-brand mx-auto">
@@ -169,6 +163,8 @@ export default {
       suggestion:[]
     },
     pushNotificationCnt: 0,
+    isOpenMenu:false,
+    active_el: '',
   }),
   computed: mapGetters({
     user: 'auth/user'
@@ -188,6 +184,12 @@ export default {
   // },
 
   methods: {
+    navigateToRouterLink(path){
+      this.active_el = path;
+      this.isOpenMenu = false;
+      this.$router.push({ path: `/${path}` })
+      console.log(path);
+    },
     async logout () {
       // Log out the user.
       await this.$store.dispatch('auth/logout')
@@ -203,6 +205,7 @@ export default {
         }
         else{
           this.pushNotification = JSON.parse(res.data.pushData);
+          console.log("hurry", this.pushNotification);
           this.pushNotificationCnt = this.pushNotification.notification.length + this.pushNotification.community.length + this.pushNotification.suggestion.length;
         }
       })
@@ -308,6 +311,21 @@ export default {
               })
           });
     },
+
+    openMenu(){
+      let drawerItem = $('.ivu-drawer-content');
+      if ($('.navbar').hasClass('navbar-scroll')) {
+        drawerItem.removeClass('scroll-drawer');
+        drawerItem.addClass('top-drawer');
+
+      }
+      else{
+        drawerItem.addClass('scroll-drawer');
+        drawerItem.removeClass('top-drawer');
+      }
+      console.log(drawerItem);
+      this.isOpenMenu = !this.isOpenMenu;
+    }
   }
 }
 </script>

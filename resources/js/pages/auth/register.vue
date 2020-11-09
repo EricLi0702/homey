@@ -34,9 +34,15 @@
               </v-button> -->
               <Button v-if="isSentVercode == false" class="mt-3" long icon="ios-send" type="success" @click="verifyUserInfo" :disabled="isConfirming" :loading="isConfirming">{{ $t('common').request }}</Button>
             </div>
+
+            <div class="m-2 animate__animated animate__fadeIn d-flex justify-content-center" v-if="isSentVercode">
+              <p class="mr-3">{{dong}} {{ $t('auth').dong }}</p>
+              <p>{{ho}} {{ $t('auth').ho }}</p>
+            </div>
             <div class="m-2 animate__animated animate__fadeIn" v-if="isSentVercode">
                 <p class="mt-2">{{ $t('auth').verificationCode }}</p>
                 <Input prefix="md-finger-print" class="d-block" v-model="verifyCode.code" name="vercode" maxlength="6" :disabled="isFinishVerify" />
+                <p>{{ $t('auth').verificationEmailCode }}</p>
                 <Button class="mt-3" icon="ios-send" type="success" long @click="verifyingCode" :disabled="isVerifying||isFinishVerify" :loading="isVerifying">{{ $t('auth').verify }}</Button>
             </div>
             <div class="m-2 animate__animated animate__fadeIn" v-if="isFinishVerify">
@@ -96,6 +102,8 @@ export default {
       code:'',
       userData: {}
     },
+    dong:'',
+    ho:'',
     isVerifying:false,
     isFinishVerify: false,
     password : {
@@ -120,7 +128,10 @@ export default {
       this.isConfirming = true;
       await postValidation(this.verifyData)
       .then(res=>{
+        console.log(res);
         if(res.data.msg = "ok"){
+          this.dong = res.data.dong;
+          this.ho = res.data.ho;
           this.isSentVercode = true;
         }
       })

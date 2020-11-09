@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Laravolt\Avatar\Avatar;
+use App\Building;
 use Mail;
 use DateTime;
 
@@ -108,9 +109,13 @@ class RegisterController extends Controller
                 $message->from('test@testservice.com','Homey');
             });
 
+            $building = Building::where([['id', '=', $user->buildingId]])->first();
+
             return response()->json([
-                'msg' => 'please confirm your email'
-            ], 201);
+                'msg' => 'ok',
+                'dong' => $building->number,
+                'ho' => $user->ho
+            ], 200);
              
         }
     }

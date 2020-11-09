@@ -26,7 +26,7 @@ class NotificationController extends Controller
         $notificationData['aptId'] = $aptId;
         $notificationData['title'] = $request->title;
         $notificationData['content'] = $request->desc;
-        $notificationData['type'] = json_encode($request->type);
+        $notificationData['type'] = $request->type;
         $notificationData['upload_file'] = json_encode($request->file);
         if(is_array($request->period)){
             $notificationData['periodFrom'] = $request->period[0];
@@ -67,11 +67,17 @@ class NotificationController extends Controller
             $notificationData['isDraft'] = 1;
         }
         $notification = Notification::create($notificationData); 
-        
+
+        $broadcastingData['id'] = $notification->id;
+        $broadcastingData['userId'] = Auth::user()->id;
+        $broadcastingData['userName'] = Auth::user()->name;
+        $broadcastingData['userAvatar'] = Auth::user()->user_avatar;
+        $broadcastingData['title'] = $request->title;
+        $broadcastingData['type'] = $request->type;
 
         if($request->isDraft == null){
             // broadcast Event
-            broadcast(new NewNotification($notification))->toOthers();
+            broadcast(new NewNotification($broadcastingData))->toOthers();
         }
 
         return response()->json([

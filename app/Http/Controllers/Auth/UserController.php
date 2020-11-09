@@ -38,6 +38,8 @@ class UserController extends Controller
             'roleId'=>'required'
         ]);
         $roleId = $request->roleId;
+        $buildingId = $request->buildingId;
+        $buildingId = $request->buildingId;
         return User::create([
             'aptId'=>$request->aptId,
             'name'=>$request->name,

@@ -28,10 +28,16 @@ class SuggestionController extends Controller
         }
         $suggestion = Suggestion::create($suggestionData); 
 
+        $broadcastingData['id'] = $suggestion->id;
+        $broadcastingData['userId'] = Auth::user()->id;
+        $broadcastingData['userName'] = Auth::user()->name;
+        $broadcastingData['userAvatar'] = Auth::user()->user_avatar;
+        $broadcastingData['title'] = $request->title;
         if($request->isDraft == null){
             // broadcast Event
-            broadcast(new NewSuggestion($suggestion))->toOthers();
+            broadcast(new NewSuggestion($broadcastingData))->toOthers();
         }
+
         return response()->json([
             'suggestion' => $suggestion
         ], 201);
