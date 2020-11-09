@@ -260,35 +260,35 @@ class NotificationController extends Controller
 
     public function getFirstItemID()
     {
-        $Id = Notification::first()->id;
+        $Id = Notification::with('userId')->first();
         return $Id;
     }
 
     public function getLastItemID()
     {
-        $Id = Notification::orderBy('id', 'desc')->first()->id;
+        $Id = Notification::with('userId')->orderBy('id', 'desc')->first();
         return $Id;
     }
 
     public function getPreviousItemID(Request $request)
     {
-        $previousItem = Notification::where('id', '<', $request->id)->orderBy('id','desc')->first();
+        $previousItem = Notification::where('id', '<', $request->id)->orderBy('id','desc')->with('userId')->first();
         if($previousItem == null){
             return null;
         }
         else{
-            return $previousItem->id;
+            return $previousItem;
         }
     }
 
     public function getNextItemID(Request $request)
     {
-        $nextItem = Notification::where('id', '>', $request->id)->orderBy('id')->first();
+        $nextItem = Notification::where('id', '>', $request->id)->with('userId')->orderBy('id')->first();
         if($nextItem == null){
             return null;
         }
         else{
-            return $nextItem->id;
+            return $nextItem;
         }
     }
 }

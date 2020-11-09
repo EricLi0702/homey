@@ -228,33 +228,33 @@ class CommunityController extends Controller
 
     public function getFirstItemID()
     {
-        return Community::first()->id;
+        return Community::with('userId')->first();
     }
 
     public function getLastItemID()
     {
-        return Community::orderBy('id', 'desc')->first()->id;
+        return Community::with('userId')->orderBy('id', 'desc')->first();
     }
 
     public function getPreviousItemID(Request $request)
     {
-        $previousItem = Community::where('id', '<', $request->id)->orderBy('id','desc')->first();
+        $previousItem = Community::where('id', '<', $request->id)->with('userId')->orderBy('id','desc')->first();
         if($previousItem == null){
             return null;
         }
         else{
-            return $previousItem->id;
+            return $previousItem;
         }
     }
 
     public function getNextItemID(Request $request)
     {
-        $nextItem = Community::where('id', '>', $request->id)->orderBy('id')->first();
+        $nextItem = Community::where('id', '>', $request->id)->with('userId')->orderBy('id')->first();
         if($nextItem == null){
             return null;
         }
         else{
-            return $nextItem->id;
+            return $nextItem;
         }
     }
 }

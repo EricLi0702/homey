@@ -6,10 +6,10 @@
           <!-- <button class="navbar-toggler" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="navbar-toggler-icon" />
           </button> -->
-          <Icon @click="openMenu" size="25" type="md-menu" />
+          <Icon @click="openMenu" size="25" type="md-menu" class="open-draw-icon"/>
           <Drawer placement="left" :closable="false" v-model="isOpenMenu" class-name="hamburger-menu-left">
             <slot name="header">
-              <div class="w-100 text-center p-4">
+              <div @click="navigateToHome" class="w-100 text-center p-4">
                 <img :src="`${baseUrl}/asset/img/icon/logo.png`" alt="" class="brand mx-auto">
               </div>
             </slot>
@@ -52,9 +52,9 @@
           </Drawer>
         </li>
       </ul>
-      <router-link :to="{ name: user ? 'home' : 'welcome' }" class="navbar-brand mx-auto">
+      <div @click="navigateToHome" class="navbar-brand mx-auto">
         <img :src="`${baseUrl}/asset/img/icon/logo.png`" alt="">
-      </router-link>
+      </div>
       <ul class="navbar-nav ml-auto d-flex align-items-center">
         <locale-dropdown />
         <li class="mr-2 d-flex align-items-center ml-3 nav-item">
@@ -184,11 +184,22 @@ export default {
   // },
 
   methods: {
+    navigateToHome(){
+      if(this.user == null){
+        this.isOpenMenu = false;
+        this.active_el = '';
+        this.$router.push({ name: 'welcome' })
+      }
+      else{
+        this.isOpenMenu = false;
+        this.active_el = '';
+        this.$router.push({ name: 'home' })
+      }
+    },
     navigateToRouterLink(path){
       this.active_el = path;
       this.isOpenMenu = false;
       this.$router.push({ path: `/${path}` })
-      console.log(path);
     },
     async logout () {
       // Log out the user.

@@ -1,38 +1,7 @@
 <template>
     <div class="m-2 py-5">
         <Button class="mb-4" type="info" size="small" @click="addApt">Add Apartment</Button>
-        <table class="table m-0">
-        <tr>
-            <th>{{ $t('apartment').id }}</th>
-            <th>{{ $t('apartment').AptName }}</th>
-            <th>{{ $t('apartment').address }}</th>
-            <th>{{ $t('apartment').representativeName }}</th>
-            <th>{{ $t('apartment').phoneNumber }}</th>
-            <th>{{ $t('apartment').eMail }}</th>
-            <th>{{ $t('apartment').createdAt }}</th>
-            <th>{{ $t('apartment').action }}</th>
-        </tr>
-        <template v-if="aptLists && aptLists.length > 0">
-            <tr v-for="(apt,i) in aptLists" :key="i">
-                <td>{{i+1}}</td>
-                <td>{{apt.aptName}}</td>
-                <td>{{apt.address}}</td>
-                <td>{{apt.repreName}}</td>
-                <td>{{apt.phoneNumber}}</td>
-                <td>{{apt.email}}</td>
-                <td>{{TimeView(apt.created_at)}}</td>
-                <td class="d-flex">
-                    <Button type="info" size="small" @click="editApt(apt,i)">Edit</Button>
-                    &nbsp;&nbsp;
-                    <Button type="error" size="small" @click="delApt(apt,i)" :loading="isDeleting" :disabled="isDeleting">{{ $t('apartment').delete }}</Button>
-                    &nbsp;&nbsp;
-                    <Button type="error" size="small" @click="registerSuperMng(apt)" :loading="isDeleting" :disabled="isDeleting">{{ $t('apartment').registerSuperManager }}</Button>
-                    &nbsp;&nbsp;
-                    <Button type="error" size="small" @click="registerBuilding(apt)" :loading="isDeleting" :disabled="isDeleting">{{ $t('apartment').registerBuilding }}</Button>
-                </td>
-            </tr>
-        </template>
-    </table>
+        <Table :loading="aptLists.length == 0"  border :columns="columns2" :data="aptLists"></Table>
     </div>
 </template>
 
@@ -44,6 +13,92 @@ export default {
             aptLists:[],
             isAdding:false,
             isDeleting:false,
+            columns2: [
+                {
+                    title: this.$i18n.t('apartment').AptName,
+                    key: 'aptName',
+                    width: 150,
+                    fixed: 'left'
+                },
+                {
+                    title: this.$i18n.t('apartment').aptCode,
+                    key: 'code',
+                    width: 150
+                },
+                {
+                    title: this.$i18n.t('apartment').address,
+                    key: 'address',
+                    width: 200
+                },
+                {
+                    title: this.$i18n.t('apartment').representativeName,
+                    key: 'repreName',
+                    width: 150
+                },
+                {
+                    title: this.$i18n.t('apartment').phoneNumber,
+                    key: 'phoneNumber',
+                    width: 150
+                },
+                {
+                    title: this.$i18n.t('apartment').eMail,
+                    key: 'email',
+                    width: 150
+                },
+                {
+                    title: this.$i18n.t('apartment').action,
+                    key: 'action',
+                    fixed: 'right',
+                    width: 300,
+                    render: (h, params) => {
+                        return h('div', [
+                            h('Button', {
+                                props: {
+                                    type: 'primary',
+                                    size: 'small'
+                                },
+                                style: {
+                                    marginRight: '5px'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.editApt(params.index)
+                                    }
+                                }
+                            }, this.$i18n.t('apartment').edit),
+                            h('Button', {
+                                props: {
+                                    type: 'error',
+                                    size: 'small'
+                                },
+                                style: {
+                                    marginRight: '5px'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.delApt(params.index)
+                                    }
+                                }
+                            }, this.$i18n.t('apartment').delete),
+                            h('Button', {
+                                props: {
+                                    type: 'success',
+                                    size: 'small'
+                                },
+                                style: {
+                                    marginRight: '5px'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.registerSuperMng(params.index)
+                                    }
+                                }
+                            }, this.$i18n.t('apartment').registerSuperManager),
+                            
+                        ]);
+                    }
+                }
+            ]
         }
     },
     mounted(){
@@ -59,10 +114,12 @@ export default {
         addApt(){
             this.$router.push({path:'register'})
         },
-        editApt(apt,index){
+        editApt(index){
+            let apt = this.aptLists[index];
             this.$router.push({name:'apartment.details',params:{addData:apt}})
         },
-        delApt(apt,index){
+        delApt(index){
+            let apt = this.aptLists[index];
             this.isDeleting = true
             delApt(apt)
                 .then(res=>{
@@ -74,12 +131,14 @@ export default {
                 })
             this.isDeleting = false
         },
-        registerSuperMng(apt){
+        registerSuperMng(index){
+            let apt = this.aptLists[index];
             this.$router.push({name:'apartment.superManager',params:{aptData:apt}})
         },
-        registerBuilding(apt){
-            this.$router.push({name:'apartment.building',params:{aptData:apt}})
-        }
+
+        // registerBuilding(apt){
+        //     this.$router.push({name:'apartment.building',params:{aptData:apt}})
+        // }
     }
 }
 </script>

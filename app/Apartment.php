@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Apartment extends Model
 {
     //
-    protected $fillable = ['aptName','address','repreName','phoneNumber','email'];
+    protected $fillable = ['aptName','address','repreName','phoneNumber','email', 'code'];
 
     public function building(){
         return $this->hasMany(Building::class,'aptId');

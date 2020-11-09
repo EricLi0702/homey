@@ -67,6 +67,7 @@
         "eMail":"Email",
         "edit":"Edit",
         "id":"ID",
+        "aptCode":"APT code",
         "createdAt":"Created at",
         "action":"Action",
         "delete":"Delete",

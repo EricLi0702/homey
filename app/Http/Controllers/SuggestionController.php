@@ -288,33 +288,33 @@ class SuggestionController extends Controller
 
     public function getFirstItemID()
     {
-        return Suggestion::first()->id;
+        return Suggestion::with('userId')->first();
     }
 
     public function getLastItemID()
     {
-        return Suggestion::orderBy('id', 'desc')->first()->id;
+        return Suggestion::with('userId')->orderBy('id', 'desc')->first();
     }
 
     public function getPreviousItemID(Request $request)
     {
-        $previousItem = Suggestion::where('id', '<', $request->id)->orderBy('id','desc')->first();
+        $previousItem = Suggestion::where('id', '<', $request->id)->orderBy('id','desc')->with('userId')->first();
         if($previousItem == null){
             return null;
         }
         else{
-            return $previousItem->id;
+            return $previousItem;
         }
     }
 
     public function getNextItemID(Request $request)
     {
-        $nextItem = Suggestion::where('id', '>', $request->id)->orderBy('id')->first();
+        $nextItem = Suggestion::where('id', '>', $request->id)->with('userId')->orderBy('id')->first();
         if($nextItem == null){
             return null;
         }
         else{
-            return $nextItem->id;
+            return $nextItem;
         }
     }
 }

@@ -1317,6 +1317,7 @@ a.text-dark:hover, a.text-dark:focus {
     bottom: 0;
     right: -50px;
     width: 300px;
+    display: none;
 }
 .ivu-drawer-body{
     overflow: unset!important;
@@ -1335,6 +1336,16 @@ a.text-dark:hover, a.text-dark:focus {
     color: white;
 }
 
+.drawer-menu-item{
+    cursor: pointer;
+    background: white;
+    transition: all 0.3s ease;
+}
+.drawer-menu-item:hover{
+    background: #0F4C81;
+    color: white;
+    box-shadow: 1px 1px 6px gray;
+}
 
 .gray-input .mdb-select{
     border-radius: 2px;
@@ -1346,6 +1357,10 @@ a.text-dark:hover, a.text-dark:focus {
     color: #989c9e;
     font-family: 'Open Sans Light', sans-serif;
     height: 50px;
+}
+
+.brand, .navbar-brand, .open-draw-icon{
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {
@@ -1371,10 +1386,23 @@ a.text-dark:hover, a.text-dark:focus {
     .cta-text h4 {
         font-size: 16px;
     }
+    .drawer-img{
+        width: 240px;
+    }
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 450px) {
     .navbar-brand{
         display: none;
     }
+}
+
+@media screen and (min-width: 450px) and (min-height: 970px) {
+    .drawer-img{
+        display: block;
+    }
+}
+
+@media(hover: hover) and (pointer: fine) {
+    
 }

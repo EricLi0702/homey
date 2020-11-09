@@ -207,7 +207,7 @@ export default {
                 if(res.data == ""){
                     return this.error("This is the first.");
                 }
-                this.$router.push({ path:`/notification/${res.data}` });
+                this.$router.push({ path:`/notification/${res.data.id}` });
             })
             .catch(err=>{
                 console.log(err);
@@ -220,7 +220,7 @@ export default {
                 if(res.data == ""){
                     return this.error("This is the last.");
                 }
-                this.$router.push({ path:`/notification/${res.data}` });
+                this.$router.push({ path:`/notification/${res.data.id}` });
             })
             .catch(err=>{
                 console.log(err);
@@ -230,7 +230,7 @@ export default {
         getFirstItem(){
             getFirstItem()
             .then(res=>{
-                this.$router.push({ path:`/notification/${res.data}` });
+                this.$router.push({ path:`/notification/${res.data.id}` });
             })
             .catch(err=>{
                 console.log(err);
@@ -240,7 +240,7 @@ export default {
         getLastItem(){
             getLastItem()
             .then(res=>{
-                this.$router.push({ path:`/notification/${res.data}` });
+                this.$router.push({ path:`/notification/${res.data.id}` });
             })
             .catch(err=>{
                 console.log(err);

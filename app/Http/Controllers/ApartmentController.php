@@ -25,12 +25,15 @@ class ApartmentController extends Controller
         $repreName = $request->repreName;
         $phoneNumber = $request->phoneNumber;
         $email = $request->email;
+        $rand = mt_rand(100000, 999999);
+        $code = $rand.time();
         return Apartment::create([
             'aptName'=>$aptName,
             'address'=>$address,
             'repreName'=>$repreName,
             'phoneNumber'=>$phoneNumber,
-            'email'=>$email
+            'email'=>$email,
+            'code'=>$code
         ]);
     }
 
