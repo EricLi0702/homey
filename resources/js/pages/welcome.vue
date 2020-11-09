@@ -270,8 +270,8 @@ export default {
         playbackRates: [0.7, 1.0, 1.5, 2.0],
         sources: [{
             type: "video/mp4",
-            src: "http://asystem.test/asset/video/bgvideo.mp4"
-            // src: "http://18.183.106.31/asset/video/bgvideo.mp4"
+            // src: "http://asystem.test/asset/video/bgvideo.mp4"
+            src: "http://18.183.106.31/asset/video/bgvideo.mp4"
         }],
         // poster: "/static/images/author.jpg",
     },
