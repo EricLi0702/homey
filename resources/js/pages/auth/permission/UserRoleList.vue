@@ -17,11 +17,23 @@
                     <td class="d-flex">
                         <Button v-if="role.isEditing == undefined || role.isEditing == false" type="info" size="small" @click="editRole(role,i)">{{ $t('apartment').edit }}</Button>
                         <Button v-else-if="role.isEditing == true" type="info" size="small" @click="updateRole(role,i)" :disabled="isEditing" :loading="isEditing">{{ $t('auth').update }}</Button>
-                        <Button type="error" size="small" @click="delRole(role,i)">{{ $t('apartment').delete }}</Button>
+                        <Button type="error" size="small" @click="openRemoveModal(role)">{{ $t('apartment').delete }}</Button>
                     </td>
                 </tr>
             </template>
         </table>
+        <Modal v-model="removeModal" width="360">
+            <p slot="header" style="color:#f60;text-align:center">
+                <Icon type="ios-information-circle"></Icon>
+                <span v-if="deleteRoleData != null">Delete {{deleteRoleData.roleName}}</span>
+            </p>
+            <div class="text-center">
+                <p>Will you delete it? All users and datas of this Role will delete.</p>
+            </div>
+            <div slot="footer">
+                <Button type="error" size="large" long :loading="isDeleting" @click="delRole()">{{ $t('apartment').delete }}</Button>
+            </div>
+        </Modal>
         <Modal
             v-model="addModal"
             title="Add Role"
@@ -55,13 +67,15 @@ export default {
             },
             isAdding:false,
             isEditing:false,
+            isDeleting:false,
             roleLists:[],
+            removeModal : false,
+            deleteRoleData:null,
         }
     },
     mounted(){
         fetchUserRole()
             .then(res=>{
-                console.log(res.data)
                 this.roleLists = res.data
             })
             .catch(err=>{
@@ -69,6 +83,10 @@ export default {
             })
     },
     methods:{
+        openRemoveModal(role){
+            this.deleteRoleData = role;
+            this.removeModal = true;
+        },
         addRole(){
             // if(this.addData.roleName.trim() == ''){
             //     return this.warning('roleName is required')
@@ -78,9 +96,9 @@ export default {
             addUserRole(this.addData)
                 .then(res=>{
                     console.log(res)
-                    this.success('Role is Added')
-                    this.roleLists.unshift(res.data)
+                    this.roleLists.push(res.data)
                     this.addData.roleName = ''
+                    this.success('Role is Added')
                 })
                 .catch(err=>{
                     this.swr()
@@ -110,12 +128,15 @@ export default {
                 })
             this.isEditing = false
         },
-        delRole(role,index){
-            console.log(role)
-            delUserRole(role)
+        delRole(){
+            this.isDeleting = true;
+            delUserRole(this.deleteRoleData)
                 .then(res=>{
-                    console.log(res)
-                    this.roleLists.splice(index,1)
+                    this.removeModal = false;
+                    this.isDeleting = false;
+                    this.roleLists.pop(this.deleteRoleData);
+                    this.deleteRoleData = null;
+                    this.success("removed succesfully!");
                 })
                 .catch(err=>{
                     console.log(err)

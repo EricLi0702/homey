@@ -26,7 +26,7 @@
                 <Icon size="25" class="mr-1" type="md-people" />
                 {{$t('apartment').User}}
               </div>
-              <div v-if="user.roleId == 2" @click="navigateToRouterLink('building')" :class="{ active : active_el == 'user' }" class="d-flex m-1 p-2 drawer-menu-item">
+              <div v-if="user.roleId == 2" @click="navigateToRouterLink('building')" :class="{ active : active_el == 'building' }" class="d-flex m-1 p-2 drawer-menu-item">
                 <Icon size="25" class="mr-1" type="md-home" />
                 building
               </div>
@@ -61,7 +61,7 @@
       </div>
       <ul class="navbar-nav ml-auto d-flex align-items-center">
         <locale-dropdown />
-        <li class="mr-2 d-flex align-items-center ml-3 nav-item">
+        <li v-if="user" class="mr-2 d-flex align-items-center ml-3 nav-item">
           <Badge :count="pushNotificationCnt">
             <Icon size="30" color="#ffffff" type="md-notifications" class="navbar-notification-icon nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
             <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn mt-1rem">
@@ -175,6 +175,7 @@ export default {
   }),
   created(){
     this.getNewPush();
+    console.log("@@@@", this.user)
   },
   mounted(){
     this.listenNewNotification();

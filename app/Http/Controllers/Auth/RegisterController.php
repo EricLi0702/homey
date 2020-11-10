@@ -153,15 +153,6 @@ class RegisterController extends Controller
         $phone = $userData['phone'];
         $user = User::where('email', '=', $email)->where('phoneNumber', '=', $phone)->first();
         $user['password'] = bcrypt($password);
-        //set avatar
-        $name = date('YmdHis') . ".png";
-        $destinationPath = ('/uploads/avatar/user/'); 
-        $avatar = new Avatar;
-        $avatarImage = $avatar->create($email)->toBase64();
-        // $avatar->create($email)->save( $destinationPath.$name, $quality = 90);
-        $avatarImage->save(public_path('/uploads/avatar/user/'.$name), $quality = 90);
-        $user['user_avatar'] = $destinationPath.$name;
-        $user->save();
         return response()->json([
             'msg' => 'ok'
         ], 200);

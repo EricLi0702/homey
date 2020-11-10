@@ -21,7 +21,7 @@
                             <div class="emoji-area-popup">
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
-                            <Button icon="ios-briefcase-outline" type="warning" class="ml-auto mr-2" @click="saveToDraftSuggestion" :disabled="isSavingDraft" :loading="isSavingDraft">Draft</Button>
+                            <Button icon="ios-briefcase-outline" type="warning" class="ml-auto mr-2" @click="saveToDraftSuggestion" :disabled="isSavingDraft" :loading="isSavingDraft">{{ $t('notification').Draft }}</Button>
                             <Button icon="ios-send" type="success" class="" @click="registerSuggestion" :disabled="isSuggesting" :loading="isSuggesting">{{ $t('suggest').suggest }}</Button>
                         </div>
                         <div class="col-12 uploaded_file">

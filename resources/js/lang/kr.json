@@ -78,7 +78,8 @@
         "superMangerId":"전산관리자 Id",
         "superMangerPWD":"전산관리자 PWD",
         "Apartment":"아파트",
-        "User":"사용자"
+        "User":"사용자",
+        "building":"건물"
     },
     "auth":{
         "resetPassword":"비밀번호 재설정",

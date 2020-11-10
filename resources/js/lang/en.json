@@ -78,7 +78,8 @@
         "superMangerId":"Super Manager Id",
         "superMangerPWD":"Super Manager PWD",
         "Apartment":"Apartment",
-        "User":"User"
+        "User":"User",
+        "building":"Building"
     },
     "auth":{
         "resetPassword":"Reset Password",

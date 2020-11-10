@@ -5,11 +5,12 @@
             :headers="{'x-csrf-token': token, 'X-Requested-Width' : 'XMLHttpRequest'}"
             :on-success="imageSuccess"
             :on-error="handleError"
-            :format="['jpg','gif','png']"
+            :format="['jpg','gif','png', 'jfif', 'pjpeg', 'jpeg', 'pjp']"
             :max-size="2048"
             :show-upload-list="false"
             :on-format-error="handleFormatError"
             :on-exceeded-size="handleMaxSize"
+            accept="image/png, image/jpeg"
             action="/api/fileUpload/image">
                 <Icon class="pr-2 noti-upload-icons" size="25" type="ios-image" />
         </Upload>
@@ -23,6 +24,7 @@
             :show-upload-list="false"
             :on-format-error="handleFormatError"
             :on-exceeded-size="handleMaxSize"
+            accept=".doc, .docx, .zip, .pdf, .xls, .xlsx, .rp, .mp3, .rp, .ppt, .pptx, .pptm, .apk, .rar"
             action="/api/fileUpload/other">
                 <Icon class="pr-2 noti-upload-icons" size="25" type="ios-folder" />
         </Upload>
@@ -36,6 +38,7 @@
             :show-upload-list="false"
             :on-format-error="handleFormatError"
             :on-exceeded-size="handleMaxSize"
+            accept="video/mp4"
             action="/api/fileUpload/video">
                 <Icon class="pr-2 noti-upload-icons" size="25" type="ios-film" />
         </Upload>

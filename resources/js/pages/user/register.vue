@@ -3,7 +3,7 @@
     <div class="form-group row">
       <label for="inputPassword" class="col-sm-2 col-form-label">Apt Code</label>
       <div class="col-sm-10">
-        {{currentUser.apt.id}}
+        {{currentUser.apt.code}}
       </div>
     </div>
     <div class="form-group row">
@@ -52,10 +52,7 @@
         </select>
       </div>
     </div>
-    <div class="form-group row">
-      <Button type="success" @click="addUser" :loading="isAdding" :disabled="isAdding">Register</Button>
-      <!-- <button type="button" class="btn btn-primary">Edit</button> -->
-    </div>
+    <Button class="float-right" type="success" @click="addUser" :loading="isAdding" :disabled="isAdding">Register</Button>
   </div>
 </template>
 
@@ -85,10 +82,8 @@ export default {
     })
   },
   mounted(){
-    console.log('++++',this.currentUser)
     fetchUserRole()
       .then(res=>{
-        console.log('---',res.data)
         this.userRole = res.data
       })
       .catch(err=>{
@@ -121,20 +116,19 @@ export default {
       this.isAdding = true
       await addUser(this.user)
         .then(res=>{
-          console.log(res)
           if(res.status == 201){
-            // this.isAdding = false
-            // this.addData.aptName = ''
-            // this.addData.address = ''
-            // this.addData.repreName = ''
-            // this.addData.phoneNumber = ''
-            // this.addData.email = ''
             this.$router.push({path:'/user'})
           }
         })
-        .catch(err=>{
-          console.log(err);
-        })
+        .catch(error => {
+          console.log(error.response)
+          if(error.response.data.isMail == false){
+            this.error("Email you entered is aleardy exist in our DB.");
+          }
+          if(error.response.data.isPhone == false){
+            this.error("Phone number you entered is aleardy exist in our DB.");
+          }
+        });
       this.isAdding = false
     },
   }

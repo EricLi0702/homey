@@ -228,7 +228,7 @@ export default {
 
             this.isRegistering = true;
 
-
+            console.log(this.registerNotificationData.period);
             await registerNotification(this.registerNotificationData)
             .then(res=>{
                 this.registerNotificationData.title = '';

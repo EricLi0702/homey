@@ -39,7 +39,7 @@ export default [
       {path:'', name:'user.index', redirect:{name:'user.list'}},
       {path:'list', name:'user.list', component: page('user/list')},
       {path:'register', name:'user.register', component: page('user/register')},
-      {path:'edit', name:'user.details', component: page('user/details.vue')}
+      {path:'edit', name:'user.details', component: page('user/details.vue'),props:true}
     ]
   },
 

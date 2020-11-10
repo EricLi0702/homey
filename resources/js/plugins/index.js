@@ -8,6 +8,7 @@ import './videoview'
 import './googleMaps'
 import './timeago'
 import './readmore'
+import './pagination'
 
 import 'bootstrap'
 

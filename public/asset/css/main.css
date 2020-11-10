@@ -1362,6 +1362,21 @@ a.text-dark:hover, a.text-dark:focus {
 .brand, .navbar-brand, .open-draw-icon{
     cursor: pointer;
 }
+.user-list-photo{
+    width: 50px;
+    height: 50px;
+}
+.user-list-table td{
+    vertical-align: middle;
+}
+
+.admin-user-list-info .ivu-tag{
+    margin: 0;
+}
+
+.comment-content p{
+    white-space: pre-wrap;
+}
 
 @media only screen and (max-width: 600px) {
     .subtitle h1 {

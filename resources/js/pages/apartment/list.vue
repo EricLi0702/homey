@@ -2,6 +2,18 @@
     <div class="m-2 py-5">
         <Button class="mb-4" type="info" size="small" @click="addApt">Add Apartment</Button>
         <Table :loading="aptLists.length == 0"  border :columns="columns2" :data="aptLists"></Table>
+        <Modal v-model="removeModal" width="360">
+            <p slot="header" style="color:#f60;text-align:center">
+                <Icon type="ios-information-circle"></Icon>
+                <span v-if="deleteAptData != null">Delete {{deleteAptData.aptName}}</span>
+            </p>
+            <div class="text-center">
+                <p>Will you delete it? All users, buildings and datas of this APT will delete.</p>
+            </div>
+            <div slot="footer">
+                <Button type="error" size="large" long :loading="isDeleting" @click="delApt()">{{ $t('apartment').delete }}</Button>
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -13,6 +25,9 @@ export default {
             aptLists:[],
             isAdding:false,
             isDeleting:false,
+            deleteAptData:null,
+            removeModal:false,
+
             columns2: [
                 {
                     title: this.$i18n.t('apartment').AptName,
@@ -54,34 +69,6 @@ export default {
                         return h('div', [
                             h('Button', {
                                 props: {
-                                    type: 'primary',
-                                    size: 'small'
-                                },
-                                style: {
-                                    marginRight: '5px'
-                                },
-                                on: {
-                                    click: () => {
-                                        this.editApt(params.index)
-                                    }
-                                }
-                            }, this.$i18n.t('apartment').edit),
-                            h('Button', {
-                                props: {
-                                    type: 'error',
-                                    size: 'small'
-                                },
-                                style: {
-                                    marginRight: '5px'
-                                },
-                                on: {
-                                    click: () => {
-                                        this.delApt(params.index)
-                                    }
-                                }
-                            }, this.$i18n.t('apartment').delete),
-                            h('Button', {
-                                props: {
                                     type: 'success',
                                     size: 'small'
                                 },
@@ -94,6 +81,39 @@ export default {
                                     }
                                 }
                             }, this.$i18n.t('apartment').registerSuperManager),
+
+                            h('Icon', {
+                                props: {
+                                    type: 'md-create',
+                                    size: '25',
+                                    color: '#44B4E2'
+                                },
+                                style: {
+                                    marginRight: '5px'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.editApt(params.index)
+                                    }
+                                }
+                            }),
+                            h('Icon', {
+                                props: {
+                                    type: 'ios-trash',
+                                    size: '25',
+                                    color: '#FD0000'
+                                },
+                                style: {
+                                    marginRight: '5px'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.openRemoveModal(params.index)
+                                        // this.delApt(params.index)
+                                    }
+                                }
+                            }),
+                            
                             
                         ]);
                     }
@@ -118,18 +138,25 @@ export default {
             let apt = this.aptLists[index];
             this.$router.push({name:'apartment.details',params:{addData:apt}})
         },
-        delApt(index){
-            let apt = this.aptLists[index];
+
+        openRemoveModal(index){
+            this.deleteAptData = this.aptLists[index];
+            this.removeModal = true;
+        },
+
+        delApt(){
             this.isDeleting = true
-            delApt(apt)
+            delApt(this.deleteAptData)
                 .then(res=>{
+                    this.removeModal = false;
+                    this.isDeleting = false;
+                    this.aptLists.pop(this.deleteAptData);
+                    this.deleteAptData = null;
                     this.success('successfully deleted')
-                    this.aptLists.splice(index,1)
                 })
                 .catch(err=>{
                     console.log(err)
                 })
-            this.isDeleting = false
         },
         registerSuperMng(index){
             let apt = this.aptLists[index];

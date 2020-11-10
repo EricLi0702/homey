@@ -4,7 +4,7 @@
             <tr>
                 <th>{{ $t('apartment').buildingNumber }}</th>
                 <th>{{ $t('apartment').display }}</th>
-                <th>action</th>
+                <th>{{ $t('apartment').action }}</th>
             </tr>
             <tr v-for="building in buildingList" :key="building.id">
                 <td>{{building.number}}</td>
@@ -24,7 +24,7 @@
                     <p>Will you delete it? All users and datas of this building will delete.</p>
                 </div>
                 <div slot="footer">
-                    <Button type="error" size="large" long :loading="isDeletingBuilding" @click="delBuilding()">Delete</Button>
+                    <Button type="error" size="large" long :loading="isDeletingBuilding" @click="delBuilding()">{{ $t('apartment').delete }}</Button>
                 </div>
             </Modal>
         <div class="form-group row">
@@ -32,7 +32,7 @@
             <div class="col-8 gray-input">
                 <input type="text" id="repreName" v-model="buildingInfo.number" class="form-control" placeholder="">
             </div>
-            <Button class="m-3" long type="success" @click="addBuilding" :disabled="isAdding" :loading="isAdding">{{ $t('register').register }}</Button>
+            <Button class="m-3" type="success" @click="addBuilding" :disabled="isAdding" :loading="isAdding">{{ $t('register').register }}</Button>
         </div>
     </div>
 </template>
@@ -68,6 +68,9 @@ export default {
     },
     methods:{
         addBuilding(){
+            if(this.buildingInfo.number.trim() == ''){
+                return this.error("please enter building number!");
+            }
             this.isAdding = true
             this.$set(this.buildingInfo,'aptId',this.currentUser.aptId)
             addBuilding(this.buildingInfo)
@@ -83,11 +86,9 @@ export default {
         openRemoveModal(building){
             this.deleteBuildingData = building;
             this.removeModal = true;
-            console.log("this.deleteBuildingData1", this.deleteBuildingData);
         },
         delBuilding(){
             this.isDeletingBuilding = true;
-            console.log("this.deleteBuildingData2", this.deleteBuildingData);
             delBuilding(this.deleteBuildingData)
             .then(res=>{
                 this.success("removed succesfully!");

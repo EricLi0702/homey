@@ -17,13 +17,15 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', 'Auth\LoginController@logout');
 
     Route::get('/user', 'Auth\UserController@current');
+    Route::get('users', 'Auth\UserController@userList');
+    Route::post('users','Auth\UserController@addUser');
+    Route::delete('users','Auth\UserController@delUser');
+    Route::put('users','Auth\UserController@updateUser');
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');
     Route::patch('settings/password', 'Settings\PasswordController@update');
     Route::post('settings/avatar', 'Settings\ProfileController@updateAvatar');
 
-    Route::get('users', 'Auth\UserController@userList');
-    Route::post('users','Auth\UserController@addUser');
 
     Route::get('userRole','UserRoleController@getUserRoleList');
     Route::post('userRole','UserRoleController@addUserRole');

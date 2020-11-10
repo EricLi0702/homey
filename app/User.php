@@ -114,6 +114,6 @@ class User extends Authenticatable implements JWTSubject , MustVerifyEmail
         return $this->belongsTo(Apartment::class,'aptId');
     }
     public function building(){
-        return $this->belongsTo(Building::class,'buidingId');
+        return $this->belongsTo(Building::class,'buildingId');
     }
 }

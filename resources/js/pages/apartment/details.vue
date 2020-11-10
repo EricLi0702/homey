@@ -30,10 +30,7 @@
         <input type="email" v-model="addData.email" class="form-control" id="email" placeholder="">
       </div>
     </div>
-    <div class="form-group row">
-      <Button type="success" @click="editApt" :loading="isAdding" :disabled="isAdding">{{ $t('apartment').edit }}</Button>
-      <!-- <button type="button" class="btn btn-primary">Edit</button> -->
-    </div>
+    <Button class="float-right" type="success" @click="editApt" :loading="isAdding" :disabled="isAdding">{{ $t('apartment').edit }}</Button>
   </div>
 </template>
 

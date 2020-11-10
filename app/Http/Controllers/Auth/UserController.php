@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Laravolt\Avatar\Avatar;
+use DateTime;
+
 class UserController extends Controller
 {
     /**
@@ -22,9 +25,9 @@ class UserController extends Controller
     }
 
     public function userList(Request $request){
-        $aptId = $request->id;
-        $aptId = $request->aptId;
-        return User::where([['aptId','=',$request->aptId],['roleId','>',2]])->with('role','apt','building')->get(); 
+        // $aptId = $request->id;
+        // $aptId = $request->aptId;
+        return User::where([['aptId','=',Auth::user()->aptId],['roleId','>',2]])->with('role','apt','building')->paginate(7); 
     }
 
     public function addUser(Request $request){
@@ -37,10 +40,20 @@ class UserController extends Controller
             'ho'=>'required',
             'roleId'=>'required'
         ]);
+        if (User::where('email', '=', $request->email)->exists()) {
+            return response()->json([
+                'isMail' => false
+            ], 422);
+        }
+        
+        if (User::where('phoneNumber', '=', $request->phoneNumber)->exists()) {
+            return response()->json([
+                'isPhone' => false
+            ], 422);
+        }
         $roleId = $request->roleId;
         $buildingId = $request->buildingId;
-        $buildingId = $request->buildingId;
-        return User::create([
+        $user =  User::create([
             'aptId'=>$request->aptId,
             'name'=>$request->name,
             'email'=>$request->email,
@@ -49,8 +62,66 @@ class UserController extends Controller
             'ho'=>$request->ho,
             'roleId'=>$request->roleId
         ]);
+
+        //set avatar
+        $name = date('YmdHis') . ".png";
+        $destinationPath = ('/uploads/avatar/user/'); 
+        $avatar = new Avatar;
+        $avatarImage = $avatar->create($request->email)->toBase64();
+        $avatarImage->save(public_path('/uploads/avatar/user/'.$name), $quality = 90);
+        $user['user_avatar'] = $destinationPath.$name;
+        $user->save();
+
+        return response()->json([
+            'msg' => "created"
+        ], 201);
     }
 
+    public function delUser(Request $request){
+        $id = $request->id;
+        return User::where('id',$request->id)->delete();
+    }
+
+    public function updateUser(Request $request)
+    {
+        $this->validate($request,[
+            'aptId'=>'required',
+            'name'=>'required',
+            'email'=>'required',
+            'phoneNumber'=>'required',
+            'buildingId'=>'required',
+            'ho'=>'required',
+            'roleId'=>'required'
+        ]);
+        
+        if (User::where([['email', '=', $request->email], ['id', '<>', $request->id]])->exists()) {
+            return response()->json([
+                'isMail' => false
+            ], 422);
+        }
+        
+        if (User::where([['phoneNumber', '=', $request->phoneNumber], ['id', '<>', $request->id]])->exists()) {
+            return response()->json([
+                'isPhone' => false
+            ], 422);
+        }
+        $roleId = $request->roleId;
+        $buildingId = $request->buildingId;
+        $user =  User::where('id', $request->id)->update([
+            'aptId'=>$request->aptId,
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phoneNumber'=>$request->phoneNumber,
+            'buildingId'=>$request->buildingId,
+            'ho'=>$request->ho,
+            'roleId'=>$request->roleId
+        ]);
+
+        return response()->json([
+            'msg' => "updated"
+        ], 201);
+    }
+    
     public function newPush(Request $request)
     {
         $userId = Auth::user()->id;
