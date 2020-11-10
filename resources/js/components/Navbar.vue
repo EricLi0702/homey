@@ -52,7 +52,7 @@
               {{$t('repair').repair}}
             </div>
             
-            <img :src="`${baseUrl}/asset/img/bg/introducerGuide.png`" alt="" class="drawer-img">
+            <!-- <img :src="`${baseUrl}/asset/img/bg/introducerGuide.png`" alt="" class="drawer-img"> -->
           </Drawer>
         </li>
       </ul>
@@ -328,15 +328,25 @@ export default {
     },
 
     openMenu(){
+      let heightOfDevice = $(window).height();
+      
       let drawerItem = $('.ivu-drawer-content');
+      let drawerBody = $('.ivu-drawer-body');
       if ($('.navbar').hasClass('navbar-scroll')) {
         drawerItem.removeClass('scroll-drawer');
         drawerItem.addClass('top-drawer');
+        let heightOfMenuDrawer = heightOfDevice - 86.78;
+        drawerBody.css("height", `${heightOfMenuDrawer}px`);
+        drawerBody.css("overflow", 'auto');
 
       }
       else{
         drawerItem.addClass('scroll-drawer');
         drawerItem.removeClass('top-drawer');
+        let heightOfMenuDrawer = heightOfDevice - 66.78;
+        drawerBody.css("height", `${heightOfMenuDrawer}px`);
+        drawerBody.css("overflow", 'auto');
+
       }
       console.log(drawerItem);
       this.isOpenMenu = !this.isOpenMenu;

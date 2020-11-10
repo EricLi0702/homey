@@ -1320,7 +1320,7 @@ a.text-dark:hover, a.text-dark:focus {
     display: none;
 }
 .ivu-drawer-body{
-    overflow: unset!important;
+    /* overflow: unset!important; */
     padding: 0px!important;
 }
 
