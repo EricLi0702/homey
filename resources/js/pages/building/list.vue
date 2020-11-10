@@ -28,7 +28,7 @@
                 </div>
             </Modal>
         <div class="form-group row">
-            <label for="inputPassword" class="col-4 col-form-label">{{ $t('apartment').representativeName }}</label>
+            <label for="inputPassword" class="col-4 col-form-label">{{ $t('apartment').buildingNumber }}</label>
             <div class="col-8 gray-input">
                 <input type="text" id="repreName" v-model="buildingInfo.number" class="form-control" placeholder="">
             </div>
