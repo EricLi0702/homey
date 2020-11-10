@@ -93,6 +93,12 @@ export default [
       {path:'reservation', name:'facility.reservation', component: page('facility/reservation.vue')},
     ]  
   },
+  { path: '/building',  name:  'building',  component:  page('building/index.vue'),
+    children:[
+      {path:'', name:  'building', redirect: {name:  'building.list'}},
+      {path:'index', name:  'building.list', component: page('building/list.vue')},
+    ]
+  },
   { path: '/settings',
     component: page('settings/index.vue'),
     children: [

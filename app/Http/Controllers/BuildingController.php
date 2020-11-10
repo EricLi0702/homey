@@ -20,4 +20,10 @@ class BuildingController extends Controller
 
         return Building::create(['aptId'=>$request->aptId,'number'=>$request->number]);
     }
+    
+    public function delBuilding(Request $request)
+    {
+        $buildingId = $request->id;
+        return Building::where('id', $buildingId)->delete();
+    }
 }

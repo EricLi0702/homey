@@ -21,11 +21,17 @@ function addSuperMng(payload){
 }
 
 function getBuildingList(payload){
-    return axios.get('/api/aptBuilding',{params:payload});
+    let id = {
+        id : payload
+    }
+    return axios.get('/api/aptBuilding',{params:id});
 }
 
 function addBuilding(payload){
     return axios.post('/api/aptBuilding',payload)
+}
+function delBuilding(payload){
+    return axios.delete('/api/aptBuilding',{data: payload})
 }
 
 export{
@@ -35,5 +41,6 @@ export{
     delApt,
     addSuperMng,
     getBuildingList,
-    addBuilding
+    addBuilding,
+    delBuilding,
 }

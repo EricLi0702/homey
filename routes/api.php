@@ -109,6 +109,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('aptBuilding','BuildingController@getBuildingList');
     Route::post('aptBuilding','BuildingController@addBuilding');
+    Route::delete('aptBuilding','BuildingController@delBuilding');
     
     //PushNotification
     Route::post('newPush','Auth\UserController@newPush');

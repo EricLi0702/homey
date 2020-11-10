@@ -26,6 +26,10 @@
                 <Icon size="25" class="mr-1" type="md-people" />
                 {{$t('apartment').User}}
               </div>
+              <div v-if="user.roleId == 2" @click="navigateToRouterLink('building')" :class="{ active : active_el == 'user' }" class="d-flex m-1 p-2 drawer-menu-item">
+                <Icon size="25" class="mr-1" type="md-people" />
+                building
+              </div>
             </div>
             <div @click="navigateToRouterLink('notification')" :class="{ active : active_el == 'notification' }" class="d-flex m-1 p-2 drawer-menu-item">
               <Icon size="25" class="mr-1" type="ios-clipboard-outline" />
