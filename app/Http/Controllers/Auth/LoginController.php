@@ -39,7 +39,7 @@ class LoginController extends Controller
             config()->set('jwt.ttl', 30);
         }
         if ($mobileValue == true){
-            config()->set('jwt.ttl', 60*2);
+            config()->set('jwt.ttl', 1);
         }
         $token = $this->guard()->attempt($this->credentials($request));
 
