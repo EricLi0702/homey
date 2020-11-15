@@ -129,6 +129,19 @@ class SuggestionController extends Controller
     {   
         $userId = Auth::user()->id;
         $id = $request->id;
+        //remove from new push
+        $newPushData = json_decode(Auth::user()->newPush);
+        if($newPushData !== null){
+            foreach ($newPushData->suggestion as $key => $suggestion){
+                if($id = $suggestion->id){
+                    unset($newPushData->suggestion[$key]);
+                }
+            }
+            $updatedPushDataUser = User::where('id', $userId)->first();
+            $updatedPushDataUser['newPush'] = json_encode($newPushData);
+            $updatedPushDataUser->save();
+        }
+        ////////////////////////////////////////////////////////////
         $suggestionData =  Suggestion::with('userId')
                         ->where('id',$id)
                         ->first();

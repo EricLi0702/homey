@@ -16,7 +16,7 @@
                         </div>
                         <div v-else class="facility-category-list p-3">
                             <div v-for="(facility, m) in facilityList" :key="m" class=" ccl-item d-flex justify-content-between">
-                                <p>{{facility.name}}</p>
+                                <p @click="selectFacility(facility)">{{facility.name}}</p>
                                 <Tag v-if="selectedFacilityAlreadyReservated(facility)" color="success">{{$t('facility').alreadyReservated}}</Tag>
                                 <Tag v-else-if="facility.isUsing == 0" color="success">{{$t('facility').possibleToUse}}</Tag>
                                 <Tag v-else color="warning">{{$t('facility').impossibleToUse}}</Tag>
@@ -101,31 +101,29 @@
                             
                         </div>
                         <div class="control-view-type col-12 mb-3 p-0" v-else>
-                            <div  v-for="(facility, i) in facilityList" :key="i" v-if="facility.reservation_data.length" class="col-12 m-0 row list-view-container posted-item p-2 mb-3">
-                                <div v-for="(reservation, k) in facility.reservation_data"  :key="k" v-if="facility.reservation_data.length" class="row col-12 m-0">
-                                    <div class="col-1">
-                                        <div class="posted-item-user-info">
-                                            <img style="width:40px;" :src="`${baseUrl}/asset/img/icon/avatar.png`" class="rounded-circle profile-photo mr-1" alt="">
+                            <div  v-for="(reservation, i) in selectedFacility.reservation_data" :key="i" v-if="selectedFacility.reservation_data.length" class="col-12 m-0 row list-view-container posted-item p-2 mb-3">
+                                <div class="col-1">
+                                    <div class="posted-item-user-info">
+                                        <img :src="`${baseUrl}${reservation.user_id.user_avatar}`" class="rounded-circle profile-photo mr-1" alt="">
+                                    </div>
+                                </div>   
+                                
+                                <div class="col-11">
+                                    <div class="posted-user-info d-flex justify-content-between">
+                                        <p class="mb-2">{{reservation.user_id.name}}</p>
+                                        <div class="reservation-period">
+                                            <p>{{TimeView(reservation.periodFrom)}}</p>
+                                            <p>{{TimeView(reservation.periodTo)}}</p>
                                         </div>
-                                    </div>   
-                                    
-                                    <div class="col-11">
-                                        <div class="posted-user-info d-flex justify-content-between">
-                                            <p class="mb-2">{{facility.user_id.name}}</p>
-                                            <div class="reservation-period">
-                                                <p>{{TimeView(reservation.periodFrom)}}</p>
-                                                <p>{{TimeView(reservation.periodTo)}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="title">
-                                            <h3>{{reservation.title}}</h3>
-                                            <Tag color="success">{{reservation.status}}</Tag>
-                                        </div>
-                                        <div class="post-content p-2">
-                                            <p>something</p>
-                                        </div>
-                                    </div> 
-                                </div>
+                                    </div>
+                                    <div class="title">
+                                        <h5>{{reservation.title}}</h5>
+                                        <Tag color="success">{{reservation.status}}</Tag>
+                                    </div>
+                                    <div class="post-content p-2">
+                                        <p>{{reservation.purpose}}</p>
+                                    </div>
+                                </div> 
                             </div>
                         </div>
                     </div>
@@ -145,6 +143,7 @@ export default {
             noFacility:false,
             calendarView:false,
             baseUrl:window.base_url,
+            selectedFacility : {}
         }
     },
 
@@ -183,11 +182,17 @@ export default {
                     return;
                 }
                 this.facilityList = res.data;
+                this.selectedFacility = this.facilityList[0];
                 for(let i = 0; i < this.facilityList.length ; i++){
                     this.facilityList[i].upload_file = JSON.parse(this.facilityList[i].upload_file);
                 }
             })
         },
+
+        selectFacility(facility){
+            this.selectedFacility = facility;
+            console.log("this.selectedFacility", this.selectedFacility);
+        }
     }
 }
 </script>

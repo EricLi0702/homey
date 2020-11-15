@@ -153,6 +153,7 @@ class RegisterController extends Controller
         $phone = $userData['phone'];
         $user = User::where('email', '=', $email)->where('phoneNumber', '=', $phone)->first();
         $user['password'] = bcrypt($password);
+        $user->save();
         return response()->json([
             'msg' => 'ok'
         ], 200);

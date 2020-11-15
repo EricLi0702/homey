@@ -176,6 +176,19 @@ class NotificationController extends Controller
     {   
         $userId = Auth::user()->id;
         $id = $request->id;
+        //remove from new push
+        $newPushData = json_decode(Auth::user()->newPush);
+        if($newPushData !== null){
+            foreach ($newPushData->notification as $key => $notification){
+                if($id = $notification->id){
+                    unset($newPushData->notification[$key]);
+                }
+            }
+            $updatedPushDataUser = User::where('id', $userId)->first();
+            $updatedPushDataUser['newPush'] = json_encode($newPushData);
+            $updatedPushDataUser->save();
+        }
+        ////////////////////////////////////////////////////////////
         $notificationData =  Notification::with('userId')
                         ->where('id',$id)
                         ->first();

@@ -184,6 +184,19 @@ class CommunityController extends Controller
     {   
         $userId = Auth::user()->id;
         $id = $request->id;
+        //remove from new push
+        $newPushData = json_decode(Auth::user()->newPush);
+        if($newPushData !== null){
+            foreach ($newPushData->community as $key => $community){
+                if($id = $community->id){
+                    unset($newPushData->community[$key]);
+                }
+            }
+            $updatedPushDataUser = User::where('id', $userId)->first();
+            $updatedPushDataUser['newPush'] = json_encode($newPushData);
+            $updatedPushDataUser->save();
+        }
+        ////////////////////////////////////////////////////////////
         $communityData =  Community::with('userId')
                         ->where('id',$id)
                         ->first();
