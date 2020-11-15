@@ -4,7 +4,7 @@ function page (path) {
 
 export default [
   { path: '/', name: 'welcome', component: page('welcome.vue') },
-  { path: '/mobile', name: 'welcome-mobile', component: page('welcome.vue') },
+  { path: '/welcomeMobile', name: 'welcomeMobile', component: page('welcomeMobile.vue') },
 
   { path: '/login', name: 'login', component: page('auth/login.vue') },
   { path: '/register', name: 'register', component: page('auth/register.vue') },

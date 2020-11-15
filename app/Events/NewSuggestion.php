@@ -31,6 +31,6 @@ class NewSuggestion implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('suggestion');
+        return new Channel('suggestion');
     }
 }

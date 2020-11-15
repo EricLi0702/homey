@@ -145,4 +145,36 @@ class RepairController extends Controller
             'currentCnt'=>$currentUserCnt
         ]);
     }
+
+    public function getFirstItemID()
+    {
+        return Repair::with('userId')->first();
+    }
+
+    public function getLastItemID()
+    {
+        return Repair::with('userId')->orderBy('id', 'desc')->first();
+    }
+
+    public function getPreviousItemID(Request $request)
+    {
+        $previousItem = Repair::where('id', '<', $request->id)->with('userId')->orderBy('id','desc')->first();
+        if($previousItem == null){
+            return null;
+        }
+        else{
+            return $previousItem;
+        }
+    }
+
+    public function getNextItemID(Request $request)
+    {
+        $nextItem = Repair::where('id', '>', $request->id)->with('userId')->orderBy('id')->first();
+        if($nextItem == null){
+            return null;
+        }
+        else{
+            return $nextItem;
+        }
+    }
 }

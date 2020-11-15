@@ -19,6 +19,12 @@ class NotificationController extends Controller
             'type' => 'bail|required',
             'period' => 'bail|required'
         ]);
+
+        
+        if (isset($request->id)){
+            $Id = $request->id;
+            Notification::where('id', $request->id)->delete();
+        }
         
         $userId = Auth::user()->id;
         $aptId = Auth::user()->aptId;
@@ -64,8 +70,32 @@ class NotificationController extends Controller
         }
 
         if($request->isDraft !== null){
-            $notificationData['isDraft'] = 1;
+            $draftData = Notification::where([
+                ['userId', '=', Auth::user()->id],
+                ['isDraft', '=', 1]
+            ])->first();
+            if($draftData == null){
+                $notificationData['isDraft'] = 1;
+                $notificationData['status'] = "before";
+                $notification = Notification::create($notificationData); 
+                return response()->json([
+                    'notification' => $notification
+                ], 201);
+            }
+            else{
+                $draftData->title = $notificationData['title'];
+                $draftData->content = $notificationData['content'];
+                $draftData->type = $notificationData['type'];
+                $draftData->upload_file = $notificationData['upload_file'];
+                $draftData->isDraft = 1;
+                $draftData->status = "before";
+                $draftData->save();
+                return response()->json([
+                    'notification' => $draftData
+                ], 201);
+            }
         }
+
         $notification = Notification::create($notificationData); 
 
         $broadcastingData['id'] = $notification->id;
@@ -74,10 +104,34 @@ class NotificationController extends Controller
         $broadcastingData['userAvatar'] = Auth::user()->user_avatar;
         $broadcastingData['title'] = $request->title;
         $broadcastingData['type'] = $request->type;
+        $broadcastingData['created_at'] = now();
 
         if($request->isDraft == null){
             // broadcast Event
             broadcast(new NewNotification($broadcastingData))->toOthers();
+
+            $userList = User::where([
+                ['aptId', '=', Auth::user()->aptId],
+                ['id', '<>', Auth::user()->id]
+            ])->get();
+
+            foreach ($userList as $key => $user){
+                $newPushOfUser = json_decode($user->newPush);
+                if($newPushOfUser == null){
+                    $willStoreAsNewPush = new \stdClass();
+                    $willStoreAsNewPush->notification[] = $broadcastingData;
+                    // array_push($willStoreAsNewPush->notification, $broadcastingData);
+                    $willStoreAsNewPush->suggestion = [];
+                    $willStoreAsNewPush->community = [];
+                    $user->newPush = json_encode($willStoreAsNewPush);
+                    $user->save();
+                }
+                else{
+                    array_push($newPushOfUser->notification, $broadcastingData);
+                    $user->newPush = json_encode($newPushOfUser);
+                    $user->save();
+                }
+            }
         }
 
         return response()->json([
@@ -289,6 +343,24 @@ class NotificationController extends Controller
         }
         else{
             return $nextItem;
+        }
+    }
+
+    public function getDraft(Request $request){
+        $draftData = Notification::where([
+            ['userId', '=', Auth::user()->id],
+            ['isDraft', '=', 1]
+        ])->get();
+        
+        if($draftData == null){
+            return response()->json([
+                'draftData' => null
+            ], 200);
+        }
+        else{
+            return response()->json([
+                'draftData' => $draftData
+            ], 200);
         }
     }
 }

@@ -40,7 +40,7 @@ class UploadController extends Controller
 
     public function videoUpload(Request $request){
         $this->validate($request,[
-            'file' => 'required|mimes:mp4'
+            'file' => 'required'
         ]);
         $file = $request->file();
         $fileSize = $request->file->getSize();

@@ -41,15 +41,15 @@
             </div>
             <div @click="navigateToRouterLink('facility')" :class="{ active : active_el == 'facility' }" class="d-flex m-1 p-2 drawer-menu-item">
               <Icon size="25" class="mr-1" type="md-share" />
-              {{$t('facility').Facility}}
+              {{$t('welcome').PublicFacility}}
             </div>
             <div @click="navigateToRouterLink('suggestion')" :class="{ active : active_el == 'suggestion' }" class="d-flex m-1 p-2 drawer-menu-item">
               <Icon size="25" class="mr-1" type="md-chatbubbles" />
-              {{$t('suggest').suggest}}
+              {{$t('welcome').suggestion}}
             </div>
             <div @click="navigateToRouterLink('repair')" :class="{ active : active_el == 'repair' }" class="d-flex m-1 p-2 drawer-menu-item">
               <Icon size="25" class="mr-1" type="ios-construct" />
-              {{$t('repair').repair}}
+              {{$t('repair').repairRequest}}
             </div>
             
             <!-- <img :src="`${baseUrl}/asset/img/bg/introducerGuide.png`" alt="" class="drawer-img"> -->
@@ -270,7 +270,7 @@ export default {
     },
 
     listenNewNotification(){
-      Echo.private('notification')
+      Echo.channel('notification')
           .listen('NewNotification', (newNotification) => {
             console.log("newNotification", newNotification)
               if(newNotification.notification.userId == this.user.id){
@@ -292,7 +292,7 @@ export default {
     },
 
     listenNewSuggestion(){
-      Echo.private('suggestion')
+      Echo.channel('suggestion')
           .listen('NewSuggestion', (newSuggestion) => {
               if(newSuggestion.suggestion.userId == this.user.id){
                 return;
@@ -310,7 +310,7 @@ export default {
           });
     },
     listenNewCommunity(){
-      Echo.private('community')
+      Echo.channel('community')
           .listen('NewCommunity', (newCommunity) => {
               if(newCommunity.community.userId == this.user.id){
                 return;

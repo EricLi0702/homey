@@ -9,7 +9,13 @@
             <div class="row m-0 p-0">
                 <Category/>
                 <div class="col-12 col-md-8 m-0 p-0">
-                    <div class="posted-item" v-for="(notification,i) in notificationList" :key="i" v-if="notificationList.length">
+                    <div v-if="notificationList.length == 0" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
+                        <div class="no-fac text-center">
+                            <Icon size="150" type="ios-search" />
+                            <h5>oops! there is no downgraded notification!</h5>
+                        </div>
+                    </div>
+                    <div v-else-if="notificationList.length" class="posted-item" v-for="(notification,i) in notificationList" :key="i" >
                         <router-link :to="{path:`/notification/${notification.id}`}">
                             <div class="pi-wrap float-left">
                                 <div class="user-info float-left">
@@ -54,7 +60,8 @@
                             <div class="clearfix"></div>
                         </router-link>
                     </div>
-                    <InfiniteLoading 
+                    <InfiniteLoading
+                        v-if="notificationList.length !== 0" 
                         class="pb-3"
                         @infinite="infiniteHandlerNotification"
                         spinner="circles"

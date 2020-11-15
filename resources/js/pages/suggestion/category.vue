@@ -33,14 +33,14 @@
         </Collapse>
         <Collapse class="box-block" v-model="collapse2">
             <Panel hide-arrow name="item2">
-                The count of notification on this month:{{this.monthData}}
+                The count of suggestion on this month:{{this.monthData}}
                 <div slot="content" class="community-category-list p-3">
                     <div class=" ccl-item">
-                        <p>Today notification percent of this month.</p>
+                        <p>Today suggestion percent of this month.</p>
                         <Progress class="w-100" :percent="todayPro" :stroke-width="20" status="active" text-inside />
                     </div>
                     <div class=" ccl-item">
-                        <p>CurrentWeek notification percent of this month</p>
+                        <p>CurrentWeek suggestion percent of this month</p>
                         <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
                     </div>
                     <div class=" ccl-item">

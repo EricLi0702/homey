@@ -1,6 +1,6 @@
 <template>
   <div class="main-layout">
-      <navbar />
+      <navbar v-if="checkComponent"/>
 
     <div class="container-fluid mt-navbar p-0">
       <child />
@@ -22,6 +22,18 @@ export default {
   components: {
     Navbar,
     Footer
-  }
+  },
+  computed:{
+    checkComponent(){
+      if(this.$route.name == "welcomeMobile"){
+        let mtNavbar = $('.mt-navbar');
+        mtNavbar.removeClass('mt-navbar');
+        return false;
+      }
+      else{
+        return true;
+      }
+    },      
+  },
 }
 </script>

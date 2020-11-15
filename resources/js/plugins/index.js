@@ -9,6 +9,7 @@ import './googleMaps'
 import './timeago'
 import './readmore'
 import './pagination'
+import './mobiledetection'
 
 import 'bootstrap'
 

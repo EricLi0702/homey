@@ -79,12 +79,12 @@
                                         <Icon @click="editSuggestion(details)" size="25" class="mr-4" type="md-create"/>
                                     </div>
                                     <div v-else class="reply mr-auto">
-                                        <div v-if="details.comment_cnt !== null && details.comment_cnt.includes(currentUser.id)" class="reply d-flex mr-4">
+                                        <Icon size="25" type="ios-undo" @click="toggleReply"/>
+                                        <!-- <div v-if="details.comment_cnt !== null && details.comment_cnt.includes(currentUser.id)" class="reply d-flex mr-4">
                                             <p>{{ $t('suggest').alreadyCommented }}</p>
                                         </div>
                                         <div v-else class="reply d-flex mr-4">
-                                            <Icon size="25" type="ios-undo" @click="toggleReply"/>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="heart d-flex mr-4">
                                         <Icon class="mr-1" v-if="checkIfHeart(details.heart_cnt)" @click="heartPost(details)" size="25" type="md-heart-outline" />

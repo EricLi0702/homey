@@ -89,6 +89,15 @@
                             </div>
                         </div>                 
                     </div>
+                    <div v-if="details !== null" class="navigte-item d-flex justify-content-center mt-3">
+                        <ButtonGroup shape="circle">
+                            <Button @click="getFirstItem" type="primary" icon="ios-skip-backward"></Button>
+                            <Button @click="getPreviousItem" type="primary" icon="md-arrow-round-back"></Button>
+                            <Button @click="getNextItem" type="primary" icon="md-arrow-round-forward"></Button>
+                            <Button @click="getLastItem" type="primary" icon="ios-skip-forward"></Button>
+                        </ButtonGroup>
+                    </div>
+
                     <div v-if="isResponsing" class="posted-item mt-3 p-2 animate__animated animate__fadeIn">
                         <div class="reply-form-comment m-0 row p-2">
                             <Input v-model="responseData" type="textarea" placeholder="Enter Response..." />
@@ -156,6 +165,10 @@ import {
     getCurrentRepairFromServer, 
     deleteRequest,
     finishRequest,
+    getFirstItem,
+    getLastItem,
+    getPreviousItem,
+    getNextItem,
 } from '~/api/repair'
 
 import Category from './category'
@@ -234,6 +247,52 @@ export default {
         // this.details = JSON.parse(this.currentPath.query.details)
     },
     methods:{
+
+        getPreviousItem(){
+            getPreviousItem(this.repairId)
+            .then(res=>{
+                if(res.data == ""){
+                    return this.error("This is the first.");
+                }
+                this.$router.push({ path:`/repair/${res.data.id}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+        
+        getNextItem(){
+            getNextItem(this.repairId)
+            .then(res=>{
+                if(res.data == ""){
+                    return this.error("This is the last.");
+                }
+                this.$router.push({ path:`/repair/${res.data.id}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
+        getFirstItem(){
+            getFirstItem()
+            .then(res=>{
+                this.$router.push({ path:`/repair/${res.data.id}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
+
+        getLastItem(){
+            getLastItem()
+            .then(res=>{
+                this.$router.push({ path:`/repair/${res.data.id}` });
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        },
 
         async responseToRepairRequest(){
             console.log("reply to request", this.responseData);

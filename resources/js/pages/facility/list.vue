@@ -297,6 +297,7 @@ export default {
                 aptId : this.selectedFacility.aptId,
                 facilityId : this.selectedFacility.id,
             };
+            console.log("payload", payload);
             this.isReservating = true;
             await createReservation(payload)
             .then(res=>{

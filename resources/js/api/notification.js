@@ -57,6 +57,10 @@ function getNextItem(notificationId){
     return axios.get('/api/notification/next', {params:{id:notificationId}})
 }
 
+function getDraft(){
+    return axios.get('/api/notification/draft');
+}
+
 export{
     getNotificationList,
     registerNotification,
@@ -73,4 +77,5 @@ export{
     getLastItem,
     getPreviousItem,
     getNextItem,
+    getDraft,
 }

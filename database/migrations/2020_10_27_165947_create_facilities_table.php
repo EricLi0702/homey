@@ -19,9 +19,9 @@ class CreateFacilitiesTable extends Migration
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('aptId');
             $table->foreign('aptId')->references('id')->on('apartments')->onDelete('cascade');
-            $table->string('name');
-            $table->string('equipment');
-            $table->string('nb');
+            $table->text('name');
+            $table->text('equipment');
+            $table->text('nb');
             $table->text('outline');
             $table->unsignedBigInteger('max');
             $table->text('upload_file')->nullable();

@@ -642,7 +642,17 @@ ul {
   }
 }
 
+@media (max-width:350px) {
+  .second-background {
+    height: 37rem;
+  }
+}
 
+@media (max-width:350px) {
+  .second-background {
+    height: 44rem;
+  }
+}
 
 .editr {
   border: 1px solid #e4e4e4;

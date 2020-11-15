@@ -3,10 +3,10 @@
         <!-- <div class="apt-img hv-40 noti-apt-img">
         </div> -->
         <div class="notification-sub-menu container-fluid bg-white box-block">
-            <div class="container d-flex justify-content-between p-0 py-3 ">
-                <Input class="w-40"
+            <div class="container d-flex justify-content-between p-0 py-3 row m-0 mx-auto">
+                <Input class="col-12 col-md-6 p-0"
                  search :placeholder=" $t('facility').EnterSomething " />
-                <div class="notification-sub-menu-items">
+                <div class="notification-sub-menu-items col-12 col-md-6 p-0 text-right">
                     <router-link :to="{ name: 'settings.profile' }" class="">
                         <!-- {{ $t('register') }} -->
                         <Button type="primary" icon="md-person">{{ $t('setting').Profile }}</Button>

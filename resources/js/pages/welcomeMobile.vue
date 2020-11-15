@@ -21,9 +21,24 @@
             <div class="col-12 text-center mb-3">
                 <h2 class="section-title">{{ $t('welcome').VApartmentManagementSystem }}</h2>
             </div>
-            <div class="col-12 mb-2">
+            <div class="col-md-8 col-sm-12 col-12">
                 <div class="main-content col-md-12 d-flex  align-items-center justify-content-center mb-5">
                     <read-more :more-str="$t('welcome').readmore" :text="$t('welcome').LadiesAndGentleMen" link="#" :less-str="$t('welcome').readless" :max-chars="150"></read-more>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+                <div class="conten-list col-md-12 d-flex  align-items-center justify-content-center">
+                    <ul class="">
+                        <li>{{ $t('welcome').PrivateBalconies }}</li>
+                        <li>{{ $t('welcome').AirConditioning }}</li>
+                        <li>{{$t('welcome').CableReady}}</li>
+                        <li>{{$t('welcome').CeilingFans}}</li>
+                        <li>{{$t('welcome').StainlessSteelAppliances}}</li>
+                        <li>{{$t('welcome').ExtraStorage}}</li>
+                        <li>{{$t('welcome').SpaciousWalk}}</li>
+                        <li>{{$t('welcome').Ceilings}}</li>
+                        <li>{{$t('welcome').SpectacularViews}}</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -77,75 +92,63 @@
                             <p class="">{{$t('welcome').DECORATION}}</p>
                             <p>{{$t('welcome').REPAIR}}</p>
                         </div>
+                        <div class="a-button d-flex col-md-12 align-items-center justify-content-center text-center">
+                            <Button shape="circle" size="large" type="primary" class="mt-5 wel-btn" >{{$t('welcome').ServicesDetails}}</Button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- <div class="service container">
+        <div class="service-video row p-0 m-0">
+            <div class="video-title col-md-12 text-center mt-5">
+                <h2>{{ $t('welcome').Vapartment }}</h2>
+            </div>
+            <div class="video-intro col-md-12 mt-5">
+                <div class="embed-responsive embed-responsive-16by9">
+                  <iframe class="embed-responsive-item" :src="`${baseUrl}/asset/video/bgvideo.mp4`" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="service-detail col-md-12 mt-5 row p-0 m-0">
+                <div class="detail-title col-md-12 d-flex justify-content-center align-items-center text-center row p-0 m-0">
+                    <h2>{{$t('welcome').OtherFeatures}}</h2>
+                </div>
+                <div class="col-md-8 d-flex row p-0 mt-5 mx-auto mb-5">
+                    <div class="service-list col-md-6 col-sm-12 col-12 d-flex justify-content-center">
+                        <ul>
+                            <li>{{$t('welcome').GuestParking}}</li>
+                            <li>{{$t('welcome').EasyFreewayAccess}}</li>
+                            <li>{{$t('welcome').HighSpeed}}</li>
+                        </ul>
+                    </div>
+                    <div class="service-list col-md-6 col-sm-12 col-12 d-flex justify-content-center">
+                        <ul>
+                            <li>{{$t('welcome').GuestParking}}</li>
+                            <li>{{$t('welcome').EasyFreewayAccess}}</li>
+                            <li>{{$t('welcome').HighSpeed}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
     <div class="third-background container-fluid">
         <div class="third-wrap">
             <div class="third">  
             </div>
             <div class="h-100 container">
                 <div class="row p-0 m-0">
-                    <div class="col-md-6 d-flex row p-0 m-0 text-md-left text-center align-items-center">
-                        <div class="w-100">
-                            <div class="row w-100">
-                                <div class="col-3">
-                                    <p>{{$t('welcome').APTdetail_option_1}}</p>
-                                </div>
-                                <div class="col-9">
-                                    582
-                                    <!-- <p>{{$t('welcome').APTdetail_detail_1}}</p> -->
-                                </div>
+                    <div class="join col-md-6 d-flex row p-0 m-0 text-md-left text-center align-items-center">
+                        <div class="row">
+                            <div class="join-title col-md-12">
+                                <p class="m-0 p-0 pt-4">{{$t('welcome').JoinOurCommunity}}</p>
                             </div>
-                            <div class="row w-100">
-                                <div class="col-3">
-                                    <p>{{$t('welcome').APTdetail_option_2}}</p>
-                                </div>
-                                <div class="col-9">
-                                    <p>{{$t('welcome').APTdetail_detail_2}}</p>
-                                </div>
+                            <div class="join-content col-md-12">
+                                <p>{{$t('welcome').CallOrEmail}}</p>
                             </div>
-                            <div class="row w-100">
-                                <div class="col-3">
-                                    <p>{{$t('welcome').APTdetail_option_3}}</p>
-                                </div>
-                                <div class="col-9">
-                                    <p>{{$t('welcome').APTdetail_detail_3}}</p>
-                                </div>
-                            </div>
-                            <div class="row w-100">
-                                <div class="col-3">
-                                    <p>{{$t('welcome').APTdetail_option_4}}</p>
-                                </div>
-                                <div class="col-9">
-                                    <p>{{$t('welcome').APTdetail_detail_4}}</p>
-                                </div>
-                            </div>
-                            <div class="row w-100">
-                                <div class="col-3">
-                                    <p>{{$t('welcome').APTdetail_option_5}}</p>
-                                </div>
-                                <div class="col-9">
-                                    <p>{{$t('welcome').APTdetail_detail_5}}</p>
-                                </div>
-                            </div>
-                            <div class="row w-100">
-                                <div class="col-3">
-                                    <p>{{$t('welcome').APTdetail_option_6}}</p>
-                                </div>
-                                <div class="col-9">
-                                    <p>{{$t('welcome').APTdetail_detail_6}}</p>
-                                </div>
-                            </div>
-                            <div class="row w-100">
-                                <div class="col-3">
-                                    <p>{{$t('welcome').APTdetail_option_7}}</p>
-                                </div>
-                                <div class="col-9">
-                                    <p>{{$t('welcome').APTdetail_detail_7}}</p>
-                                </div>
+                            <div class="join-button col-md-12 mt-5">
+                                <Button shape="circle" size="large" type="primary" class="wel-btn" >{{$t('welcome').JoinCommunity}}</Button>
                             </div>
                         </div>
                     </div>
@@ -162,6 +165,9 @@
         <div class="row p-0 m-0">
             <div class="gallery-title col-md-12 d-flex text-center mt-5">
                 <h2 class="col-md-12 m-0 p-0 section-title">{{$t('welcome').GALLERY}}</h2> 
+            </div>
+            <div class="gallery-content col-md-12 d-flex text-center mt-5">
+                <p class="col-md-12 m-0 p-0">{{$t('welcome').OnlinePhots}}</p>
             </div>
         </div>
         <section id="gallery">
@@ -213,10 +219,10 @@
     <div class="container-fluid mt-5">
         <div class="row p-0 m-0">
             <div class="add-title col-md-12 row p-0 m-0">
-                <h2 class="col-md-12 d-flex align-items-center justify-content-center row p-0 m-0 section-title">{{ $t('welcome').theLinkLocation }}</h2>
+                <h2 class="col-md-12 d-flex align-items-center justify-content-center row p-0 m-0 section-title">{{ $t('welcome').Vapartment }}</h2>
             </div>
             <div class="add-content col-md-12 row p-0 mt-5">
-                <p class="col-md-4 offset-md-4 text-center mb-5">Lô đất IC 32, Khu Đô Thị Nam Thăng Long, Tây Hồ, Hà Nội</p>
+                <p class="col-md-4 offset-md-4 text-center mb-5">{{$t('welcome').Spectrum}}</p>
             </div>
         </div>
     </div>
@@ -261,8 +267,8 @@ export default {
         playbackRates: [0.7, 1.0, 1.5, 2.0],
         sources: [{
             type: "video/mp4",
-            src: "http://asystem.test/asset/video/bgvideo.mp4"
-            // src: "http://18.183.106.31/asset/video/bgvideo.mp4"
+            // src: "http://asystem.test/asset/video/bgvideo.mp4"
+            src: "http://18.183.106.31/asset/video/bgvideo.mp4"
         }],
         // poster: "/static/images/author.jpg",
     },

@@ -33,9 +33,32 @@ class SuggestionController extends Controller
         $broadcastingData['userName'] = Auth::user()->name;
         $broadcastingData['userAvatar'] = Auth::user()->user_avatar;
         $broadcastingData['title'] = $request->title;
+        $broadcastingData['created_at'] = now();
+
         if($request->isDraft == null){
             // broadcast Event
             broadcast(new NewSuggestion($broadcastingData))->toOthers();
+            $userList = User::where([
+                ['aptId', '=', Auth::user()->aptId],
+                ['id', '<>', Auth::user()->id]
+            ])->get();
+
+            foreach ($userList as $key => $user){
+                $newPushOfUser = json_decode($user->newPush);
+                if($newPushOfUser == null){
+                    $willStoreAsNewPush = new \stdClass();
+                    $willStoreAsNewPush->suggestion[] = $broadcastingData;
+                    $willStoreAsNewPush->notification = [];
+                    $willStoreAsNewPush->community = [];
+                    $user->newPush = json_encode($willStoreAsNewPush);
+                    $user->save();
+                }
+                else{
+                    array_push($newPushOfUser->suggestion, $broadcastingData);
+                    $user->newPush = json_encode($newPushOfUser);
+                    $user->save();
+                }
+            }
         }
 
         return response()->json([

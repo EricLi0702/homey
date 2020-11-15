@@ -4,10 +4,10 @@
             <img :src="`${baseUrl}/asset/img/bg/room11.png`" />
         </div> -->
         <div class="suggestion-sub-menu container-fluid bg-white box-block">
-            <div class="container d-flex justify-content-between p-0 py-3 ">
-                <Input class="w-40"
+            <div class="container d-flex justify-content-between p-0 py-3 row m-0 mx-auto">
+                <Input class="col-12 col-md-6 p-0"
                  search :placeholder="$t('facility').EnterSomething" />
-                <div class="suggestion-sub-menu-items">
+                <div class="suggestion-sub-menu-items col-12 col-md-6 p-0 text-right">
                     <router-link :to="{ path: '/facility/reservation' }" class="">
                         <!-- {{ $t('register') }} -->
                         <Button type="warning" icon="md-checkbox-outline">{{$t('publicFacility').reservation}}</Button>

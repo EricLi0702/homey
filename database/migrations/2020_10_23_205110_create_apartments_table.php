@@ -16,6 +16,7 @@ class CreateApartmentsTable extends Migration
         Schema::create('apartments', function (Blueprint $table) {
             $table->id();
             $table->string('aptName')->unique();
+            $table->string('code')->unique();
             $table->string('address');
             $table->string('repreName');
             $table->string('phoneNumber');

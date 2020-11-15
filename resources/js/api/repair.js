@@ -39,6 +39,20 @@ function getRepairCnt(userId){
     return axios.get('/api/repairCnt',{params:{id:userId}})
 }
 
+function getFirstItem(){
+    return axios.get('/api/repair/first')
+}
+function getLastItem(){
+    return axios.get('/api/repair/last')
+}
+function getPreviousItem(repairId){
+    return axios.get('/api/repair/previous', {params:{id:repairId}})
+}
+function getNextItem(repairId){
+    return axios.get('/api/repair/next', {params:{id:repairId}})
+}
+
+
 export{
     getRepairList,
     registerRepair,
@@ -49,4 +63,8 @@ export{
     finishRequest,
     getTop5Repair,
     getRepairCnt,
+    getFirstItem,
+    getLastItem,
+    getPreviousItem,
+    getNextItem,
 }

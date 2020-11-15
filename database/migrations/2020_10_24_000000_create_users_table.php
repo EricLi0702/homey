@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phoneNumber')->unique();
+            $table->string('phoneNumber')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('ho')->nullable();
@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->foreign('buildingId')->references('id')->on('buildings')->onDelete('cascade');
             $table->unsignedBigInteger('vercode')->default('0');
             $table->string('user_avatar')->default('/');
+            $table->text('newPush')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -1378,6 +1378,10 @@ a.text-dark:hover, a.text-dark:focus {
     white-space: pre-wrap;
 }
 
+.post-content p{
+    word-break: break-all;
+}
+
 @media only screen and (max-width: 600px) {
     .subtitle h1 {
         font-size: 3rem!important;
@@ -1409,6 +1413,12 @@ a.text-dark:hover, a.text-dark:focus {
 @media only screen and (max-width: 450px) {
     .navbar-brand{
         display: none;
+    }
+    .bg-transparent{
+        padding: 14px 10px!important;
+    }
+    .navbar-scroll{
+        padding: 24px 10px!important;
     }
 }
 

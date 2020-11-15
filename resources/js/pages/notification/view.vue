@@ -276,6 +276,7 @@ export default {
             .then(res=>{
                 this.details = res.data.notificationData;
                 this.details.upload_file = JSON.parse(this.details.upload_file);
+                console.log("@@@this.details.upload_file@@@", this.details.upload_file);
                 viewedCurrentNotification(this.details.id);
             })
         },

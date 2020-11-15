@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('apartment','ApartmentController@delApt');
     
     Route::post('notification/create', 'NotificationController@store');
+    Route::get('notification/draft', 'NotificationController@getDraft');
     Route::get('notification', 'NotificationController@index');
     Route::delete('notification', 'NotificationController@delete');
     Route::get('notification/current', 'NotificationController@getCurrent');
@@ -63,6 +64,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('repair/response', 'RepairController@response');
     Route::delete('repair','RepairController@deleteRepair');
     Route::post('repair/finish','RepairController@finish');
+    Route::get('repair/first', 'RepairController@getFirstItemID');
+    Route::get('repair/last', 'RepairController@getLastItemID');
+    Route::get('repair/previous', 'RepairController@getPreviousItemID');
+    Route::get('repair/next', 'RepairController@getNextItemID');
     
 
     Route::post('community/create', 'CommunityController@store');

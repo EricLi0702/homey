@@ -70,7 +70,31 @@ class CommunityController extends Controller
         $broadcastingData['userName'] = Auth::user()->name;
         $broadcastingData['userAvatar'] = Auth::user()->user_avatar;
         $broadcastingData['title'] = $request->title;
+        $broadcastingData['created_at'] = now();
+
         broadcast(new NewCommunity($broadcastingData))->toOthers();
+        $userList = User::where([
+            ['aptId', '=', Auth::user()->aptId],
+            ['id', '<>', Auth::user()->id]
+        ])->get();
+
+        foreach ($userList as $key => $user){
+            $newPushOfUser = json_decode($user->newPush);
+            if($newPushOfUser == null){
+                $willStoreAsNewPush = new \stdClass();
+                $willStoreAsNewPush->community[] = $broadcastingData;
+                // array_push($willStoreAsNewPush->notification, $broadcastingData);
+                $willStoreAsNewPush->suggestion = [];
+                $willStoreAsNewPush->notification = [];
+                $user->newPush = json_encode($willStoreAsNewPush);
+                $user->save();
+            }
+            else{
+                array_push($newPushOfUser->community, $broadcastingData);
+                $user->newPush = json_encode($newPushOfUser);
+                $user->save();
+            }
+        }
 
         return response()->json([
             'community' => $community

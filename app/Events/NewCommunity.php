@@ -31,6 +31,6 @@ class NewCommunity implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('community');
+        return new Channel('community');
     }
 }

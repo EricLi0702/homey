@@ -13,14 +13,14 @@
                             <p>{{$t('notification').Type}}</p>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
-                                    <i-switch @on-change="insertTypeUrgent" class="mb-2" />
+                                    <i-switch @click="insertTypeUrgent" v-model="isUrgent" class="mb-2" />
                                     <Icon size="35" type="md-stopwatch" color="#F4B894" />
                                     <span style="color:#F4B894">{{$t('notification').Urgent}}</span>
                                 </label>
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
-                                    <i-switch @on-change="insertTypeImportant" class="mb-2" />
+                                    <i-switch @click="insertTypeImportant" v-model="isImportant" class="mb-2" />
                                     <Icon size="35" type="ios-warning-outline" color="#F26A5A" />
                                     <span style="color:#F26A5A">{{$t('notification').Important}}</span>
                                 </label>
@@ -111,7 +111,7 @@ import wysiwyg from "vue-wysiwyg"
 //emoji
 import { Picker } from 'emoji-mart-vue'
 //import Api
-import {getNotificationList,registerNotification,updateNotification,delNotification} from '~/api/notification'
+import {getNotificationList,registerNotification,updateNotification,delNotification, getDraft} from '~/api/notification'
 //file upload component
 import Upload from '~/components/Upload'
 import {delUploadFile} from '~/api/upload'
@@ -161,7 +161,46 @@ export default {
         }
     },
 
+    created(){
+        this.getDraft();
+    },
+
     methods:{
+        getDraft(){
+            getDraft()
+            .then(res=>{
+                if(res.data.draftData.length !== 0){
+                    this.success("You have already draft");
+                    this.registerNotificationData.file = JSON.parse(res.data.draftData[0].upload_file);
+                    this.registerNotificationData.title = res.data.draftData[0].title;
+                    this.registerNotificationData.desc = res.data.draftData[0].content;
+                    this.registerNotificationData.type = res.data.draftData[0].type;
+                    this.registerNotificationData['id'] = res.data.draftData[0].id;
+                    switch (this.registerNotificationData.type) {
+                        case 0:
+                            this.isUrgent = false;
+                            this.isImportant = false;
+                            break;
+                        case 1:
+                            this.isUrgent = true;
+                            this.isImportant = false;
+                            break;
+                        case 2:
+                            this.isUrgent = false;
+                            this.isImportant = true;
+                            break;
+                        case 3:
+                            this.isUrgent = true;
+                            this.isImportant = true;
+                            break;
+                    }
+                }
+            })
+            .catch(err => {
+                // console.log(err.response)
+            });
+        },
+
         insertTypeUrgent(){
             this.isUrgent = !this.isUrgent;
         },

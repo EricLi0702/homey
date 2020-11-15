@@ -18,13 +18,13 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('notification', function ($user) {
-    return auth()->check();
+    return true;
 });
 
 Broadcast::channel('suggestion', function ($user) {
-    return auth()->check();
+    return true;
 });
 
 Broadcast::channel('community', function ($user) {
-    return auth()->check();
+    return true;
 });
