@@ -35,20 +35,18 @@ class LoginController extends Controller
         $agent = new Agent();
         $desktopValue = $agent->isDesktop();
         $mobileValue = $agent->isPhone();
-        if ($desktopValue == true){
-            // config()->set('jwt.ttl', 1);
-            config([
-                'jwt.ttl' => 1,
-            ]);
-        }
-        if ($mobileValue == true){
-            // config()->set('jwt.ttl', 10);
-            config([
-                'jwt.ttl' => 10,
-            ]);
-        }
-        $token = $this->guard();
-        $token = $this->guard();
+        // if ($desktopValue == true){
+        //     // config()->set('jwt.ttl', 1);
+        //     config([
+        //         'jwt.ttl' => 1,
+        //     ]);
+        // }
+        // if ($mobileValue == true){
+        //     // config()->set('jwt.ttl', 10);
+        //     config([
+        //         'jwt.ttl' => 1,
+        //     ]);
+        // }
         $token = $this->guard()->attempt($this->credentials($request));
 
         if (! $token) {
