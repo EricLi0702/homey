@@ -97,10 +97,10 @@
                             <Button @click="toggleViewType" v-if="calendarView" type="warning" icon="ios-calendar-outline">{{$t('facility').ListView}}</Button>
                             <Button @click="toggleViewType" v-else type="warning" icon="md-paper">{{$t('facility').CalendarView}}</Button>
                         </div>
-                        <div v-if="calendarView" v-for="(facility, j) in facilityList" :key="j" class="col-12 m-0 row calendar-view-container posted-item">
+                        <div v-if="calendarView" class="col-12 m-0 row calendar-view-container posted-item">
                             
                         </div>
-                        <div class="control-view-type col-12 mb-3 p-0" v-else>
+                        <div v-else class="control-view-type col-12 mb-3 p-0">
                             <div  v-for="(reservation, i) in selectedFacility.reservation_data" :key="i" v-if="selectedFacility.reservation_data.length" class="col-12 m-0 row list-view-container posted-item p-2 mb-3">
                                 <div class="col-1">
                                     <div class="posted-item-user-info">
