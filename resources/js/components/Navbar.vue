@@ -57,7 +57,7 @@
         </li>
       </ul>
       <div @click="navigateToHome" class="navbar-brand mx-auto">
-        <img :src="`${baseUrl}/asset/img/icon/logo.png`" alt="">
+        <img :src="`${baseUrl}/asset/img/icon/logo1.png`" alt="">
       </div>
       <ul class="navbar-nav ml-auto d-flex align-items-center">
         <locale-dropdown />

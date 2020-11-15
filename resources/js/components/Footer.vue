@@ -6,7 +6,7 @@
                     <div class="col-12 m-0 p-0 mb-3">
                         <h1 class="text-bold text-white">{{ $t('welcome').HomeyApt }}</h1>
                     </div>
-                    <div class="col-xl-4 col-md-4 mb-30 p-0">
+                    <div class="col-xl-6 col-md-6 mb-30 p-0">
                         <div class="single-cta d-flex justify-content-start align-items-start ">
                             <Icon type="md-locate" color="#FF5E14" size="30"/>
                             <div class="cta-text">
@@ -15,21 +15,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-md-4 mb-30 p-0 pl-md-2">
+                    <div class="col-xl-6 col-md-6 mb-30 p-0 pl-md-2">
                         <div class="single-cta d-flex justify-content-start align-items-start">
                             <Icon type="ios-phone-portrait" color="#FF5E14" size="30" />
                             <div class="cta-text">
                                 <h4>{{ $t('welcome').CallUs }}</h4>
                                 <span>{{ $t('welcome').CellNum }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-4 mb-30 p-0 pl-md-3">
-                        <div class="single-cta d-flex justify-content-start align-items-start">
-                            <Icon type="md-mail-open" color="#FF5E14" size="30" />
-                            <div class="cta-text">
-                                <h4>{{ $t('welcome').MailUs }}</h4>
-                                <span>{{ $t('welcome').HomeyCom }}</span>
                             </div>
                         </div>
                     </div>
@@ -54,7 +45,7 @@
                             <div class="single-cta d-flex justify-content-start align-items-center ">
                                 <Icon type="md-locate" color="#FF5E14" size="30"/>
                                 <div class="cta-text">
-                                    <h4>{{ $t('welcome').AvenueAddress }}</h4>
+                                    <h4>{{ $t('welcome').footerLocate }}</h4>
                                 </div>
                             </div>
                             <div class="single-cta d-flex justify-content-start align-items-center ">
@@ -69,6 +60,12 @@
                                     <h4>{{ $t('welcome').HomeyCom }}</h4>
                                 </div>
                             </div>
+                            <div class="single-cta d-flex justify-content-start align-items-center ">
+                                <Icon type="ios-phone-portrait" color="#FF5E14" size="30" />
+                                <div class="cta-text">
+                                    <h4>+84 357 852 066</h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
@@ -81,7 +78,6 @@
                                     <h3>{{ $t('welcome').PrivacyPolicy }}</h3>
                                 </router-link>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -92,7 +88,7 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 text-center align-items-center justify-content-center">
                         <div class="copyright-text">
-                            <p>Copyright &copy; 2020, All Right Reserved <a href="#">MangoJam</a></p>
+                            <p>Copyright &copy; HOMEY Guide All Rights Reserved.</p>
                         </div>
                     </div>
                 </div>

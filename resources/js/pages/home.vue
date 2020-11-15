@@ -6,10 +6,10 @@
             </div>
             <div class="h-100 d-flex text-center align-items-center justify-content-center ">
                 <div class="title row m-0 p-0">
-                    <div class="subtitle col-md-12 mb-5">
+                    <div class="subtitle col-md-12 mb-5" data-aos="zoom-out">
                         <h1>{{ $t('welcome').Vapartment }}</h1>
                     </div>
-                    <div class="description col-md-12 mt-5">
+                    <div class="description col-md-12 mt-5" data-aos="fade-up">
                         <h4>{{ $t('welcome').WelcomeVapartment }}</h4>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
         <div class="hero-items row">
             <div class="container">
                 <div class="row align-middle">
-                  <router-link :to="{ name: 'notification' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" >
+                  <router-link :to="{ name: 'notification' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" data-aos="fade-down-right" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="card-hero gr-1">
                       <div class="txt">
                         <h1>{{$t('welcome').Notification}}</h1>
@@ -31,7 +31,7 @@
                       </div>
                     </div>
                   </router-link>
-                  <router-link :to="{ name: 'community' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" >
+                  <router-link :to="{ name: 'community' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000">
                       <div class="card-hero gr-1">
                           <div class="txt">
                               <h1>{{$t('community').cummunity}}</h1>
@@ -42,7 +42,7 @@
                           </div>
                       </div>
                   </router-link>
-                  <router-link :to="{ name: 'facility' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" >
+                  <router-link :to="{ name: 'facility' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" data-aos="fade-down-left" data-aos-easing="linear" data-aos-duration="1000">
                       <div class="card-hero gr-1">
                           <div class="txt">
                               <h1>{{$t('welcome').PublicFacility}}</h1>
@@ -53,7 +53,7 @@
                           </div>
                       </div>
                   </router-link>
-                  <router-link :to="{ name: 'suggestion' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" >
+                  <router-link :to="{ name: 'suggestion' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" data-aos="fade-up-right" data-aos-easing="linear" data-aos-duration="1000">
                       <div class="card-hero gr-1">
                         <div class="txt">
                           <h1>{{$t('welcome').suggestion}}</h1>
@@ -64,7 +64,7 @@
                         </div>
                       </div>
                   </router-link>
-                  <router-link :to="{ name: 'repair' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" >
+                  <router-link :to="{ name: 'repair' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
                       <div class="card-hero gr-1">
                           <div class="txt">
                               <h1>{{$t('repair').repairRequest}}</h1>
@@ -75,7 +75,7 @@
                           </div>
                       </div>
                   </router-link>
-                  <router-link :to="{ name: 'home' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" >
+                  <router-link :to="{ name: 'home' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" data-aos="fade-up-left" data-aos-easing="linear" data-aos-duration="1000">
                       <div class="card-hero gr-1">
                           <div class="txt">
                               <h1>{{$t('welcome').advertisement}}</h1>
@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-    <div class="content container d-flex align-items-center justify-content-center my-4 pt-4">
+    <div class="content container d-flex align-items-center justify-content-center my-4 pt-4" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
         <div class="row m-0 p-0">
             <div class="col-12 text-center mb-3">
                 <h2 class="section-title">{{ $t('welcome').VApartmentManagementSystem }}</h2>
@@ -134,7 +134,7 @@
         </div><!-- end overlay -->
     </div>
     <!--end app video section-->
-    <div class="second-background container-fluid">
+    <div class="second-background container-fluid" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
         <div class="second-wrap">
             <!-- <div class="second">  
             </div> -->
@@ -162,7 +162,7 @@
             </div>
             <div class="h-100 container">
                 <div class="row p-0 m-0">
-                    <div class="col-md-6 d-flex row p-0 m-0 text-md-left text-center align-items-center">
+                    <div class="col-md-6 d-flex row p-0 m-0 text-md-left text-center align-items-center text-white font-weight-bold" data-aos="fade-left" data-aos-easing="linear" data-aos-duration="1000">
                         <div class="w-100">
                             <div class="row w-100">
                                 <div class="col-3">
@@ -223,7 +223,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="structure col-md-6 row p-0 mt-2 animate__backInUp animate__animated ">
+                    <div class="structure col-md-6 row p-0 mt-2 " data-aos="fade-right" data-aos-easing="linear" data-aos-duration="1000">
                         <div class="home-structure col-md-12">
                             <img :src="`${baseUrl}/asset/img/bg/room-structure.png`" alt="" class="p-4">
                         </div>
@@ -234,7 +234,7 @@
     </div>
     <div class="gallery container-fluid">
         <div class="row p-0 m-0">
-            <div class="gallery-title col-md-12 d-flex text-center mt-5">
+            <div class="gallery-title col-md-12 d-flex text-center mt-5" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
                 <h2 class="col-md-12 m-0 p-0 section-title">{{$t('welcome').GALLERY}}</h2> 
             </div>
         </div>
@@ -242,7 +242,7 @@
             <div class="container-fluid">
               <div id="image-gallery">
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
+                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image" data-aos="flip-up" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="img-wrapper">
                       <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room1.jpg`" class="img-responsive"></a>
                       <div class="img-overlay">
@@ -251,7 +251,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
+                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image" data-aos="flip-up" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="img-wrapper" style="height:95%">
                       <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room4.png`" class="img-responsive" style="height:100%"></a>
                       <div class="img-overlay">
@@ -260,7 +260,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
+                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image" data-aos="flip-up" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="img-wrapper" style="height:95%">
                       <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room3.jpg`" class="img-responsive" style="height:100%"></a>
                       <div class="img-overlay">
@@ -269,7 +269,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
+                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image" data-aos="flip-up" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="img-wrapper" style="height:95%">
                       <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room2.jpg`" class="img-responsive" style="height:100%"></a>
                       <div class="img-overlay">
@@ -284,7 +284,7 @@
             </div><!-- End container --> 
           </section>    
     </div>
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-5" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
         <div class="row p-0 m-0">
             <div class="add-title col-md-12 row p-0 m-0">
                 <h2 class="col-md-12 d-flex align-items-center justify-content-center row p-0 m-0 section-title">{{ $t('welcome').theLinkLocation }}</h2>
@@ -306,10 +306,13 @@
 </template>
 
 <script>
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+require('videojs-youtube');
+import { videoPlayer } from 'vue-video-player'
 import { mapGetters } from 'vuex'
 import GoogleMapLoader from '~/components/GoogleMapLoader'
 import 'video.js/dist/video-js.css'
-import { videoPlayer } from 'vue-video-player'
 export default {
 
   layout: 'default',
@@ -332,15 +335,20 @@ export default {
         fluid: true,
         height:'350',
         language: 'en',
+        techOrder: [ 'youtube'],
         playbackRates: [0.7, 1.0, 1.5, 2.0],
         sources: [{
-            type: "video/mp4",
-            src: "http://asystem.test/asset/video/bgvideo.mp4"
-            // src: "http://18.183.106.31/asset/video/bgvideo.mp4"
+            type: "video/youtube",
+            src: "https://www.youtube.com/watch?v=EkU4xR20Xro"
         }],
-        // poster: "/static/images/author.jpg",
+        poster: "/static/img/backgrounds/feature-video.jpg"
     },
   }),
+
+  created () {
+        AOS.init()
+    },
+    
 
   computed:{ 
         ...mapGetters({
@@ -351,7 +359,7 @@ export default {
         }
     },
   mounted(){
-    
+    this.playerOptions.poster = this.baseUrl + '/asset/img/bg/introduceVideoCoverImage.png'
   },
   methods:{
       getStart(){

@@ -34,15 +34,16 @@
         "OnlinePhots":"Chụp ảnh trực tuyến các The Link 345 của chúng tôi theo yêu cầu của bạn, chúng tôi có thể giúp bạn.",
         "ApartmentLiving":"Căn hộ sống",
         "Spectrum":"Sống tại Spectrum đặt mọi thứ bạn cần và yêu thích trong tầm tay. Vị trí trung tâm của chúng tôi nằm trong khoảng cách đi bộ đến hai cửa hàng tạp hóa, hiệu thuốc, bệnh viện và đường vành đai. Bạn sẽ tìm thấy một kiểu sống khác ở đây tại Spectrum - một đặc trưng bởi sự dễ dàng và sang trọng.",
-        "HomeyApt":"Ứng dụng gia đình",
+        "HomeyApt":"The Link 345",
         "FindUs":"Tìm chúng tôi",
-        "AvenueAddress":"1010 Avenue, sw 54321, chandigarh",
-        "CallUs":"Gọi cho chúng tôi",
-        "CellNum":"15140043021",
+        "AvenueAddress":"Lô đất IC 32, Khu Đô Thị Nam Thăng Long,  Tây Hồ, Hà Nội",
+        "CallUs":"Điện thoại",
+        "footerLocate": "Công ty TNHH một thành viên We Apt",
+        "CellNum":"1900-3432, 1900-1122",
         "MailUs":"Gửi thư cho chúng tôi",
-        "HomeyCom":"sammie123456@homey.com",
-        "Support":"Chúng tôi ủng hộ một cuộc sống hạnh phúc.",
-        "NName":"Sammie",
+        "HomeyCom":"weapt2021@gmail.com",
+        "Support":"Chúng tôi ủng hộ một cuộc sống hạnh phúc",
+        "NName":"Han Sang Hoon",
         "TermsUse":"Điều khoản Sử dụng",
         "PrivacyPolicy":"Chính sách Bảo mật",
         "suggestion":"Ý kiến",
@@ -526,6 +527,61 @@
         "content20":"Xin vui lòng đọc Điều khoản Dịch vụ về việc sử dụng, từ bỏ và giới hạn trách nhiệm khi sử dụng Homey, Dịch Vụ và các chính sách liên quan khác./.",
         "content20_last":"Chỉnh sửa lần cuối: ngày 30/10/2020"
 
+    },
+    
+    "categories":{
+        "notification" : {
+            "Categories": "Hạng mục",
+            "countOfThisMonth" : "Thông báo tháng này",
+            "countOfThisWeek" : "Thông báo tuần này",
+            "countOfToday" : "Thông báo hôm nay",
+            "countOfRegisteredUser" : "Số lượng người dùng đăng ký",
+            "countOfCurrentUser" : "Số lượng người dùng hiện tại",
+            "notificationOfThisMonth" : "Thông báo tháng này:",
+            "percentOfThisMonth" : "Phần trăm thông báo hôm nay",
+            "percentOfThisWeek" : "Phần trăm thông báo tuần này",
+            "currentUser_registeredUser" : "Người dùng hiện tại :: Đăng ký người dùng",
+            "myActivityThread" : "Chủ đề hoạt động của tôi"
+        },
+        "community" : {
+            "Categories": "Hạng mục",
+            "countOfThisMonth" : "Bảng tin dân cư tháng này",
+            "countOfThisWeek" : "Bảng tin dân cư tuần này",
+            "countOfToday" : "Bảng tin dân cư hôm nay",
+            "countOfRegisteredUser" : "Số lượng người dùng đăng ký",
+            "countOfCurrentUser" : "Số lượng người dùng hiện tại",
+            "communityOfThisMonth" : "Bảng tin dân cư tháng này:",
+            "percentOfThisMonth" : "Phần trăm bảng tin dân cư hôm nay",
+            "percentOfThisWeek" : "Phần trăm bảng tin dân cư tuần này",
+            "currentUser_registeredUser" : "Người dùng hiện tại :: Đăng ký người dùng",
+            "myActivityThread" : "Chủ đề hoạt động của tôi"
+        },
+        "suggestion" : {
+            "Categories": "Hạng mục",
+            "countOfThisMonth" : "Ý kiến tháng này",
+            "countOfThisWeek" : "Ý kiến tuần này",
+            "countOfToday" : "Ý kiến hôm nay",
+            "countOfRegisteredUser" : "Số lượng người dùng đăng ký",
+            "countOfCurrentUser" : "Số lượng người dùng hiện tại",
+            "suggestionOfThisMonth" : "Ý kiến tháng này:",
+            "percentOfThisMonth" : "Phần trăm ý kiến hôm nay",
+            "percentOfThisWeek" : "Phần trăm ý kiến tuần này",
+            "currentUser_registeredUser" : "Người dùng hiện tại :: Đăng ký người dùng",
+            "myActivityThread" : "Chủ đề hoạt động của tôi"
+        },
+        "repair" : {
+            "Categories": "Hạng mục",
+            "countOfThisMonth" : "Sửa chữa tháng này",
+            "countOfThisWeek" : "Sửa chữa tuần này",
+            "countOfToday" : "Sửa chữa hôm nay",
+            "countOfRegisteredUser" : "Số lượng người dùng đăng ký",
+            "countOfCurrentUser" : "Số lượng người dùng hiện tại",
+            "repairOfThisMonth" : "Sửa chữa tháng này:",
+            "percentOfThisMonth" : "Phần trăm sửa chữa hôm nay",
+            "percentOfThisWeek" : "Phần trăm sửa chữa tuần này",
+            "currentUser_registeredUser" : "Người dùng hiện tại :: Đăng ký người dùng",
+            "myActivityThread" : "Chủ đề hoạt động của tôi"
+        }
     }
 
 

@@ -1,70 +1,68 @@
 <template>
     <div class="col-12 col-md-4 m-0 p-0 pr-md-4">
-        <Collapse class="box-block" v-model="collapse1">
-            <Panel hide-arrow name="item1">
-                Categories
-                <div slot="content" class="community-category-list p-3">
-                    <div class=" ccl-item d-flex justify-content-between">
-                        <p>1. The count of repair of this month</p>
-                        <Badge type="normal" :count="monthData"></Badge>
-                    </div>
-                    <div class=" ccl-item d-flex justify-content-between">
-                        <p>2. The count of repair of this week</p>
-                        <Badge type="normal" :count="weekData"></Badge>
-                    </div>
-                    <div class=" ccl-item d-flex justify-content-between">
-                        <p>3. The count of repair of today</p>
-                        <Badge type="normal" :count="todayData"></Badge>
-                    </div>
-                    <div class=" ccl-item d-flex justify-content-between">
-                        <p>4. The count of registerd user</p>
-                        <Badge type="normal" :count="registerCnt"></Badge>
-                    </div>
-                    <div class=" ccl-item d-flex justify-content-between">
-                        <p>5. The count of current user</p>
-                        <Badge type="normal" :count="currentCnt"></Badge>
-                    </div>
-                    <div class=" ccl-item d-flex justify-content-between">
-                        <p>6. Notice of Rent Increase</p>
-                        <Badge type="normal" :count="38"></Badge>
-                    </div>
-                </div>
-            </Panel>
-        </Collapse>
-        
-        <Collapse class="box-block" v-model="collapse2">
-            <Panel hide-arrow name="item2">
-                The count of repair on this month:{{this.monthData}}
-                <div slot="content" class="community-category-list p-3">
-                    <div class=" ccl-item">
-                        <p>Today repair percent of this month.</p>
-                        <Progress class="w-100" :percent="todayPro" :stroke-width="20" status="active" text-inside />
-                    </div>
-                    <div class=" ccl-item">
-                        <p>CurrentWeek repair percent of this month</p>
-                        <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
-                    </div>
-                    <div class=" ccl-item">
-                        <p>CurrentUser :: RegisterUser</p>
-                        <Progress class="w-100" :percent="userPro" :stroke-width="20" status="active" text-inside />
-                    </div>
-                </div>
-            </Panel>
-        </Collapse>
-        <Collapse class="box-block" v-model="collapse3">
-            <Panel hide-arrow name="item3">
-                My Activity Thread
-                <div slot="content" class="community-category-list p-3">
-                    <div v-for="repair in repairData" :key="repair.id" >
+        <div class="position-sticky pb-1" style="top: 150px;">
+            <Collapse class="box-block" v-model="collapse1">
+                <Panel hide-arrow name="item1">
+                    {{$t('categories').repair.Categories}}
+                    <div slot="content" class="community-category-list p-3">
                         <div class=" ccl-item d-flex justify-content-between">
-                            <router-link :to="{path:`/repair/${repair.id}`}">
-                                <p>{{repair.title}}</p>
-                            </router-link>
+                            <p>1. {{$t('categories').repair.countOfThisMonth}}</p>
+                            <Badge type="normal" :count="monthData"></Badge>
+                        </div>
+                        <div class=" ccl-item d-flex justify-content-between">
+                            <p>2. {{$t('categories').repair.countOfThisWeek}}</p>
+                            <Badge type="normal" :count="weekData"></Badge>
+                        </div>
+                        <div class=" ccl-item d-flex justify-content-between">
+                            <p>3. {{$t('categories').repair.countOfToday}}</p>
+                            <Badge type="normal" :count="todayData"></Badge>
+                        </div>
+                        <div class=" ccl-item d-flex justify-content-between">
+                            <p>4. {{$t('categories').repair.countOfRegisteredUser}}</p>
+                            <Badge type="normal" :count="registerCnt"></Badge>
+                        </div>
+                        <div class=" ccl-item d-flex justify-content-between">
+                            <p>5. {{$t('categories').repair.countOfCurrentUser}}</p>
+                            <Badge type="normal" :count="currentCnt"></Badge>
                         </div>
                     </div>
-                </div>
-            </Panel>
-        </Collapse>
+                </Panel>
+            </Collapse>
+            
+            <Collapse class="box-block" v-model="collapse2">
+                <Panel hide-arrow name="item2">
+                    {{$t('categories').repair.repairOfThisMonth}}:{{this.monthData}}
+                    <div slot="content" class="community-category-list p-3">
+                        <div class=" ccl-item">
+                            <p>{{$t('categories').repair.percentOfThisMonth}}</p>
+                            <Progress class="w-100" :percent="todayPro" :stroke-width="20" status="active" text-inside />
+                        </div>
+                        <div class=" ccl-item">
+                            <p>{{$t('categories').repair.percentOfThisWeek}}</p>
+                            <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
+                        </div>
+                        <div class=" ccl-item">
+                            <p>{{$t('categories').repair.currentUser_registeredUser}}</p>
+                            <Progress class="w-100" :percent="userPro" :stroke-width="20" status="active" text-inside />
+                        </div>
+                    </div>
+                </Panel>
+            </Collapse>
+            <Collapse class="box-block" v-model="collapse3">
+                <Panel hide-arrow name="item3">
+                    {{$t('categories').repair.myActivityThread}}
+                    <div slot="content" class="community-category-list p-3">
+                        <div v-for="repair in repairData" :key="repair.id" >
+                            <div class=" ccl-item d-flex justify-content-between">
+                                <router-link :to="{path:`/repair/${repair.id}`}">
+                                    <p>{{repair.title}}</p>
+                                </router-link>
+                            </div>
+                        </div>
+                    </div>
+                </Panel>
+            </Collapse>
+        </div>
     </div>
 </template>
 

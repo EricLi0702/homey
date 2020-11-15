@@ -232,10 +232,11 @@
 </template>
 
 <script>
+require('videojs-youtube');
+import { videoPlayer } from 'vue-video-player'
 import { mapGetters } from 'vuex'
 import GoogleMapLoader from '~/components/GoogleMapLoader'
 import 'video.js/dist/video-js.css'
-import { videoPlayer } from 'vue-video-player'
 export default {
 
   layout: 'default',
@@ -258,13 +259,13 @@ export default {
         fluid: true,
         height:'350',
         language: 'en',
+        techOrder: [ 'youtube'],
         playbackRates: [0.7, 1.0, 1.5, 2.0],
         sources: [{
-            type: "video/mp4",
-            src: "http://asystem.test/asset/video/bgvideo.mp4"
-            // src: "http://18.183.106.31/asset/video/bgvideo.mp4"
+            type: "video/youtube",
+            src: "https://www.youtube.com/watch?v=EkU4xR20Xro"
         }],
-        // poster: "/static/images/author.jpg",
+        poster: "/static/img/backgrounds/feature-video.jpg"
     },
   }),
 
@@ -277,7 +278,7 @@ export default {
         }
     },
   mounted(){
-    
+    this.playerOptions.poster = this.baseUrl + '/asset/img/bg/introduceVideoCoverImage.png'
   },
   methods:{
       getStart(){

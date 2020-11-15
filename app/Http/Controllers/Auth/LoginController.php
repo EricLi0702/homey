@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Jenssegers\Agent\Agent;
 
 class LoginController extends Controller
 {
@@ -31,6 +32,15 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
+        $agent = new Agent();
+        $desktopValue = $agent->isDesktop();
+        $mobileValue = $agent->isPhone();
+        if ($desktopValue == true){
+            config()->set('jwt.ttl', 30);
+        }
+        if ($mobileValue == true){
+            config()->set('jwt.ttl', 60*2);
+        }
         $token = $this->guard()->attempt($this->credentials($request));
 
         if (! $token) {

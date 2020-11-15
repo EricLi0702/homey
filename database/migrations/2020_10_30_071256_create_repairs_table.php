@@ -19,7 +19,7 @@ class CreateRepairsTable extends Migration
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('aptId');
             $table->foreign('aptId')->references('id')->on('apartments')->onDelete('cascade');
-            $table->string('title');
+            $table->text('title');
             $table->text('desc');
             $table->string('type');
             $table->string('object');

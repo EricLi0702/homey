@@ -34,15 +34,16 @@
         "OnlinePhots":"V- 아파트의 온라인 사진을 찍어 귀하의 요구 사항을 충족시켜 드릴 수 있습니다. ",
         "ApartmentLiving":"아파트 생활",
         "Spectrum":"오늘 저희에게 전화 또는 이메일로 업데이트 일정을 알려주세요. 업데이트 된 집과 커뮤니티 기능을 직접 확인하세요",
-        "HomeyApt":"Homey Apt",
-        "FindUs":"Find us",
-        "AvenueAddress":"1010 Avenue, sw 54321, chandigarh",
-        "CallUs":"Call us",
-        "CellNum":"15140043021",
+        "HomeyApt":"The Link 345",
+        "FindUs":"위치",
+        "AvenueAddress":"Lô đất IC 32, Khu Đô Thị Nam Thăng Long,  Tây Hồ, Hà Nội",
+        "footerLocate": "Công ty TNHH một thành viên We Apt",
+        "CallUs":"연락처",
+        "CellNum":"1900-3432, 1900-1122",
         "MailUs":"찾기",
-        "HomeyCom":"sammie123456@homey.com",
-        "Support":"행복한 생활을 응원합니다.",
-        "NName":"새미",
+        "HomeyCom":"weapt2021@gmail.com",
+        "Support":"행복한 삶을 지원합니다",
+        "NName":"한상훈",
         "TermsUse":"이용 약관",
         "PrivacyPolicy":"개인 정보 보호 정책",
         "suggestion":"건의",
@@ -527,6 +528,61 @@
         "content20":"Homey, 서비스 및 기타 관련 정책을 사용할 때 사용, 면책 및 책임 제한에 관한 서비스 약관을 읽으십시오",
         "content20_last":"최종 수정 : 2020 년 10 월 30 일"
 
+    },
+
+    "categories":{
+        "notification" : {
+            "Categories": "카테고리",
+            "countOfThisMonth" : "이달의 공지",
+            "countOfThisWeek" : "금주의 공지",
+            "countOfToday" : "오늘의 공지",
+            "countOfRegisteredUser" : "등록회원수",
+            "countOfCurrentUser" : "현재회원수",
+            "notificationOfThisMonth" : "이달의 공지:",
+            "percentOfThisMonth" : "이달중 오늘 공지 비율",
+            "percentOfThisWeek" : "이달중 금주 공지 비율",
+            "currentUser_registeredUser" : "현재 회원 : 등록 회원",
+            "myActivityThread" : "나의 글"
+        },
+        "community" : {
+            "Categories": "카테고리",
+            "countOfThisMonth" : "이달의 커뮤니티",
+            "countOfThisWeek" : "금주의 커뮤니티",
+            "countOfToday" : "오늘의 커뮤니티",
+            "countOfRegisteredUser" : "등록회원수",
+            "countOfCurrentUser" : "현재회원수",
+            "communityOfThisMonth" : "이달의 커뮤니티:",
+            "percentOfThisMonth" : "이달중 오늘 커뮤니티 비율",
+            "percentOfThisWeek" : "이달중 금주 커뮤니티 비율",
+            "currentUser_registeredUser" : "현재 회원 : 등록 회원",
+            "myActivityThread" : "나의 글"
+        },
+        "suggestion" : {
+            "Categories": "카테고리",
+            "countOfThisMonth" : "이달의 제안",
+            "countOfThisWeek" : "금주의 제안",
+            "countOfToday" : "오늘의 제안",
+            "countOfRegisteredUser" : "등록회원수",
+            "countOfCurrentUser" : "현재회원수",
+            "suggestionOfThisMonth" : "이달의 제안:",
+            "percentOfThisMonth" : "이달중 오늘 제안 비율",
+            "percentOfThisWeek" : "이달중 금주 제안 비율",
+            "currentUser_registeredUser" : "현재 회원 : 등록 회원",
+            "myActivityThread" : "나의 글"
+        },
+        "repair" : {
+            "Categories": "카테고리",
+            "countOfThisMonth" : "이달의 수리요청",
+            "countOfThisWeek" : "금주의 수리요청",
+            "countOfToday" : "오늘의 수리요청",
+            "countOfRegisteredUser" : "등록회원수",
+            "countOfCurrentUser" : "현재회원수",
+            "repairOfThisMonth" : "이달의 수리요청:",
+            "percentOfThisMonth" : "이달중 오늘 수리요청 비율",
+            "percentOfThisWeek" : "이달중 금주 수리요청 비율",
+            "currentUser_registeredUser" : "현재 회원 : 등록 회원",
+            "myActivityThread" : "나의 글"
+        }
     }
 
 

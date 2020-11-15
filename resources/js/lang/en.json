@@ -34,15 +34,16 @@
         "OnlinePhots":"Take an online Photos of our The Link 345 for your requirements we can help you.",
         "ApartmentLiving":"Apartment Living",
         "Spectrum":"Living at Spectrum puts everything that you need and love close at hand. Our central location is within walking distance of two grocery stores, a pharmacy, hospital, and beltway. You'll find a different kind of living here at Spectrum--one characterized by ease and elegance.",
-        "HomeyApt":"Homey Apt",
+        "HomeyApt":"The Link 345",
         "FindUs":"Find us",
-        "AvenueAddress":"1010 Avenue, sw 54321, chandigarh",
+        "AvenueAddress":"Lô đất IC 32, Khu Đô Thị Nam Thăng Long,  Tây Hồ, Hà Nội",
         "CallUs":"Call us",
-        "CellNum":"15140043021",
+        "footerLocate": "Công ty TNHH một thành viên We Apt",
+        "CellNum":"1900-3432, 1900-1122",
         "MailUs":"Mail us",
-        "HomeyCom":"sammie123456@homey.com",
-        "Support":"We support a happy life.",
-        "NName":"Sammie",
+        "HomeyCom":"weapt2021@gmail.com",
+        "Support":"We support a happy life",
+        "NName":"Han Sang Hoon",
         "TermsUse":"Terms of Use",
         "PrivacyPolicy":"Privacy Policy",
         "suggestion":"Suggestion",
@@ -527,7 +528,63 @@
         "content20":"Please read the Terms of Service regarding the use, disclaimer and limitation of liability when using Homey, the Service and other related policies./.",
         "content20_last":"Last edited: October 30, 2020"
 
+    },
+
+    "categories":{
+        "notification" : {
+            "Categories": "Categories",
+            "countOfThisMonth" : "The count of notification of this month",
+            "countOfThisWeek" : "The count of notification of this week",
+            "countOfToday" : "The count of notification of today",
+            "countOfRegisteredUser" : "The count of register user",
+            "countOfCurrentUser" : "The count of current user",
+            "notificationOfThisMonth" : "The count of notification on this month",
+            "percentOfThisMonth" : "Today notification percent of this month",
+            "percentOfThisWeek" : "Current Week notification percent of this month",
+            "currentUser_registeredUser" : "CurrentUser :: RegisterUser",
+            "myActivityThread" : "My Activity Thread"
+        },
+        "community" : {
+            "Categories": "Categories",
+            "countOfThisMonth" : "The count of community of this month",
+            "countOfThisWeek" : "The count of community of this week",
+            "countOfToday" : "The count of community of today",
+            "countOfRegisteredUser" : "The count of register user",
+            "countOfCurrentUser" : "The count of current user",
+            "communityOfThisMonth" : "The count of community on this month",
+            "percentOfThisMonth" : "Today community percent of this month",
+            "percentOfThisWeek" : "Current Week community percent of this month",
+            "currentUser_registeredUser" : "CurrentUser :: RegisterUser",
+            "myActivityThread" : "My Activity Thread"
+        },
+        "suggestion" : {
+            "Categories": "Categories",
+            "countOfThisMonth" : "The count of suggestion of this month",
+            "countOfThisWeek" : "The count of suggestion of this week",
+            "countOfToday" : "The count of suggestion of today",
+            "countOfRegisteredUser" : "The count of register user",
+            "countOfCurrentUser" : "The count of current user",
+            "suggestionOfThisMonth" : "The count of suggestion on this month",
+            "percentOfThisMonth" : "Today suggestion percent of this month",
+            "percentOfThisWeek" : "Current Week suggestion percent of this month",
+            "currentUser_registeredUser" : "CurrentUser :: RegisterUser",
+            "myActivityThread" : "My Activity Thread"
+        },
+        "repair" : {
+            "Categories": "Categories",
+            "countOfThisMonth" : "The count of repair of this month",
+            "countOfThisWeek" : "The count of repair of this week",
+            "countOfToday" : "The count of repair of today",
+            "countOfRegisteredUser" : "The count of register user",
+            "countOfCurrentUser" : "The count of current user",
+            "repairOfThisMonth" : "The count of repair on this month",
+            "percentOfThisMonth" : "Today repair percent of this month",
+            "percentOfThisWeek" : "Current Week repair percent of this month",
+            "currentUser_registeredUser" : "CurrentUser :: RegisterUser",
+            "myActivityThread" : "My Activity Thread"
+        }
     }
+    
     
 
 

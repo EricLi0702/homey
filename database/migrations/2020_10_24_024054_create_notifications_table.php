@@ -19,7 +19,7 @@ class CreateNotificationsTable extends Migration
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('aptId')->nullable();
             $table->foreign('aptId')->references('id')->on('apartments')->onDelete('cascade');
-            $table->string('title');
+            $table->text('title');
             $table->smallInteger('type');
             $table->enum('status', ['before', 'ongoing', 'finish'])->default('ongoing');
             $table->string('period')->nullable();
