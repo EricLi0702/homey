@@ -140,18 +140,27 @@ class NotificationController extends Controller
     }
 
     public function index(Request $request){
+        
         $aptId = Auth::user()->aptId;
-        return Notification::where([['status','=','ongoing']])
-                            ->where([['aptId','=',$aptId]])
+        if (Auth::user()->roleId == 2 || Auth::user()->roleId == 6){
+            return Notification::where([['aptId','=',$aptId]])
                             ->where([['isDraft','=',0]])
-                            ->where([['isDowngrade','=',0]])
                             ->with('userId')
                             ->orderBy('updated_at','desc')->paginate(5);
+        }
+        else{
+            return Notification::where([['status','=','ongoing']])
+                                ->where([['aptId','=',$aptId]])
+                                ->where([['isDraft','=',0]])
+                                ->where([['isDowngrade','=',0]])
+                                ->with('userId')
+                                ->orderBy('updated_at','desc')->paginate(5);
+        }
     }
 
     public function indexDowngrade(Request $request){
         $aptId = Auth::user()->aptId;
-        return Notification::where([['isDowngrade','=',1]])
+        return Notification::where([['isDowngrade','=',1], ['aptId', '=', $aptId]])
                             ->with('userId')
                             ->orderBy('updated_at','desc')->paginate(5);
     }

@@ -26,6 +26,13 @@
                                         <a href="#">{{notification.title}}</a>
                                     </h2>
                                     <p v-html="notification.content"></p>
+                                    <div v-if="currentUser.roleId == 2 || currentUser.roleId == 6">
+                                        <Tag v-if="notification.status == 'ongoing'" color="success">ongoing</Tag>
+                                        <Tag v-else-if="notification.status == 'before'" color="magenta">before</Tag>
+                                        <Tag v-else-if="notification.status == 'finish'" color="default">finish</Tag>
+                                        <Tag v-if="notification.isDowngrade == 0" color="success" class="ml-2">upgraded</Tag>
+                                        <Tag v-else-if="notification.isDowngrade == 1" color="warning" class="ml-2">downgraded</Tag>
+                                    </div>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
