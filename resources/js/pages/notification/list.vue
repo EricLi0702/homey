@@ -27,11 +27,11 @@
                                     </h2>
                                     <p v-html="notification.content"></p>
                                     <div v-if="currentUser.roleId == 2 || currentUser.roleId == 6">
-                                        <Tag v-if="notification.status == 'ongoing'" color="success">ongoing</Tag>
-                                        <Tag v-else-if="notification.status == 'before'" color="magenta">before</Tag>
-                                        <Tag v-else-if="notification.status == 'finish'" color="default">finish</Tag>
-                                        <Tag v-if="notification.isDowngrade == 0" color="success" class="ml-2">upgraded</Tag>
-                                        <Tag v-else-if="notification.isDowngrade == 1" color="warning" class="ml-2">downgraded</Tag>
+                                        <Tag v-if="notification.status == 'ongoing'" color="success">{{$t('notification').ongoingNoti}}</Tag>
+                                        <Tag v-else-if="notification.status == 'before'" color="magenta">{{$t('notification').beforeNoti}}</Tag>
+                                        <Tag v-else-if="notification.status == 'finish'" color="default">{{$t('notification').finishNoti}}</Tag>
+                                        <Tag v-if="notification.isDowngrade == 0" color="success" class="ml-2">{{$t('notification').upgradedNoti}}</Tag>
+                                        <Tag v-else-if="notification.isDowngrade == 1" color="warning" class="ml-2">{{$t('notification').downgradedNoti}}</Tag>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>

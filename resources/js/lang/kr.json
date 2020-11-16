@@ -186,7 +186,12 @@
         "update":"업데이트",
         "Remove":"제거",
         "DownGrade":"다운그레이드",
-        "UpGrade":"업 그레이드"
+        "UpGrade":"업 그레이드",
+        "ongoingNoti": "현재 알림중",
+        "beforeNoti": "준비중인 공지",
+        "finishNoti": "끝난 공지",
+        "upgradedNoti": "올리운 공지",
+        "downgradedNoti": "내리운 공지"
     },
     "community":{
         "cummunity":"커뮤니티",

@@ -186,7 +186,12 @@
         "update":"Update",
         "Remove":"Remove",
         "DownGrade":"DownGrade",
-        "UpGrade":"UpGrade"
+        "UpGrade":"UpGrade",
+        "ongoingNoti": "notify now",
+        "beforeNoti": "before",
+        "finishNoti": "finished",
+        "upgradedNoti": "upgraded",
+        "downgradedNoti": "downgraded"
     },
     "community":{
         "cummunity":"Community",

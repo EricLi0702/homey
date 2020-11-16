@@ -186,7 +186,12 @@
         "update":"Cập nhật",
         "Remove":"Xóa",
         "DownGrade":"Hạ cấp",
-        "UpGrade":"Nâng cấp"
+        "UpGrade":"Nâng cấp",
+        "ongoingNoti": "Hiện đang thông báo",
+        "beforeNoti": "Thông báo chuẩn bị",
+        "finishNoti": "Chú ý qua",
+        "upgradedNoti": "Đã đăng thông báo",
+        "downgradedNoti": "Để ý thông báo"
     },
     "community":{
         "cummunity":"Bảng tin dân cư",
