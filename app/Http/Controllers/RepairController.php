@@ -42,7 +42,7 @@ class RepairController extends Controller
     }
 
     public function index(Request $request){
-        if(Auth::user()->roleId == 2){
+        if(Auth::user()->roleId == 2 || Auth::user()->roleId == 7){
             return Repair::with(['userId', 'repairId.managerId'])
                             ->where([['isDraft','=',0]])
                             ->where([['aptId','=',Auth::user()->aptId]])

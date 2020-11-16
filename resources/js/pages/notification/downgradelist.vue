@@ -81,7 +81,7 @@ import {getDowngradNotificationList,registerNotification,updateNotification,delN
 import Category from './category'
 import { mapGetters } from 'vuex'
 export default {
-
+    middleware: 'notimanager',
     components:{
         InfiniteLoading,
         Category,

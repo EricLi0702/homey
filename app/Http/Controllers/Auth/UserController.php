@@ -30,6 +30,37 @@ class UserController extends Controller
         return User::where([['aptId','=',Auth::user()->aptId],['roleId','>',2]])->with('role','apt','building')->paginate(7); 
     }
 
+    public function adminUserList(Request $request){
+        $aptId = $request->aptId;
+        $commonUserData = User::where([
+            ['aptId','=',$aptId],
+            ['roleId','<>',1],
+            ['roleId','<>',2],
+            ['roleId','<>',6],
+            ['roleId','<>',7],
+        ])->with('role','apt','building')->paginate(7); 
+        $superManagerData = User::where([
+            ['aptId','=',$aptId],
+            ['roleId','=',2]
+        ])->with('role','apt','building')->get(); 
+        $notiManagerData = User::where([
+            ['aptId','=',$aptId],
+            ['roleId','=',6]
+        ])->with('role','apt','building')->get(); 
+        $repairManagerData = User::where([
+            ['aptId','=',$aptId],
+            ['roleId','=',7]
+        ])->with('role','apt','building')->get(); 
+
+        return response()->json([
+            'commonUserData' => $commonUserData,
+            'superManagerData' => $superManagerData,
+            'notiManagerData' => $notiManagerData,
+            'repairManagerData' => $repairManagerData
+        ], 200); 
+        
+    }
+
     public function addUser(Request $request){
         $this->validate($request,[
             'aptId'=>'required',

@@ -175,6 +175,7 @@ import { mapGetters } from 'vuex'
 
 
 export default {
+    middleware: 'notimanager',
     computed:{ 
         ...mapGetters({
             currentUser: 'auth/user'

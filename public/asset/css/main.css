@@ -1382,6 +1382,16 @@ a.text-dark:hover, a.text-dark:focus {
     word-break: break-all;
 }
 
+.manager-card-container{
+    border-radius: 20px;
+    box-shadow: 1px 1px 10px gray;
+}
+
+.manager-card-container .manager-avatar img{
+    width: 80px!important;
+    height: 80px!important;
+}
+
 @media only screen and (max-width: 600px) {
     .subtitle h1 {
         font-size: 3rem!important;

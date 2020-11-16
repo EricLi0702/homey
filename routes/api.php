@@ -18,6 +18,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('/user', 'Auth\UserController@current');
     Route::get('users', 'Auth\UserController@userList');
+    Route::get('adminusers', 'Auth\UserController@adminUserList');
     Route::post('users','Auth\UserController@addUser');
     Route::delete('users','Auth\UserController@delUser');
     Route::put('users','Auth\UserController@updateUser');

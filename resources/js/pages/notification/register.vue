@@ -117,7 +117,7 @@ import Upload from '~/components/Upload'
 import {delUploadFile} from '~/api/upload'
 
 export default {
-    middleware: 'manager',
+    middleware: 'notimanager',
 
     components: {
         Picker,     //emoji

@@ -95,7 +95,7 @@ import {registerFacility} from '~/api/facility'
 import {delUploadFile} from '~/api/upload'
 
 export default {
-    middleware: 'auth',
+    middleware: 'manager',
 
     components: {
         Picker,     //emoji

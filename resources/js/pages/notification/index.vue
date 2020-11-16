@@ -7,11 +7,11 @@
                 <Input class="col-12 col-md-6 p-0"
                  search :placeholder="$t('facility').EnterSomething" />
                 <div class="notification-sub-menu-items col-12 col-md-6 p-0 text-right">
-                    <router-link v-if="currentUser.roleId == 2" :to="{ name: 'notification.register' }" class="">
+                    <router-link v-if="currentUser.roleId == 2 || currentUser.roleId == 6" :to="{ name: 'notification.register' }" class="">
                         <!-- {{ $t('register') }} -->
                         <Button type="success" icon="md-add">{{$t('community').New}}</Button>
                     </router-link>
-                    <router-link v-if="currentUser.roleId == 2" :to="{ name: 'notification.downgradelist' }" class="">
+                    <router-link v-if="currentUser.roleId == 2 || currentUser.roleId == 6" :to="{ name: 'notification.downgradelist' }" class="">
                         <!-- {{ $t('register') }} -->
                         <Button type="warning" icon="md-trending-down">{{$t('notification').DownGraded}}</Button>
                     </router-link>

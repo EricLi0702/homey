@@ -7,7 +7,7 @@
                 <Input class="col-12 col-md-6 p-0"
                  search :placeholder="$t('facility').EnterSomething" />
                 <div class="suggestion-sub-menu-items col-12 col-md-6 p-0 text-right">
-                    <router-link :to="{ path: '/repair/create' }" class="">
+                    <router-link v-if="currentUser.roleId !== 2 && currentUser.roleId !== 7 && currentUser.roleId !== 1" :to="{ path: '/repair/create' }" class="">
                         <!-- {{ $t('register') }} -->
                         <Button type="success" icon="md-add">{{$t('community').New}}</Button>
                     </router-link>
@@ -33,10 +33,16 @@
 
 <script>
 import Breadcrumb from '~/components/Breadcrumb'
+import { mapGetters } from 'vuex'
 export default {
     middleware: 'auth',
     components:{
         Breadcrumb,
+    },
+    computed:{ 
+        ...mapGetters({
+            currentUser: 'auth/user'
+        }),
     },
     data(){
         return{

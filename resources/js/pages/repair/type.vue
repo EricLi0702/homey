@@ -17,7 +17,7 @@ import {} from '~/api/suggestion'
 import {delUploadFile} from '~/api/upload'
 
 export default {
-    middleware: 'auth',
+    middleware: 'repairmanager',
 
     components: {
         

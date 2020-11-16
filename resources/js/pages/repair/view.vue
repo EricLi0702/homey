@@ -83,7 +83,7 @@
                                     <Rate v-else disabled class="w-100 text-right" v-model="details.star" />
                                 </div>
 
-                                <div v-else class="reply ml-auto">
+                                <div v-else-if="currentUser.roleId == 2 || currentUser.roleId == 7" class="reply ml-auto">
                                     <Icon size="25" type="ios-undo" @click="toggleReply"/>
                                 </div>
                             </div>

@@ -3,7 +3,7 @@
         <div class="row m-0 p-0">
             <Category/>
             <div class="col-12 col-md-8 m-0 p-0 pb-4">
-                <div v-if="details !== null && ( currentUser.roleId == 2)" class="control-notification row m-0 mb-3 d-flex justify-content-between">
+                <div v-if="details !== null && ( currentUser.roleId == 2 || currentUser.roleId == 6 || currentUser.roleId == 1)" class="control-notification row m-0 mb-3 d-flex justify-content-between">
                     <Button @click="editNotification(details)" icon="md-create" type="info">{{$t('notification').update}}</Button>
                     <Poptip
                         class="ml-auto mr-2"
@@ -154,7 +154,7 @@ import {
 } from '~/api/notification'
 
 export default {
-
+    middleware: 'auth',
     components:{
         Viewer,
         videoPlayer,

@@ -190,7 +190,7 @@
                                 <wysiwyg v-model="createReservationData.purpose" :placeholder="$t('facility').enterDescription" />
                             </div>
                         </Form>
-                        <div class="col-12 text-right mb-3">
+                        <div v-if="currentUser.roleId !== 2 && currentUser.roleId !== 1 && currentUser.roleId !== 6 && currentUser.roleId !== 7" class="col-12 text-right mb-3">
                             <Button @click="reservateNew" class="float-right" type="success" icon="md-calendar" :disabled="isReservating" :loading="isReservating" >{{$t('facility').Reservate}}</Button>
                         </div>
                     </div>

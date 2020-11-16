@@ -43,6 +43,13 @@ export default [
     ]
   },
 
+  { path:'/adminuser', component: page('adminuser/index.vue'),
+    children:[
+      {path:'', name:'adminuser.index', redirect:{name:'adminuser.list'}},
+      {path:'list', name:'adminuser.list', component: page('adminuser/list')},
+    ]
+  },
+
   { path: '/superManager', name:'superManager', component: page('superManager/index.vue'),
     children:[
       {path:'register', name:  'superManager.register', component: page('superManager/register.vue')},

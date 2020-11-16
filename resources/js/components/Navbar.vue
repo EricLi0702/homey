@@ -18,6 +18,10 @@
                 <Icon size="25" class="mr-1" type="md-man" />
                 {{ $t('common').userRole }}
               </div>
+              <div v-if="user.roleId == 1" @click="navigateToRouterLink('adminuser')" :class="{ active : active_el == 'adminuser' }" class="d-flex m-1 p-2 drawer-menu-item">
+                <Icon size="25" class="mr-1" type="md-people" />
+                {{ $t('apartment').User }}
+              </div>
               <div v-if="user.roleId == 1" @click="navigateToRouterLink('apartment')" :class="{ active : active_el == 'apartment' }" class="d-flex m-1 p-2 drawer-menu-item">
                 <Icon size="25" class="mr-1" type="md-home" />
               {{$t('apartment').Apartment}}
