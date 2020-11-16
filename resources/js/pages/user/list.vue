@@ -7,62 +7,62 @@
         </div>
         <Button class="mb-4" type="info" size="small" @click="addUser">Register User</Button>
         <table class="table user-list-table">
-        <tr class="">
-            <th>User</th>
-            <th>Dong Ho</th>
-            <th>Email</th>
-            <th>PhoneNumber</th>
-            <th>isUser</th>
-            <th>Action</th>
-        </tr>
-        <template v-if="userLists && userLists.length > 0">
-            <tr class="" v-for="(user,i) in userLists" :key="i">
-                <td class="d-flex align-items-center justify-content-start"> 
-                    <img :src="`${baseUrl}${user.user_avatar}`" class="rounded-circle user-list-photo mr-2" alt="">
-                    <div class="admin-user-list-info">
-                        <p class="font-weight-bold">{{user.name}}</p>
-                        <Tag color="blue">{{user.role.roleName}}</Tag>
-                    </div>
-                </td>
-                <td>
-                    <div class="d-flex justify-content-start">
-                        <p class="mr-2">{{user.building.number}}{{ $t('auth').dong }}</p>
-                        <p>{{user.ho}}{{ $t('auth').ho }}</p>
-                    </div>
-                </td>
-                <td>{{user.email}}</td>
-                <td>{{user.phoneNumber}}</td>
-                <td>
-                    <div v-if="user.email_verified_at == null">
-                        <Tag color="warning">not User</Tag>
-                    </div>
-                    <div v-else>
-                        <Tag color="success">User</Tag>
-                    </div>
-                </td>
-                <td>
-                    <Icon size="25" type="md-create" color="#44B4E2" @click="editUser(user,i)"/>
-                    <Icon size="25" type="ios-trash" color="#FD0000" @click="openRemoveModal(user)"/>
-                </td>
+            <tr class="">
+                <th>User</th>
+                <th>Dong Ho</th>
+                <th>Email</th>
+                <th>PhoneNumber</th>
+                <th>isUser</th>
+                <th>Action</th>
             </tr>
-        </template>
-    </table>
-    <div class="d-flex justify-content-center">
-        <pagination :limit="3" :data="paginationData" @pagination-change-page="getResults"></pagination>
-    </div>
+            <template v-if="userLists && userLists.length > 0">
+                <tr class="" v-for="(user,i) in userLists" :key="i">
+                    <td class="d-flex align-items-center justify-content-start"> 
+                        <img :src="`${baseUrl}${user.user_avatar}`" class="rounded-circle user-list-photo mr-2" alt="">
+                        <div class="admin-user-list-info">
+                            <p class="font-weight-bold">{{user.name}}</p>
+                            <Tag color="blue">{{user.role.roleName}}</Tag>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-start">
+                            <p class="mr-2">{{user.building.number}}{{ $t('auth').dong }}</p>
+                            <p>{{user.ho}}{{ $t('auth').ho }}</p>
+                        </div>
+                    </td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.phoneNumber}}</td>
+                    <td>
+                        <div v-if="user.email_verified_at == null">
+                            <Tag color="warning">not User</Tag>
+                        </div>
+                        <div v-else>
+                            <Tag color="success">User</Tag>
+                        </div>
+                    </td>
+                    <td>
+                        <Icon size="25" type="md-create" color="#44B4E2" @click="editUser(user,i)"/>
+                        <Icon size="25" type="ios-trash" color="#FD0000" @click="openRemoveModal(user)"/>
+                    </td>
+                </tr>
+            </template>
+        </table>
+        <div class="d-flex justify-content-center">
+            <pagination :limit="3" :data="paginationData" @pagination-change-page="getResults"></pagination>
+        </div>
 
-    <Modal v-model="removeModal" width="360">
-        <p slot="header" style="color:#f60;text-align:center">
-            <Icon type="ios-information-circle"></Icon>
-            <span v-if="deleteUserData != null">Delete {{deleteUserData.name}}</span>
-        </p>
-        <div class="text-center">
-            <p>Will you delete this user?</p>
-        </div>
-        <div slot="footer">
-            <Button type="error" size="large" long :loading="isDeleting" :disabled="isDeleting" @click="delUser()">{{ $t('apartment').delete }}</Button>
-        </div>
-    </Modal>
+        <Modal v-model="removeModal" width="360">
+            <p slot="header" style="color:#f60;text-align:center">
+                <Icon type="ios-information-circle"></Icon>
+                <span v-if="deleteUserData != null">Delete {{deleteUserData.name}}</span>
+            </p>
+            <div class="text-center">
+                <p>Will you delete this user?</p>
+            </div>
+            <div slot="footer">
+                <Button type="error" size="large" long :loading="isDeleting" :disabled="isDeleting" @click="delUser()">{{ $t('apartment').delete }}</Button>
+            </div>
+        </Modal>
     </div>
 </template>
 
