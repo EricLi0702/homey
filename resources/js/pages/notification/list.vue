@@ -89,6 +89,9 @@ import {getNotificationList,registerNotification,updateNotification,delNotificat
 import Category from './category'
 import { mapGetters } from 'vuex'
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').notificationList }
+    },
     components:{
         InfiniteLoading,
         Category,

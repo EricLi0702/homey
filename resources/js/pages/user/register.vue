@@ -61,6 +61,9 @@ import {fetchUserRole} from '~/api/permission'
 import {addUser} from '~/api/user'
 import {mapGetters} from 'vuex'
 export default {
+  metaInfo () {
+        return { title: this.$t('metaInfo').registerUser }
+    },
   data(){
     return{
       user:{

@@ -74,12 +74,11 @@
 
                         <div v-if="details.upload_file.videoUrl.length !== 0" class="post-video row m-0 p-0 mb-4">
                             <div v-for="(video,i) in details.upload_file.videoUrl" :key="i" class="post-video-item col-12 p-2">
-                                    <video-player  
+                                <video-player  
                                     class="video-player-box vjs-custom-skin w-100"
                                     ref="videoPlayer"
-                                    :options="getEachVideoSrc(video)"
+                                    :options="playerOptionsGroup[i]"
                                     :playsinline="true"
-                                    @ready="playerReadied(video)"
                                     >
                                 </video-player>
                             </div>
@@ -154,6 +153,9 @@ import {
 } from '~/api/notification'
 
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').viewDetailNotification }
+    },
     middleware: 'auth',
     components:{
         Viewer,
@@ -166,6 +168,7 @@ export default {
             baseUrl:window.base_url,
             details:null,
             notificationId:null,
+            playerOptionsGroup:[],
             playerOptions: {
             // videojs options
                 height:'350',
@@ -251,32 +254,24 @@ export default {
             this.$router.push({name:'notification.update',params:{updateNotificationData:notification}})
         },
 
-        playerReadied(video){
-            this.playerOptions.sources[0].src = this.baseUrl+'/uploads/video/' + video.fileName;
-        },
-
         showImage(){
             const viewer = this.$el.getElementsByClassName('post-img-item').$viewer
             viewer.show()
         },
 
-        getEachVideoSrc(video){
-            this.playerOptions.sources[0].src = this.baseUrl+'/uploads/video/'+video.fileName;
-            return this.playerOptions
-        },
-        // onPlayerPlay($event,video){
-        //     console.log($event)
-        //     console.log('====')
-        //     console.log(video)
-        //     this.playerOptions.sources[0].src = "http://localhost:8000/uploads/video/"+video.fileName;
-        //     console.log(this.playerOptions)
-        // },
         getCurrentNotification(){
             getCurrentNotificationFromServer(this.notificationId)
             .then(res=>{
                 this.details = res.data.notificationData;
                 this.details.upload_file = JSON.parse(this.details.upload_file);
-                console.log("@@@this.details.upload_file@@@", this.details.upload_file);
+                //video url
+                let videoUrlGroup = this.details.upload_file.videoUrl;
+                for(let i = 0; i < videoUrlGroup.length ; i++){
+                    let clonedOption = JSON.parse(JSON.stringify(this.playerOptions));
+                    clonedOption.sources[0].src = this.baseUrl + '/uploads/video/'+videoUrlGroup[i].fileName;
+                    this.playerOptionsGroup.push(clonedOption);
+                }
+
                 viewedCurrentNotification(this.details.id);
             })
         },

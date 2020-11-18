@@ -9,7 +9,7 @@
                     <div class="subtitle col-md-12 mb-5" data-aos="zoom-out">
                         <h1>{{ $t('welcome').Vapartment }}</h1>
                     </div>
-                    <div class="description col-md-12 mt-5" data-aos="fade-up">
+                    <div class="description mt-5 container" data-aos="fade-up">
                         <h4>{{ $t('welcome').WelcomeVapartment }}</h4>
                     </div>
                 </div>
@@ -20,69 +20,69 @@
         <div class="hero-items row">
             <div class="container">
                 <div class="row align-middle">
-                  <router-link :to="{ name: 'notification' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" data-aos="fade-down-right" data-aos-easing="linear" data-aos-duration="1000">
+                  <router-link :to="{ name: 'notification' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column">
                     <div class="card-hero gr-1">
                       <div class="txt">
                         <h1>{{$t('welcome').Notification}}</h1>
                       </div>
                       <a href="#">{{$t('welcome').detail}}</a>
                       <div class="ico-card-hero">
-                        <i class="fas fa-exclamation-circle"></i>
+                        <Icon type="ios-clipboard-outline" />
                       </div>
                     </div>
                   </router-link>
-                  <router-link :to="{ name: 'community' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000">
+                  <router-link :to="{ name: 'community' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column">
                       <div class="card-hero gr-1">
                           <div class="txt">
                               <h1>{{$t('community').cummunity}}</h1>
                           </div>
                           <a href="#">{{$t('welcome').detail}}</a>
                           <div class="ico-card-hero">
-                          <i class="fas fa-users"></i>
+                            <Icon type="ios-people" />
                           </div>
                       </div>
                   </router-link>
-                  <router-link :to="{ name: 'facility' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" data-aos="fade-down-left" data-aos-easing="linear" data-aos-duration="1000">
+                  <router-link :to="{ name: 'facility' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column">
                       <div class="card-hero gr-1">
                           <div class="txt">
                               <h1>{{$t('welcome').PublicFacility}}</h1>
                           </div>
                           <a href="#">{{$t('welcome').detail}}</a>
                           <div class="ico-card-hero">
-                          <i class="fas fa-building"></i>
+                          <Icon type="md-share" />
                           </div>
                       </div>
                   </router-link>
-                  <router-link :to="{ name: 'suggestion' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" data-aos="fade-up-right" data-aos-easing="linear" data-aos-duration="1000">
+                  <router-link :to="{ name: 'suggestion' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column">
                       <div class="card-hero gr-1">
                         <div class="txt">
                           <h1>{{$t('welcome').suggestion}}</h1>
                         </div>
                         <a href="#">{{$t('welcome').detail}}</a>
                         <div class="ico-card-hero">
-                          <i class="fab fa-tripadvisor"></i>
+                          <Icon type="md-chatbubbles" />
                         </div>
                       </div>
                   </router-link>
-                  <router-link :to="{ name: 'repair' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
+                  <router-link :to="{ name: 'repair' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column">
                       <div class="card-hero gr-1">
                           <div class="txt">
                               <h1>{{$t('repair').repairRequest}}</h1>
                           </div>
                           <a href="#">{{$t('welcome').detail}}</a>
                           <div class="ico-card-hero">
-                          <i class="fas fa-tools"></i>
+                          <Icon type="ios-construct" />
                           </div>
                       </div>
                   </router-link>
-                  <router-link :to="{ name: 'home' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column" data-aos="fade-up-left" data-aos-easing="linear" data-aos-duration="1000">
+                  <router-link :to="{ name: 'home' }" class="col-12 col-sm-12 col-md-6 col-lg-4 column">
                       <div class="card-hero gr-1">
                           <div class="txt">
                               <h1>{{$t('welcome').advertisement}}</h1>
                           </div>
                           <a href="#">{{$t('welcome').detail}}</a>
                           <div class="ico-card-hero">
-                          <i class="fas fa-ad"></i>
+                              <Icon type="md-home" />
                           </div>
                       </div>
                   </router-link>
@@ -141,7 +141,7 @@
             <div class="h-100 d-flex text-center align-items-center justify-content-center ">
                 <div class="attraction">
                     <div class="row p-0 m-0">
-                        <div class="a-title col-md-12">
+                        <div class="a-title col-md-12 content">
                             <h2 class="section-title">{{$t('welcome').VapartmentServices}}</h2>
                         </div>
                         <p class="col-md-6 offset-md-3 col-8 offset-2 pt-2">{{$t('welcome').APTservice}}</p>
@@ -162,9 +162,9 @@
             </div>
             <div class="h-100 container">
                 <div class="row p-0 m-0">
-                    <div class="col-md-6 d-flex row p-0 m-0 text-md-left text-center align-items-center text-white font-weight-bold" data-aos="fade-left" data-aos-easing="linear" data-aos-duration="1000">
-                        <div class="w-100">
-                            <div class="row w-100">
+                    <div class="col-md-6 d-flex row p-0 m-0 text-md-left text-center align-items-center text-white font-weight-bold" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
+                        <div class="w-100 m-3 p-2">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_1}}</p>
                                 </div>
@@ -173,7 +173,7 @@
                                     <!-- <p>{{$t('welcome').APTdetail_detail_1}}</p> -->
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_2}}</p>
                                 </div>
@@ -181,7 +181,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_2}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_3}}</p>
                                 </div>
@@ -189,7 +189,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_3}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_4}}</p>
                                 </div>
@@ -197,7 +197,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_4}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_5}}</p>
                                 </div>
@@ -205,7 +205,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_5}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_6}}</p>
                                 </div>
@@ -213,7 +213,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_6}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_7}}</p>
                                 </div>
@@ -223,7 +223,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="structure col-md-6 row p-0 mt-2 " data-aos="fade-right" data-aos-easing="linear" data-aos-duration="1000">
+                    <div class="structure col-md-6 row p-0 mt-2 " data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
                         <div class="home-structure col-md-12">
                             <img :src="`${baseUrl}/asset/img/bg/room-structure.png`" alt="" class="p-4">
                         </div>
@@ -286,7 +286,7 @@
     </div>
     <div class="container-fluid mt-5" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
         <div class="row p-0 m-0">
-            <div class="add-title col-md-12 row p-0 m-0">
+            <div class="add-title col-md-12 row p-0 m-0 content">
                 <h2 class="col-md-12 d-flex align-items-center justify-content-center row p-0 m-0 section-title">{{ $t('welcome').theLinkLocation }}</h2>
             </div>
             <div class="add-content col-md-12 row p-0 mt-5">
@@ -317,8 +317,8 @@ export default {
 
   layout: 'default',
 
-  metaInfo () {
-    return { title: this.$t('home') }
+   metaInfo () {
+    return { title: this.$t('metaInfo').home }
   },
   components:{
     videoPlayer,

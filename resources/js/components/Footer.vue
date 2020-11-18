@@ -42,25 +42,25 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
                         <div class="footer-widget">
-                            <div class="single-cta d-flex justify-content-start align-items-center ">
+                            <div class="single-cta d-flex justify-content-start align-items-center mb-2">
                                 <Icon type="md-locate" color="#FF5E14" size="30"/>
                                 <div class="cta-text">
                                     <h4>{{ $t('welcome').footerLocate }}</h4>
                                 </div>
                             </div>
-                            <div class="single-cta d-flex justify-content-start align-items-center ">
+                            <div class="single-cta d-flex justify-content-start align-items-center mb-2">
                                 <Icon type="ios-person" color="#FF5E14" size="30" />
                                 <div class="cta-text">
                                     <h4>{{ $t('welcome').NName }}</h4>
                                 </div>
                             </div>
-                            <div class="single-cta d-flex justify-content-start align-items-center ">
+                            <div class="single-cta d-flex justify-content-start align-items-center mb-2">
                                 <Icon type="ios-mail-open" color="#FF5E14" size="30"/>
                                 <div class="cta-text">
                                     <h4>{{ $t('welcome').HomeyCom }}</h4>
                                 </div>
                             </div>
-                            <div class="single-cta d-flex justify-content-start align-items-center ">
+                            <div class="single-cta d-flex justify-content-start align-items-center mb-2">
                                 <Icon type="ios-phone-portrait" color="#FF5E14" size="30" />
                                 <div class="cta-text">
                                     <h4>+84 357 852 066</h4>
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-50 text-md-center">
                         <div class="footer-widget">
                             <div class="footer-widget-heading">
                                 <router-link :to="{ name: 'term' }">

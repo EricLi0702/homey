@@ -31,9 +31,8 @@
                                     <video-player  
                                     class="video-player-box vjs-custom-skin w-100"
                                     ref="videoPlayer"
-                                    :options="getEachVideoSrc(video)"
+                                    :options="playerOptionsGroup[i]"
                                     :playsinline="true"
-                                    @ready="playerReadied(video)"
                                     >
                                 </video-player>
                             </div>
@@ -90,6 +89,7 @@
                         <div class="d-flex justify-content-between col-12 p-0">
                             <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                             <div class="emoji-area-popup">
+                                <div v-if="emoStatus" class="position-absolute close-emoji-btn" @click="closeEmojiWindow()">{{$t('common').closeEmoji}}</div>
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
                             <Button :disabled="isLeaving" :loading="isLeaving" @click="leaveComment">{{ $t('community').Leave }}</Button>
@@ -190,6 +190,9 @@ import {
 } from '~/api/community'
 
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').viewDetailCommunity }
+    },
     components:{
         Viewer,
         videoPlayer,
@@ -210,6 +213,7 @@ export default {
             details:null,
             communityId:null,
             baseUrl:window.base_url,
+            playerOptionsGroup:[],
             playerOptions: {
             // videojs options
                 height:'350',
@@ -319,8 +323,19 @@ export default {
                 this.details = res.data.communityData;
                 this.details.upload_file = JSON.parse(this.details.upload_file);
                 this.details.comment_cnt = JSON.parse(this.details.comment_cnt);
+                //video url
+                let videoUrlGroup = this.details.upload_file.videoUrl;
+                for(let i = 0; i < videoUrlGroup.length ; i++){
+                    let clonedOption = JSON.parse(JSON.stringify(this.playerOptions));
+                    clonedOption.sources[0].src = this.baseUrl + '/uploads/video/'+videoUrlGroup[i].fileName;
+                    this.playerOptionsGroup.push(clonedOption);
+                }
                 viewCurrentCommunity(this.details.id);
             })
+        },
+
+        closeEmojiWindow(){
+            this.emoStatus = false;
         },
 
         toggleEmo(){

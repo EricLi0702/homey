@@ -112,7 +112,7 @@ export default {
         }).catch(err=>{
             console.log(err)
         })
-        await getNotificationCnt(this.currentUser.id).then(res=>{
+        await getNotificationCnt().then(res=>{
             console.log(res)
             this.todayData = res.data.today;
             this.weekData = res.data.week;

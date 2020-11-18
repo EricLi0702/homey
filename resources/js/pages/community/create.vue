@@ -32,6 +32,7 @@
                             />
                             <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                             <div class="emoji-area-popup">
+                                <div v-if="emoStatus" class="position-absolute close-emoji-btn" @click="closeEmojiWindow()">{{$t('common').closeEmoji}}</div>
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
                             <Button icon="md-create" class="ml-auto" @click="registerCommunity" :disabled="isRegistering" :loading="isRegistering">{{ $t('community').CreateTopic }}</Button>
@@ -97,6 +98,9 @@ import {getCommunityList,registerCommunity,updateCommunity,delCommunity} from '~
 import {delUploadFile} from '~/api/upload'
 
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').createCommunity }
+    },
     middleware: 'auth',
 
     components: {
@@ -135,6 +139,10 @@ export default {
     },
 
     methods:{
+        closeEmojiWindow(){
+            this.emoStatus = false;
+        },
+        
         toggleEmo(){
             this.emoStatus = !this.emoStatus;
         },

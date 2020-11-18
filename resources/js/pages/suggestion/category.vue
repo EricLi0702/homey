@@ -102,7 +102,7 @@ export default {
         }).catch(err=>{
             console.log(err)
         })
-        getSuggestionCnt(this.currentUser.id).then(res=>{
+        getSuggestionCnt().then(res=>{
             console.log(res)
             this.todayData = res.data.today
             this.weekData = res.data.week

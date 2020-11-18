@@ -147,6 +147,9 @@ import {getAdminUserList, delUser} from '~/api/user'
 import {getAptLists} from '~/api/apartment'
 import {mapGetters} from 'vuex'
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').userlist }
+    },
     data(){
         return{
             baseUrl:window.base_url,
@@ -175,6 +178,7 @@ export default {
         
     },
     methods:{
+        
         getApt(){
             getAptLists()
             .then(res=>{

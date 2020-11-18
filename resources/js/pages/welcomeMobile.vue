@@ -6,17 +6,17 @@
             </div>
             <div class="h-100 d-flex text-center align-items-center justify-content-center ">
                 <div class="title row m-0 p-0">
-                    <div class="subtitle col-md-12 mb-5">
+                    <div class="subtitle col-md-12 mb-5" data-aos="zoom-out">
                         <h1>{{ $t('welcome').Vapartment }}</h1>
                     </div>
-                    <div class="description col-md-12 mt-5">
+                    <div class="description mt-5 container" data-aos="fade-up">
                         <h4>{{ $t('welcome').WelcomeVapartment }}</h4>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="content container d-flex align-items-center justify-content-center my-4 pt-4">
+    <div class="content container d-flex align-items-center justify-content-center my-4 pt-4" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
         <div class="row m-0 p-0">
             <div class="col-12 text-center mb-3">
                 <h2 class="section-title">{{ $t('welcome').VApartmentManagementSystem }}</h2>
@@ -60,14 +60,14 @@
         </div><!-- end overlay -->
     </div>
     <!--end app video section-->
-    <div class="second-background container-fluid">
+    <div class="second-background container-fluid" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
         <div class="second-wrap">
             <!-- <div class="second">  
             </div> -->
             <div class="h-100 d-flex text-center align-items-center justify-content-center ">
                 <div class="attraction">
                     <div class="row p-0 m-0">
-                        <div class="a-title col-md-12">
+                        <div class="a-title col-md-12 content">
                             <h2 class="section-title">{{$t('welcome').VapartmentServices}}</h2>
                         </div>
                         <p class="col-md-6 offset-md-3 col-8 offset-2 pt-2">{{$t('welcome').APTservice}}</p>
@@ -88,9 +88,9 @@
             </div>
             <div class="h-100 container">
                 <div class="row p-0 m-0">
-                    <div class="col-md-6 d-flex row p-0 m-0 text-md-left text-center align-items-center">
-                        <div class="w-100">
-                            <div class="row w-100">
+                    <div class="col-md-6 d-flex row p-0 m-0 text-md-left text-center align-items-center text-white font-weight-bold" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
+                        <div class="w-100 m-3 p-2">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_1}}</p>
                                 </div>
@@ -99,7 +99,7 @@
                                     <!-- <p>{{$t('welcome').APTdetail_detail_1}}</p> -->
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_2}}</p>
                                 </div>
@@ -107,7 +107,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_2}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_3}}</p>
                                 </div>
@@ -115,7 +115,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_3}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_4}}</p>
                                 </div>
@@ -123,7 +123,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_4}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_5}}</p>
                                 </div>
@@ -131,7 +131,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_5}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_6}}</p>
                                 </div>
@@ -139,7 +139,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_6}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_7}}</p>
                                 </div>
@@ -149,7 +149,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="structure col-md-6 row p-0 mt-2 animate__backInUp animate__animated ">
+                    <div class="structure col-md-6 row p-0 mt-2 " data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
                         <div class="home-structure col-md-12">
                             <img :src="`${baseUrl}/asset/img/bg/room-structure.png`" alt="" class="p-4">
                         </div>
@@ -160,7 +160,7 @@
     </div>
     <div class="gallery container-fluid">
         <div class="row p-0 m-0">
-            <div class="gallery-title col-md-12 d-flex text-center mt-5">
+            <div class="gallery-title col-md-12 d-flex text-center mt-5" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
                 <h2 class="col-md-12 m-0 p-0 section-title">{{$t('welcome').GALLERY}}</h2> 
             </div>
         </div>
@@ -168,7 +168,7 @@
             <div class="container-fluid">
               <div id="image-gallery">
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
+                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image" data-aos="flip-up" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="img-wrapper">
                       <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room1.jpg`" class="img-responsive"></a>
                       <div class="img-overlay">
@@ -177,7 +177,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
+                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image" data-aos="flip-up" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="img-wrapper" style="height:95%">
                       <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room4.png`" class="img-responsive" style="height:100%"></a>
                       <div class="img-overlay">
@@ -186,7 +186,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
+                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image" data-aos="flip-up" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="img-wrapper" style="height:95%">
                       <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room3.jpg`" class="img-responsive" style="height:100%"></a>
                       <div class="img-overlay">
@@ -195,7 +195,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image">
+                  <div class="col-lg-3 col-md-4 col-sm-6 col-12 image" data-aos="flip-up" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="img-wrapper" style="height:95%">
                       <a href="/asset/img/bg/room12.png"><img :src="`${baseUrl}/asset/img/bg/room2.jpg`" class="img-responsive" style="height:100%"></a>
                       <div class="img-overlay">
@@ -210,9 +210,9 @@
             </div><!-- End container --> 
           </section>    
     </div>
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-5" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
         <div class="row p-0 m-0">
-            <div class="add-title col-md-12 row p-0 m-0">
+            <div class="add-title col-md-12 row p-0 m-0 content">
                 <h2 class="col-md-12 d-flex align-items-center justify-content-center row p-0 m-0 section-title">{{ $t('welcome').theLinkLocation }}</h2>
             </div>
             <div class="add-content col-md-12 row p-0 mt-5">
@@ -232,6 +232,8 @@
 </template>
 
 <script>
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 require('videojs-youtube');
 import { videoPlayer } from 'vue-video-player'
 import { mapGetters } from 'vuex'
@@ -268,6 +270,11 @@ export default {
         poster: "/static/img/backgrounds/feature-video.jpg"
     },
   }),
+
+  created () {
+        AOS.init()
+    },
+    
 
   computed:{ 
         ...mapGetters({

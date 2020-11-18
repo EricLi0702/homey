@@ -41,6 +41,9 @@
 import { mapGetters } from 'vuex'
 import {getBuildingList,addBuilding,delBuilding} from '~/api/apartment'
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').building_manage }
+    },
     data(){
         return{
             buildingList:[],

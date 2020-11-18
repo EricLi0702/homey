@@ -33,7 +33,7 @@ export default {
   scrollToTop: false,
 
   metaInfo () {
-    return { title: this.$t('settings') }
+    return { title: this.$t('metaInfo').reset_password }
   },
 
   data: () => ({

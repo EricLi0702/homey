@@ -146,7 +146,9 @@
 
 <script>
 export default {
-    
+    metaInfo () {
+        return { title: this.$t('metaInfo').privacy }
+    },
     data: () => ({
         baseUrl:window.base_url,
 

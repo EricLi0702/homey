@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Repair;
 use App\ResponseRepair;
 use App\User;
+use App\RepairType;
 use Carbon\Carbon;
 
 class RepairController extends Controller
@@ -132,9 +133,7 @@ class RepairController extends Controller
         $weekData = Repair::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
         $todayData = Repair::whereDate('created_at', Carbon::today())->count();
         $monthData = Repair::whereYear('created_at',Carbon::now()->year)->whereMonth('created_at',Carbon::now()->month)->count();
-        $userId = $request->id;
-        $aptId = User::select('aptId')->where('id',$userId)->get();
-        $id = $aptId[0]->aptId;
+        $id = Auth::user()->aptId;
         $registerUserCnt = User::where('aptId',$id)->count();
         $currentUserCnt = User::where([['aptId','=',$id],['email_verified_at','<>',null]])->count();
         return response()->json([
@@ -176,5 +175,55 @@ class RepairController extends Controller
         else{
             return $nextItem;
         }
+    }
+
+    public function getRepairType(Request $request){
+        return RepairType::where('aptId', Auth::user()->aptId)->get();
+        // $userRoleId = Auth::user()->roleId;
+        // if($userRoleId !== 2 && $userRoleId !== 7){
+        //     return null;
+        // }
+        // else{
+        // }
+    }
+
+    public function postRepairType(Request $request)
+    {
+        $aptId = Auth::user()->aptId;
+        $userId = Auth::user()->id;
+        $jsonData = json_encode($request->jsonData);
+        $lang = $request->lang;
+        if($lang == "VN"){
+            return RepairType::where([
+                ['aptId', '=', $aptId],
+                ['lang', '=', 'vn']
+            ])->update([
+                'userId'=>$userId,
+                'aptId'=>$aptId,
+                'repair_type'=>$jsonData
+            ]);
+        }
+        if($lang == "EN"){
+            return RepairType::where([
+                ['aptId', '=', $aptId],
+                ['lang', '=', 'en']
+            ])->update([
+                'userId'=>$userId,
+                'aptId'=>$aptId,
+                'repair_type'=>$jsonData
+            ]);
+        }
+        if($lang == "KR"){
+            return RepairType::where([
+                ['aptId', '=', $aptId],
+                ['lang', '=', 'kr']
+            ])->update([
+                'userId'=>$userId,
+                'aptId'=>$aptId,
+                'repair_type'=>$jsonData
+            ]);
+        }
+
+        
     }
 }

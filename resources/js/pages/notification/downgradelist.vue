@@ -78,6 +78,9 @@ import {getDowngradNotificationList, upgradeNotification} from '~/api/notificati
 import Category from './category'
 import { mapGetters } from 'vuex'
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').downgradeNotification }
+    },
     components:{
         InfiniteLoading,
         Category,

@@ -70,6 +70,9 @@
 import {getUserList, delUser} from '~/api/user'
 import {mapGetters} from 'vuex'
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').ListUser }
+    },
     data(){
         return{
             baseUrl:window.base_url,

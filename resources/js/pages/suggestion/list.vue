@@ -96,6 +96,9 @@ import {getSuggestionList,registerSuggestion,updateSuggestion,delSuggestion} fro
 import Category from './category'
 // import VueTimeago from 'vue-timeago'
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').suggestionList }
+    },
     components:{
         InfiniteLoading,
         Category,

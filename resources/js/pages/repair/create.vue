@@ -13,18 +13,18 @@
                     <div class="row m-0 p-0">
                         <div v-if="autoInputMode" class="col-12 m-0 p-0 row">
                             <div class="col-12 col-md-6 mb-3 gray-input">
-                                <Select v-model="createRepairData.type" size="large" style="width:100%" :placeholder="$t('repair').selectRepairType">
-                                    <Option v-for="item in repairType" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                                <Select v-model="createRepairData.type" size="large" style="width:100%" @on-change="selectedRepairType(createRepairData.type)" :placeholder="$t('repair').selectRepairType">
+                                    <Option v-for="item in repairJsonData" :value="item.value" :key="item.value">{{ item.label }}</Option>
                                 </Select>
                             </div>
                             <div class="col-12 col-md-6 mb-3 gray-input">
-                                <Select v-model="createRepairData.object" size="large" style="width:100%" :placeholder="$t('repair').selectRepairObject">
-                                    <Option v-for="item in repairObject" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                                <Select v-model="createRepairData.object" size="large" :disabled="willRepairObject == null" @on-change="selectedRepairObject(createRepairData.object)" style="width:100%" :placeholder="$t('repair').selectRepairObject">
+                                    <Option v-for="item in willRepairObject" :value="item.value" :key="item.value">{{ item.label }}</Option>
                                 </Select>
                             </div>
                             <div class="col-12 mb-3 newtopic gray-input">
-                                <Select v-model="createRepairData.title" size="large" style="width:100%" :placeholder="$t('repair').selectRepairTitle">
-                                    <Option v-for="item in repairTitle" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                                <Select v-model="createRepairData.title" size="large" :disabled="willRepairTitle == null" @on-change="selectedRepairTitle(createRepairData.title)" style="width:100%" :placeholder="$t('repair').selectRepairTitle">
+                                    <Option v-for="item in willRepairTitle" :value="item.value" :key="item.value">{{ item.label }}</Option>
                                 </Select>
                             </div>
                         </div>
@@ -50,6 +50,7 @@
                             />
                             <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                             <div class="emoji-area-popup">
+                                <div v-if="emoStatus" class="position-absolute close-emoji-btn" @click="closeEmojiWindow()">{{$t('common').closeEmoji}}</div>
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
                             <Checkbox v-model="createRepairData.isShowToProprietor" label="Proprietor" class="ml-auto mr-2">
@@ -122,8 +123,12 @@ import {delUploadFile} from '~/api/upload'
 import repairType from '../../json/repairType';
 import repairObject from '../../json/repairObject.json';
 import repairTitle from '../../json/repairTitle.json';
+import repairJsonData from '../../json/repairUpdate.json';
 
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').newRepairRequest }
+    },
     middleware: 'auth',
 
     components: {
@@ -133,6 +138,9 @@ export default {
 
     data(){
         return{
+            repairJsonData,
+            willRepairObject:null,
+            willRepairTitle:null,
             autoInputMode: false,
             repairType,
             repairObject,
@@ -159,7 +167,15 @@ export default {
         }
     },
 
+    mounted(){
+        
+    },
+
     methods:{
+        closeEmojiWindow(){
+            this.emoStatus = false;
+        },
+        
         toggleEmo(){
             this.emoStatus = !this.emoStatus;
         },
@@ -176,19 +192,34 @@ export default {
 
         async requestRepair(){
             this.emoStatus = false;
-            if(this.createRepairData.type.trim() == ''){
-                return this.error('Type is required')
+            if(this.autoInputMode){
+                if(this.createRepairData.type == ''){
+                    return this.error('Type is required');
+                }
+                if(this.createRepairData.object == ''){
+                    return this.error('Object is required');
+                }
+                if(this.createRepairData.title == ''){
+                    return this.error('Title is required');
+                }
+                if(this.createRepairData.desc.trim() == ''){
+                    return this.error('Description is required')
+                }
             }
-            if(this.createRepairData.object.trim() == ''){
-                return this.error('Object is required')
-            }
-            if(this.createRepairData.title.trim() == ''){
-                return this.error('Title is required')
-            }
-            if(this.createRepairData.desc.trim() == ''){
-                return this.error('Description is required')
-            }
-
+            else{
+                if(this.createRepairData.type.trim() == ''){
+                    return this.error('Type is required')
+                }
+                if(this.createRepairData.object.trim() == ''){
+                    return this.error('Object is required')
+                }
+                if(this.createRepairData.title.trim() == ''){
+                    return this.error('Title is required')
+                }
+                if(this.createRepairData.desc.trim() == ''){
+                    return this.error('Description is required')
+                }
+            }   
             this.isRequesting = true;
             await registerRepair(this.createRepairData)
             .then(res=>{
@@ -280,6 +311,10 @@ export default {
         changeInputType(){
             if(this.autoInputMode == false){
                 this.autoInputMode = true;
+                // this.createRepairData.type = this.repairJsonData[0];
+                // console.log("this.createRepairData.type", this.createRepairData.type);
+                // this.createRepairData.object = this.createRepairData.type.object[0]; 
+                // this.createRepairData.title = this.createRepairData.object.title[0];
             }
             else{
                 this.autoInputMode = false;
@@ -287,6 +322,21 @@ export default {
             this.createRepairData.title = '';
             this.createRepairData.type = '';
             this.createRepairData.object = '';
+        },
+
+        selectedRepairType(val){
+            this.willRepairObject = this.repairJsonData[val-1].object;
+            this.createRepairData.title = '';
+            this.willRepairTitle = null;
+            this.createRepairData.object = '';
+        },
+        selectedRepairObject(val){
+            if (val != undefined){
+                this.willRepairTitle = this.willRepairObject[val-1].title;
+            }
+        },
+        selectedRepairTitle(val){
+
         }
     }
 }

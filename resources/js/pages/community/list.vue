@@ -78,6 +78,9 @@ import {getCommunityList} from '~/api/community'
 import Category from './category'
 // import VueTimeago from 'vue-timeago'
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').communityList }
+    },
     components:{
         InfiniteLoading,
         Category,

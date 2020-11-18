@@ -69,6 +69,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('repair/last', 'RepairController@getLastItemID');
     Route::get('repair/previous', 'RepairController@getPreviousItemID');
     Route::get('repair/next', 'RepairController@getNextItemID');
+    Route::get('repair/json', 'RepairController@getRepairType');
+    Route::put('repair/json', 'RepairController@postRepairType');
     
 
     Route::post('community/create', 'CommunityController@store');

@@ -47,7 +47,8 @@ html{
     font-size: 1.2rem;
 }
 body{
-    font-family: 'Times New Roman', Times, serif, 'Malgun Gothic'!important;
+    /* font-family: 'Times New Roman', Times, serif, 'Malgun Gothic', '맑은 고딕'!important; */
+    font-family: 'Times New Roman', Times, serif, AppleSDGothicNeo-Regular, 'Malgun Gothic', '맑은 고딕', dotum, '돋움', sans-serif!important;
     /* overflow: auto!important; */
 }
 
@@ -1390,6 +1391,35 @@ a.text-dark:hover, a.text-dark:focus {
 .manager-card-container .manager-avatar img{
     width: 80px!important;
     height: 80px!important;
+}
+
+.newpush-dropdown-menu{
+    height: 400px;
+    width: 300px;
+    overflow: auto;
+}
+
+.newpush-dropdown-p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.close-emoji-btn{
+    bottom: 3px;
+    right: 3px;
+    cursor: pointer;
+    z-index: 1000;
+    background: #AE65C5;
+    color: black;
+    padding: 0 15px;
+    border-radius: 18px;
+    transition: all 0.5s ease;
+}
+
+.close-emoji-btn:hover{
+    background:#79438a;
+    color: white;
 }
 
 @media only screen and (max-width: 600px) {

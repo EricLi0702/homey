@@ -30,6 +30,7 @@
                             />
                             <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                             <div class="emoji-area-popup">
+                                <div v-if="emoStatus" class="position-absolute close-emoji-btn" @click="closeEmojiWindow()">{{$t('common').closeEmoji}}</div>
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
                             <Button icon="md-create" type="success" class="ml-auto" @click="registerNewFacility" :disabled="isCreatingNewFacility" :loading="isCreatingNewFacility">Create{{ $t('facility').reply }}</Button>
@@ -95,6 +96,9 @@ import {registerFacility} from '~/api/facility'
 import {delUploadFile} from '~/api/upload'
 
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').FacilityCreate }
+    },
     middleware: 'manager',
 
     components: {
@@ -127,6 +131,11 @@ export default {
     },
 
     methods:{
+
+        closeEmojiWindow(){
+            this.emoStatus = false;
+        },
+        
         toggleEmo(){
             this.emoStatus = !this.emoStatus;
         },
@@ -150,10 +159,14 @@ export default {
                 return this.error('Equipment is required')
             }
             if(this.createFacilityData.nb.trim() == ''){
-                return this.error('Equipment is required')
+                return this.error('N.B is required')
             }
             if(this.createFacilityData.outline.trim() == ''){
-                return this.error('Equipment is required')
+                return this.error('Outline is required')
+            }
+
+            if(this.createFacilityData.file.imgUrl.length == 0){
+                return this.error("When registering a public building, at least one image to be used as a cover image is required.");
             }
 
             this.isCreatingNewFacility = true;

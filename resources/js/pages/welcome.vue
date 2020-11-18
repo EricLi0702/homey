@@ -9,7 +9,7 @@
                     <div class="subtitle col-md-12 mb-5" data-aos="zoom-out">
                         <h1>{{ $t('welcome').Vapartment }}</h1>
                     </div>
-                    <div class="description col-md-12 mt-5" data-aos="fade-up">
+                    <div class="description mt-5 container" data-aos="fade-up">
                         <h4>{{ $t('welcome').WelcomeVapartment }}</h4>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
             <div class="h-100 d-flex text-center align-items-center justify-content-center ">
                 <div class="attraction">
                     <div class="row p-0 m-0">
-                        <div class="a-title col-md-12">
+                        <div class="a-title col-md-12 content">
                             <h2 class="section-title">{{$t('welcome').VapartmentServices}}</h2>
                         </div>
                         <p class="col-md-6 offset-md-3 col-8 offset-2 pt-2">{{$t('welcome').APTservice}}</p>
@@ -88,9 +88,9 @@
             </div>
             <div class="h-100 container">
                 <div class="row p-0 m-0">
-                    <div class="col-md-6 d-flex row p-0 m-0 text-md-left text-center align-items-center text-white font-weight-bold" data-aos="fade-left" data-aos-easing="linear" data-aos-duration="1000">
-                        <div class="w-100">
-                            <div class="row w-100">
+                    <div class="col-md-6 d-flex row p-0 m-0 text-md-left text-center align-items-center text-white font-weight-bold" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
+                        <div class="w-100 m-3 p-2">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_1}}</p>
                                 </div>
@@ -99,7 +99,7 @@
                                     <!-- <p>{{$t('welcome').APTdetail_detail_1}}</p> -->
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_2}}</p>
                                 </div>
@@ -107,7 +107,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_2}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_3}}</p>
                                 </div>
@@ -115,7 +115,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_3}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_4}}</p>
                                 </div>
@@ -123,7 +123,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_4}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_5}}</p>
                                 </div>
@@ -131,7 +131,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_5}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_6}}</p>
                                 </div>
@@ -139,7 +139,7 @@
                                     <p>{{$t('welcome').APTdetail_detail_6}}</p>
                                 </div>
                             </div>
-                            <div class="row w-100">
+                            <div class="row w-100 m-0">
                                 <div class="col-3">
                                     <p>{{$t('welcome').APTdetail_option_7}}</p>
                                 </div>
@@ -149,7 +149,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="structure col-md-6 row p-0 mt-2 " data-aos="fade-right" data-aos-easing="linear" data-aos-duration="1000">
+                    <div class="structure col-md-6 row p-0 mt-2 " data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
                         <div class="home-structure col-md-12">
                             <img :src="`${baseUrl}/asset/img/bg/room-structure.png`" alt="" class="p-4">
                         </div>
@@ -212,7 +212,7 @@
     </div>
     <div class="container-fluid mt-5" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
         <div class="row p-0 m-0">
-            <div class="add-title col-md-12 row p-0 m-0">
+            <div class="add-title col-md-12 row p-0 m-0 content">
                 <h2 class="col-md-12 d-flex align-items-center justify-content-center row p-0 m-0 section-title">{{ $t('welcome').theLinkLocation }}</h2>
             </div>
             <div class="add-content col-md-12 row p-0 mt-5">
@@ -244,7 +244,7 @@ export default {
   layout: 'default',
 
   metaInfo () {
-    return { title: this.$t('home') }
+    return { title: this.$t('metaInfo').welcome }
   },
   components:{
     videoPlayer,

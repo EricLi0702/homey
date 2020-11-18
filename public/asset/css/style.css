@@ -211,7 +211,7 @@ color: #a9c0ff;
 .second-background {
     position: relative;
     width: 100%;
-    height: 30rem;
+    height: 17rem;
 }
 .second-wrap {
     clip: rect(0, auto, auto, 0);
@@ -374,9 +374,13 @@ color: #a9c0ff;
   #overlay img {
       width: 60%;
  }
-}
-@media screen and (min-width: 1200px) {
  
+}
+
+@media screen and (max-width: 768px) {
+  .footer-widget-heading h3::before {
+    left: 0!important;
+  }
 }
 #nextButton {
   color: #fff;
@@ -441,7 +445,6 @@ ul {
   color: #ff5e14;
   font-size: 30px;
   float: left;
-  margin-top: 8px;
 }
 
 .cta-text {
@@ -525,7 +528,7 @@ ul {
 .footer-widget-heading h3::before {
   content: "";
   position: absolute;
-  left: 0;
+  left: calc(50% - 25px);
   bottom: -15px;
   height: 2px;
   width: 50px;
@@ -605,12 +608,15 @@ ul {
 }
 @media (max-width:991px) {
     .third-background {
-        height: 19rem;
+        height: 23rem;
+    }
+    .cta-text h4{
+      font-size: 16px;
     }
 }
 @media (max-width:767px) {
     .third-background {
-        height: 41rem;
+        height: 44rem;
     }
     .subtitle h1 {
       font-size: 4rem;
@@ -626,6 +632,9 @@ ul {
   .content h2 {
       font-size: 1.5rem;
   }
+  .description h4 {
+    font-size: 1.6rem;
+  }
 
 }
 @media (max-width:500px) {
@@ -636,24 +645,19 @@ ul {
 
 @media (max-width:400px) {
   .third-background {
-    height: 32rem;
+    height:40rem;
   }
   .second-background {
-    height: 30rem;
+    height: 18rem;
   }
 }
 
 @media (max-width:350px) {
   .second-background {
-    height: 37rem;
+    height: 20rem;
   }
 }
 
-@media (max-width:350px) {
-  .second-background {
-    height: 44rem;
-  }
-}
 
 .editr {
   border: 1px solid #e4e4e4;

@@ -19,6 +19,7 @@
                             />
                             <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                             <div class="emoji-area-popup">
+                                <div v-if="emoStatus" class="position-absolute close-emoji-btn" @click="closeEmojiWindow()">{{$t('common').closeEmoji}}</div>
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
                             <Button icon="ios-briefcase-outline" type="warning" class="ml-auto mr-2" @click="saveToDraftSuggestion" :disabled="isSavingDraft" :loading="isSavingDraft">{{ $t('notification').Draft }}</Button>
@@ -85,6 +86,9 @@ import {getSuggestionList,registerSuggestion,updateSuggestion,delSuggestion} fro
 import {delUploadFile} from '~/api/upload'
 
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').createSuggestion }
+    },
     middleware: 'auth',
 
     components: {
@@ -116,6 +120,9 @@ export default {
     },
 
     methods:{
+        closeEmojiWindow(){
+            this.emoStatus = false;
+        },
         toggleEmo(){
             this.emoStatus = !this.emoStatus;
         },

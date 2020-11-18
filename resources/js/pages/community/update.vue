@@ -32,6 +32,7 @@
                             />
                             <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                             <div class="emoji-area-popup">
+                                <div v-if="emoStatus" class="position-absolute close-emoji-btn" @click="closeEmojiWindow()">{{$t('common').closeEmoji}}</div>
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
                             <Button icon="md-create" type="success" class="ml-auto" @click="updateCommunity" :disabled="isUpdating" :loading="isUpdating">Update Topic</Button>
@@ -99,6 +100,9 @@ import {delUploadFile} from '~/api/upload'
 import { mapGetters } from 'vuex'
 
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').communityUpdate }
+    },
     middleware: 'auth',
 
     components: {
@@ -148,6 +152,10 @@ export default {
     },
 
     methods:{
+        closeEmojiWindow(){
+            this.emoStatus = false;
+        },
+        
         toggleEmo(){
             this.emoStatus = !this.emoStatus;
         },

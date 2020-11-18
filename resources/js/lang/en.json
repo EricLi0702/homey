@@ -1,7 +1,7 @@
 {
     "welcome":{
         "Vapartment": "The Link 345",
-        "WelcomeVapartment":"The Link 345' is an apartment located in the center of Hanoi that provides a pleasant living environment.",
+        "WelcomeVapartment":"The Link 345 is an apartment located in the center of Hanoi that provides a pleasant living environment.",
         "GetStart":"Get start",
         "Notification":"Notification",
         "detail":"detail",
@@ -137,7 +137,15 @@
         "resetPass":"Reset Password",
         "sendResetPassLink":"Send reset password link",
         "and":"and",
-        "setPassword": "Set password"
+        "setPassword": "Set password",
+        "closeEmoji": "Close Emoji",
+        "swr" : "Something went wrong!",
+        "serverError" : "Server error",
+        "tokenExpired": "Token expired!",
+        "tokenExpiredText" : "Token expired. please try login again.",
+        "ok": "ok",
+        "cancel": "cancel",
+        "goHome": "Go Home"
     },
     "login":{
         "login":"Login",
@@ -221,7 +229,8 @@
         "oopsNoCommunity":"oops! there is no community!",
         "noMoreCommunity":"no more community",
         "UpdateTopic":"Update Topic",
-        "Leave":"Leave"
+        "Leave":"Leave",
+        "Period":"Period"
     },
     "facility":{
         "NewFacility":"New Facility",
@@ -245,7 +254,8 @@
         "oopsNoFacility":"oops! there is no facility",
         "ListView":"List View",
         "CalendarView":"Calendar View",
-        "Facility":"Facility"
+        "Facility":"Facility",
+        "maxNumberOfUser" : "Maximum number of users who can use the facility:"
     },
     "suggest":{
         "suggest":"Suggestion",
@@ -308,7 +318,8 @@
         "noMoreRequest":"no more request",
         "Response":"Response",
         "EnterReview":"Enter Review...",
-        "LeaveReview":"Leave Review"
+        "LeaveReview":"Leave Review",
+        "repairType": "Register type"
     },
     "publicFacility":{
         "facilityName":"Facility",
@@ -589,8 +600,42 @@
             "currentUser_registeredUser" : "CurrentUser :: RegisterUser",
             "myActivityThread" : "My Activity Thread"
         }
-    }
+    },
     
+    "metaInfo":{
+        "reset_password" : "ResetPassword",
+        "home" : "Home",
+        "welcome" : "Welcome",
+        "userlist" : "UserList",
+        "building_manage" : "ManageBuilding",
+        "createCommunity" : "New Topic Community",
+        "communityList" : "Community List",
+        "communityUpdate" : "Update Community",
+        "viewDetailCommunity" : "Detail View Community",
+        "notFoundPage" : "404",
+        "FacilityCreate" : "Register Facility",
+        "FacilityList" : "Facility List",
+        "reservation" : "Reservation List",
+        "downgradeNotification" : "Downgraded Notification List",
+        "notificationList" : "Notification List",
+        "registerNotification" : "New Notification",
+        "notificationUpdate" : "Update Notification",
+        "viewDetailNotification" : "Detail View Notification",
+        "newRepairRequest" : "New Repair Request",
+        "repairRequestList" : "Repair Request List",
+        "registerRepairType" : "Edit Repair Request Type",
+        "viewDetailRepairRequest" : "Detail View Repair Request",
+        "profile" : "Profile",
+        "createSuggestion" : "New Suggestion",
+        "suggestionList" : "Suggestion List",
+        "suggestionUpdate" : "Update Suggestion",
+        "viewDetailSuggestion" : "Detail View Suggestion",
+        "privacy" : "Privacy Policy",
+        "term" : "TERM OF US",
+        "updateUserInfo" : "Update User Info",
+        "ListUser" : "UserList",
+        "registerUser" : "Register User"
+    }
     
 
 

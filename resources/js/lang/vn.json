@@ -1,7 +1,7 @@
 {
     "welcome":{
         "Vapartment": "The Link 345",
-        "WelcomeVapartment":"The Link 345' là căn hộ nằm ở trung tâm Hà Nội, mang đến một môi trường sống dễ chịu.",
+        "WelcomeVapartment":"The Link 345 là căn hộ nằm ở trung tâm Hà Nội, mang đến một môi trường sống dễ chịu.",
         "GetStart":"Bắt đầu",
         "Notification":"Thông báo",
         "detail":"chi tiết",
@@ -137,7 +137,15 @@
         "resetPass":"Đặt lại mật khẩu",
         "sendResetPassLink":"Gửi liên kết đặt lại mật khẩu",
         "and":"và",
-        "setPassword": "Đặt mật khẩu"
+        "setPassword": "Đặt mật khẩu",
+        "closeEmoji": "Đóng cửa sổ biểu tượng cảm xúc",
+        "swr" : "Có gì đó không ổn.",
+        "serverError" : "Lỗi máy chủ!",
+        "tokenExpired": "Mã thông báo hết hạn!",
+        "tokenExpiredText" : "Mã thông báo đã hết hạn. Xin vui lòng đăng nhập lại.",
+        "ok": "đồng ý",
+        "cancel": "hủy bỏ",
+        "goHome": "về nhà"
     },
     "login":{
         "login":"Đăng nhập",
@@ -221,7 +229,8 @@
         "oopsNoCommunity":"rất tiếc! không có cộng đồng nào!",
         "noMoreCommunity":"không còn cộng đồng",
         "UpdateTopic":"Cập nhật chủ đề",
-        "Leave":"Rời khỏi"
+        "Leave":"Rời khỏi",
+        "Period":"thời gian"
     },
     "facility":{
         "NewFacility":"Cơ sở mới",
@@ -245,7 +254,8 @@
         "oopsNoFacility":"rất tiếc! không có cơ sở",
         "ListView":"Chế độ xem danh sách",
         "CalendarView":"Chế độ xem lịch",
-        "Facility":"Cơ sở"
+        "Facility":"Cơ sở",
+        "maxNumberOfUser" : "Số lượng người dùng tối đa có thể sử dụng thiết bị:"
     },
     "suggest":{
         "suggest":"Không gian chung",
@@ -308,7 +318,8 @@
         "noMoreRequest":"không yêu cầu nữa",
         "Response":"Phản hồi",
         "EnterReview":"Nhập Đánh giá ...",
-        "LeaveReview":"Để lại Đánh giá"
+        "LeaveReview":"Để lại Đánh giá",
+        "repairType": "Đăng ký loại"
     },
     "publicFacility":{
         "facilityName":"Không gian chung",
@@ -588,6 +599,41 @@
             "currentUser_registeredUser" : "Người dùng hiện tại :: Đăng ký người dùng",
             "myActivityThread" : "Chủ đề hoạt động của tôi"
         }
+    },
+
+    "metaInfo":{
+        "reset_password" : "Đặt lại mật khẩu",
+        "home" : "Trang Chủ",
+        "welcome" : "chào mừng",
+        "userlist" : "Danh sách người dùng",
+        "building_manage" : "Ban Quản lí toà nhà",
+        "createCommunity" : "Cộng đồng chủ đề mới",
+        "communityList" : "Danh sách cộng đồng",
+        "communityUpdate" : "Sửa đổi cộng đồng",
+        "viewDetailCommunity" : "Xem chi tiết cộng đồng",
+        "notFoundPage" : "404",
+        "FacilityCreate" : "Đăng ký cơ sở công cộng",
+        "FacilityList" : "Danh sách các cơ sở công cộng",
+        "reservation" : "danh sách đặt chỗ",
+        "downgradeNotification" : "Xuống danh sách",
+        "notificationList" : "danh sách thông báo",
+        "registerNotification" : "Tạo thông báo mới",
+        "notificationUpdate" : "cập nhật thông báo",
+        "viewDetailNotification" : "Xem thông báo chi tiết",
+        "newRepairRequest" : "yêu cầu sửa chữa mới",
+        "repairRequestList" : "danh sách yêu cầu sửa chữa",
+        "registerRepairType" : "đăng ký Loại sửa chữa",
+        "viewDetailRepairRequest" : "Xem chi tiết yêu cầu sửa chữa",
+        "profile" : "hồ sơ",
+        "createSuggestion" : "tạo đề xuất mới",
+        "suggestionList" : "danh sách đề xuất",
+        "suggestionUpdate" : "Cập nhật đề xuất",
+        "viewDetailSuggestion" : "Xem chi tiết đề xuất",
+        "privacy" : "Chính sách Bảo mật",
+        "term" : "Điều khoản sử dụng",
+        "updateUserInfo" : "Chỉnh sửa thông tin người dùng",
+        "ListUser" : "Danh sách người dùng",
+        "registerUser" : "đăng ký người dùng"
     }
 
 

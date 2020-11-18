@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="col-12 mb-3">
-                            <p class="">Period{{$t('community').View}}</p>
+                            <p class="">{{$t('community').Period}}</p>
                             <RadioGroup @on-change="setPeriodToBlank" v-model="periodType" class="">
                                 <Radio label="withPeriod">{{$t('community').ChoosePeriod}}</Radio>
                                 <Radio label="withCalendar">{{$t('community').ChooseCalendar}}</Radio>
@@ -51,6 +51,7 @@
                             />
                             <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                             <div class="emoji-area-popup">
+                                <div v-if="emoStatus" class="position-absolute close-emoji-btn" @click="closeEmojiWindow()">{{$t('common').closeEmoji}}</div>
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
                             <Button icon="ios-briefcase-outline" type="warning" class="ml-auto mr-2" @click="saveToDraftNotification" :disabled="isSavingDraft" :loading="isSavingDraft">{{$t('notification').Draft}}</Button>
@@ -117,6 +118,9 @@ import Upload from '~/components/Upload'
 import {delUploadFile} from '~/api/upload'
 
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').registerNotification }
+    },
     middleware: 'notimanager',
 
     components: {
@@ -207,6 +211,10 @@ export default {
 
         insertTypeImportant(){
             this.isImportant = !this.isImportant;
+        },
+
+        closeEmojiWindow(){
+            this.emoStatus = false;
         },
 
         toggleEmo(){

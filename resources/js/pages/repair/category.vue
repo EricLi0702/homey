@@ -69,9 +69,15 @@
 <script>
 import {mapGetters} from 'vuex'
 import {getTop5Repair,getRepairCnt} from '~/api/repair'
+import {getRepairJsonData} from '../../api/repair'
+
 export default {
     data(){
         return{
+            enJsonData:[],
+            krJsonData:[],
+            vnJsonData:[],
+            repairJsonData:[],
             repairData:[],
             monthData:1,
             todayData:0,
@@ -88,7 +94,8 @@ export default {
     },
     computed:{
     ...mapGetters({
-      currentUser:'auth/user'
+      currentUser:'auth/user',
+      currentLang:'lang/locale'
     })
     },
     watch:{
@@ -97,15 +104,47 @@ export default {
         }
     },
 
+    created(){
+        getRepairJsonData()
+        .then(res=>{
+            console.log("res.data", res.data);
+            this.enJsonData = JSON.parse(res.data[0].repair_type);
+            this.krJsonData = JSON.parse(res.data[1].repair_type);
+            this.vnJsonData = JSON.parse(res.data[2].repair_type);
+            if(this.currentLang == 'en'){
+                this.repairJsonData = this.enJsonData;
+            }
+            else if(this.currentLang == 'kr'){
+                this.repairJsonData = this.krJsonData;
+            }
+            else if(this.currentLang == 'vn'){
+                this.repairJsonData = this.vnJsonData;
+            }
+        })
+        .catch(err=>{
+            console.log(err.response)
+        })
+    },
+
     async mounted(){
         // console.log('++++repair+++',this.currentUser)
         await getTop5Repair(this.currentUser.id).then(res=>{
             console.log('----res',res)
             this.repairData = res.data
+            for(let i = 0; i < this.repairData.length; i++){
+                if(!isNaN(this.repairData[i].type)){
+                    let type = this.repairJsonData[this.repairData[i].type-1].label;
+                    let object = this.repairJsonData[this.repairData[i].type-1].object[this.repairData[i].object-1].label;
+                    let title = this.repairJsonData[this.repairData[i].type-1].object[this.repairData[i].object-1].title[this.repairData[i].title-1].label;
+                    this.repairData[i].type = type;
+                    this.repairData[i].object = object;
+                    this.repairData[i].title = title;
+                }
+            }
         }).catch(err=>{
             console.log(err)
         })
-        getRepairCnt(this.currentUser.id).then(res=>{
+        getRepairCnt().then(res=>{
             this.todayData = res.data.today
             this.weekData = res.data.week
             this.monthData = res.data.month

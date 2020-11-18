@@ -73,8 +73,13 @@
 import InfiniteLoading from 'vue-infinite-loading';
 import {getRepairList} from '~/api/repair'
 import Category from './category'
+import {getRepairJsonData} from '../../api/repair'
+import { mapGetters } from 'vuex'
 // import VueTimeago from 'vue-timeago'
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').repairRequestList }
+    },
     components:{
         InfiniteLoading,
         Category,
@@ -82,17 +87,48 @@ export default {
     },
     data(){
         return{
+            enJsonData:[],
+            krJsonData:[],
+            vnJsonData:[],
+            repairJsonData:null,
             baseUrl:window.base_url,
             repairList : [],
             noRequest:false,
             //infinit loading
             pageOfRepair: 1,
             lastPageOfRepair: 0,
+            
         }
     },
 
-    async created(){
-        // this.start();
+    computed:{
+        ...mapGetters({
+            currentLang:'lang/locale'
+        })
+    },
+
+    created(){
+        console.log(this.currentLang);
+        getRepairJsonData()
+        .then(res=>{
+            console.log(res.data)
+            this.enJsonData = JSON.parse(res.data[0].repair_type);
+            this.krJsonData = JSON.parse(res.data[1].repair_type);
+            this.vnJsonData = JSON.parse(res.data[2].repair_type);
+            if(this.currentLang == 'en'){
+                this.repairJsonData = this.enJsonData;
+            }
+            else if(this.currentLang == 'kr'){
+                this.repairJsonData = this.krJsonData;
+            }
+            else if(this.currentLang == 'vn'){
+                this.repairJsonData = this.vnJsonData;
+            }
+            console.log("123123",this.repairJsonData)
+        })
+        .catch(err=>{
+            console.log(err.response)
+        })
     },
 
     methods:{
@@ -104,6 +140,9 @@ export default {
         },
 
         async infiniteHandlerRepairRequest($state){
+            // if(this.repairJsonData == null){
+            //     return;
+            // }
             let timeOut = 0;
             
             if (this.pageOfRepair > 1) {
@@ -121,6 +160,15 @@ export default {
 
                 $.each(res.data.data, function(key, value){
                         value.upload_file = JSON.parse(value.upload_file);
+                        if(!isNaN(value.type)){
+                            console.log("select mode", value);
+                            let type = vm.repairJsonData[value.type-1].label;
+                            let object = vm.repairJsonData[value.type-1].object[value.object-1].label;
+                            let title = vm.repairJsonData[value.type-1].object[value.object-1].title[value.title-1].label;
+                            value.type = type;
+                            value.object = object;
+                            value.title = title;
+                        }
                         vm.repairList.push(value); 
                     });
                 if (vm.pageOfRepair - 1 === vm.lastpageOfRepair) {

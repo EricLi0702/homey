@@ -68,7 +68,7 @@
         <li v-if="user" class="mr-2 d-flex align-items-center ml-3 nav-item">
           <Badge :count="pushNotificationCnt">
             <Icon size="30" color="#ffffff" type="md-notifications" class="navbar-notification-icon nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
-            <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn mt-1rem">
+            <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn mt-1rem newpush-dropdown-menu">
               <ul class="navbar-nav flex-column">
                 <div v-if="user !== null">
                   <div v-if="pushNotificationCnt == 0">
@@ -79,23 +79,26 @@
                   <div v-else>
                     <div v-if="pushNotification.notification && pushNotification.notification.length >0">
                       <div class="dropdown-divider" />
-                      <div @click="removeNotificationFromNew(notification)" v-for="(notification,i) in pushNotification.notification" :key="i" class="nav-item dropdown-item d-flex" active-class="active">
-                        <Icon size="25" class="mr-1" type="ios-clipboard" />
-                        <p>{{notification.title}}</p>
+                      <div @click="removeNotificationFromNew(notification)" v-for="(notification,i) in pushNotification.notification" :key="i" class="nav-item dropdown-item d-flex align-items-center mt-2" active-class="active">
+                        <img :src="`${baseUrl}${notification.userAvatar}`" class="rounded-circle profile-photo mr-1" alt="">
+                        <Icon class="mr-1" type="ios-clipboard" />
+                        <p class="newpush-dropdown-p">{{notification.title}}</p>
                       </div>
                     </div>
                     <div v-if="pushNotification.suggestion && pushNotification.suggestion.length >0">
                       <div class="dropdown-divider" />
-                      <div @click="removeSuggestionFromNew(suggestion)" v-for="(suggestion,i) in pushNotification.suggestion" :key="i" :to="{ path:`/suggestion/${suggestion.id}` }" class="nav-item dropdown-item d-flex" active-class="active">
-                        <Icon size="25" class="mr-1" type="md-chatbubbles" />
-                        <p>{{suggestion.title}}</p>
+                      <div @click="removeSuggestionFromNew(suggestion)" v-for="(suggestion,i) in pushNotification.suggestion" :key="i" :to="{ path:`/suggestion/${suggestion.id}` }" class="nav-item dropdown-item d-flex align-items-center mt-2" active-class="active">
+                      <img :src="`${baseUrl}${suggestion.userAvatar}`" class="rounded-circle profile-photo mr-1" alt="">
+                        <Icon class="mr-1" type="md-chatbubbles" />
+                        <p class="newpush-dropdown-p">{{suggestion.title}}</p>
                       </div>
                     </div>
                     <div v-if="pushNotification.community && pushNotification.community.length >0">
                       <div class="dropdown-divider" />
-                      <div @click="removeCommunityFromNew(community)" v-for="(community,i) in pushNotification.community" :key="i" :to="{ path:`/community/${community.id}` }" class="nav-item dropdown-item d-flex" active-class="active">
-                        <Icon size="25" class="mr-1" type="ios-people" />
-                        <p>{{community.title}}</p>
+                      <div @click="removeCommunityFromNew(community)" v-for="(community,i) in pushNotification.community" :key="i" :to="{ path:`/community/${community.id}` }" class="nav-item dropdown-item d-flex align-items-center mt-2" active-class="active">
+                      <img :src="`${baseUrl}${community.userAvatar}`" class="rounded-circle profile-photo mr-1" alt="">
+                        <Icon class="mr-1" type="ios-people" />
+                        <p class="newpush-dropdown-p">{{community.title}}</p>
                       </div>
                     </div>
                   </div>

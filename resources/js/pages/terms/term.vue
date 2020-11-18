@@ -62,7 +62,9 @@
 
 <script>
 export default {
-    
+    metaInfo () {
+        return { title: this.$t('metaInfo').term }
+    },
     data: () => ({
         baseUrl:window.base_url,
 

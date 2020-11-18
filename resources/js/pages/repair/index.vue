@@ -8,15 +8,12 @@
                  search :placeholder="$t('facility').EnterSomething" />
                 <div class="suggestion-sub-menu-items col-12 col-md-6 p-0 text-right">
                     <router-link v-if="currentUser.roleId !== 2 && currentUser.roleId !== 7 && currentUser.roleId !== 1" :to="{ path: '/repair/create' }" class="">
-                        <!-- {{ $t('register') }} -->
                         <Button type="success" icon="md-add">{{$t('community').New}}</Button>
                     </router-link>
-                    <!-- <router-link :to="{ path: '/repair/type' }" class="">
-                        {{ $t('register') }}
-                        <Button type="warning" icon="logo-buffer">Type</Button>
-                    </router-link> -->
+                    <router-link v-if="currentUser.roleId == 2 || currentUser.roleId == 7" :to="{ path: '/repair/type' }" class="">
+                        <Button type="warning" icon="logo-buffer">{{$t('repair').repairType}}</Button>
+                    </router-link>
                     <router-link :to="{ path: '/repair/index' }" class="">
-                        <!-- {{ $t('register') }} -->
                         <Button type="primary" icon="md-list">{{$t('community').View}}</Button>
                     </router-link>
                 </div>

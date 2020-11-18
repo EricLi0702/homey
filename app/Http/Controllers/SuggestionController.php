@@ -308,9 +308,7 @@ class SuggestionController extends Controller
         $weekData = Suggestion::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
         $todayData = Suggestion::whereDate('created_at', Carbon::today())->count();
         $monthData = Suggestion::whereYear('created_at',Carbon::now()->year)->whereMonth('created_at',Carbon::now()->month)->count();
-        $userId = $request->id;
-        $aptId = User::select('aptId')->where('id',$userId)->get();
-        $id = $aptId[0]->aptId;
+        $id = Auth::user()->aptId;
         $registerUserCnt = User::where('aptId',$id)->count();
         $currentUserCnt = User::where([['aptId','=',$id],['email_verified_at','<>',null]])->count();
         return response()->json([

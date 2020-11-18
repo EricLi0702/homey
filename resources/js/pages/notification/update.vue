@@ -25,30 +25,9 @@
                                     <span style="color:#F26A5A">{{$t('notification').Important}}</span>
                                 </label>
                             </div>
-                            <!-- <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" value="common" v-model="updateNotificationData.type">
-                                    <Icon size="35" type="md-hand" color="#BFD23A"/>
-                                    <span style="color:#BFD23A">{{$t('notification').Common}}</span>
-                                </label>
-                            </div>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" value="urgent" v-model="updateNotificationData.type">
-                                    <Icon size="35" type="md-stopwatch" color="#F4B894" />
-                                    <span style="color:#F4B894">{{$t('notification').Urgent}}</span>
-                                </label>
-                            </div>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" value="important" v-model="updateNotificationData.type">
-                                    <Icon size="35" type="ios-warning-outline" color="#F26A5A" />
-                                    <span style="color:#F26A5A">{{$t('notification').Important}}</span>
-                                </label>
-                            </div> -->
                         </div>
                         <div class="col-12 mb-3">
-                            <p class="">Period</p>
+                            <p class="">{{$t('community').Period}}</p>
                             <RadioGroup @on-change="setPeriodToBlank" v-model="periodType" class="">
                                 <Radio label="withPeriod">{{$t('notification').ChoosePeriod}}</Radio>
                                 <Radio label="withCalendar">{{$t('notification').ChooseCalendar}}</Radio>
@@ -109,6 +88,7 @@
                             </Upload>
                             <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                             <div class="emoji-area-popup">
+                                <div v-if="emoStatus" class="position-absolute close-emoji-btn" @click="closeEmojiWindow()">{{$t('common').closeEmoji}}</div>
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
                             <Button icon="md-create" type="success" class="ml-auto" @click="updateNotification" :disabled="isUpdating" :loading="isUpdating">{{$t('notification').update}}</Button>
@@ -175,6 +155,9 @@ import { mapGetters } from 'vuex'
 
 
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').notificationUpdate }
+    },
     middleware: 'notimanager',
     computed:{ 
         ...mapGetters({
@@ -267,6 +250,11 @@ export default {
                 }
             })
         },
+
+        closeEmojiWindow(){
+            this.emoStatus = false;
+        },
+
         toggleEmo(){
             this.emoStatus = !this.emoStatus;
         },

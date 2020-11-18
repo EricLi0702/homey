@@ -32,9 +32,9 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
-        $agent = new Agent();
-        $desktopValue = $agent->isDesktop();
-        $mobileValue = $agent->isPhone();
+        // $agent = new Agent();
+        // $desktopValue = $agent->isDesktop();
+        // $mobileValue = $agent->isPhone();
         // if ($desktopValue == true){
         //     // config()->set('jwt.ttl', 1);
         //     config([

@@ -65,8 +65,8 @@ function getTop5Suggestion(userId){
     return axios.get('/api/top5Suggestion',{params:{id:userId}});
 }
 
-function getSuggestionCnt(userId){
-    return axios.get('/api/suggestionCnt',{params:{id:userId}});
+function getSuggestionCnt(){
+    return axios.get('/api/suggestionCnt');
 }
 
 function getFirstItem(){

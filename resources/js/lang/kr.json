@@ -1,7 +1,7 @@
 {
     "welcome":{
         "Vapartment": "더 링크 345 아파트",
-        "WelcomeVapartment":"하노이 도심 쾌적한 주거환경의 ‘더링크 345’ 아파트 관리 서비스",
+        "WelcomeVapartment":"하노이 도심 쾌적한 주거환경의 더링크 345 아파트 관리 서비스",
         "GetStart":"시작하기",
         "Notification":"알림",
         "detail":"구체적으로",
@@ -137,7 +137,15 @@
         "resetPass":"암호 재설정",
         "sendResetPassLink":"암호 재설정 링크얻기",
         "and":"과",
-        "setPassword": "암호설정"
+        "setPassword": "암호설정",
+        "closeEmoji": "이모티콘 창 닫기",
+        "swr" : "무엇인가 잘못된것 같습니다.",
+        "serverError" : "써버 오류!",
+        "tokenExpired": "토큰 만료!",
+        "tokenExpiredText" : "토큰이 만료되였습니다. 로그인을 다시하세요.",
+        "ok": "예",
+        "cancel": "취소",
+        "goHome": "홈으로 가기"
     },
     "login":{
         "login":"로그인",
@@ -211,7 +219,7 @@
         "saveAs":"임시저장",
         "CreateNewTopic":"새 주제 만들기",
         "ChoosePeriod":"기간 선택",
-        "ChooseCalendar":"캐린더로 기간 선택",
+        "ChooseCalendar":"캘린더로 기간 선택",
         "Forever":"영원히",
         "OneWeek":"1주",
         "OneMonth":"1개월",
@@ -221,7 +229,8 @@
         "oopsNoCommunity":"죄송합니다. 커뮤니티가 없습니다!",
         "noMoreCommunity":"더 이상 커뮤니티가 없음",
         "UpdateTopic":"주제 업데이트",
-        "Leave":"나가기"
+        "Leave":"나가기",
+        "Period":"기간"
     },
     "facility":{
         "NewFacility":"새 시설",
@@ -245,7 +254,8 @@
         "oopsNoFacility":"죄송합니다. 시설이 없습니다.",
         "ListView":"목록 보기",
         "CalendarView":"캘린더 보기",
-        "Facility":"시설"
+        "Facility":"시설",
+        "maxNumberOfUser" : "시설을 이용할수있는 최대사용자수:"
     },
     "suggest":{
         "suggest":"건의",
@@ -308,7 +318,8 @@
         "noMoreRequest":"더 이상 요청 없음",
         "Response":"회답",
         "EnterReview":"리뷰입력",
-        "LeaveReview":"리뷰 남기기"
+        "LeaveReview":"리뷰 남기기",
+        "repairType": "요청형태등록"
     },
     "publicFacility":{
         "facilityName":"시설명",
@@ -589,6 +600,42 @@
             "currentUser_registeredUser" : "현재 회원 : 등록 회원",
             "myActivityThread" : "나의 글"
         }
+    },
+
+    "metaInfo":{
+        "reset_password" : "암호재설정",
+        "home" : "홈",
+        "welcome" : "환영합니다",
+        "userlist" : "유저목록보기",
+        "building_manage" : "빌딩관리",
+        "createCommunity" : "새 주제 커뮤니티",
+        "communityList" : "커뮤니티목록",
+        "communityUpdate" : "커뮤니티수정",
+        "viewDetailCommunity" : "커뮤니티상세보기",
+        "notFoundPage" : "404",
+        "FacilityCreate" : "공공시설등록",
+        "FacilityList" : "공공시설목록",
+        "reservation" : "예약목록",
+        "downgradeNotification" : "내림함목록",
+        "notificationList" : "공지목록",
+        "registerNotification" : "새 공지작성",
+        "notificationUpdate" : "공지수정",
+        "viewDetailNotification" : "공지상세보기",
+        "newRepairRequest" : "새 수리요청",
+        "repairRequestList" : "수리요청목록",
+        "registerRepairType" : "수리요청사항작성",
+        "viewDetailRepairRequest" : "수리요청내용보기",
+        "profile" : "프로필",
+        "createSuggestion" : "새 건의작성",
+        "suggestionList" : "건의목록",
+        "suggestionUpdate" : "건의수정",
+        "viewDetailSuggestion" : "건의상세보기",
+        "privacy" : "개인정보보호정책",
+        "term" : "이용약관",
+        "updateUserInfo" : "유저정보수정",
+        "ListUser" : "유저목록",
+        "registerUser" : "유저등록"
+
     }
 
 

@@ -42,9 +42,8 @@
                                      <video-player  
                                         class="video-player-box vjs-custom-skin w-100"
                                         ref="videoPlayer"
-                                        :options="getEachVideoSrc(video)"
+                                        :options="playerOptionsGroup[i]"
                                         :playsinline="true"
-                                        @ready="playerReadied(video)"
                                         >
                                     </video-player>
                                 </div>
@@ -104,6 +103,7 @@
                             <div class="d-flex justify-content-between col-12 p-0">
                                 <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                                 <div class="emoji-area-popup">
+                                    <div v-if="emoStatus" class="position-absolute close-emoji-btn" @click="closeEmojiWindow()">{{$t('common').closeEmoji}}</div>
                                     <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                                 </div>
                                 <Button @click="responseToRepairRequest" :loading="isResponsingTo" :disabled="isResponsingTo">{{ $t('repair').Response }}</Button>
@@ -172,9 +172,12 @@ import {
 } from '~/api/repair'
 
 import Category from './category'
-
+import repairJsonData from '../../json/repairUpdate.json';
 import { mapGetters } from 'vuex'
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').viewDetailRepairRequest }
+    },
     // props:{
     //     details:Object
     // },
@@ -188,12 +191,14 @@ export default {
 
     data(){
         return{
+            repairJsonData,
             baseUrl:window.base_url,
             suggestionItem : [],
             details:null,
             repairId:null,
             responseCommentData:null,
             isFinishRequest:false,
+            playerOptionsGroup:[],
             playerOptions: {
             // videojs options
                 height:'350',
@@ -314,6 +319,10 @@ export default {
             this.isResponsingTo = false;
         },
 
+        closeEmojiWindow(){
+            this.emoStatus = false;
+        },
+
         toggleEmo(){
             this.emoStatus = !this.emoStatus;
         },
@@ -364,10 +373,26 @@ export default {
         getCurrentRepair(){
             getCurrentRepairFromServer(this.repairId)
             .then(res=>{
-                console.log("ddd",res.data.repairData);
                 this.responseCommentData = res.data.repairData.repair_id;
                 this.details = res.data.repairData;
+                if(!isNaN(this.details.type)){
+                    let type = this.repairJsonData[this.details.type-1].label;
+                    let object = this.repairJsonData[this.details.type-1].object[this.details.object-1].label;
+                    let title = this.repairJsonData[this.details.type-1].object[this.details.object-1].title[this.details.title-1].label;
+                    this.details.type = type;
+                    this.details.object = object;
+                    this.details.title = title;
+                }
                 this.details.upload_file = JSON.parse(this.details.upload_file);
+
+                //video url
+                let videoUrlGroup = this.details.upload_file.videoUrl;
+                for(let i = 0; i < videoUrlGroup.length ; i++){
+                    let clonedOption = JSON.parse(JSON.stringify(this.playerOptions));
+                    clonedOption.sources[0].src = this.baseUrl + '/uploads/video/'+videoUrlGroup[i].fileName;
+                    this.playerOptionsGroup.push(clonedOption);
+                }
+
             })
         },
 

@@ -137,6 +137,9 @@ import {getFacilityList} from '~/api/facility'
 import {createReservation, getReservationList} from '~/api/reservation'
 import { mapGetters } from 'vuex'
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').reservation }
+    },
     data(){
         return{
             facilityList : [],

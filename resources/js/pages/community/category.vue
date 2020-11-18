@@ -102,7 +102,7 @@ export default {
         }).catch(err=>{
             console.log(err)
         })
-        getCommunityCnt(this.currentUser.id).then(res=>{
+        getCommunityCnt().then(res=>{
             this.todayData = res.data.today
             this.weekData = res.data.week
             this.monthData = res.data.month

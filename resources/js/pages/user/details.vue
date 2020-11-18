@@ -61,6 +61,9 @@ import { mapGetters } from 'vuex'
 import {fetchUserRole} from '~/api/permission'
 import {updateUser} from '~/api/user'
 export default {
+    metaInfo () {
+        return { title: this.$t('metaInfo').updateUserInfo }
+    },
     props:{
         userData:Object
     },

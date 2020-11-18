@@ -8,7 +8,7 @@
       </h1>
       <div class="links">
         <router-link :to="{ name: 'welcome' }">
-          <Button type="primary">{{ $t('go_home') }}</Button>
+          <Button type="primary">{{ $t('common').goHome }}</Button>
         </router-link>
       </div>
     </div>
@@ -18,6 +18,9 @@
 
 <script>
 export default {
+  metaInfo () {
+        return { title: this.$t('metaInfo').notFoundPage }
+    },
   name: 'NotFound'
 }
 </script>

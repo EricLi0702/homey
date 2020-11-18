@@ -35,8 +35,8 @@ function getTop5Repair(userId){
     return axios.get('/api/top5Repair',{params:{id:userId}})
 }
 
-function getRepairCnt(userId){
-    return axios.get('/api/repairCnt',{params:{id:userId}})
+function getRepairCnt(){
+    return axios.get('/api/repairCnt')
 }
 
 function getFirstItem(){
@@ -50,6 +50,14 @@ function getPreviousItem(repairId){
 }
 function getNextItem(repairId){
     return axios.get('/api/repair/next', {params:{id:repairId}})
+}
+
+function getRepairJsonData(){
+    return axios.get('/api/repair/json')
+}
+
+function saveToJson(payload){
+    return axios.put('/api/repair/json', payload);
 }
 
 
@@ -67,4 +75,6 @@ export{
     getLastItem,
     getPreviousItem,
     getNextItem,
+    getRepairJsonData,
+    saveToJson
 }
