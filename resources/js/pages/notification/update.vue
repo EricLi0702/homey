@@ -158,6 +158,11 @@ export default {
     metaInfo () {
         return { title: this.$t('metaInfo').notificationUpdate }
     },
+
+    components: {
+        Picker,     //emoji
+    },
+
     middleware: 'notimanager',
     computed:{ 
         ...mapGetters({
