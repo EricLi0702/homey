@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="posted-item-info-time">
                                     <Icon type="ios-clock-outline" />
-                                    <timeago :datetime="community.updated_at" :since="community.updated_at" :auto-update="60"></timeago>
+                                    <timeago :datetime="community.updated_at" :auto-update="60"></timeago>
                                 </div>
                             </div>
                             <div class="clearfix">
@@ -76,6 +76,7 @@
 import InfiniteLoading from 'vue-infinite-loading';
 import {getCommunityList} from '~/api/community'
 import Category from './category'
+import { mapGetters } from 'vuex'
 // import VueTimeago from 'vue-timeago'
 export default {
     metaInfo () {
@@ -99,8 +100,25 @@ export default {
         }
     },
 
+    computed:{ 
+        ...mapGetters({
+            currentUser: 'auth/user',
+            currentLang:'lang/locale'
+        }),
+    },
+
+    watch:{
+        currentLang:{
+            handler(val){
+                this.$timeago.locale = this.currentLang;
+            },
+            deep:true
+        }
+    },
+
     async created(){
         // this.start();
+        this.$timeago.locale = this.currentLang;
     },
 
     methods:{
@@ -145,26 +163,6 @@ export default {
                 
         },
 
-        listenNewNotification(){
-            Echo.private('notification')
-                .listen('NewNotification', (newNotification) => {
-                    console.log("wow, greate!!",newNotification);
-                    // this.$store.commit('setNewNotificationCnt', this.getCurrentUser.new_noti_cnt + 1);
-                    // this.notificationList.unshift(newNotification.notification);
-                    // Notification.requestPermission( permission => {
-                    //     let notification = new Notification('New post alert!', {
-                    //         body: newNotification.notification.title, // content for the alert
-                    //         icon: "http://127.0.0.1:8000/images/icons/mainPage-phone.png" // optional image url
-                    //     });
-
-                    //     // link to page on clicking the notification
-                    //     notification.onclick = () => {
-                    //         window.open(window.location.href);
-                    //     };
-                    // });
-                    // const res = this.callApi('post','/api/users/newVideoCount',{new_video_cnt:this.$store.state.user.new_video_cnt});
-                });
-        },
     }
 }
 </script>

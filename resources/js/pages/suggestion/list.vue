@@ -95,6 +95,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 import {getSuggestionList,registerSuggestion,updateSuggestion,delSuggestion} from '~/api/suggestion'
 import Category from './category'
 // import VueTimeago from 'vue-timeago'
+import { mapGetters } from 'vuex'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').suggestionList }
@@ -115,8 +116,25 @@ export default {
         }
     },
 
+    computed:{ 
+        ...mapGetters({
+            currentUser: 'auth/user',
+            currentLang:'lang/locale'
+        }),
+    },
+
+    watch:{
+        currentLang:{
+            handler(val){
+                this.$timeago.locale = this.currentLang;
+            },
+            deep:true
+        }
+    },
+
     async created(){
         // this.start();
+        this.$timeago.locale = this.currentLang;
     },
 
     methods:{
