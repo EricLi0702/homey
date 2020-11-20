@@ -647,6 +647,21 @@
         "updateUserInfo" : "Update User Info",
         "ListUser" : "UserList",
         "registerUser" : "Register User"
+    },
+
+    "infinitLoader":{
+        "communityNoMore":"No more community",
+        "communityNoResult":"There is no community",
+        "suggestionNoMore":"No more suggestion",
+        "suggestionNoResult":"There is no suggestion",
+        "repairNoMore":"No more repair request",
+        "repairNoResult":"There is no repair request",
+        "notificationNoMore":"No more notification",
+        "notificationNoResult":"There is no notification",
+        "downgradednotificationNoMore":"No more downgraded notification",
+        "downgradednotificationNoResult":"There is no downgraded notification",
+        "commentNoMore": "No more comment",
+        "commentNoResult": "There is no comment"
     }
     
 

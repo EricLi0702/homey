@@ -90,6 +90,12 @@ class CommentOfCommunityController extends Controller
         $replyToCommentData->parentId = $parentComment['parentId'];
         $replyToCommentData->save();
 
+        $currentCommunity = Community::where('id', $replyToCommentData->coId)->first();
+        $currentCommentCnt = json_decode($currentCommunity->comment_cnt);
+        array_push($currentCommentCnt, $replyToCommentData->userId);
+        $currentCommunity->comment_cnt = $currentCommentCnt;
+        $currentCommunity->save();
+
         return response()->json([
             'replyToCommentData' => $replyToCommentData
         ], 201);

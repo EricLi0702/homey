@@ -182,6 +182,11 @@
     </div>
 </template>
 <script>
+import { locale } from 'view-design';
+import en from 'view-design/dist/locale/en-US';
+import ko from 'view-design/dist/locale/ko-KR';
+import vn from 'view-design/dist/locale/vi-VN';
+
 import wysiwyg from "vue-wysiwyg"
 import {getFacilityList} from '~/api/facility'
 import {createReservation, getReservationList, getReservationMyData, getReservatoinCnt} from '~/api/reservation'
@@ -252,14 +257,41 @@ export default {
         }
     },
 
+    watch:{
+        currentLang:{
+            handler(val){
+                if(val == 'en'){
+                    locale(en);
+                }
+                if(val == 'kr'){
+                    locale(ko);
+                }
+                if(val == 'vn'){
+                    locale(vn);
+                }
+            },
+            deep:true
+        }
+    },
+
     async created(){
         this.start();
         this.getReservatoinCnt();
+        if(this.currentLang == 'en'){
+            locale(en);s
+        }
+        if(this.currentLang == 'kr'){
+            locale(ko);
+        }
+        if(this.currentLang == 'vn'){
+            locale(vn);
+        }
     },
 
     computed:{
         ...mapGetters({
-            currentUser: 'auth/user'
+            currentUser: 'auth/user',
+            currentLang:'lang/locale'
         }),
         player() {
             return this.$refs.videoPlayer.player

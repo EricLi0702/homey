@@ -646,6 +646,21 @@
         "updateUserInfo" : "Chỉnh sửa thông tin người dùng",
         "ListUser" : "Danh sách người dùng",
         "registerUser" : "đăng ký người dùng"
+    },
+
+    "infinitLoader":{
+        "communityNoMore":"Không còn cộng đồng",
+        "communityNoResult":"Không có cộng đồng",
+        "suggestionNoMore":"Không còn Ý kiến",
+        "suggestionNoResult":"Không có Ý kiến",
+        "repairNoMore":"Không còn yêu cầu sửa chữa",
+        "repairNoResult":"Không có yêu cầu sửa chữa",
+        "notificationNoMore":"Không còn thông báo",
+        "notificationNoResult":"Không có thông báo",
+        "downgradednotificationNoMore":"Không còn Đã xuống cấp thông báo",
+        "downgradednotificationNoResult":"Không có Đã xuống cấp thông báo",
+        "commentNoMore": "Không còn bình luận",
+        "commentNoResult": "Không có bình luận"
     }
 
 

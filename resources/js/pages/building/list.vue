@@ -18,7 +18,7 @@
             <Modal v-model="removeModal" width="360">
                 <p slot="header" style="color:#f60;text-align:center">
                     <Icon type="ios-information-circle"></Icon>
-                    <span v-if="deleteBuildingData != null">Delete {{deleteBuildingData.number}}</span>
+                    <span v-if="deleteBuildingData != null">{{$t('apartment').delete}} {{deleteBuildingData.number}}</span>
                 </p>
                 <div class="text-center">
                     <p>Will you delete it? All users and datas of this building will delete.</p>
@@ -28,9 +28,9 @@
                 </div>
             </Modal>
             <Modal v-model="updateModal" width="360">
-                <p slot="header" style="color:#045890;text-align:center">
+                <p slot="header" style="color:#47CB89;text-align:center">
                     <Icon type="ios-information-circle"></Icon>
-                    <span v-if="updateBuildingData != null">Delete {{updateBuildingData.number}}</span>
+                    <span v-if="updateBuildingData != null">{{$t('auth').update}} {{updateBuildingData.number}}</span>
                 </p>
                 <div class="text-center">
                     <Input v-if="updateBuildingData !== null" v-model="updateBuildingData.number" placeholder="Enter something..." />

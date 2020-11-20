@@ -213,7 +213,7 @@
         "next":"다음",
         "before":"이전",
         "back":"맨 앞으로",
-        "reply":"댓글",
+        "reply":"회답",
         "registering":"등록",
         "content":"내용",
         "createPost":"게시물을 작성하세요.",
@@ -231,7 +231,7 @@
         "oopsNoCommunity":"죄송합니다. 커뮤니티가 없습니다!",
         "noMoreCommunity":"더 이상 커뮤니티가 없음",
         "UpdateTopic":"주제 업데이트",
-        "Leave":"나가기",
+        "Leave":"댓글 남기기",
         "Period":"기간"
     },
     "facility":{
@@ -272,7 +272,7 @@
         "saveAs":"임시저장",
         "like":"좋아요",
         "unlike":"싫어요",
-        "reply":"댓글",
+        "reply":"회답",
         "next":"다음",
         "before":"이전",
         "back":"맨 앞으로",
@@ -372,12 +372,12 @@
         "title":"제목",
         "add":"첨부",
         "content":"내용",
-        "reply":"댓글",
+        "reply":"회답",
         "registering":"등록",
         "revise":"수정",
         "delete":"삭제",
         "loadDown":"내리기",
-        "createContent":"내용을 작성 해 주세요"
+        "createContent":"내용을 작성 해주세요"
     },
     "errorMessage":{
         "badNetwork":"네트워크 상태가 원할하지 않습니다",
@@ -648,6 +648,21 @@
         "ListUser" : "유저목록",
         "registerUser" : "유저등록"
 
+    },
+
+    "infinitLoader":{
+        "communityNoMore":"더 이상 커뮤니티 없음",
+        "communityNoResult":"커뮤니티자료 없음",
+        "suggestionNoMore":"더 이상 건의 없음",
+        "suggestionNoResult":"건의자료 없음",
+        "repairNoMore":"더 이상 수리요청 없음",
+        "repairNoResult":"수리요청자료 없음",
+        "notificationNoMore":"더 이상 공지 없음",
+        "notificationNoResult":"공지자료 없음",
+        "downgradednotificationNoMore":"더 이상 다운그레이드된 공지 없음",
+        "downgradednotificationNoResult":"다운그레이드된 공지자료 없음",
+        "commentNoMore": "더 이상 댓글 없음",
+        "commentNoResult": "댓글 없음"
     }
 
 

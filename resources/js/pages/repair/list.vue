@@ -9,14 +9,14 @@
             <div class="row m-0 p-0">
                 <Category/>
                 <div class="col-12 col-md-8 m-0 p-0">
-                    <div v-if="noRequest" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
+                    <!-- <div v-if="noRequest" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
                         <div class="no-fac text-center">
                             <Icon size="150" type="ios-search" />
                             <h5>{{ $t('repair').oopsThere }}</h5>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div v-else-if="repairList.length" class="posted-item position-relative" v-for="(repair,i) in repairList" :key="i" >
+                    <div v-if="repairList.length" class="posted-item position-relative" v-for="(repair,i) in repairList" :key="i" >
                         <router-link :to="{path:`/repair/${repair.id}`}">
                             <div class="pi-wrap float-left ">
                                 <div class="user-info float-left">
@@ -61,7 +61,13 @@
                         @infinite="infiniteHandlerRepairRequest"
                         spinner="circles"
                     >
-                        <div slot="no-more">{{ $t('welcome').noMoreRequest }}</div>
+                        <div slot="no-more">{{ $t('infinitLoader').repairNoMore }}</div>
+                        <div slot="no-results" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
+                            <div class="no-fac text-center p-5 m-5">
+                                <Icon size="150" type="ios-search" />
+                                <h5>{{ $t('infinitLoader').repairNoResult }}</h5>
+                            </div>
+                        </div>
                     </InfiniteLoading>
                 </div>
             </div>

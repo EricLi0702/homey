@@ -64,7 +64,13 @@
                         spinner="circles"
                     >
                     
-                        <div slot="no-more">no more notification</div>
+                        <div slot="no-more">{{$t('infinitLoader').downgradednotificationNoMore}}</div>
+                        <div slot="no-results" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
+                            <div class="no-fac text-center p-5 m-5">
+                                <Icon size="150" type="ios-search" />
+                                <h5>{{ $t('infinitLoader').downgradednotificationNoResult }}</h5>
+                            </div>
+                        </div>
                     </InfiniteLoading>
                 </div>
             </div>

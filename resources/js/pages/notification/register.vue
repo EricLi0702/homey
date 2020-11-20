@@ -107,6 +107,12 @@
 </template>
 
 <script>
+import { locale } from 'view-design';
+import en from 'view-design/dist/locale/en-US';
+import ko from 'view-design/dist/locale/ko-KR';
+import vn from 'view-design/dist/locale/vi-VN';
+
+
 //
 import wysiwyg from "vue-wysiwyg"
 //emoji
@@ -116,7 +122,7 @@ import {getNotificationList,registerNotification,updateNotification,delNotificat
 //file upload component
 import Upload from '~/components/Upload'
 import {delUploadFile} from '~/api/upload'
-
+import { mapGetters } from 'vuex'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').registerNotification }
@@ -127,6 +133,31 @@ export default {
         Picker,     //emoji
         Upload,
     },
+
+    computed:{ 
+        ...mapGetters({
+            currentUser: 'auth/user',
+            currentLang:'lang/locale'
+        }),
+    },
+
+    watch:{
+        currentLang:{
+            handler(val){
+                if(val == 'en'){
+                    locale(en);
+                }
+                if(val == 'kr'){
+                    locale(ko);
+                }
+                if(val == 'vn'){
+                    locale(vn);
+                }
+            },
+            deep:true
+        }
+    },
+
 
     data(){
         return{
@@ -167,6 +198,15 @@ export default {
 
     created(){
         this.getDraft();
+        if(this.currentLang == 'en'){
+            locale(en);s
+        }
+        if(this.currentLang == 'kr'){
+            locale(ko);
+        }
+        if(this.currentLang == 'vn'){
+            locale(vn);
+        }
     },
 
     methods:{

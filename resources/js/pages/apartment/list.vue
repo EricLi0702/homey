@@ -18,6 +18,13 @@
 </template>
 
 <script>
+
+import { locale } from 'view-design';
+import en from 'view-design/dist/locale/en-US';
+import ko from 'view-design/dist/locale/ko-KR';
+import vn from 'view-design/dist/locale/vi-VN';
+
+import { mapGetters } from 'vuex'
 import {getAptLists,delApt} from '~/api/apartment'
 export default {
     data(){
@@ -121,6 +128,44 @@ export default {
             ]
         }
     },
+
+    computed:{ 
+        ...mapGetters({
+            currentUser: 'auth/user',
+            currentLang:'lang/locale'
+        }),
+    },
+
+    watch:{
+        currentLang:{
+            handler(val){
+                console.log(val);
+                if(val == 'en'){
+                    locale(en);
+                }
+                if(val == 'kr'){
+                    locale(ko);
+                }
+                if(val == 'vn'){
+                    locale(vn);
+                }
+            },
+            deep:true
+        }
+    },
+
+    created(){
+        if(this.currentLang == 'en'){
+            locale(en);s
+        }
+        if(this.currentLang == 'kr'){
+            locale(ko);
+        }
+        if(this.currentLang == 'vn'){
+            locale(vn);
+        }
+    },
+
     mounted(){
         getAptLists()
         .then(res=>{

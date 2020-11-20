@@ -29,8 +29,8 @@
                         <div class="col-12 mb-3">
                             <p class="">{{$t('community').Period}}</p>
                             <RadioGroup @on-change="setPeriodToBlank" v-model="periodType" class="">
-                                <Radio label="withPeriod">{{$t('notification').ChoosePeriod}}</Radio>
-                                <Radio label="withCalendar">{{$t('notification').ChooseCalendar}}</Radio>
+                                <Radio label="withPeriod">{{$t('community').ChoosePeriod}}</Radio>
+                                <Radio label="withCalendar">{{$t('community').ChooseCalendar}}</Radio>
                             </RadioGroup>   
 
                             <DatePicker v-if="periodType == 'withCalendar' " class="w-50 mx-auto"  type="daterange" @on-change="notiDateChange" :placeholder="$t('welcome').selectthedate" style="display: block" placement="bottom-end"></DatePicker>

@@ -27,10 +27,10 @@
                                     </h2>
                                     <p v-html="notification.content"></p>
                                     <div v-if="currentUser.roleId == 2 || currentUser.roleId == 6">
-                                        <Tag v-if="notification.status == 'ongoing'" color="success">{{$t('notification').ongoingNoti}}</Tag>
-                                        <Tag v-else-if="notification.status == 'before'" color="magenta">{{$t('notification').beforeNoti}}</Tag>
-                                        <Tag v-else-if="notification.status == 'finish'" color="default">{{$t('notification').finishNoti}}</Tag>
-                                        <Tag v-if="notification.isDowngrade == 0" color="success" class="ml-2">{{$t('notification').upgradedNoti}}</Tag>
+                                        <Tag v-if="notification.status == 'ongoing' && notification.isDowngrade == 0" color="success">{{$t('notification').ongoingNoti}}</Tag>
+                                        <Tag v-else-if="notification.status == 'before' && notification.isDowngrade == 0" color="magenta">{{$t('notification').beforeNoti}}</Tag>
+                                        <Tag v-else-if="notification.status == 'finish' && notification.isDowngrade == 0" color="default">{{$t('notification').finishNoti}}</Tag>
+                                        <Tag v-if="notification.isDowngrade == 0" color="purple" class="ml-2">{{$t('notification').upgradedNoti}}</Tag>
                                         <Tag v-else-if="notification.isDowngrade == 1" color="warning" class="ml-2">{{$t('notification').downgradedNoti}}</Tag>
                                     </div>
                                 </div>
@@ -75,7 +75,13 @@
                         spinner="circles"
                     >
                     
-                        <div slot="no-more">no more notification</div>
+                        <div slot="no-more">{{$t('infinitLoader').notificationNoMore}}</div>
+                        <div slot="no-results" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
+                            <div class="no-fac text-center p-5 m-5">
+                                <Icon size="150" type="ios-search" />
+                                <h5>{{$t('infinitLoader').notificationNoResult}}</h5>
+                            </div>
+                        </div>
                     </InfiniteLoading>
                 </div>
             </div>
