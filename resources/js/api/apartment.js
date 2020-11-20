@@ -34,6 +34,10 @@ function delBuilding(payload){
     return axios.delete('/api/aptBuilding',{data: payload})
 }
 
+function updateBuilding(payload){
+    return axios.put('/api/aptBuilding',payload)
+}
+
 export{
     getAptLists,
     addApt,
@@ -43,4 +47,5 @@ export{
     getBuildingList,
     addBuilding,
     delBuilding,
+    updateBuilding
 }

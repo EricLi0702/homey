@@ -145,7 +145,9 @@
         "tokenExpiredText" : "Mã thông báo đã hết hạn. Xin vui lòng đăng nhập lại.",
         "ok": "đồng ý",
         "cancel": "hủy bỏ",
-        "goHome": "về nhà"
+        "goHome": "về nhà",
+        "isUser" : "tiểu bang",
+        "notUser" : "Không phải thành viên"
     },
     "login":{
         "login":"Đăng nhập",
@@ -255,7 +257,8 @@
         "ListView":"Chế độ xem danh sách",
         "CalendarView":"Chế độ xem lịch",
         "Facility":"Cơ sở",
-        "maxNumberOfUser" : "Số lượng người dùng tối đa có thể sử dụng thiết bị:"
+        "maxNumberOfUser" : "Số lượng người dùng tối đa có thể sử dụng thiết bị:",
+        "NumberOfReservation" : "Số lượng đặt trước"
     },
     "suggest":{
         "suggest":"Không gian chung",
@@ -341,7 +344,8 @@
         "revise":"Chỉnh sửa",
         "impossibleToReserve":"Không thể đặt chỗ thời gian này ",
         "enterDate":"Hãy nhập thời gian đặt chỗ",
-        "noReservation":"Chưa có nội dung đặt"
+        "noReservation":"Chưa có nội dung đặt",
+        "newFacility" : "Cơ sở mới"
     },
     "introduction":{
         "introduction":"Tổng quan chung cư",
@@ -598,6 +602,14 @@
             "percentOfThisWeek" : "Phần trăm sửa chữa tuần này",
             "currentUser_registeredUser" : "Người dùng hiện tại :: Đăng ký người dùng",
             "myActivityThread" : "Chủ đề hoạt động của tôi"
+        },
+        "facility":{
+            "myReservation" : "Đặt chỗ của tôi",
+            "noReservation" : "Bạn không có đặt chỗ",
+            "reservationOfThisMonth" : "Đặt chỗ trong tháng",
+            "percentOfThisMonth" : "Phần trăm Dự phòng hôm nay",
+            "percentOfThisWeek" : "Phần trăm Dự phòng tuần nay",
+            "currentUser_registeredUser" : "Người dùng hiện tại :: Đăng ký người dùng"
         }
     },
 

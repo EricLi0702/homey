@@ -1,4 +1,6 @@
 /node_modules
+!/node_modules/vue-timeago
+!/node_modules/date-fns
 /.idea
 /public/hot
 /public/uploads

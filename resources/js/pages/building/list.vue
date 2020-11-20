@@ -10,7 +10,7 @@
                 <td>{{building.number}}</td>
                 <td>{{ $t('apartment').dong }}</td>
                 <td>
-                    <Icon size="25" type="md-create" color="#44B4E2"/>
+                    <Icon size="25" type="md-create" color="#44B4E2" @click="openUpdateModal(building)"/>
                     <Icon size="25" type="ios-trash" color="#FD0000" @click="openRemoveModal(building)"/>
                 </td>
             </tr>
@@ -27,6 +27,18 @@
                     <Button type="error" size="large" long :loading="isDeletingBuilding" @click="delBuilding()">{{ $t('apartment').delete }}</Button>
                 </div>
             </Modal>
+            <Modal v-model="updateModal" width="360">
+                <p slot="header" style="color:#045890;text-align:center">
+                    <Icon type="ios-information-circle"></Icon>
+                    <span v-if="updateBuildingData != null">Delete {{updateBuildingData.number}}</span>
+                </p>
+                <div class="text-center">
+                    <Input v-if="updateBuildingData !== null" v-model="updateBuildingData.number" placeholder="Enter something..." />
+                </div>
+                <div slot="footer">
+                    <Button type="success" size="large" long :loading="isUpdatingBuilding" @click="updateBuilding()">{{ $t('notification').update }}</Button>
+                </div>
+            </Modal>
         <div class="form-group row">
             <label for="inputPassword" class="col-4 col-form-label">{{ $t('apartment').buildingNumber }}</label>
             <div class="col-8 gray-input">
@@ -39,7 +51,7 @@
 
 <script> 
 import { mapGetters } from 'vuex'
-import {getBuildingList,addBuilding,delBuilding} from '~/api/apartment'
+import {getBuildingList,addBuilding,delBuilding, updateBuilding} from '~/api/apartment'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').building_manage }
@@ -55,6 +67,9 @@ export default {
             deleteBuildingData:null,
             removeModal:false,
             isDeletingBuilding:false,
+            updateBuildingData:null,
+            updateModal:false,
+            isUpdatingBuilding:false,
         }
     },
     computed: mapGetters({
@@ -90,6 +105,10 @@ export default {
             this.deleteBuildingData = building;
             this.removeModal = true;
         },
+        openUpdateModal(building){
+            this.updateBuildingData = building;
+            this.updateModal = true;
+        },
         delBuilding(){
             this.isDeletingBuilding = true;
             delBuilding(this.deleteBuildingData)
@@ -104,6 +123,30 @@ export default {
                 this.error("something went wrong!");
             })
             
+        },
+
+        updateBuilding(){
+            console.log("sss", this.updateBuildingData);
+            this.isUpdatingBuilding = true;
+            let payload = {
+                id: this.updateBuildingData.id,
+                number: this.updateBuildingData.number
+            }
+            updateBuilding(payload)
+            .then(res=>{
+                console.log(res);
+                for(let i = 0; i<this.buildingList.length; i++){
+                    if(this.buildingList[i].id == this.updateBuildingData.id){
+                        this.buildingList[i].number = this.updateBuildingData.number;
+                    }
+                }
+                this.updateBuildingData = null;
+                this.isUpdatingBuilding = false;
+                this.updateModal = false;
+            })
+            .catch(error=>{
+                console.log(error.response);
+            })
         }
     }
 }

@@ -123,14 +123,14 @@
         "name":"name",
         "email":"Email",
         "password":"Password",
-        "phone":"phone",
+        "phone":"Phone",
         "confirmPassword":"Confirm Password",
         "rememberMe":"remember me",
         "forgotPassword":"Forgot password",
         "apartment":"apartment",
         "superManager":"super Manager",
         "userRole":"UserRole",
-        "user":"user",
+        "user":"User",
         "request":"Request",
         "setting":"Settings",
         "logout":"Logout",
@@ -145,7 +145,9 @@
         "tokenExpiredText" : "Token expired. please try login again.",
         "ok": "ok",
         "cancel": "cancel",
-        "goHome": "Go Home"
+        "goHome": "Go Home",
+        "isUser" : "Status",
+        "notUser" : "not User"
     },
     "login":{
         "login":"Login",
@@ -255,7 +257,8 @@
         "ListView":"List View",
         "CalendarView":"Calendar View",
         "Facility":"Facility",
-        "maxNumberOfUser" : "Maximum number of users who can use the facility:"
+        "maxNumberOfUser" : "Maximum number of users who can use the facility:",
+        "NumberOfReservation" : "Number of reservation"
     },
     "suggest":{
         "suggest":"Suggestion",
@@ -341,7 +344,8 @@
         "revise":"Revise",
         "impossibleToReserve":"Your reservation is not available at the moment",
         "enterDate":"Please enter your date",
-        "noReservation":"There is no any reservation"
+        "noReservation":"There is no any reservation",
+        "newFacility" : "New Facility"
     },
     "introduction":{
         "introduction":"Introduction",
@@ -599,6 +603,14 @@
             "percentOfThisWeek" : "Current Week repair percent of this month",
             "currentUser_registeredUser" : "CurrentUser :: RegisterUser",
             "myActivityThread" : "My Activity Thread"
+        },
+        "facility":{
+            "myReservation" : "My reservations",
+            "noReservation" : "You have no reservation.",
+            "reservationOfThisMonth" : "The count of reservation on this month",
+            "percentOfThisMonth" : "Today reservation percent of this month",
+            "percentOfThisWeek" : "Current Week reservation percent of this month",
+            "currentUser_registeredUser" : "CurrentUser :: RegisterUser"
         }
     },
     

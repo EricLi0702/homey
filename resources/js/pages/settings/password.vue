@@ -2,7 +2,7 @@
   <div class="container-fluid bg-light-gray m-0 p-0 pb-5">
     <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
       <div class="p-3 py-5">
-        <h2 class="p-3">{{$t('your_password')}}</h2>
+        <h2 class="p-3">{{$t('auth').resetPassword}}</h2>
         <form @submit.prevent="update" @keydown="form.onKeydown($event)">
           <div class="row m-0 p-0">
             <div class="col-12 mb-3 gray-input">
@@ -16,7 +16,7 @@
             
             <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
               <v-button :loading="form.busy" type="success">
-                {{ $t('update') }}
+                {{ $t('auth').update }}
               </v-button>                           
             </div>
           </div>

@@ -1422,6 +1422,10 @@ a.text-dark:hover, a.text-dark:focus {
     color: white;
 }
 
+.ivu-badge-count{
+    top: 0!important;
+}
+
 @media only screen and (max-width: 600px) {
     .subtitle h1 {
         font-size: 3rem!important;

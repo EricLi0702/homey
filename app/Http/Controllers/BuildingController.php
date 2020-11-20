@@ -26,4 +26,14 @@ class BuildingController extends Controller
         $buildingId = $request->id;
         return Building::where('id', $buildingId)->delete();
     }
+
+    public function updateBuilding(Request $request){
+        $this->validate($request,[
+            'id'=>'required',
+            'number'=>'required',
+        ]);
+        return Building::where('id',$request->id)->update([
+            'number'=>$request->number
+        ]);
+    }
 }

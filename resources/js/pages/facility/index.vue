@@ -9,7 +9,7 @@
                         <Button type="warning" icon="md-checkbox-outline">{{$t('publicFacility').reservation}}</Button>
                     </router-link>
                     <router-link v-if="currentUser.role.roleName == 'SuperManager'" :to="{ path: '/facility/create' }" class="">
-                        <Button type="success" icon="md-add">{{$t('community').New}}</Button>
+                        <Button type="success" icon="md-add">{{$t('publicFacility').newFacility}}</Button>
                     </router-link>
                     <router-link :to="{ path: '/facility/index' }" class="">
                         <Button type="primary" icon="md-list">{{$t('community').View}}</Button>

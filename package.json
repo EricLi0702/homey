@@ -19,7 +19,6 @@
     "aos": "^2.3.4",
     "axios": "^0.18.1",
     "bootstrap": "^4.3.1",
-    "date-fns": "^2.16.1",
     "emoji-mart-vue": "^2.6.6",
     "jquery": "^3.4.1",
     "js-cookie": "^2.2.0",

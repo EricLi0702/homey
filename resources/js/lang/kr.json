@@ -129,8 +129,8 @@
         "forgotPassword":"암호분실",
         "apartment":"아파트",
         "superManager":"최고관리자",
-        "userRole":"사용자권한",
-        "user":"사용자",
+        "userRole":"회원권한",
+        "user":"회원",
         "request":"요청",
         "setting":"설정",
         "logout":"가입탈퇴",
@@ -145,7 +145,9 @@
         "tokenExpiredText" : "토큰이 만료되였습니다. 로그인을 다시하세요.",
         "ok": "예",
         "cancel": "취소",
-        "goHome": "홈으로 가기"
+        "goHome": "홈으로 가기",
+        "isUser" : "등록상태",
+        "notUser" : "비회원"
     },
     "login":{
         "login":"로그인",
@@ -185,7 +187,7 @@
         "RegisterNewNotification":"새 알림 등록",
         "enterTitleNotification":"알림 제목을 입력하십시오",
         "Type":"유형",
-        "Common":"공통",
+        "Common":"일반",
         "Urgent":"긴급",
         "Important":"중요",
         "Draft":"초안",
@@ -238,7 +240,7 @@
         "enterNB":"N.B를 입력하세요",
         "enterEquipments":"장비를 입력하세요",
         "MaxNumberPeople":"한 번에이 시설을 사용할 수있는 최대 인원입니다.",
-        "enterOutline":"개용를 입력하세요",
+        "enterOutline":"내용를 입력하세요",
         "EnterSomething":"입력...",
         "Facilities":"시설",
         "alreadyReservated":"이미 예약했습니다",
@@ -255,7 +257,8 @@
         "ListView":"목록 보기",
         "CalendarView":"캘린더 보기",
         "Facility":"시설",
-        "maxNumberOfUser" : "시설을 이용할수있는 최대사용자수:"
+        "maxNumberOfUser" : "시설을 이용할수있는 최대사용자수:",
+        "NumberOfReservation" : "예약건수"
     },
     "suggest":{
         "suggest":"건의",
@@ -341,7 +344,8 @@
         "revise":"수정",
         "impossibleToReserve":"선택한 날짜 및 시간은 예약 할 수 없습니다. ",
         "enterDate":"예약날짜를 입력 해 주세요.",
-        "noReservation":"현재 예약한내용이 없습니다."
+        "noReservation":"현재 예약한내용이 없습니다.",
+        "newFacility" : "새 시설등록"
     },
     "introduction":{
         "introduction":"APT 소개",
@@ -599,6 +603,14 @@
             "percentOfThisWeek" : "이달중 금주 수리요청 비율",
             "currentUser_registeredUser" : "현재 회원 : 등록 회원",
             "myActivityThread" : "나의 글"
+        },
+        "facility":{
+            "myReservation" : "나의 예약들",
+            "noReservation" : "예약한 내용이 없습니다.",
+            "reservationOfThisMonth" : "이달의 예약",
+            "percentOfThisMonth" : "이달중 오늘 예약 비율",
+            "percentOfThisWeek" : "이달중 금주 예약 비율",
+            "currentUser_registeredUser" : "현재 회원 : 등록 회원"
         }
     },
 

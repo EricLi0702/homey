@@ -81,16 +81,16 @@
             </div>
         </div>
         <div class="text-centers mt-5">
-            <h3>User List</h3>
+            <h3>{{$t('metaInfo').ListUser}}</h3>
         </div>
         <table class="table user-list-table mt-4">
             <tr class="">
-                <th>User</th>
-                <th>Dong Ho</th>
-                <th>Email</th>
-                <th>PhoneNumber</th>
-                <th>isUser</th>
-                <th>Action</th>
+                <th>{{$t('common').user}}</th>
+                <th>{{$t('auth').dong}} {{$t('auth').ho}}</th>
+                <th>{{$t('common').email}}</th>
+                <th>{{$t('common').phone}}</th>
+                <th>{{$t('common').isUser}}</th>
+                <th>{{$t('apartment').action}}</th>
             </tr>
             <template v-if="userLists && userLists.length > 0">
                 <tr class="" v-for="(user,i) in userLists" :key="i">
@@ -111,10 +111,10 @@
                     <td>{{user.phoneNumber}}</td>
                     <td>
                         <div v-if="user.email_verified_at == null">
-                            <Tag color="warning">not User</Tag>
+                            <Tag color="warning">{{$t('common').notUser}}</Tag>
                         </div>
                         <div v-else>
-                            <Tag color="success">User</Tag>
+                            <Tag color="success">{{$t('common').user}}</Tag>
                         </div>
                     </td>
                     <td>

@@ -5,20 +5,64 @@
                 <div class="position-sticky pb-1" style="top: 150px;">
                     <Collapse class="box-block" v-model="collapse1">
                         <Panel hide-arrow name="item1">
-                            {{$t('facility').Facilities}}
+                            <div class="d-flex justify-content-between align-items-center">
+                                {{$t('facility').Facilities}} 
+                                <p v-if="currentUser.roleId == 2 || currentUser.roleId == 6 || currentUser.roleId == 7" class="pr-3">{{$t('facility').NumberOfReservation}}</p>
+                            </div>
                             <div v-if="noFacility" slot="content" class="facility-category-list p-3">
                             </div>
                             <div v-else slot="content" class="facility-category-list p-3">
                                 <div v-for="(facility, i) in facilityList" :key="i" class=" ccl-item d-flex justify-content-between">
                                     <p @click="selectFacility(facility)">{{facility.name}}</p>
-                                    <Tag v-if="selectedFacilityAlreadyReservated(facility)" color="success">{{$t('facility').alreadyReservated}}</Tag>
-                                    <Tag v-else-if="facility.isUsing == 0" color="success">{{$t('facility').possibleToUse}}</Tag>
-                                    <Tag v-else color="warning">{{$t('facility').impossibleToUse}}</Tag>
+                                    <div v-if="currentUser.roleId == 3 || currentUser.roleId == 4">
+                                        <Tag v-if="selectedFacilityAlreadyReservated(facility)" color="success">{{$t('facility').alreadyReservated}}</Tag>
+                                        <Tag v-else-if="facility.isUsing == 0" color="success">{{$t('facility').possibleToUse}}</Tag>
+                                        <Tag v-else color="warning">{{$t('facility').impossibleToUse}}</Tag>
+                                    </div>
+                                    <div v-else-if="currentUser.roleId == 2 || currentUser.roleId == 6 || currentUser.roleId == 7 " class="d-flex">
+                                        <Tag color="success">{{facility.reservation_data.length}}</Tag>
+                                    </div>
                                 </div>
                             </div>
                         </Panel>
                     </Collapse>
 
+                    <Collapse class="box-block" v-model="collapse2">
+                        <Panel hide-arrow name="item2">
+                            {{$t('categories').facility.reservationOfThisMonth}}:{{this.monthData}}
+                            <div slot="content" class="community-category-list p-3">
+                                <div class=" ccl-item">
+                                    <p>{{$t('categories').facility.percentOfThisMonth}}</p>
+                                    <Progress class="w-100" :percent="todayPro" :stroke-width="20" status="active" text-inside />
+                                </div>
+                                <div class=" ccl-item">
+                                    <p>{{$t('categories').facility.percentOfThisWeek}}</p>
+                                    <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
+                                </div>
+                                <div class=" ccl-item">
+                                    <p>{{$t('categories').facility.currentUser_registeredUser}}</p>
+                                    <Progress class="w-100" :percent="userPro" :stroke-width="20" status="active" text-inside />
+                                </div>
+                            </div>
+                        </Panel>
+                    </Collapse>
+
+                    <Collapse class="box-block" v-model="collapse3">
+                        <Panel hide-arrow name="item3">
+                            {{$t('categories').facility.myReservation}}
+                            <div v-if="isNoMyReservation" slot="content" class="community-category-list p-3">
+                                <p>{{$t('categories').facility.noReservation}}</p>
+                            </div>
+                            <div v-else slot="content" class="community-category-list p-3">
+                                <div v-for="(reservation, i) in reservationMyData" :key="i">
+                                    <div class=" ccl-item d-flex justify-content-between">
+                                        <p>{{reservation.title}}</p>
+                                        <p>{{}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </Panel>
+                    </Collapse>
                     
                 </div>
             </div>
@@ -34,7 +78,7 @@
                         <h1>{{selectedFacility.name}}</h1>
                         <div class="d-flex align-items-center justify-content-center">
                             <p> {{$t('facility').maxNumberOfUser}} {{selectedFacility.max}}</p>
-                            <Icon class="mr-2" size="25" type="ios-people" />
+                            <Icon class="ml-2" size="25" type="ios-people" />
                         </div>
                     </div>
                     <div v-if="noFile" class="col-12 row m-0 p-0">
@@ -51,7 +95,7 @@
                         </Tabs>
                     </div>
                     <div v-else class="col-12 row m-0 p-0">
-                        <div class="facility-cover-image w-100">
+                        <div class="facility-cover-image w-100" v-if="selectedFacility.upload_file.imgUrl.length !== 0">
                             <img :src="selectedFacility.upload_file.imgUrl[0]" alt="" class="w-100 mb-2">
                         </div>
                         <div class="col-12 col-lg-12 content-container">
@@ -129,7 +173,7 @@
                             <wysiwyg v-model="createReservationData.purpose" :placeholder="$t('facility').enterDescription" />
                         </div>
                     </Form>
-                    <div v-if="currentUser.roleId !== 2 && currentUser.roleId !== 1 && currentUser.roleId !== 6 && currentUser.roleId !== 7" class="col-12 text-right mb-3">
+                    <div v-if="currentUser.roleId == 3 || currentUser.roleId == 4 " class="col-12 text-right mb-3">
                         <Button @click="reservateNew" class="float-right" type="success" icon="md-calendar" :disabled="isReservating" :loading="isReservating" >{{$t('facility').Reservate}}</Button>
                     </div>
                 </div>
@@ -140,7 +184,7 @@
 <script>
 import wysiwyg from "vue-wysiwyg"
 import {getFacilityList} from '~/api/facility'
-import {createReservation, getReservationList} from '~/api/reservation'
+import {createReservation, getReservationList, getReservationMyData, getReservatoinCnt} from '~/api/reservation'
 //image viewer
 import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
@@ -158,13 +202,23 @@ export default {
     },
     data(){
         return{
+            monthData:1,
+            todayData:0,
+            weekData:0,
+            todayPro:0,
+            weekPro:0,
+            userPro:0,
+            registerCnt:0,
+            currentCnt:0,
             collapse1:"item1",
             collapse2:"item2",
             collapse3:"item3",
             baseUrl:window.base_url,
             facilityList : [],
+            reservationMyData: [],
             selectedFacility : {},
             noFile:false,
+            isNoMyReservation: false,
             noFacility:false,
             playerOptionsGroup:[],
             playerOptions: {
@@ -200,6 +254,7 @@ export default {
 
     async created(){
         this.start();
+        this.getReservatoinCnt();
     },
 
     computed:{
@@ -293,8 +348,17 @@ export default {
                 this.facilityList = res.data;
                 for(let i = 0; i < this.facilityList.length ; i++){
                     this.facilityList[i].upload_file = JSON.parse(this.facilityList[i].upload_file);
+                    for(let j = 0; j < this.facilityList[i].reservation_data.length ; j++){
+                        if( this.facilityList[i].reservation_data[j].userId == this.currentUser.id){
+                            this.reservationMyData.push(this.facilityList[i].reservation_data[j]);
+                        }
+                    }
+                    if(this.reservationMyData.length == 0){
+                        this.isNoMyReservation = true;
+                    }
                 }
                 this.selectedFacility = this.facilityList[0];
+                console.log("asdfasdf",this.facilityList);
                 //video url
                 let videoUrlGroup = this.selectedFacility.upload_file.videoUrl;
                 for(let i = 0; i < videoUrlGroup.length ; i++){
@@ -310,6 +374,20 @@ export default {
                 }
             })
         },
+        getReservatoinCnt(){
+            getReservatoinCnt().then(res=>{
+                console.log("res", res);
+                this.todayData = res.data.today
+                this.weekData = res.data.week
+                this.monthData = res.data.month
+                this.currentCnt = res.data.currentCnt
+                this.registerCnt = res.data.registerCnt
+                this.userPro = parseFloat((this.currentCnt/this.registerCnt*100).toFixed(2))
+                this.todayPro = parseFloat((this.todayData/this.monthData*100).toFixed(2))
+                this.weekPro = parseFloat((this.weekData/this.monthData*100).toFixed(2))
+            })
+        },
+        
         selectFacility(facility){
             //init data
             this.createReservationData.title = '';

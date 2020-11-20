@@ -9,6 +9,7 @@ use App\User;
 use App\Apartment;
 use App\Facility;
 use App\ReservationFacility;
+use Carbon\Carbon;
 
 class ReservationFacilityController extends Controller
 {
@@ -74,9 +75,21 @@ class ReservationFacilityController extends Controller
             ], 201);
 
         }
-        
+    }
 
-        
-
+    public function getReservatoinCnt(Request $request){
+        $weekData = ReservationFacility::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
+        $todayData = ReservationFacility::whereDate('created_at', Carbon::today())->count();
+        $monthData = ReservationFacility::whereYear('created_at',Carbon::now()->year)->whereMonth('created_at',Carbon::now()->month)->count();
+        $id = Auth::user()->aptId;
+        $registerUserCnt = User::where('aptId',$id)->count();
+        $currentUserCnt = User::where([['aptId','=',$id],['email_verified_at','<>',null]])->count();
+        return response()->json([
+            'today'=>$todayData,
+            'week'=>$weekData,
+            'month'=>$monthData,
+            'registerCnt'=>$registerUserCnt,
+            'currentCnt'=>$currentUserCnt
+        ]);
     }
 }

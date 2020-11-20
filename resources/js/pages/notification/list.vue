@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="posted-item-info-time">
                                     <Icon type="ios-clock-outline" />
-                                    <timeago :datetime="notification.updated_at" :since="notification.updated_at" :auto-update="60"></timeago>
+                                    <timeago :datetime="notification.updated_at" :auto-update="60"></timeago>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
@@ -108,16 +108,28 @@ export default {
 
     computed:{ 
         ...mapGetters({
-            currentUser: 'auth/user'
+            currentUser: 'auth/user',
+            currentLang:'lang/locale'
         }),
+    },
+
+    watch:{
+        currentLang:{
+            handler(val){
+                this.$timeago.locale = this.currentLang;
+            },
+            deep:true
+        }
     },
 
     async created(){
         // this.start();
+        this.$timeago.locale = this.currentLang;
     },
 
     methods:{
         async start(){
+            
             await getNotificationList()
             .then(res=>{
                 console.log(res);
