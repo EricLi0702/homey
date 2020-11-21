@@ -20,9 +20,28 @@ function updateAvatarOfUser(imgUrl){
     return axios.post('/api/settings/avatar', imageUrl)
 }
 
+function verifyUserEmailResetPass(payload){
+    return axios.post('/api/password/email', payload)
+}
+
+function verifyingCodeFromEmailResetPass(payload){
+    return axios.post('/api/password/verifycode', payload)
+}
+
+function setupPasswordResetPass(password, userEmail){
+    let obj = {}
+    obj['password'] = password;
+    obj['userEmail'] = userEmail;
+    return axios.post('/api/password/setpassword', obj)
+}
+
+
 export{
     postValidation,
     verifyingCodeFromEmail,
     setupPassword,
     updateAvatarOfUser,
+    verifyUserEmailResetPass,
+    verifyingCodeFromEmailResetPass,
+    setupPasswordResetPass,
 }

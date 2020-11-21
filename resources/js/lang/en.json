@@ -135,7 +135,7 @@
         "setting":"Settings",
         "logout":"Logout",
         "resetPass":"Reset Password",
-        "sendResetPassLink":"Send reset password link",
+        "sendResetPassLink":"Send reset password code",
         "and":"and",
         "setPassword": "Set password",
         "closeEmoji": "Close Emoji",
@@ -668,6 +668,10 @@
         "downgradednotificationNoResult":"There is no downgraded notification",
         "commentNoMore": "No more comment",
         "commentNoResult": "There is no comment"
+    },
+
+    "alert":{
+        "invalidEmail" : "Invalid email, please try again."
     }
     
 

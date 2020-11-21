@@ -173,7 +173,6 @@ export default {
         this.password.confirmpassword = '';
         return this.error('Password does not match. please try again');
       }
-      console.log("password", this.password);
       this.isSettingPassword = true;
       await setupPassword(this.password.password, this.verifyData)
       .then(res=>{

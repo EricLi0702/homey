@@ -135,7 +135,7 @@
         "setting":"설정",
         "logout":"가입탈퇴",
         "resetPass":"암호 재설정",
-        "sendResetPassLink":"암호 재설정 링크얻기",
+        "sendResetPassLink":"암호 재설정 코드얻기",
         "and":"과",
         "setPassword": "암호설정",
         "closeEmoji": "이모티콘 창 닫기",
@@ -669,6 +669,10 @@
         "downgradednotificationNoResult":"다운그레이드된 공지자료 없음",
         "commentNoMore": "더 이상 댓글 없음",
         "commentNoResult": "댓글 없음"
+    },
+
+    "alert":{
+        "invalidEmail" : "유효하지 않은 이메일입니다. 다시 입력해주세요."
     }
 
 

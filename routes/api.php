@@ -155,7 +155,9 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('verifycode', 'Auth\RegisterController@verifycode');
     Route::post('setpassword', 'Auth\RegisterController@setpassword');
 
-    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+    Route::post('password/email', 'Auth\RegisterController@sendResetCodeToEmail');
+    Route::post('password/verifycode', 'Auth\RegisterController@verifycodeResetPass');
+    Route::post('password/setpassword', 'Auth\RegisterController@setpasswordResetPass');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
     Route::post('email/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify');

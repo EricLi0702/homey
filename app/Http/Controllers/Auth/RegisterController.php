@@ -158,4 +158,73 @@ class RegisterController extends Controller
             'msg' => 'ok'
         ], 200);
     }
+
+
+    public function verifycodeResetPass(Request $request){
+        $verCode = $request->code;
+        $email = $request->userEmail;
+
+        $user = User::where('email', '=', $email)->first();
+        if($verCode == $user['vercode']){
+            return response()->json([
+                'msg' => 1
+            ], 200);
+        }
+        else{
+            return response()->json([
+                'msg' => 0
+            ], 401);
+        }
+    }
+
+    public function setpasswordResetPass(Request $request){
+        $password = $request->password;
+        $email = $request->userEmail;
+        $user = User::where('email', '=', $email)->first();
+        $user['password'] = bcrypt($password);
+        $user->save();
+        return response()->json([
+            'msg' => 'ok'
+        ], 200);
+    }
+
+    public function sendResetCodeToEmail(Request $request)
+    {
+        $email = $request->email;
+        $user = User::where('email', '=', $email)->first();
+        if ($user == null) {
+            return response()->json([
+                'msg' => 0
+            ], 404);
+        }
+        if ($user->email_verified_at == null){
+            return response()->json([
+                'msg' => 1
+            ], 422);
+        }
+        else{
+            //Verification email with code to User
+            $to_name = $user->name;
+            $to_email = $user->email;
+            $code = mt_rand(100000, 999999);
+            $user['vercode'] = $code;
+            $user->save();
+
+            $data = array(
+                'name' => 'Please confirm your code', 
+                'body' => $code,
+            );
+            
+            Mail::send('emails.verification', $data, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)
+                        ->subject('Homey Verify Email');
+                $message->from('test@testservice.com','Homey');
+            });
+
+            return response()->json([
+                'msg' => 2
+            ], 200);
+             
+        }
+    }
 }

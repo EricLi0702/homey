@@ -135,7 +135,7 @@
         "setting":"Cài đặt",
         "logout":"Đăng xuất",
         "resetPass":"Đặt lại mật khẩu",
-        "sendResetPassLink":"Gửi liên kết đặt lại mật khẩu",
+        "sendResetPassLink":"Gửi mã đặt lại mật khẩu",
         "and":"và",
         "setPassword": "Đặt mật khẩu",
         "closeEmoji": "Đóng cửa sổ biểu tượng cảm xúc",
@@ -667,6 +667,10 @@
         "downgradednotificationNoResult":"Không có Đã xuống cấp thông báo",
         "commentNoMore": "Không còn bình luận",
         "commentNoResult": "Không có bình luận"
+    },
+
+    "alert":{
+        "invalidEmail" : "Email không hợp lệ, vui lòng thử lại."
     }
 
 
