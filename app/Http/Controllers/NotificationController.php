@@ -146,7 +146,7 @@ class NotificationController extends Controller
             return Notification::where([['aptId','=',$aptId]])
                             ->where([['isDraft','=',0]])
                             ->with('userId')
-                            ->orderBy('updated_at','desc')->paginate(5);
+                            ->orderBy('created_at','desc')->paginate(5);
         }
         else{
             return Notification::where([['status','=','ongoing']])
@@ -154,7 +154,7 @@ class NotificationController extends Controller
                                 ->where([['isDraft','=',0]])
                                 ->where([['isDowngrade','=',0]])
                                 ->with('userId')
-                                ->orderBy('updated_at','desc')->paginate(5);
+                                ->orderBy('created_at','desc')->paginate(5);
         }
     }
 
@@ -162,7 +162,7 @@ class NotificationController extends Controller
         $aptId = Auth::user()->aptId;
         return Notification::where([['isDowngrade','=',1], ['aptId', '=', $aptId]])
                             ->with('userId')
-                            ->orderBy('updated_at','desc')->paginate(5);
+                            ->orderBy('created_at','desc')->paginate(5);
     }
 
     public function delete(Request $request){
@@ -239,6 +239,7 @@ class NotificationController extends Controller
         $notificationData['title'] = $request->title;
         $notificationData['content'] = $request->content;
         $notificationData['type'] = $request->type;
+        $notificationData['created_at'] = now();
         $notificationData['upload_file'] = json_encode($request->upload_file);
         if(is_array($request->period)){
             $notificationData['periodFrom'] = $request->period[0];
@@ -292,9 +293,10 @@ class NotificationController extends Controller
     }
 
     public function upgrade(Request $request)
-    {
+    {   
         return Notification::where('id',$request->id)->update([
-            'isDowngrade' => 0
+            'isDowngrade' => 0,
+            'created_at' => now()
         ]);
     }
 

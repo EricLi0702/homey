@@ -39,15 +39,15 @@
                                 <div slot="content" class="community-category-list p-3">
                                     <div class=" ccl-item">
                                         <p>{{$t('categories').facility.percentOfThisMonth}}</p>
-                                        <Progress class="w-100" :percent="todayPro" :stroke-width="20" status="active" text-inside />
+                                        <Progress class="w-100" :percent="todayPro" status="active"/>
                                     </div>
                                     <div class=" ccl-item">
                                         <p>{{$t('categories').facility.percentOfThisWeek}}</p>
-                                        <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
+                                        <Progress class="w-100" :percent="weekPro" stroke-color="#D14429" status="active"/>
                                     </div>
                                     <div class=" ccl-item">
                                         <p>{{$t('categories').facility.currentUser_registeredUser}}</p>
-                                        <Progress class="w-100" :percent="userPro" :stroke-width="20" status="active" text-inside />
+                                        <Progress class="w-100" :percent="userPro" stroke-color="#19be6b" status="active"/>
                                     </div>
                                 </div>
                             </Panel>
@@ -63,7 +63,9 @@
                                     <div v-for="(reservation, i) in reservationMyData" :key="i">
                                         <div class=" ccl-item d-flex justify-content-between">
                                             <p>{{reservation.title}}</p>
-                                            <p>{{}}</p>
+                                            <Tag v-if="reservation.status == 'pending'" color="magenta">{{$t('common').pending}}</Tag>
+                                            <Tag v-else-if="reservation.status == 'allow'" color="green">{{$t('common').allow}}</Tag>
+                                            <Tag v-else-if="reservation.status == 'deny'" color="error">{{$t('common').deny}}</Tag>
                                         </div>
                                     </div>
                                 </div>
@@ -83,17 +85,23 @@
                             <Button @click="toggleViewType" v-if="calendarView" type="warning" icon="ios-paper-outline">{{$t('facility').ListView}}</Button>
                             <Button @click="toggleViewType" v-else type="warning" icon="ios-calendar-outline">{{$t('facility').CalendarView}}</Button>
                         </div>
-                        <div v-if="calendarView" class="col-12 m-0 row calendar-view-container posted-item">
-                            
+                        <div v-if="calendarView" class="col-12 m-0 row calendar-view-container posted-item p-4">
+                            <reservation-calendar :locale="selectedLang" is-expanded :min-date='new Date()' :attributes='attributes'>
+                                <template #day-popover="{ dayTitle  }" >
+                                    <div class="text-xs text-gray-300 font-semibold text-center">
+                                        <p>{{dayTitle }}</p>
+                                        <p>{{$t('facility').SomeoneAlreadyReserved}}</p>
+                                    </div>
+                                </template>
+                            </reservation-calendar>
                         </div>
                         <div v-else class="control-view-type col-12 mb-3 p-0">
-                            <div  v-for="(reservation, i) in selectedFacility.reservation_data" :key="i" v-if="selectedFacility.reservation_data.length" class="col-12 m-0 row list-view-container posted-item p-2 mb-3">
+                            <div  v-for="(reservation, i) in selectedFacility.reservation_data" :key="i" v-if="selectedFacility.reservation_data.length" class="col-12 m-0 row list-view-container posted-item p-4 mb-3">
                                 <div class="col-1">
                                     <div class="posted-item-user-info">
                                         <img :src="`${baseUrl}${reservation.user_id.user_avatar}`" class="rounded-circle profile-photo mr-1" alt="">
                                     </div>
                                 </div>   
-                                
                                 <div class="col-11">
                                     <div class="posted-user-info d-flex justify-content-between">
                                         <p class="mb-2">{{reservation.user_id.name}}</p>
@@ -104,12 +112,33 @@
                                     </div>
                                     <div class="title">
                                         <h5>{{reservation.title}}</h5>
-                                        <Tag color="success">{{reservation.status}}</Tag>
+                                        <Tag v-if="reservation.status == 'pending'" color="magenta">{{$t('common').pending}}</Tag>
+                                        <Tag v-else-if="reservation.status == 'allow'" color="green">{{$t('common').allow}}</Tag>
+                                        <Tag v-else-if="reservation.status == 'deny'" color="error">{{$t('common').deny}}</Tag>
                                     </div>
                                     <div class="post-content p-2">
-                                        <p v-html="reservation.purpose">s</p>
+                                        <p v-html="reservation.purpose"></p>
                                     </div>
                                 </div> 
+                                <div class="col-11 offset-1 d-flex justify-content-between align-items-center">
+                                    <div class="allow-deny-control-btn-group" v-if="currentUser.roleId == 2 && isAutoReserve == false">
+                                        <Button v-if="reservation.status == 'pending' || reservation.status == 'deny'" @click="allowReservation(reservation, i)" :disabled="isAllowing" :loading="isAllowing" type="primary" ghost>Allow</Button>
+                                        <Button v-if="reservation.status == 'pending' || reservation.status == 'allow'" @click="denyReservation(reservation, i)" :disabled="isDenying" :loading="isDenying" type="error" ghost>Deny</Button>
+                                    </div>
+                                    <Icon v-if="reservation.userId == currentUser.id || currentUser.roleId == 2" size="25" type="ios-trash" color="#FD0000" @click="openRemoveModal(reservation, i)"/>
+                                </div>
+                                <Modal v-model="removeModal" width="360">
+                                    <p slot="header" style="color:#f60;text-align:center">
+                                        <Icon type="ios-information-circle"></Icon>
+                                        <span v-if="deleteReservationData != null">Delete {{deleteReservationData.name}}</span>
+                                    </p>
+                                    <div class="text-center">
+                                        <p>Will you delete this reservation?</p>
+                                    </div>
+                                    <div slot="footer">
+                                        <Button type="error" size="large" long :loading="isDeleting" :disabled="isDeleting" @click="delReservation()">{{ $t('apartment').delete }}</Button>
+                                    </div>
+                                </Modal>
                             </div>
                         </div>
                     </div>
@@ -120,7 +149,14 @@
 </template>
 <script>
 import {getFacilityList} from '~/api/facility'
-import {createReservation, getReservationList, getReservatoinCnt} from '~/api/reservation'
+import {
+    createReservation, 
+    getReservationList, 
+    getReservationCnt, 
+    delReservation,
+    allowReservation,
+    denyReservation,
+    } from '~/api/reservation'
 import { mapGetters } from 'vuex'
 export default {
     metaInfo () {
@@ -128,6 +164,18 @@ export default {
     },
     data(){
         return{
+            attributes:[{
+                key: 'today',
+                highlight: true,
+                dates: new Date(),
+                popover: {
+                    visibility: 'hover',
+                },
+                dates: [
+                    { start: new Date(2020, 12, 14), end: new Date(2020, 12, 18) },
+                    { start: new Date(2020, 12, 20), end: new Date(2020, 12, 22) },
+                ]
+            }],
             monthData:1,
             todayData:0,
             weekData:0,
@@ -145,19 +193,60 @@ export default {
             isNoMyReservation: false,
             calendarView:false,
             baseUrl:window.base_url,
-            selectedFacility : {}
+            selectedFacility : {},
+            alreadyReservedDates:[],
+            selectedLang: '',
+            deleteReservationData:{},
+            removeModal: false,
+            isDeleting: false,
+            deleteDataIndex: -1,
+            allowReservationData: {},
+            allowDataIndex: -1,
+            isAllowing: false,
+            denyReservationData: {},
+            denyDataIndex: -1,
+            isDenying: false,
+            isAutoReserve: false,
         }
     },
 
     async created(){
         this.start();
-        this.getReservatoinCnt();
+        this.getReservationCnt();
+        if(this.currentLang == 'vn'){
+            this.selectedLang = 'vi';
+        }
+        if(this.currentLang == 'en'){
+            this.selectedLang = 'en';
+        }
+        if(this.currentLang == 'kr'){
+            this.selectedLang = 'ko';
+        }
     },
 
     computed:{
         ...mapGetters({
-            currentUser: 'auth/user'
+            currentUser: 'auth/user',
+            currentLang:'lang/locale'
         }),
+    },
+    
+    watch:{
+        currentLang:{
+            handler(val){
+                console.log(val);
+                if(val == 'vn'){
+                    this.selectedLang = 'vi';
+                }
+                if(val == 'en'){
+                    this.selectedLang = 'en';
+                }
+                if(val == 'kr'){
+                    this.selectedLang = 'ko';
+                }
+            },
+            deep:true
+        }
     },
 
     methods:{
@@ -180,12 +269,38 @@ export default {
         async start(){
             await getFacilityList()
             .then(res=>{
-                if(res.data.length == 0){
+                console.log(res.data.facilityData);
+                if(res.data.facilityData.length == 0){
                     this.noFacility = true;
                     return;
                 }
-                this.facilityList = res.data;
+
+                let isAuto = parseInt(res.data.isAutoReservation);
+                if(isAuto == 0){
+                    this.isAutoReserve = false;
+                }else{
+                    this.isAutoReserve = true;
+                }
+
+                this.facilityList = res.data.facilityData;
                 this.selectedFacility = this.facilityList[0];
+                console.log("this.selectedFacility", this.selectedFacility)
+                for(let k = 0; k < this.selectedFacility.reservation_data.length; k++){
+                    let reserveFrom = (this.selectedFacility.reservation_data[k].periodFrom.split(" "))[0];
+                    let reserveTo = (this.selectedFacility.reservation_data[k].periodTo.split(" "))[0];
+                    let reserveFromYear = parseInt((reserveFrom.split("-"))[0]);
+                    let reserveFromMonth = parseInt((reserveFrom.split("-"))[1]) - 1;
+                    let reserveFromDay = parseInt((reserveFrom.split("-"))[2]);
+                    let reserveToYear = parseInt((reserveTo.split("-"))[0]);
+                    let reserveToMonth = parseInt((reserveTo.split("-"))[1]) - 1;
+                    let reserveToDay = parseInt((reserveTo.split("-"))[2]);
+                    let startToEndObj = { 
+                        start: new Date(reserveFromYear, reserveFromMonth, reserveFromDay), 
+                        end: new Date(reserveToYear, reserveToMonth, reserveToDay) 
+                    }
+                    this.alreadyReservedDates.push(startToEndObj);
+                    this.attributes[0].dates = this.alreadyReservedDates;
+                }
                 for(let i = 0; i < this.facilityList.length ; i++){
                     this.facilityList[i].upload_file = JSON.parse(this.facilityList[i].upload_file);
                     for(let j = 0; j < this.facilityList[i].reservation_data.length ; j++){
@@ -200,12 +315,102 @@ export default {
             })
         },
 
-        selectFacility(facility){
-            this.selectedFacility = facility;
-            console.log("this.selectedFacility", this.selectedFacility);
+        openRemoveModal(reservation, index){
+            this.deleteReservationData = reservation;
+            this.deleteDataIndex = index;
+            this.removeModal = true;
         },
-        getReservatoinCnt(){
-            getReservatoinCnt().then(res=>{
+
+        allowReservation(reservation, index){
+            this.allowReservationData = reservation;
+            this.allowDataIndex = index;
+            let obj={
+                id: this.allowReservationData.id
+            }
+            allowReservation(obj)
+            .then(res=>{
+                this.selectedFacility.reservation_data[this.allowDataIndex].status = 'allow';
+                this.success('You have allowed this reservation');
+                this.allowReservationData = {};
+                this.allowDataIndex = -1;
+            })
+            .catch(err=>{
+                console.log(err.response);
+                if(err.response.data.access == false){
+                    this.error("you cannot allow this reservation");
+                }
+            })
+        },
+
+        denyReservation(reservation, index){
+            this.denyReservationData = reservation;
+            this.denyDataIndex = index;
+            let obj={
+                id: this.denyReservationData.id
+            }
+            denyReservation(obj)
+            .then(res=>{
+                this.selectedFacility.reservation_data[this.denyDataIndex].status = 'deny';
+                this.success('You have denyed this reservation');
+                this.denyReservationData = {};
+                this.denyDataIndex = -1;
+            })
+            .catch(err=>{
+                console.log(err.response);
+                if(err.response.data.access == false){
+                    this.error("you cannot deny this reservation");
+                }
+            })
+        },
+
+        delReservation(){
+            let obj = {
+                id: this.deleteReservationData.id,
+                userId: this.deleteReservationData.userId
+            }
+            this.isDeleting = true;
+            delReservation(obj)
+            .then(res=>{
+                console.log(res);
+                this.selectedFacility.reservation_data.splice(this.deleteDataIndex, 1)
+                this.success('Successfully removed reservation!');
+                this.deleteReservationData = {};
+                this.deleteDataIndex = -1;
+                this.isDeleting = false;
+                this.removeModal = false;
+            })
+            .catch(err=>{
+                console.log(err.response);
+                if(err.response.data.access == false){
+                    this.error("you can not delete this reservation.");
+                }
+                this.isDeleting = false;
+                this.removeModal = false;
+            });
+        },
+
+        selectFacility(facility){
+            this.alreadyReservedDates = [];
+            this.selectedFacility = facility;
+            for(let k = 0; k < this.selectedFacility.reservation_data.length; k++){
+                let reserveFrom = (this.selectedFacility.reservation_data[k].periodFrom.split(" "))[0];
+                let reserveTo = (this.selectedFacility.reservation_data[k].periodTo.split(" "))[0];
+                let reserveFromYear = parseInt((reserveFrom.split("-"))[0]);
+                let reserveFromMonth = parseInt((reserveFrom.split("-"))[1]) - 1;
+                let reserveFromDay = parseInt((reserveFrom.split("-"))[2]);
+                let reserveToYear = parseInt((reserveTo.split("-"))[0]);
+                let reserveToMonth = parseInt((reserveTo.split("-"))[1]) - 1;
+                let reserveToDay = parseInt((reserveTo.split("-"))[2]);
+                let startToEndObj = { 
+                    start: new Date(reserveFromYear, reserveFromMonth, reserveFromDay), 
+                    end: new Date(reserveToYear, reserveToMonth, reserveToDay) 
+                }
+                this.alreadyReservedDates.push(startToEndObj);
+                this.attributes[0].dates = this.alreadyReservedDates;
+            }
+        },
+        getReservationCnt(){
+            getReservationCnt().then(res=>{
                 console.log("res", res);
                 this.todayData = res.data.today
                 this.weekData = res.data.week

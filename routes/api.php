@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('apartment','ApartmentController@addApt');
     Route::put('apartment','ApartmentController@updateApt');
     Route::delete('apartment','ApartmentController@delApt');
+    Route::put('apartment/auto','ApartmentController@updateAutoMode');
     
     Route::post('notification/create', 'NotificationController@store');
     Route::get('notification/draft', 'NotificationController@getDraft');
@@ -55,9 +56,13 @@ Route::group(['middleware' => 'auth:api'], function () {
     
     Route::post('facility/create', 'FacilityController@store');
     Route::get('facility', 'FacilityController@index');
+    Route::delete('facility', 'FacilityController@delete');
     
     Route::post('reservation/create', 'ReservationFacilityController@store');
     Route::get('reservation', 'ReservationFacilityController@index');
+    Route::delete('reservation', 'ReservationFacilityController@delReservation');
+    Route::put('reservation/allow', 'ReservationFacilityController@allowReservation');
+    Route::put('reservation/deny', 'ReservationFacilityController@denyReservation');
     
     Route::post('repair/create', 'RepairController@store');
     Route::get('repair', 'RepairController@index');
@@ -140,7 +145,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('communityCnt','CommunityController@getCommunityCnt');
     Route::get('suggestionCnt','SuggestionController@getSuggestionCnt');
     Route::get('repairCnt','RepairController@getRepairCnt');
-    Route::get('reservatoinCnt','ReservationFacilityController@getReservatoinCnt');
+    Route::get('reservatoinCnt','ReservationFacilityController@getReservationCnt');
 });
 
 Route::group(['middleware' => 'guest:api'], function () {

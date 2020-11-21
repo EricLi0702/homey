@@ -105,7 +105,7 @@ class CommunityController extends Controller
         return Community::with('userId')
                         ->where([['aptId', '=', Auth::user()->aptId]])
                         ->where([['status', '=', 'ongoing']])
-                        ->orderBy('updated_at','desc')->paginate(5);
+                        ->orderBy('created_at','desc')->paginate(5);
     }
 
     public function getCurrent(Request $request){
@@ -135,6 +135,7 @@ class CommunityController extends Controller
             $communityData['aptId'] = $aptId;
             $communityData['title'] = $request->title;
             $communityData['content'] = $request->content;
+            $communityData['created_at'] = now();
             $communityData['upload_file'] = json_encode($request->upload_file);
 
             if(is_array($request->period)){

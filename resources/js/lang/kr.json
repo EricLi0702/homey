@@ -147,7 +147,10 @@
         "cancel": "취소",
         "goHome": "홈으로 가기",
         "isUser" : "등록상태",
-        "notUser" : "비회원"
+        "notUser" : "비회원",
+        "pending" : "보류중",
+        "allow" : "승인됨",
+        "deny" : "거절됨"
     },
     "login":{
         "login":"로그인",
@@ -258,7 +261,10 @@
         "CalendarView":"캘린더 보기",
         "Facility":"시설",
         "maxNumberOfUser" : "시설을 이용할수있는 최대사용자수:",
-        "NumberOfReservation" : "예약건수"
+        "NumberOfReservation" : "예약건수",
+        "SomeoneAlreadyReserved": "이미 누군가가 예약하였습니다.",
+        "autoApproveReservation" : "자동으로 예약승인",
+        "removeThisFacility" : "이 시설 삭제"
     },
     "suggest":{
         "suggest":"건의",

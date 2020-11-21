@@ -112,10 +112,7 @@
           <a class="nav-link dropdown-toggle text-dark"
               href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           >
-            <!-- <img :src="user.photo_url" class="rounded-circle profile-photo mr-1"> -->
             <img :src="`${baseUrl}${user.user_avatar}`" class="rounded-circle profile-photo mr-1" alt="">
-            <!-- <img src="https://i.pravatar.cc/40" alt="" style="border-radius: 50%;"> -->
-           
           </a>
           <div class="dropdown-menu position-absolute bg-blue-gradient animate__animated animate__fadeIn mt-1rem">
             <div class="pt-3 text-center">

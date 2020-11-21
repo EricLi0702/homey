@@ -147,6 +147,7 @@ body{
 .navbar{
     background-color: rgba(15, 76, 129, 0.15)!important;
     backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 .navbar-brand img{
     width: 138px;
@@ -970,11 +971,13 @@ body{
 .login-body{
     background-color: rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     color:rgb(255, 255, 255);
 }
 .reset-pass-body{
     background-color: rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     color:rgb(255, 255, 255);
 }
 
@@ -1076,6 +1079,7 @@ a.text-dark:hover, a.text-dark:focus {
     border-radius: 50%;
     background-color: rgba(15, 76, 129, 0.15)!important;
     backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     display: none;
     transition: display 0.5s ease;
 }
@@ -1425,6 +1429,7 @@ a.text-dark:hover, a.text-dark:focus {
 .ivu-badge-count{
     top: 0!important;
 }
+
 
 @media only screen and (max-width: 600px) {
     .subtitle h1 {

@@ -147,7 +147,10 @@
         "cancel": "cancel",
         "goHome": "Go Home",
         "isUser" : "Status",
-        "notUser" : "not User"
+        "notUser" : "not User",
+        "pending" : "Pending",
+        "allow" : "Allowed",
+        "deny" : "Deny"
     },
     "login":{
         "login":"Login",
@@ -258,7 +261,10 @@
         "CalendarView":"Calendar View",
         "Facility":"Facility",
         "maxNumberOfUser" : "Maximum number of users who can use the facility:",
-        "NumberOfReservation" : "Number of reservation"
+        "NumberOfReservation" : "Number of reservation",
+        "SomeoneAlreadyReserved": "Someone already reserved this facility",
+        "autoApproveReservation" : "Approve reservations automatically",
+        "removeThisFacility" : "Remove this facility"
     },
     "suggest":{
         "suggest":"Suggestion",

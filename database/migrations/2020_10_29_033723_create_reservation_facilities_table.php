@@ -21,8 +21,8 @@ class CreateReservationFacilitiesTable extends Migration
             $table->foreign('facilityId')->references('id')->on('facilities')->onDelete('cascade');
             $table->unsignedBigInteger('aptId');
             $table->foreign('aptId')->references('id')->on('apartments')->onDelete('cascade');
-            $table->string('title');
-            $table->string('purpose');
+            $table->longText('title');
+            $table->longText('purpose');
             $table->unsignedBigInteger('max');
             $table->timestamp('periodFrom')->nullable();
             $table->timestamp('periodTo')->nullable();

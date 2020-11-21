@@ -69,7 +69,7 @@ class SuggestionController extends Controller
     public function index(Request $request){
         return Suggestion::with('userId')
                         ->where([['isDraft','=',0]])
-                        ->orderBy('updated_at','desc')->paginate(5);
+                        ->orderBy('created_at','desc')->paginate(5);
     }
 
     public function remove(Request $request)
@@ -114,6 +114,7 @@ class SuggestionController extends Controller
             $suggestionData['userId'] = $userId;
             $suggestionData['title'] = $request->title;
             $suggestionData['content'] = $request->content;
+            $suggestionData['created_at'] = now();
             $suggestionData['upload_file'] = json_encode($request->upload_file);
             
             return Suggestion::where('id',$request->id)->update($suggestionData);

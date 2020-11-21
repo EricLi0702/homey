@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Apartment;
 use App\Facility;
+use App\ReservationFacility;
 
 class FacilityController extends Controller
 {
@@ -40,9 +41,19 @@ class FacilityController extends Controller
     public function index(Request $request)
     {
         $aptId = Auth::user()->aptId;
-        return Facility::where([['aptId', '=', $aptId]])
+        $isAutoReservation = Apartment::where('id', $aptId)->first()->isAutoReserve;
+        $facilityData = Facility::where([['aptId', '=', $aptId]])
                         ->with(['reservationData.userId', 'userId'])
                         ->orderBy('created_at','desc')
                         ->get();
+        return response()->json([
+            'facilityData' => $facilityData,
+            'isAutoReservation' => $isAutoReservation
+        ], 201);
+    }
+
+    public function delete(Request $request)
+    {
+        return Facility::where('id',$request->id)->delete();
     }
 }

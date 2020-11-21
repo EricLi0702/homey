@@ -21,8 +21,8 @@ class CreateResponseRepairsTable extends Migration
             $table->foreign('repairId')->references('id')->on('repairs')->onDelete('cascade');
             $table->unsignedBigInteger('userId')->nullable();
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
-            $table->text('replyToClient')->nullable();
-            $table->text('replyFromClient')->nullable();
+            $table->longText('replyToClient')->nullable();
+            $table->longText('replyFromClient')->nullable();
             $table->timestamps();
         });
     }

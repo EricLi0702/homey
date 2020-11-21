@@ -147,7 +147,10 @@
         "cancel": "hủy bỏ",
         "goHome": "về nhà",
         "isUser" : "tiểu bang",
-        "notUser" : "Không phải thành viên"
+        "notUser" : "Không phải thành viên",
+        "pending" : "đang chờ xử lý",
+        "allow" : "Tán thành",
+        "deny" : "phủ nhận"
     },
     "login":{
         "login":"Đăng nhập",
@@ -258,7 +261,10 @@
         "CalendarView":"Chế độ xem lịch",
         "Facility":"Cơ sở",
         "maxNumberOfUser" : "Số lượng người dùng tối đa có thể sử dụng thiết bị:",
-        "NumberOfReservation" : "Số lượng đặt trước"
+        "NumberOfReservation" : "Số lượng đặt trước",
+        "SomeoneAlreadyReserved": "Ai đó đã đặt cơ sở này",
+        "autoApproveReservation" : "Phê duyệt đặt chỗ tự động",
+        "removeThisFacility" : "Xóa cơ sở này"
     },
     "suggest":{
         "suggest":"Không gian chung",

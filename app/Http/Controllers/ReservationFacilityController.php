@@ -22,6 +22,7 @@ class ReservationFacilityController extends Controller
         ]);
         $requestedReservationData = $request->reservationData;
         $facilityId = $request->facilityId;
+        $isAutoMode = Apartment::where('id', $request->aptId)->first()->isAutoReserve;
         $getAllReservationOfFacility = ReservationFacility::where([['facilityId', '=', $facilityId]])->get();
         
         //check if this request is the first time for a facility
@@ -35,6 +36,9 @@ class ReservationFacilityController extends Controller
             $reservationData['purpose'] = $requestedReservationData['purpose'];
             $reservationData['periodFrom'] = $requestedReservationData['period'][0];
             $reservationData['periodTo'] = $requestedReservationData['period'][1];
+            if($isAutoMode == 1){
+                $reservationData['status'] = "allow";
+            }
             $reservation = ReservationFacility::create($reservationData); 
 
             return response()->json([
@@ -68,6 +72,9 @@ class ReservationFacilityController extends Controller
             $reservationData['purpose'] = $requestedReservationData['purpose'];
             $reservationData['periodFrom'] = $requestedReservationData['period'][0];
             $reservationData['periodTo'] = $requestedReservationData['period'][1];
+            if($isAutoMode == 1){
+                $reservationData['status'] = "allow";
+            }
             $reservation = ReservationFacility::create($reservationData); 
 
             return response()->json([
@@ -77,7 +84,7 @@ class ReservationFacilityController extends Controller
         }
     }
 
-    public function getReservatoinCnt(Request $request){
+    public function getReservationCnt(Request $request){
         $weekData = ReservationFacility::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
         $todayData = ReservationFacility::whereDate('created_at', Carbon::today())->count();
         $monthData = ReservationFacility::whereYear('created_at',Carbon::now()->year)->whereMonth('created_at',Carbon::now()->month)->count();
@@ -91,5 +98,52 @@ class ReservationFacilityController extends Controller
             'registerCnt'=>$registerUserCnt,
             'currentCnt'=>$currentUserCnt
         ]);
+    }
+
+    public function delReservation(Request $request){
+        $id = $request->id;
+        $userId = $request->userId;
+        $reservationData = ReservationFacility::where('id',$id)->first();
+        $currentUserId = Auth::user()->id;
+        if($currentUserId == $userId || Auth::user()->roleId == 2){
+            return ReservationFacility::where('id',$id)->delete();
+        }
+        else{
+            return response()->json([
+                'access'=> false
+            ]);
+        }
+    }
+
+    public function allowReservation(Request $request){
+        if (Auth::user()->roleId == 2){
+            $allowReservationData = ReservationFacility::where('id', $request->id)->first();
+            $allowReservationData['status'] = 'allow';
+            $allowReservationData->save();
+            return response()->json([
+                'access'=> true
+            ]);
+        }
+        else{
+            return response()->json([
+                'access'=> false    
+            ]);
+        }
+    }
+
+    public function denyReservation(Request $request){
+        if (Auth::user()->roleId == 2){
+            $denyReservationData = ReservationFacility::where('id', $request->id)->first();
+            $denyReservationData['status'] = 'allow';
+            $denyReservationData->save();
+            return response()->json([
+                'access'=> true
+            ]);
+        }
+        else{
+            return response()->json([
+                'access'=> false    
+            ]);
+        }
     }
 }

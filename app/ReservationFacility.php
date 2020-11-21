@@ -15,6 +15,7 @@ class ReservationFacility extends Model
         'max',
         'periodFrom',
         'periodTo',
+        'status'
     ];
 
     public function userId(){

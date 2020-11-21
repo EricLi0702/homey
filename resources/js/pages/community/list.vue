@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="posted-item-info-time">
                                     <Icon type="ios-clock-outline" />
-                                    <timeago :datetime="community.updated_at" :auto-update="60"></timeago>
+                                    <timeago :datetime="community.created_at" :auto-update="60"></timeago>
                                 </div>
                             </div>
                             <div class="clearfix">

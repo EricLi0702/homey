@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Apartment;
 use App\User;
+
 class ApartmentController extends Controller
 {
     //
@@ -58,6 +60,25 @@ class ApartmentController extends Controller
             'phoneNumber'=>$phoneNumber,
             'email'=>$email
         ]);
+    }
+
+    public function updateAutoMode(Request $request){
+        if ($request->autoMode == true){
+            $apartmentData =  Apartment::where('id', Auth::user()->aptId)->first();
+            $apartmentData['isAutoReserve'] = 1;
+            $apartmentData->save();
+            return response()->json([
+                'msg'=> 1,
+            ]);
+        }
+        if ($request->autoMode == false){
+            $apartmentData =  Apartment::where('id', Auth::user()->aptId)->first();
+            $apartmentData['isAutoReserve'] = 0;
+            $apartmentData->save();
+            return response()->json([
+                'msg'=> 0,
+            ]);
+        }
     }
 
     public function delApt(Request $request){

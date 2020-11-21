@@ -34,15 +34,15 @@
                     <div slot="content" class="community-category-list p-3">
                         <div class=" ccl-item">
                             <p>{{$t('categories').notification.percentOfThisMonth}}</p>
-                            <Progress class="w-100" :percent="todayPro" :stroke-width="20" status="active" text-inside />
+                            <Progress class="w-100" :percent="todayPro" status="active"/>
                         </div>
                         <div class=" ccl-item">
                             <p>{{$t('categories').notification.percentOfThisWeek}}</p>
-                            <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
+                            <Progress class="w-100" :percent="weekPro" stroke-color="#D14429" status="active"/>
                         </div>
                         <div class=" ccl-item">
                             <p>{{$t('categories').notification.currentUser_registeredUser}}</p>
-                            <Progress class="w-100" :percent="userPro" :stroke-width="20" stroke-color="#19be6b" status="active" text-inside />
+                            <Progress class="w-100" :percent="userPro" stroke-color="#19be6b" status="active"/>
                         </div>
                     </div>
                 </Panel>

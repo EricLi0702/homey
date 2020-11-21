@@ -17,9 +17,9 @@ class CreateSuggestionsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('userId');
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
-            $table->text('title');
-            $table->text('content');
-            $table->text('upload_file')->nullable();
+            $table->longText('title');
+            $table->longText('content');
+            $table->longText('upload_file')->nullable();
             $table->json('view_cnt')->nullable();
             $table->json('heart_cnt')->nullable();
             $table->json('like_cnt')->nullable();

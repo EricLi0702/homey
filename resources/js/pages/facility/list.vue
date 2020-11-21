@@ -33,15 +33,15 @@
                             <div slot="content" class="community-category-list p-3">
                                 <div class=" ccl-item">
                                     <p>{{$t('categories').facility.percentOfThisMonth}}</p>
-                                    <Progress class="w-100" :percent="todayPro" :stroke-width="20" status="active" text-inside />
+                                    <Progress class="w-100" :percent="todayPro" status="active" />
                                 </div>
                                 <div class=" ccl-item">
                                     <p>{{$t('categories').facility.percentOfThisWeek}}</p>
-                                    <Progress class="w-100" :percent="weekPro" :stroke-width="20" stroke-color="#D14429" status="active" text-inside />
+                                    <Progress class="w-100" :percent="weekPro" stroke-color="#D14429" status="active" />
                                 </div>
                                 <div class=" ccl-item">
                                     <p>{{$t('categories').facility.currentUser_registeredUser}}</p>
-                                    <Progress class="w-100" :percent="userPro" :stroke-width="20" status="active" text-inside />
+                                    <Progress class="w-100" :percent="userPro" stroke-color="#19be6b" status="active" />
                                 </div>
                             </div>
                         </Panel>
@@ -57,7 +57,9 @@
                                 <div v-for="(reservation, i) in reservationMyData" :key="i">
                                     <div class=" ccl-item d-flex justify-content-between">
                                         <p>{{reservation.title}}</p>
-                                        <p>{{}}</p>
+                                        <Tag v-if="reservation.status == 'pending'" color="magenta">{{$t('common').pending}}</Tag>
+                                        <Tag v-else-if="reservation.status == 'allow'" color="green">{{$t('common').allow}}</Tag>
+                                        <Tag v-else-if="reservation.status == 'deny'" color="error">{{$t('common').deny}}</Tag>
                                     </div>
                                 </div>
                             </div>
@@ -67,10 +69,14 @@
                 </div>
             </div>
             <div class="col-12 col-md-8 m-0 p-0">
+                <div v-if="currentUser.roleId == 2" class="posted-item d-flex m-0 mb-3 p-3 justify-content-between align-items-center" > 
+                    <p>{{$t('facility').autoApproveReservation}}</p> 
+                    <i-switch true-color="#13ce66" false-color="#ff4949" :loading="isChaningMode"  v-model="isAutoReserve" @on-change="changeAcceptMode" />
+                </div>
                 <div v-if="noFacility" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
                     <div class="no-fac text-center">
                         <Icon size="150" type="ios-search" />
-                        <h5>oops! there is no facility!{{$t('community').View}}</h5>
+                        <h5>{{$t('facility').oopsNoFacility}}</h5>
                     </div>
                 </div>
                 <div v-else class="posted-item position-relative row m-0 p-2">
@@ -148,6 +154,21 @@
                             </div>
                         </div>
                     </div>
+                    <div v-if="currentUser.roleId == 2" class="px-2 col-12 pb-3">
+                        <Button @click="openRemoveFacilityModal" class="float-right" type="error" icon="ios-trash">{{$t('facility').removeThisFacility}}</Button>
+                        <Modal v-model="removeModal" width="360">
+                            <p slot="header" style="color:#f60;text-align:center">
+                                <Icon type="ios-information-circle"></Icon>
+                                <span>Delete {{selectedFacility.name}}</span>
+                            </p>
+                            <div class="text-center">
+                                <p>Will you delete this reservation?</p>
+                            </div>
+                            <div slot="footer">
+                                <Button type="error" size="large" long :loading="isDeleting" :disabled="isDeleting" @click="removeSelectedFacility()">{{ $t('apartment').delete }}</Button>
+                            </div>
+                        </Modal>
+                    </div>
                     <div v-if="currentUser.roleId == 3 ||  currentUser.roleId == 4" class="px-2 col-12 pb-3">
                         <p v-if="selectedFacilityAlreadyReservated(selectedFacility)" class="float-right">{{$t('facility').YouAlready}}</p>
                         <p v-else>
@@ -188,8 +209,18 @@ import ko from 'view-design/dist/locale/ko-KR';
 import vn from 'view-design/dist/locale/vi-VN';
 
 import wysiwyg from "vue-wysiwyg"
-import {getFacilityList} from '~/api/facility'
-import {createReservation, getReservationList, getReservationMyData, getReservatoinCnt} from '~/api/reservation'
+import {
+    getFacilityList, 
+    changeAcceptMode,
+    removeSelectedFacility
+} from '~/api/facility'
+import {
+    createReservation, 
+    getReservationList, 
+    getReservationMyData, 
+    getReservationCnt, 
+    
+} from '~/api/reservation'
 //image viewer
 import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
@@ -207,6 +238,10 @@ export default {
     },
     data(){
         return{
+            isDeleting:false,
+            removeModal:false,
+            isChaningMode:false,
+            isAutoReserve:false,
             monthData:1,
             todayData:0,
             weekData:0,
@@ -276,7 +311,7 @@ export default {
 
     async created(){
         this.start();
-        this.getReservatoinCnt();
+        this.getReservationCnt();
         if(this.currentLang == 'en'){
             locale(en);s
         }
@@ -299,6 +334,43 @@ export default {
     },
 
     methods:{
+        openRemoveFacilityModal(){
+            this.removeModal = true;
+        },
+
+        removeSelectedFacility(){
+            console.log("this.selectedFacility", this.selectedFacility);
+            let obj = {
+                id: this.selectedFacility.id
+            }
+            this.isDeleting = true;
+            removeSelectedFacility(obj)
+            .then(res=>{
+                console.log("1", this.facilityList);
+                for(let i = 0; i < this.facilityList.length ; i++){
+                    if(this.facilityList[i].id == this.selectedFacility.id){
+                        this.facilityList.splice(i , 1);
+                        console.log("2", this.facilityList);
+                    }
+                }
+                this.selectedFacility = this.facilityList[0];
+                //video url
+                let videoUrlGroup = this.selectedFacility.upload_file.videoUrl;
+                for(let i = 0; i < videoUrlGroup.length ; i++){
+                    let clonedOption = JSON.parse(JSON.stringify(this.playerOptions));
+                    clonedOption.sources[0].src = this.baseUrl + '/uploads/video/'+videoUrlGroup[i].fileName;
+                    this.playerOptionsGroup.push(clonedOption);
+                }
+                
+                this.isDeleting = false;
+                this.removeModal = false;
+            })
+            .catch(err=>{
+                console.log(err.response)
+                this.isDeleting = false;
+                this.removeModal = false;
+            })
+        },
         //check if user already reservated to a facility
         selectedFacilityAlreadyReservated(facility){
             if(facility.reservation_data.length > 0){
@@ -333,6 +405,7 @@ export default {
             this.isReservating = true;
             await createReservation(payload)
             .then(res=>{
+                console.log(res.data.reservation)
                 this.selectedFacility.reservation_data.push(res.data.reservation);
                 this.createReservationData.title = '';
                 this.createReservationData.purpose = '';
@@ -341,7 +414,9 @@ export default {
                 this.isRegisterToFacility = false;
             })
             .catch(err=>{
-                console.log(err)
+                if(err.response.data.msg == "impossible"){
+                    this.error("You cannot reserve on period you have selected. Already someone reserved on that period. Please check reservations.");
+                }
             })
             this.isReservating = false;
         },
@@ -373,11 +448,17 @@ export default {
         async start(){
             await getFacilityList()
             .then(res=>{
-                if(res.data.length == 0){
+                if(res.data.facilityData.length == 0){
                     this.noFacility = true;
                     return;
                 }
-                this.facilityList = res.data;
+                let isAuto = parseInt(res.data.isAutoReservation);
+                if(isAuto == 0){
+                    this.isAutoReserve = false;
+                }else{
+                    this.isAutoReserve = true;
+                }
+                this.facilityList = res.data.facilityData;
                 for(let i = 0; i < this.facilityList.length ; i++){
                     this.facilityList[i].upload_file = JSON.parse(this.facilityList[i].upload_file);
                     for(let j = 0; j < this.facilityList[i].reservation_data.length ; j++){
@@ -390,7 +471,6 @@ export default {
                     }
                 }
                 this.selectedFacility = this.facilityList[0];
-                console.log("asdfasdf",this.facilityList);
                 //video url
                 let videoUrlGroup = this.selectedFacility.upload_file.videoUrl;
                 for(let i = 0; i < videoUrlGroup.length ; i++){
@@ -406,8 +486,8 @@ export default {
                 }
             })
         },
-        getReservatoinCnt(){
-            getReservatoinCnt().then(res=>{
+        getReservationCnt(){
+            getReservationCnt().then(res=>{
                 console.log("res", res);
                 this.todayData = res.data.today
                 this.weekData = res.data.week
@@ -444,6 +524,29 @@ export default {
                 this.selectedFacility.upload_file.videoUrl.length == 0){
                     this.noFile = true;
                 }
+        },
+
+        changeAcceptMode(status){
+            let obj = {
+                autoMode : status
+            }
+            this.isChaningMode = true;
+            changeAcceptMode(obj)
+            .then(res=>{
+                console.log(res.data.msg)
+                if(res.data.msg == 1){
+                    this.success("You have selected Automatic mode");
+                }
+                else{
+                    this.success("You have selected Manual mode");
+                }
+                this.isChaningMode = false;
+            })
+            .catch(err=>{
+                console.log(err.response);
+                this.isChaningMode = false;
+            })
+            
         }
     }
 }

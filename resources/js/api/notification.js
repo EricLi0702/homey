@@ -25,7 +25,7 @@ function upgradeNotification(payload){
 }
 
 function deleteNotification(payload){
-    return axios.delete('/api/notification',payload)
+    return axios.delete('/api/notification',{data: payload})
 }
 
 function getCurrentNotificationFromServer(currentId){

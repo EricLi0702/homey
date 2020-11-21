@@ -20,7 +20,7 @@ class CreateCommentOfCommunitiesTable extends Migration
             $table->unsignedBigInteger('coId');
             $table->foreign('coId')->references('id')->on('communities')->onDelete('cascade');
             $table->unsignedBigInteger('parentId')->nullable();
-            $table->text('content');
+            $table->longText('content');
             $table->unsignedBigInteger('seq')->default('0');
             $table->unsignedBigInteger('lvl')->default('0');
             $table->boolean('isRemoved')->default('0');

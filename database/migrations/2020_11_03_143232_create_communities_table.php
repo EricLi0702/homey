@@ -19,9 +19,9 @@ class CreateCommunitiesTable extends Migration
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('aptId')->nullable();
             $table->foreign('aptId')->references('id')->on('apartments')->onDelete('cascade');
-            $table->text('title');
-            $table->text('content');
-            $table->text('upload_file')->nullable();
+            $table->longText('title');
+            $table->longText('content');
+            $table->longText('upload_file')->nullable();
             $table->enum('status', ['before', 'ongoing', 'finish'])->default('ongoing');
             $table->string('period')->nullable();
             $table->timestamp('periodFrom')->nullable();

@@ -12,13 +12,18 @@ function updateFacility(payload){
     return axios.put('/api/apartment',payload)
 }
 
-function delFacility(payload){
-    return axios.delete('/api/apartment',payload)
+function removeSelectedFacility(payload){
+    return axios.delete('/api/facility',{data: payload})
+}
+
+function changeAcceptMode(payload){
+    return axios.put('/api/apartment/auto',payload)
 }
 
 export{
     getFacilityList,
     registerFacility,
     updateFacility,
-    delFacility,
+    removeSelectedFacility,
+    changeAcceptMode
 }

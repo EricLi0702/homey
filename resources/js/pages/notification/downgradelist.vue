@@ -53,7 +53,7 @@
                             </div>
                             <div class="posted-item-info-time">
                                 <Icon type="ios-clock-outline" />
-                                <timeago :datetime="notification.updated_at" :since="notification.updated_at" :auto-update="60"></timeago>
+                                <timeago :datetime="notification.created_at" :auto-update="60"></timeago>
                             </div>
                         </div>
                         <div class="clearfix"></div>

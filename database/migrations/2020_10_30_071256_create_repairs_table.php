@@ -19,11 +19,11 @@ class CreateRepairsTable extends Migration
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('aptId');
             $table->foreign('aptId')->references('id')->on('apartments')->onDelete('cascade');
-            $table->text('title');
-            $table->text('desc');
+            $table->longText('title');
+            $table->longText('desc');
             $table->string('type');
             $table->string('object');
-            $table->text('upload_file')->nullable();
+            $table->longText('upload_file')->nullable();
             $table->boolean('isDraft')->default('0');
             $table->boolean('isShowToProprietor')->default('0');
             $table->enum('status', ['approved', 'ongoing', 'pending', 'finish'])->default('pending');

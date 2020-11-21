@@ -11,6 +11,8 @@ import './readmore'
 import './pagination'
 import './mobiledetection'
 import './aos'
+import './calendar'
+
 
 import 'bootstrap'
 

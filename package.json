@@ -27,6 +27,7 @@
     "popper.js": "^1.15.0",
     "pusher-js": "^7.0.0",
     "sweetalert2": "^8.10.0",
+    "v-calendar": "^2.1.1",
     "v-viewer": "^1.5.1",
     "vform": "^1.0.0",
     "videojs-youtube": "^2.6.1",

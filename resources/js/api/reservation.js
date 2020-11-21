@@ -8,22 +8,27 @@ function createReservation(payload){
     return axios.post('/api/reservation/create',payload)
 }
 
-function updateReservation(payload){
-    return axios.put('/api/apartment',payload)
+function allowReservation(payload){
+    return axios.put('/api/reservation/allow',payload)
+}
+
+function denyReservation(payload){
+    return axios.put('/api/reservation/deny',payload)
 }
 
 function delReservation(payload){
-    return axios.delete('/api/apartment',payload)
+    return axios.delete('/api/reservation',{data: payload})
 }
 
-function getReservatoinCnt(){
+function getReservationCnt(){
     return axios.get('/api/reservatoinCnt')
 }
 
 export{
     getReservationList,
     createReservation,
-    updateReservation,
+    allowReservation,
+    denyReservation,
     delReservation,
-    getReservatoinCnt,
+    getReservationCnt,
 }
