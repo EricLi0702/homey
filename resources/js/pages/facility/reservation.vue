@@ -1,10 +1,5 @@
 <template>
     <div>
-        <!-- <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
-            <div class="p-3 py-5 bg-white">
-                <p>something...</p>
-            </div>
-        </div> -->
         <div class="container m-0 p-0 mx-auto pb-5">
             <div class="row m-0 p-0">
                 <div class="col-12 col-md-4 m-0 p-0 pr-md-4">
@@ -234,7 +229,6 @@ export default {
     watch:{
         currentLang:{
             handler(val){
-                console.log(val);
                 if(val == 'vn'){
                     this.selectedLang = 'vi';
                 }
@@ -269,7 +263,6 @@ export default {
         async start(){
             await getFacilityList()
             .then(res=>{
-                console.log(res.data.facilityData);
                 if(res.data.facilityData.length == 0){
                     this.noFacility = true;
                     return;
@@ -284,7 +277,6 @@ export default {
 
                 this.facilityList = res.data.facilityData;
                 this.selectedFacility = this.facilityList[0];
-                console.log("this.selectedFacility", this.selectedFacility)
                 for(let k = 0; k < this.selectedFacility.reservation_data.length; k++){
                     let reserveFrom = (this.selectedFacility.reservation_data[k].periodFrom.split(" "))[0];
                     let reserveTo = (this.selectedFacility.reservation_data[k].periodTo.split(" "))[0];
@@ -371,7 +363,6 @@ export default {
             this.isDeleting = true;
             delReservation(obj)
             .then(res=>{
-                console.log(res);
                 this.selectedFacility.reservation_data.splice(this.deleteDataIndex, 1)
                 this.success('Successfully removed reservation!');
                 this.deleteReservationData = {};
@@ -411,7 +402,6 @@ export default {
         },
         getReservationCnt(){
             getReservationCnt().then(res=>{
-                console.log("res", res);
                 this.todayData = res.data.today
                 this.weekData = res.data.week
                 this.monthData = res.data.month

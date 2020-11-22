@@ -1,10 +1,5 @@
 <template>
     <div>
-        <!-- <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
-            <div class="p-3 py-5 bg-white">
-                <p>something</p>
-            </div>
-        </div> -->
         <div class="container m-0 p-0 mx-auto">
             <div class="row m-0 p-0">
                 <Category/>
@@ -79,11 +74,6 @@
                                     </div>
                                     <div v-else class="reply mr-auto">
                                         <Icon size="25" type="ios-undo" @click="toggleReply"/>
-                                        <!-- <div v-if="details.comment_cnt !== null && details.comment_cnt.includes(currentUser.id)" class="reply d-flex mr-4">
-                                            <p>{{ $t('suggest').alreadyCommented }}</p>
-                                        </div>
-                                        <div v-else class="reply d-flex mr-4">
-                                        </div> -->
                                     </div>
                                     <div class="heart d-flex mr-4">
                                         <Icon class="mr-1" v-if="checkIfHeart(details.heart_cnt)" @click="heartPost(details)" size="25" type="md-heart-outline" />
@@ -156,12 +146,6 @@
                                 </Poptip>
                             </div>
                         </div>  
-                        <!-- <div class="offset-2 col-10">
-                            <div class="user-name">
-                                <p>{{comment.user_id.name}}</p>
-                                <p>{{TimeView(comment.created_at)}}</p>
-                            </div>
-                        </div> -->
                     </div>
                     <InfiniteLoading 
                         class="p-3"
@@ -218,9 +202,6 @@ export default {
     metaInfo () {
         return { title: this.$t('metaInfo').viewDetailSuggestion }
     },
-    // props:{
-    //     details:Object
-    // },
 
     components:{
         Viewer,
@@ -250,7 +231,6 @@ export default {
                     type: "video/mp4",
                     src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
                 }],
-                // poster: "/static/images/author.jpg",
             },
 
             //comment
@@ -278,14 +258,10 @@ export default {
     },
 
     created(){
-        // console.log(this.currentPath)
         this.suggestionId = this.currentPath.params.id;
         this.getCurrentSuggestion();
     },
     mounted(){
-        // console.log(this.currentPath)
-        
-        // this.details = JSON.parse(this.currentPath.query.details)
     },
     methods:{
 
@@ -345,13 +321,11 @@ export default {
         },
 
         async leaveComment(){
-            console.log("leaveComment", this.commentData);
             if(this.commentData == null){
                 return this.error("Please enter comment");
             }
             await leaveCommentToSuggestion(this.commentData, this.details)
             .then(res=>{
-                console.log(res.data.commentToSuggest);
                 let commentCurrently = res.data.commentToSuggest;
                 commentCurrently['created_at'] = Date.now();
                 commentCurrently['user_id'] = {};
@@ -360,7 +334,6 @@ export default {
                 commentCurrently.user_id['id'] = this.currentUser.id;
                 this.commentData = null;
                 this.commentsOfCurrentSuggestion.unshift(commentCurrently);
-                console.log("this.details.comment_cnt",this.details.comment_cnt);
                 if(this.details.comment_cnt == null) {
                     this.details.comment_cnt = [];
                     this.details.comment_cnt.push(this.currentUser.id);
@@ -412,9 +385,7 @@ export default {
         getCurrentSuggestion(){
             getCurrentSuggestionFromServer(this.suggestionId)
             .then(res=>{
-                console.log("ddd",res.data.suggestionData);
                 this.details = res.data.suggestionData;
-                // this.commentsOfCurrentSuggestion = res.data.commentData;
                 this.details.heart_cnt = JSON.parse(this.details.heart_cnt);
                 this.details.like_cnt = JSON.parse(this.details.like_cnt);
                 this.details.dislike_cnt = JSON.parse(this.details.dislike_cnt);
@@ -428,10 +399,6 @@ export default {
                     this.playerOptionsGroup.push(clonedOption);
                 }
                 viewCurrentSuggestion(this.details.id);
-                // getCommentsOfCurrentSuggestion(2, this.details.id)
-                // .then(res=>{
-                //     console.log(res)
-                // });
             })
         },
 
@@ -593,7 +560,6 @@ export default {
             }
             deleteSuggestion(this.details)
             .then(res=>{
-                console.log("res", res);
                 if(res.status == 200){
                     this.success('successfully deleted')
                     this.$router.push({name:'suggestion.list'});
@@ -605,12 +571,10 @@ export default {
         },
 
         cancelRemoveSuggestion(){
-            console.log("cancelremove");
         },
         removeComment(comment){
             deleteComment(comment)
             .then(res=>{
-                console.log("res", res);
                 if(res.status == 200){
                     this.success('successfully deleted');
                     comment.isRemoved = 1;
@@ -623,7 +587,6 @@ export default {
         },
 
         cancelRemoveComment(){
-            console.log("cancelremove");
         },
     }
 }

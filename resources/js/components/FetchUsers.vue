@@ -9,7 +9,7 @@ export default {
     mounted(){
         fetchUsers()
             .then(res=>{
-                console.log(res.data)
+                
             })
             .catch(err=>{
             })

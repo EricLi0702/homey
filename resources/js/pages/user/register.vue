@@ -115,7 +115,6 @@ export default {
       }
 
       this.user.aptId = this.currentUser.apt.id
-      console.log('!!!!!!',this.user)
       this.isAdding = true
       await addUser(this.user)
         .then(res=>{

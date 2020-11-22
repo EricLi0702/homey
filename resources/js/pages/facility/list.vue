@@ -271,7 +271,6 @@ export default {
                     type: "video/mp4",
                     src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
                 }],
-                // poster: "/static/images/author.jpg",
             },
             isRegisterToFacility:false,
             //disable before time(TimePicker)
@@ -339,18 +338,15 @@ export default {
         },
 
         removeSelectedFacility(){
-            console.log("this.selectedFacility", this.selectedFacility);
             let obj = {
                 id: this.selectedFacility.id
             }
             this.isDeleting = true;
             removeSelectedFacility(obj)
             .then(res=>{
-                console.log("1", this.facilityList);
                 for(let i = 0; i < this.facilityList.length ; i++){
                     if(this.facilityList[i].id == this.selectedFacility.id){
                         this.facilityList.splice(i , 1);
-                        console.log("2", this.facilityList);
                     }
                 }
                 this.selectedFacility = this.facilityList[0];
@@ -401,11 +397,9 @@ export default {
                 aptId : this.selectedFacility.aptId,
                 facilityId : this.selectedFacility.id,
             };
-            console.log("payload", payload);
             this.isReservating = true;
             await createReservation(payload)
             .then(res=>{
-                console.log(res.data.reservation)
                 this.selectedFacility.reservation_data.push(res.data.reservation);
                 this.createReservationData.title = '';
                 this.createReservationData.purpose = '';
@@ -488,7 +482,6 @@ export default {
         },
         getReservationCnt(){
             getReservationCnt().then(res=>{
-                console.log("res", res);
                 this.todayData = res.data.today
                 this.weekData = res.data.week
                 this.monthData = res.data.month
@@ -533,7 +526,6 @@ export default {
             this.isChaningMode = true;
             changeAcceptMode(obj)
             .then(res=>{
-                console.log(res.data.msg)
                 if(res.data.msg == 1){
                     this.success("You have selected Automatic mode");
                 }

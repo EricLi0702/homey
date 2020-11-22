@@ -75,11 +75,9 @@ export default {
     methods:{
         addSuperMng(){
             const object = {...this.aptData, ...this.superManager }
-            console.log(object)
             this.isAdding = true
             addSuperMng(object)
                 .then(res=>{
-                    console.log(res)
                     this.$router.push({path:'/apartment'})
                 })
                 .catch(err=>{

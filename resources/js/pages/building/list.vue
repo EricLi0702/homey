@@ -126,7 +126,6 @@ export default {
         },
 
         updateBuilding(){
-            console.log("sss", this.updateBuildingData);
             this.isUpdatingBuilding = true;
             let payload = {
                 id: this.updateBuildingData.id,
@@ -134,7 +133,6 @@ export default {
             }
             updateBuilding(payload)
             .then(res=>{
-                console.log(res);
                 for(let i = 0; i<this.buildingList.length; i++){
                     if(this.buildingList[i].id == this.updateBuildingData.id){
                         this.buildingList[i].number = this.updateBuildingData.number;

@@ -196,10 +196,8 @@ export default {
             let obj = {};
             obj.page = page;
             obj.aptId = this.selectedAptId;
-            console.log("obj", obj);
             getAdminUserList(obj)
             .then(res=>{
-                console.log(res.data);
                 this.superManagerData = res.data.superManagerData;
                 this.notiManagerData = res.data.notiManagerData;
                 this.repairManagerData = res.data.repairManagerData;
@@ -231,7 +229,6 @@ export default {
             this.removeModal = true;
         },
         triggerAptId(){
-            console.log(this.selectedAptId);
             for(let i=0; i<this.aptLists.length; i++){
                 if(this.selectedAptId == this.aptLists[i].id){
                     this.currentApt = this.aptLists[i];
@@ -242,7 +239,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

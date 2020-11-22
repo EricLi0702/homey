@@ -5,11 +5,6 @@
           <img src="/asset/img/icon/logo.png" alt="">
       </div>
       <Divider />
-      <!-- <card v-if="mustVerifyEmail" :title="$t('register')">
-        <div class="alert alert-success" role="alert">
-          {{ $t('verify_email_address') }}
-        </div>
-      </card> -->
       <div class="lc-title">
           <h4 class="p-3"><strong>{{$t('register').register}}</strong></h4>
       </div>
@@ -28,10 +23,6 @@
                 <Input prefix="ios-phone-portrait" v-model="verifyData.phone" type="tel" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" :disabled="isSentVercode" />
             </div>
             <div class="m-2">
-              <!-- <v-button class="w-100" :loading="form.busy">
-                {{ $t('register').register }}
-                confirm
-              </v-button> -->
               <Button v-if="isSentVercode == false" class="mt-3" long icon="ios-send" type="success" @click="verifyUserInfo" :disabled="isConfirming" :loading="isConfirming">{{ $t('common').request }}</Button>
             </div>
 
@@ -128,7 +119,6 @@ export default {
       this.isConfirming = true;
       await postValidation(this.verifyData)
       .then(res=>{
-        console.log(res);
         if(res.data.msg = "ok"){
           this.dong = res.data.dong;
           this.ho = res.data.ho;

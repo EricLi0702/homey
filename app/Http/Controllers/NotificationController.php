@@ -313,21 +313,10 @@ class NotificationController extends Controller
         $id = Auth::user()->aptId;
         $registerUserCnt = User::where('aptId',$id)->count();
         $currentUserCnt = User::where([['aptId','=',$id],['email_verified_at','<>',null]])->count();
-        // $firstWeek = Carbon::today()->subDays(7);
-        // $secondWeek = Carbon::today()->subDays(14);
-        // $thirdWeek = Carbon::today()->subDays(21);
-        // $forthWeek = Carbon::today()->subDays(28);
-        // $firstData = Notification::where('created_at','>=',$firstWeek)->count();
-        // $secondData = Notification::where('created_at','>=',$secondWeek)->count();
-        // $thirdData = Notification::where('created_at','>=',$thirdWeek)->count();
-        // $forthData = Notification::where('created_at','>=',$forthWeek)->count();
+        
         return response()->json([
             'today'=>$todayData,
             'week'=>$weekData,
-            // 'firstWeek'=>$firstData,
-            // 'secondWeek'=>$secondData,
-            // 'thirdWeek'=>$thirdData,
-            // 'forthWeek'=>$forthData,
             'month'=>$monthData,
             'registerCnt'=>$registerUserCnt,
             'currentCnt'=>$currentUserCnt

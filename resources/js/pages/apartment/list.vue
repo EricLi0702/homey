@@ -139,7 +139,6 @@ export default {
     watch:{
         currentLang:{
             handler(val){
-                console.log(val);
                 if(val == 'en'){
                     locale(en);
                 }
@@ -156,7 +155,7 @@ export default {
 
     created(){
         if(this.currentLang == 'en'){
-            locale(en);s
+            locale(en);
         }
         if(this.currentLang == 'kr'){
             locale(ko);
@@ -207,10 +206,6 @@ export default {
             let apt = this.aptLists[index];
             this.$router.push({name:'apartment.superManager',params:{aptData:apt}})
         },
-
-        // registerBuilding(apt){
-        //     this.$router.push({name:'apartment.building',params:{aptData:apt}})
-        // }
     }
 }
 </script>

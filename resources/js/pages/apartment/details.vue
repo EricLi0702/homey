@@ -46,7 +46,6 @@ export default {
     }
   },
   mounted(){
-    console.log('++++',this.addData)
   },
   methods:{
     async  editApt(){
@@ -69,7 +68,6 @@ export default {
       this.isAdding = true
       await updateApt(this.addData)
         .then(res=>{
-          console.log(res)
             this.isAdding = false
             this.addData.aptName = ''
             this.addData.address = ''
@@ -86,7 +84,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

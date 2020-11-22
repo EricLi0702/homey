@@ -1,10 +1,5 @@
 <template>
     <div>
-        <!-- <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
-            <div class="p-3 py-5 bg-white">
-                <p>something</p>
-            </div>
-        </div> -->
         <div class="container m-0 p-0 mx-auto">
             <div class="row m-0 p-0">
                 <Category/>
@@ -163,6 +158,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 import {
     responseToRepairRequest, 
     getCurrentRepairFromServer, 
+    getRepairJsonData,
     deleteRequest,
     finishRequest,
     getFirstItem,
@@ -172,15 +168,11 @@ import {
 } from '~/api/repair'
 
 import Category from './category'
-import repairJsonData from '../../json/repairUpdate.json';
 import { mapGetters } from 'vuex'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').viewDetailRepairRequest }
     },
-    // props:{
-    //     details:Object
-    // },
 
     components:{
         Viewer,
@@ -191,10 +183,14 @@ export default {
 
     data(){
         return{
-            repairJsonData,
+            enJsonData:[],
+            krJsonData:[],
+            vnJsonData:[],
+            repairJsonData:null,
             baseUrl:window.base_url,
             suggestionItem : [],
             details:null,
+            rawDetails: null,
             repairId:null,
             responseCommentData:null,
             isFinishRequest:false,
@@ -209,7 +205,6 @@ export default {
                     type: "video/mp4",
                     src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
                 }],
-                // poster: "/static/images/author.jpg",
             },
 
             //comment
@@ -231,7 +226,8 @@ export default {
     },
     computed:{ 
         ...mapGetters({
-            currentUser: 'auth/user'
+            currentUser: 'auth/user',
+            currentLang:'lang/locale'
         }),
         currentPath(){
             return this.$route
@@ -241,15 +237,74 @@ export default {
         }
     },
 
+    watch:{
+        currentLang:{
+            handler(val){
+                this.$timeago.locale = this.currentLang;
+                if(val == 'en'){
+                    this.repairJsonData = this.enJsonData;
+                }
+                if(val == 'kr'){
+                    this.repairJsonData = this.krJsonData;
+                }
+                if(val == 'vn'){
+                    this.repairJsonData = this.vnJsonData;
+                }
+            },
+            deep:true
+        },
+        repairJsonData:{
+            handler(val){
+                if(this.details.isSelectMode == 1){
+                    let type = this.repairJsonData[parseInt(this.rawDetails.type)-1].label;
+                    let object = this.repairJsonData[parseInt(this.rawDetails.type)-1].object[parseInt(this.rawDetails.object)-1].label;
+                    let title = this.repairJsonData[parseInt(this.rawDetails.type)-1].object[parseInt(this.rawDetails.object)-1].title[parseInt(this.rawDetails.title)-1].label;
+                    this.details.type = type;
+                    this.details.object = object;
+                    this.details.title = title;
+                }
+            },
+            deep:true
+        },
+        details:{
+            handler(val){
+                if(this.details.isSelectMode == 1){
+                    let type = this.repairJsonData[parseInt(this.rawDetails.type)-1].label;
+                    let object = this.repairJsonData[parseInt(this.rawDetails.type)-1].object[parseInt(this.rawDetails.object)-1].label;
+                    let title = this.repairJsonData[parseInt(this.rawDetails.type)-1].object[parseInt(this.rawDetails.object)-1].title[parseInt(this.rawDetails.title)-1].label;
+                    this.details.type = type;
+                    this.details.object = object;
+                    this.details.title = title;
+                }
+            },
+            deep:true
+        }
+    },
+
     created(){
-        // console.log(this.currentPath)
         this.repairId = this.currentPath.params.id;
-        this.getCurrentRepair();
+        getRepairJsonData()
+        .then(res=>{
+            this.enJsonData = JSON.parse(res.data[0].repair_type);
+            this.krJsonData = JSON.parse(res.data[1].repair_type);
+            this.vnJsonData = JSON.parse(res.data[2].repair_type);
+            if(this.currentLang == 'en'){
+                this.repairJsonData = this.enJsonData;
+            }
+            else if(this.currentLang == 'kr'){
+                this.repairJsonData = this.krJsonData;
+            }
+            else if(this.currentLang == 'vn'){
+                this.repairJsonData = this.vnJsonData;
+            }
+            this.getCurrentRepair();
+        })
+        .catch(err=>{
+            console.log(err.response)
+        })
+        
     },
     mounted(){
-        // console.log(this.currentPath)
-        
-        // this.details = JSON.parse(this.currentPath.query.details)
     },
     methods:{
 
@@ -300,7 +355,6 @@ export default {
         },
 
         async responseToRepairRequest(){
-            console.log("reply to request", this.responseData);
             if(this.details.status == "finish"){
                 return this.error("This thread has been broken.");
             }
@@ -310,7 +364,6 @@ export default {
             this.isResponsingTo = true;
             await responseToRepairRequest(this.responseData, this.details)
             .then(res=>{
-                console.log(res.data.responseData);
                 let responseCommentCurrently = res.data.responseData;
                 this.responseData = null;
                 this.responseCommentData.unshift(responseCommentCurrently);
@@ -375,14 +428,7 @@ export default {
             .then(res=>{
                 this.responseCommentData = res.data.repairData.repair_id;
                 this.details = res.data.repairData;
-                if(!isNaN(this.details.type)){
-                    let type = this.repairJsonData[this.details.type-1].label;
-                    let object = this.repairJsonData[this.details.type-1].object[this.details.object-1].label;
-                    let title = this.repairJsonData[this.details.type-1].object[this.details.object-1].title[this.details.title-1].label;
-                    this.details.type = type;
-                    this.details.object = object;
-                    this.details.title = title;
-                }
+                this.rawDetails = JSON.parse(JSON.stringify(this.details));
                 this.details.upload_file = JSON.parse(this.details.upload_file);
 
                 //video url
@@ -410,7 +456,6 @@ export default {
         },
 
         cancelRemoveRequest(){
-            console.log("canceled");
         },
 
         toggleFinishRequest(){
@@ -451,7 +496,6 @@ export default {
         },
 
         cancelFinishRequest(){
-            console.log("canceled");
         },
         
     }

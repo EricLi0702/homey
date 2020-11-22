@@ -52,7 +52,6 @@ export default {
   mounted(){
     getAptLists()
       .then(res=>{
-        console.log(res)
         this.aptLists = res.data
       })
       .catch(err=>{
@@ -80,7 +79,6 @@ export default {
       this.isAdding = true
       await addApt(this.addData)
         .then(res=>{
-          console.log(res)
           if(res.status == 201){
             this.isAdding = false
             this.addData.aptName = ''
@@ -99,7 +97,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

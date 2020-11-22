@@ -107,7 +107,6 @@ export default {
     created(){
         getRepairJsonData()
         .then(res=>{
-            console.log("res.data", res.data);
             this.enJsonData = JSON.parse(res.data[0].repair_type);
             this.krJsonData = JSON.parse(res.data[1].repair_type);
             this.vnJsonData = JSON.parse(res.data[2].repair_type);
@@ -127,9 +126,7 @@ export default {
     },
 
     async mounted(){
-        // console.log('++++repair+++',this.currentUser)
         await getTop5Repair(this.currentUser.id).then(res=>{
-            console.log('----res',res)
             this.repairData = res.data
             for(let i = 0; i < this.repairData.length; i++){
                 if(!isNaN(this.repairData[i].type)){
@@ -148,11 +145,17 @@ export default {
             this.todayData = res.data.today
             this.weekData = res.data.week
             this.monthData = res.data.month
+            if(this.monthData == 0){
+                this.todayPro = 0;
+                this.weekPro = 0
+            }
+            else{
+                this.todayPro = parseFloat((this.todayData/this.monthData*100).toFixed(2))
+                this.weekPro = parseFloat((this.weekData/this.monthData*100).toFixed(2))
+            }
             this.currentCnt = res.data.currentCnt
             this.registerCnt = res.data.registerCnt
             this.userPro = parseFloat((this.currentCnt/this.registerCnt*100).toFixed(2))
-            this.todayPro = parseFloat((this.todayData/this.monthData*100).toFixed(2))
-            this.weekPro = parseFloat((this.weekData/this.monthData*100).toFixed(2))
         })
     },
 }

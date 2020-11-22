@@ -88,14 +88,9 @@ export default {
             this.removeModal = true;
         },
         addRole(){
-            // if(this.addData.roleName.trim() == ''){
-            //     return this.warning('roleName is required')
-            // }
-            console.log(this.addData.roleName)
             this.isAdding = true            
             addUserRole(this.addData)
                 .then(res=>{
-                    console.log(res)
                     this.roleLists.push(res.data)
                     this.addData.roleName = ''
                     this.success('Role is Added')
@@ -108,20 +103,16 @@ export default {
             this.addModal = false
         },
         editRole(role,index){
-            console.log(role)
             this.$set(role,'isEditing',true)
         },
         updateRole(role,index){
-            console.log(role)
             if(role.roleName.trim() == ''){
                 return this.error('roleName is required')
             }
             this.isEditing = true
             updateUserRole(role)
                 .then(res=>{
-                    console.log(res)
                     role.isEditing = false
-
                 })
                 .catch(err=>{
                     console.log(err)

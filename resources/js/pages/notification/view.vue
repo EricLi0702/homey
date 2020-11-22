@@ -98,24 +98,7 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>    
-                    <!-- <div class="offset-1 col-11 d-flex cnt-info">
-                        <div class="cnt d-flex w-100">
-                            <div v-if="currentUser.id == details.userId" class="remove mr-auto">
-                                <Poptip
-                                    confirm
-                                    title="Are you sure you want to delete this suggestion?"
-                                    ok-text="Yes"
-                                    cancel-text="Cancel"
-                                    placement="right"
-                                    @on-ok="removeSuggestion"
-                                    @on-cancel="cancelRemoveSuggestion">
-                                    <Icon size="25" class="mr-4" type="md-trash"/>
-                                </Poptip>
-                            </div>
-                        </div>
-                    </div>                  -->
                 </div>
                 <div v-if="details !== null" class="navigte-item d-flex justify-content-center mt-3">
                     <ButtonGroup shape="circle">
@@ -179,7 +162,6 @@ export default {
                     type: "video/mp4",
                     src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
                 }],
-                // poster: "/static/images/author.jpg",
             },
             isDeleting:false,
             baseUrl:window.base_url
@@ -290,7 +272,6 @@ export default {
         },
 
         cancelDowngradeNotification(){
-            console.log("canceldowngrade");
         },
 
         upgradeNotification(){
@@ -307,14 +288,12 @@ export default {
         },
 
         cancelUpgradeNotification(){
-            console.log("cancelupgrade");
         },
 
         deleteNotification(){
             this.isDeleting = true;
             deleteNotification(this.details)
             .then(res=>{
-                console.log("res", res);
                 if(res.status == 200){
 
                     this.success('successfully deleted')
@@ -330,7 +309,6 @@ export default {
 
         cancelDeleteNotification(){
             this.success('Title is required')
-            console.log("cancelremove");
         },
 
     }

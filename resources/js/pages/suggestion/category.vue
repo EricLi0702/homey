@@ -103,7 +103,6 @@ export default {
             console.log(err)
         })
         getSuggestionCnt().then(res=>{
-            console.log(res)
             this.todayData = res.data.today
             this.weekData = res.data.week
             this.monthData = res.data.month

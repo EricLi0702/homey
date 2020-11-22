@@ -102,7 +102,6 @@ export default {
     },
 
     mounted(){
-        console.log("this.updateSuggestionData",this.updateSuggestionData);
     },
 
     computed:{ 
@@ -143,7 +142,6 @@ export default {
 
         async updateSuggestion(){
             this.emoStatus = false;
-            console.log(this.updateSuggestionData);
             if(this.updateSuggestionData.title.trim() == ''){
                 return this.error('Title is required')
             }
@@ -192,17 +190,6 @@ export default {
             .catch(err=>{
                 console.log(err);
             })
-            // if(res.status == 200){
-            //     if(type == 'image'){
-            //         this.updateSuggestionData.upload_file.imgUrl.pop(fileName)
-            //     }else if(type == 'other'){
-            //         this.updateSuggestionData.upload_file.otherUrl.pop(fileName)
-            //     }else if(type == 'video'){
-            //         this.updateSuggestionData.upload_file.videoUrl.pop(fileName)
-            //     }
-            // }else{
-            //     this.swr();
-            // }
         },
 
         //listen event from Upload

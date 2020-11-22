@@ -108,7 +108,6 @@ export default {
             this.isUpdating = true;
             updateUser(this.userData)
             .then(res=>{
-                console.log(res);
                 this.isUpdating = false;
                 this.userData.name = ''
                 this.userData.email = ''

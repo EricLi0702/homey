@@ -178,7 +178,6 @@ export default {
     },
 
     mounted(){
-        // this.updateNotificationData.type = JSON.parse(this.updateNotificationData.type);
         if(this.updateNotificationData.type == 0){
             this.isUrgent = false;
             this.isImportant = false;

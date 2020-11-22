@@ -208,7 +208,6 @@ export default {
 
     data(){
         return{
-            
             isCommenting: false,
             isLeaving:false,
             commentData:null,
@@ -399,7 +398,6 @@ export default {
             }
             deleteCommunity(this.details)
             .then(res=>{
-                console.log("res", res);
                 if(res.status == 200){
                     this.success('successfully deleted')
                     this.$router.push({name:'community.list'});
@@ -411,7 +409,6 @@ export default {
         },
 
         cancelRemoveCommunity(){
-            console.log("cancelremove");
         },
 
         async leaveComment(){
@@ -473,7 +470,6 @@ export default {
         removeComment(comment){
             deleteComment(comment)
             .then(res=>{
-                console.log("res", res);
                 if(res.status == 200){
                     this.success('successfully deleted');
                     comment.isRemoved = 1;
@@ -486,7 +482,6 @@ export default {
         },
 
         cancelRemoveComment(){
-            console.log("cancelremove");
         },
 
         toggleReplyToComment(comment){
@@ -526,8 +521,6 @@ export default {
                 this.replyToCommentData = null;
                 this.emoStatusOfReply = false;
                 comment.showReply = false;
-                console.log("this.commentsOfCurrentCommunity",this.commentsOfCurrentCommunity);
-                console.log("resData",resData);
                 let replyOfParentId;
                 for(let i = 0; i < this.commentsOfCurrentCommunity.length; i++){
                     if( resData.parentId == this.commentsOfCurrentCommunity[i].parentId){

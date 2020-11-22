@@ -7,7 +7,6 @@
             </div>
             <Button type="success" @click="addBuilding" :disabled="isAdding" :loading="isAdding">{{ $t('register').register }}</Button>
         </div>
-
         <table class="table">
             <tr>
                 <th>{{ $t('apartment').buildingNumber }}</th>
@@ -22,7 +21,10 @@
 </template>
 
 <script> 
-import {getBuildingList,addBuilding} from '~/api/apartment'
+import {
+    getBuildingList,
+    addBuilding
+} from '~/api/apartment'
 export default {
     props:{
         aptData:Object
@@ -32,7 +34,6 @@ export default {
             buildingList:[],
             buildingInfo:{
                 number:'',
-                // type:''
             },
             isAdding:false,
         }
@@ -52,7 +53,6 @@ export default {
             this.$set(this.buildingInfo,'aptId',this.aptData.id)
             addBuilding(this.buildingInfo)
                 .then(res=>{
-                    console.log(res.data)
                     this.buildingInfo.number = ''
                     this.buildingList.unshift(res.data)
                 })
@@ -64,8 +64,3 @@ export default {
     }
 }
 </script>
-<style
->
-
-
-</style>

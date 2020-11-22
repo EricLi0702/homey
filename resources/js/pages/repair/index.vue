@@ -1,7 +1,5 @@
 <template>
     <div class="container-fluid bg-light-gray m-0 p-0 bg-wallpaper">
-        <!-- <div class="apt-img hv-40 service-apt-img">
-        </div> -->
         <div class="suggestion-sub-menu container-fluid bg-white box-block">
             <div class="container d-flex justify-content-between p-0 py-3 row m-0 mx-auto">
                 <Input class="col-12 col-md-6 p-0"

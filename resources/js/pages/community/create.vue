@@ -273,9 +273,6 @@ export default {
         upVideoUrl(value) {
             this.registerCommunityData.upload_file.videoUrl.push(value);
         },
-
-        
-
     }
 }
 </script>

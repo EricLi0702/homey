@@ -174,13 +174,6 @@ export default {
                     videoUrl:[]
                 },
             },
-            //vueEditor
-            customToolbar: [
-                ["bold", "italic", "underline"],
-                [{ list: "ordered" }, { list: "bullet" }],
-                ["image", "code-block"]
-            ],
-
             //emoji
             emoStatus:false,
 
@@ -199,7 +192,7 @@ export default {
     created(){
         this.getDraft();
         if(this.currentLang == 'en'){
-            locale(en);s
+            locale(en);
         }
         if(this.currentLang == 'kr'){
             locale(ko);
@@ -241,7 +234,7 @@ export default {
                 }
             })
             .catch(err => {
-                // console.log(err.response)
+                console.log(err.response)
             });
         },
 
@@ -315,7 +308,6 @@ export default {
 
             this.isRegistering = true;
 
-            console.log(this.registerNotificationData.period);
             await registerNotification(this.registerNotificationData)
             .then(res=>{
                 this.registerNotificationData.title = '';

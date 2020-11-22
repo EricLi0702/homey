@@ -1,10 +1,5 @@
 <template>
     <div>
-        <!-- <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
-            <div class="p-3 py-5 bg-white">
-                <p>something...</p>
-            </div>
-        </div> -->
         <div class="container m-0 p-0 mx-auto">
             <div class="row m-0 p-0">
                 <Category/>
@@ -131,7 +126,6 @@ export default {
         async start(){
             await getCommunityList()
             .then(res=>{
-                console.log(res);
             })
         },
 
@@ -165,10 +159,7 @@ export default {
                 }
                 vm.pageOfCommunity = vm.pageOfCommunity + 1;
             });
-             
-                
         },
-
     }
 }
 </script>

@@ -57,7 +57,6 @@
                                 <Icon type="ios-person" size="25"/>
                                 <span>{{$t('repair').ShowProprietor}}</span>
                             </Checkbox>
-                            <Button icon="ios-briefcase-outline" type="warning" class="mr-2" @click="saveToDraftRequest" :disabled="isSavingDraft" :loading="isSavingDraft">{{$t('notification').Draft}}</Button>
                             <Button icon="ios-send" type="success" class="" @click="requestRepair" :disabled="isRequesting" :loading="isRequesting">{{$t('repair').Request}}</Button>
                         </div>
                         <div class="col-12 uploaded_file">
@@ -119,11 +118,9 @@ import Upload from '~/components/Upload'
 //import Api
 import {registerRepair} from '~/api/repair'
 import {delUploadFile} from '~/api/upload'
-//import json
-import repairType from '../../json/repairType';
-import repairObject from '../../json/repairObject.json';
-import repairTitle from '../../json/repairTitle.json';
-import repairJsonData from '../../json/repairUpdate.json';
+
+import {getRepairJsonData} from '../../api/repair'
+import { mapGetters } from 'vuex'
 
 export default {
     metaInfo () {
@@ -136,15 +133,45 @@ export default {
         Upload,
     },
 
+    computed:{ 
+        ...mapGetters({
+            currentUser: 'auth/user',
+            currentLang:'lang/locale'
+        }),
+    },
+
+    watch:{
+        currentLang:{
+            handler(val){
+                if(val == 'en'){
+                    this.repairJsonData = this.enJsonData;
+                    this.willRepairObject = null;
+                    this.willRepairTitle = null;
+                }
+                if(val == 'kr'){
+                    this.repairJsonData = this.krJsonData;
+                    this.willRepairObject = null;
+                    this.willRepairTitle = null;
+                }
+                if(val == 'vn'){
+                    this.repairJsonData = this.vnJsonData;
+                    this.willRepairObject = null;
+                    this.willRepairTitle = null;
+                }
+            },
+            deep:true
+        }
+    },
+
     data(){
         return{
-            repairJsonData,
+            repairJsonData:null,
+            enJsonData:[],
+            krJsonData:[],
+            vnJsonData:[],
             willRepairObject:null,
             willRepairTitle:null,
             autoInputMode: false,
-            repairType,
-            repairObject,
-            repairTitle,
             createRepairData: {
                 title: '',
                 desc: '',
@@ -167,8 +194,25 @@ export default {
         }
     },
 
-    mounted(){
-        
+    created(){
+        getRepairJsonData()
+        .then(res=>{
+            this.enJsonData = JSON.parse(res.data[0].repair_type);
+            this.krJsonData = JSON.parse(res.data[1].repair_type);
+            this.vnJsonData = JSON.parse(res.data[2].repair_type);
+            if(this.currentLang == 'en'){
+                this.repairJsonData = this.enJsonData;
+            }
+            if(this.currentLang == 'kr'){
+                this.repairJsonData = this.krJsonData;
+            }
+            if(this.currentLang == 'vn'){
+                this.repairJsonData = this.vnJsonData;
+            }
+        })
+        .catch(err=>{
+            console.log(err.response)
+        })
     },
 
     methods:{
@@ -241,38 +285,6 @@ export default {
             this.isRequesting = false;
         },
 
-        async saveToDraftRequest(){
-            this.emoStatus = false;
-            if(this.createRepairData.type.trim() == ''){
-                return this.error('Type is required')
-            }
-            if(this.createRepairData.object.trim() == ''){
-                return this.error('Object is required')
-            }
-            if(this.createRepairData.title.trim() == ''){
-                return this.error('Title is required')
-            }
-            if(this.createRepairData.desc.trim() == ''){
-                return this.error('Description is required')
-            }
-            this.createRepairData.isDraft = 1;
-            // this.isSavingDraft = true;
-            // await registerSuggestion(this.createRepairData)
-            // .then(res=>{
-            //     this.createRepairData.title = '';
-            //     this.createRepairData.desc = '';
-            //     this.createRepairData.file.imgUrl = [];
-            //     this.createRepairData.file.otherUrl = [];
-            //     this.createRepairData.file.videoUrl = [];
-            //     // this.$router.push({path:'/suggestion/index'})
-                
-            // })
-            // .catch(err=>{
-            //     console.log(err);
-            // })
-            // this.isSavingDraft = false
-        },
-
         async deleteFile(type,fileName){
             let filePath = '';
             if(type == 'image'){
@@ -311,10 +323,6 @@ export default {
         changeInputType(){
             if(this.autoInputMode == false){
                 this.autoInputMode = true;
-                // this.createRepairData.type = this.repairJsonData[0];
-                // console.log("this.createRepairData.type", this.createRepairData.type);
-                // this.createRepairData.object = this.createRepairData.type.object[0]; 
-                // this.createRepairData.title = this.createRepairData.object.title[0];
             }
             else{
                 this.autoInputMode = false;

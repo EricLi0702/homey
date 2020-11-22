@@ -11,32 +11,30 @@
           </strong></h4>
       </div>
       <div class="lc-form px-4 pb-5">
-          <div class="m-2">
-              <p class="mt-2">{{ $t('common').email }} </p>
-              <Input prefix="ios-mail-outline" v-model="userEmail" type="email" name="email" :disabled="isSentVercode" :placeholder="$t('auth').enterEmail"/>
-          </div>
-          
-          <div class="m-2">
-            <Button v-if="isSentVercode == false" class="mt-3" long icon="ios-send" type="success" @click="verifyUserEmail" :disabled="isConfirming" :loading="isConfirming">{{ $t('common').sendResetPassLink }}</Button>
-          </div>
-
-          <div class="m-2 animate__animated animate__fadeIn" v-if="isSentVercode">
-            <p class="mt-2">{{ $t('auth').verificationCode }}</p>
-            <Input prefix="md-finger-print" class="d-block" v-model="verifyCode.code" name="vercode" maxlength="6" :disabled="isFinishVerify" />
-            <p>{{ $t('auth').verificationEmailCode }}</p>
-            <Button class="mt-3" icon="ios-send" type="success" long @click="verifyingCode" :disabled="isVerifying||isFinishVerify" :loading="isVerifying">{{ $t('auth').verify }}</Button>
-          </div>
-          <div class="m-2 animate__animated animate__fadeIn" v-if="isFinishVerify">
-            <p class="mt-2">{{ $t('common').password }}</p>
-            <Input prefix="ios-key-outline" v-model="password.password" type="password" password name="password" :placeholder="$t('auth').enterPass"/>
-          </div>
-          <div class="m-2 animate__animated animate__fadeIn" v-if="isFinishVerify">
-            <p class="mt-2">{{ $t('common').confirmPassword }}</p>
-            <Input prefix="ios-key-outline" v-model="password.confirmpassword" type="password" password name="confirmpassword" :placeholder="$t('auth').enterConfirmPass"/>
-          </div>
-          <div class="m-2 animate__animated animate__fadeIn">
-            <Button v-if="isFinishVerify" class="mt-3 " icon="ios-send" type="success" long @click="setPassword" :disabled="isSettingPassword" :loading="isSettingPassword">{{$t('common').resetPass}}</Button>
-          </div>
+        <div class="m-2">
+            <p class="mt-2">{{ $t('common').email }} </p>
+            <Input prefix="ios-mail-outline" v-model="userEmail" type="email" name="email" :disabled="isSentVercode" :placeholder="$t('auth').enterEmail"/>
+        </div>
+        <div class="m-2">
+          <Button v-if="isSentVercode == false" class="mt-3" long icon="ios-send" type="success" @click="verifyUserEmail" :disabled="isConfirming" :loading="isConfirming">{{ $t('common').sendResetPassLink }}</Button>
+        </div>
+        <div class="m-2 animate__animated animate__fadeIn" v-if="isSentVercode">
+          <p class="mt-2">{{ $t('auth').verificationCode }}</p>
+          <Input prefix="md-finger-print" class="d-block" v-model="verifyCode.code" name="vercode" maxlength="6" :disabled="isFinishVerify" />
+          <p>{{ $t('auth').verificationEmailCode }}</p>
+          <Button class="mt-3" icon="ios-send" type="success" long @click="verifyingCode" :disabled="isVerifying||isFinishVerify" :loading="isVerifying">{{ $t('auth').verify }}</Button>
+        </div>
+        <div class="m-2 animate__animated animate__fadeIn" v-if="isFinishVerify">
+          <p class="mt-2">{{ $t('common').password }}</p>
+          <Input prefix="ios-key-outline" v-model="password.password" type="password" password name="password" :placeholder="$t('auth').enterPass"/>
+        </div>
+        <div class="m-2 animate__animated animate__fadeIn" v-if="isFinishVerify">
+          <p class="mt-2">{{ $t('common').confirmPassword }}</p>
+          <Input prefix="ios-key-outline" v-model="password.confirmpassword" type="password" password name="confirmpassword" :placeholder="$t('auth').enterConfirmPass"/>
+        </div>
+        <div class="m-2 animate__animated animate__fadeIn">
+          <Button v-if="isFinishVerify" class="mt-3 " icon="ios-send" type="success" long @click="setPassword" :disabled="isSettingPassword" :loading="isSettingPassword">{{$t('common').resetPass}}</Button>
+        </div>
       </div>
     </div>
   </div>
@@ -78,9 +76,7 @@ export default {
 
     async send () {
       const { data } = await this.form.post('/api/password/email')
-
       this.status = data.status
-
       this.form.reset()
     },
 
@@ -99,7 +95,6 @@ export default {
       }
       verifyUserEmailResetPass(obj)
       .then(res=>{
-        console.log(res)
         if (res.data.msg == 2){
           this.isConfirming = false;
           this.isSentVercode = true;
@@ -147,7 +142,6 @@ export default {
         this.password.confirmpassword = '';
         return this.error('Password does not match. please try again');
       }
-      console.log("password", this.password);
       this.isSettingPassword = true;
       await setupPasswordResetPass(this.password.password, this.userEmail)
       .then(res=>{

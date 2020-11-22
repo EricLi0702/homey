@@ -22,7 +22,6 @@
                                 <div v-if="emoStatus" class="position-absolute close-emoji-btn" @click="closeEmojiWindow()">{{$t('common').closeEmoji}}</div>
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
-                            <Button icon="ios-briefcase-outline" type="warning" class="ml-auto mr-2" @click="saveToDraftSuggestion" :disabled="isSavingDraft" :loading="isSavingDraft">{{ $t('notification').Draft }}</Button>
                             <Button icon="ios-send" type="success" class="" @click="registerSuggestion" :disabled="isSuggesting" :loading="isSuggesting">{{ $t('suggest').suggest }}</Button>
                         </div>
                         <div class="col-12 uploaded_file">
@@ -147,7 +146,6 @@ export default {
 
         async registerSuggestion(){
             this.emoStatus = false;
-            console.log(this.createSuggestionData);
             if(this.createSuggestionData.title.trim() == ''){
                 return this.error('Title is required')
             }
@@ -158,10 +156,6 @@ export default {
             this.isSuggesting = true;
             await registerSuggestion(this.createSuggestionData)
             .then(res=>{
-                // let newSuggestion = res.data.suggestion;
-                // console.log(newSuggestion);
-                // let parsed = JSON.parse(newSuggestion.upload_file);
-                // console.log(parsed);
                 this.createSuggestionData.title = '';
                 this.createSuggestionData.desc = '';
                 this.createSuggestionData.file.imgUrl = [];
@@ -178,7 +172,6 @@ export default {
 
         async saveToDraftSuggestion(){
             this.emoStatus = false;
-            console.log(this.createSuggestionData);
             if(this.createSuggestionData.title.trim() == ''){
                 return this.error('Title is required')
             }
@@ -210,9 +203,6 @@ export default {
             }else {
                 filePath = fileName.imgUrl
             }
-
-            
-
             await delUploadFile(filePath)
             .then(res=>{
                     if(type == 'image'){
@@ -226,17 +216,6 @@ export default {
             .catch(err=>{
                 console.log(err);
             })
-            // if(res.status == 200){
-            //     if(type == 'image'){
-            //         this.createSuggestionData.file.imgUrl.pop(fileName)
-            //     }else if(type == 'other'){
-            //         this.createSuggestionData.file.otherUrl.pop(fileName)
-            //     }else if(type == 'video'){
-            //         this.createSuggestionData.file.videoUrl.pop(fileName)
-            //     }
-            // }else{
-            //     this.swr();
-            // }
         },
 
         //listen event from Upload

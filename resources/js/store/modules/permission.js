@@ -34,7 +34,6 @@ export const actions = {
     addUserRole ( { commit }, payload ){
         addUserRole(payload)
             .then(res=>{
-                console.log(res)
             })
             .catch(err=>{
                 console.log(err)

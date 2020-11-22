@@ -29,6 +29,9 @@ class RepairController extends Controller
         $repairData['type'] = $request->type;
         $repairData['object'] = $request->object;
         $repairData['upload_file'] = json_encode($request->file);
+        if (is_numeric($request->type)) {
+            $repairData['isSelectMode'] = 1;
+        }
         if($request->isDraft !== null){
             $repairData['isDraft'] = 1;
         }

@@ -17,6 +17,7 @@ class Repair extends Model
         'isDraft',
         'isShowToProprietor',
         'status',
+        'isSelectMode'
     ];
 
     public function userId(){

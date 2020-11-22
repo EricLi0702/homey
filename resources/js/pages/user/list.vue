@@ -97,7 +97,6 @@ export default {
         getResults(page = 1){
             getUserList(page)
             .then(res=>{
-                console.log('+++',res.data)
                 this.userLists = res.data.data
                 this.paginationData = res.data
             })
@@ -132,7 +131,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

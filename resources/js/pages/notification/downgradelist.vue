@@ -115,7 +115,6 @@ export default {
         async start(){
             await getDowngradNotificationList()
             .then(res=>{
-                console.log(res);
             })
         },
 

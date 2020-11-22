@@ -105,15 +105,12 @@ export default {
         }
     },
     async mounted(){
-        console.log('++++notification+++',this.currentUser)
         await getTop5Notification(this.currentUser.id).then(res=>{
-            console.log('----res',res)
             this.notificationData = res.data
         }).catch(err=>{
             console.log(err)
         })
         await getNotificationCnt().then(res=>{
-            console.log(res)
             this.todayData = res.data.today;
             this.weekData = res.data.week;
             this.monthData = res.data.month;
@@ -122,15 +119,6 @@ export default {
             this.userPro = parseFloat((this.currentCnt/this.registerCnt*100).toFixed(2))
             this.todayPro = parseFloat((this.todayData/this.monthData*100).toFixed(2))
             this.weekPro = parseFloat((this.weekData/this.monthData*100).toFixed(2))
-            // this.firstWeek = res.data.firstWeek;
-            // this.secondWeek = res.data.secondWeek;
-            // this.thirdWeek = res.data.thirdWeek;
-            // this.forthWeek = res.data.forthWeek;
-            // this.oneWeekAgo = parseInt(this.firstWeek / this.monthData * 100)
-            // this.twoWeekAgo = parseInt((this.secondWeek - this.firstWeek) / this.monthData * 100)
-            // this.threeWeekAgo = parseInt((this.thirdWeek -this.secondWeek) / this.monthData * 100)
-            // this.fourWeekAgo = parseInt((this.forthWeek -this.thirdWeek) / this.monthData * 100)
-
         }).catch(err=>{
             console.log(err)
         })

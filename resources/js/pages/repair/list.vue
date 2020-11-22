@@ -1,21 +1,9 @@
 <template>
     <div>
-        <!-- <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
-            <div class="p-3 py-5 bg-white">
-                <p>something...</p>
-            </div>
-        </div> -->
         <div class="container m-0 p-0 mx-auto">
             <div class="row m-0 p-0">
                 <Category/>
                 <div class="col-12 col-md-8 m-0 p-0">
-                    <!-- <div v-if="noRequest" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
-                        <div class="no-fac text-center">
-                            <Icon size="150" type="ios-search" />
-                            <h5>{{ $t('repair').oopsThere }}</h5>
-                        </div>
-                    </div> -->
-
                     <div v-if="repairList.length" class="posted-item position-relative" v-for="(repair,i) in repairList" :key="i" >
                         <router-link :to="{path:`/repair/${repair.id}`}">
                             <div class="pi-wrap float-left ">
@@ -99,6 +87,7 @@ export default {
             repairJsonData:null,
             baseUrl:window.base_url,
             repairList : [],
+            repairListRaw : [],
             noRequest:false,
             //infinit loading
             pageOfRepair: 1,
@@ -113,11 +102,45 @@ export default {
         })
     },
 
+    watch:{
+        currentLang:{
+            handler(val){
+                this.$timeago.locale = this.currentLang;
+                if(val == 'en'){
+                    this.repairJsonData = this.enJsonData;
+                }
+                if(val == 'kr'){
+                    this.repairJsonData = this.krJsonData;
+                }
+                if(val == 'vn'){
+                    this.repairJsonData = this.vnJsonData;
+                }
+            },
+            deep:true
+        },
+        repairJsonData:{
+            handler(val){
+                for(let i = 0; i < this.repairList.length; i++){
+                    if(this.repairList[i].isSelectMode == 1){
+                        let type = val[parseInt(this.repairListRaw[i].type)-1].label;
+                        let object = val[parseInt(this.repairListRaw[i].type)-1].object[parseInt(this.repairListRaw[i].object)-1].label;
+                        let title = val[parseInt(this.repairListRaw[i].type)-1].object[parseInt(this.repairListRaw[i].object)-1].title[parseInt(this.repairListRaw[i].title)-1].label;
+                        this.repairList[i].type = type;
+                        this.repairList[i].object = object;
+                        this.repairList[i].title = title;
+                    }
+                }
+            },
+            deep:true
+        }
+    },
+
+    
+
     created(){
-        console.log(this.currentLang);
+        this.$timeago.locale = this.currentLang;
         getRepairJsonData()
         .then(res=>{
-            console.log(res.data)
             this.enJsonData = JSON.parse(res.data[0].repair_type);
             this.krJsonData = JSON.parse(res.data[1].repair_type);
             this.vnJsonData = JSON.parse(res.data[2].repair_type);
@@ -130,7 +153,6 @@ export default {
             else if(this.currentLang == 'vn'){
                 this.repairJsonData = this.vnJsonData;
             }
-            console.log("123123",this.repairJsonData)
         })
         .catch(err=>{
             console.log(err.response)
@@ -141,14 +163,10 @@ export default {
         async start(){
             await getrepairList()
             .then(res=>{
-                console.log(res);
             })
         },
 
         async infiniteHandlerRepairRequest($state){
-            // if(this.repairJsonData == null){
-            //     return;
-            // }
             let timeOut = 0;
             
             if (this.pageOfRepair > 1) {
@@ -166,16 +184,9 @@ export default {
 
                 $.each(res.data.data, function(key, value){
                         value.upload_file = JSON.parse(value.upload_file);
-                        if(!isNaN(value.type)){
-                            console.log("select mode", value);
-                            let type = vm.repairJsonData[value.type-1].label;
-                            let object = vm.repairJsonData[value.type-1].object[value.object-1].label;
-                            let title = vm.repairJsonData[value.type-1].object[value.object-1].title[value.title-1].label;
-                            value.type = type;
-                            value.object = object;
-                            value.title = title;
-                        }
-                        vm.repairList.push(value); 
+                        vm.repairList.push(value);
+                        let clonedVal = JSON.parse(JSON.stringify(value));
+                        vm.repairListRaw.push(clonedVal); 
                     });
                 if (vm.pageOfRepair - 1 === vm.lastpageOfRepair) {
                     $state.complete();

@@ -124,7 +124,6 @@ export default {
     },
 
     mounted(){
-        console.log("this.updateSuggestionData",this.updateCommunityData);
     },
 
     data(){

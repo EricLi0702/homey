@@ -1,10 +1,5 @@
 <template>
     <div>
-        <!-- <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
-            <div class="p-3 py-5 bg-white">
-                <p>something...</p>
-            </div>
-        </div> -->
         <div class="container m-0 p-0 mx-auto">
             <div class="row m-0 p-0">
                 <Category/>
@@ -17,7 +12,6 @@
                     </div>
                     <div v-else-if="suggestionList.length" class="posted-item position-relative" v-for="(suggestion,i) in suggestionList" :key="i" >
                         <router-link :to="{path:`/suggestion/${suggestion.id}`}">
-                            
                             <div class="pi-wrap float-left ">
                                 <div class="user-info float-left">
                                     <div class="avatar">
@@ -147,7 +141,6 @@ export default {
         async start(){
             await getSuggestionList()
             .then(res=>{
-                console.log(res);
             })
         },
 
@@ -185,27 +178,6 @@ export default {
             });
              
                 
-        },
-
-        listenNewNotification(){
-            Echo.private('notification')
-                .listen('NewNotification', (newNotification) => {
-                    console.log("wow, greate!!",newNotification);
-                    // this.$store.commit('setNewNotificationCnt', this.getCurrentUser.new_noti_cnt + 1);
-                    // this.notificationList.unshift(newNotification.notification);
-                    // Notification.requestPermission( permission => {
-                    //     let notification = new Notification('New post alert!', {
-                    //         body: newNotification.notification.title, // content for the alert
-                    //         icon: "http://127.0.0.1:8000/images/icons/mainPage-phone.png" // optional image url
-                    //     });
-
-                    //     // link to page on clicking the notification
-                    //     notification.onclick = () => {
-                    //         window.open(window.location.href);
-                    //     };
-                    // });
-                    // const res = this.callApi('post','/api/users/newVideoCount',{new_video_cnt:this.$store.state.user.new_video_cnt});
-                });
         },
     }
 }

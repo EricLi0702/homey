@@ -110,7 +110,6 @@ export default {
     created(){
         getRepairJsonData()
         .then(res=>{
-            console.log(res.data[0])
             this.enJsonData = JSON.parse(res.data[0].repair_type);
             this.krJsonData = JSON.parse(res.data[1].repair_type);
             this.vnJsonData = JSON.parse(res.data[2].repair_type);
@@ -287,7 +286,6 @@ export default {
                 this.deleteRepairObjectData = null;
                 this.deleteRepairObjectIndex = null;
                 this.isDeleteRepairModal = false;
-                console.log(this.repairJsonData);
             }
 
             //delete repair title

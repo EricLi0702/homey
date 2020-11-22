@@ -315,7 +315,7 @@
         "createRequest":"요청 사항을 작성하세요.",
         "name":"이름",
         "NewRequest":"새 요청",
-        "SelectMode":"모드 선택",
+        "SelectMode":"선택모드",
         "selectRepairType":"수리 유형을 선택하십시오",
         "selectRepairObject":"복구 개체를 선택하십시오",
         "selectRepairTitle":"수리 제목을 선택하십시오",

@@ -179,7 +179,6 @@ export default {
   }),
   created(){
     this.getNewPush();
-    console.log("@@@@", this.user)
   },
   mounted(){
     this.listenNewNotification();
@@ -225,7 +224,6 @@ export default {
         }
         else{
           this.pushNotification = JSON.parse(res.data.pushData);
-          console.log("hurry", this.pushNotification);
           this.pushNotificationCnt = this.pushNotification.notification.length + this.pushNotification.community.length + this.pushNotification.suggestion.length;
         }
       })
@@ -276,7 +274,6 @@ export default {
     listenNewNotification(){
       Echo.channel('notification')
           .listen('NewNotification', (newNotification) => {
-            console.log("newNotification", newNotification)
               if(newNotification.notification.userId == this.user.id){
                 return;
               }
@@ -284,10 +281,8 @@ export default {
               this.pushNotificationCnt++;
               let newPushData = {}
               newPushData.postNewPushData = this.pushNotification;
-              console.log("]]]",newPushData);
               newPush(newPushData)
               .then(res=>{
-                console.log("$$$$$", this.pushNotification);
               })
               .catch(err=>{
 
@@ -307,7 +302,6 @@ export default {
               newPushData.postNewPushData = this.pushNotification;
               newPush(newPushData)
               .then(res=>{
-                console.log("$$$$$", this.pushNotification);
               })
               .catch(err=>{
               })
@@ -325,7 +319,6 @@ export default {
               newPushData.postNewPushData = this.pushNotification;
               newPush(newPushData)
               .then(res=>{
-                console.log("$$$$$", this.pushNotification);
               })
               .catch(err=>{
               })
@@ -353,7 +346,6 @@ export default {
         drawerBody.css("overflow", 'auto');
 
       }
-      console.log(drawerItem);
       this.isOpenMenu = !this.isOpenMenu;
     }
   }
