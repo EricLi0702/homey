@@ -4,13 +4,7 @@
             <div class="row m-0 p-0">
                 <Category/>
                 <div class="col-12 col-md-8 m-0 p-0">
-                    <div v-if="noSuggestion" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
-                        <div class="no-fac text-center">
-                            <Icon size="150" type="ios-search" />
-                            <h5>{{ $t('suggest').oopsNoSuggestion }}</h5>
-                        </div>
-                    </div>
-                    <div v-else-if="suggestionList.length" class="posted-item position-relative" v-for="(suggestion,i) in suggestionList" :key="i" >
+                    <div v-if="suggestionList.length" class="posted-item position-relative" v-for="(suggestion,i) in suggestionList" :key="i" >
                         <router-link :to="{path:`/suggestion/${suggestion.id}`}">
                             <div class="pi-wrap float-left ">
                                 <div class="user-info float-left">
