@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->foreign('buildingId')->references('id')->on('buildings')->onDelete('cascade');
             $table->unsignedBigInteger('vercode')->default('0');
             $table->string('user_avatar')->default('/');
-            $table->text('newPush')->nullable();
+            $table->longText('newPush')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

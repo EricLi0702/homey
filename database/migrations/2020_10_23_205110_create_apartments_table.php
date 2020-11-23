@@ -21,6 +21,7 @@ class CreateApartmentsTable extends Migration
             $table->string('repreName');
             $table->string('phoneNumber');
             $table->string('email')->unique();
+            $table->boolean('isAutoReserve')->default('0');
             $table->timestamps();
         });
     }

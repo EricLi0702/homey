@@ -28,6 +28,7 @@ class CreateRepairsTable extends Migration
             $table->boolean('isShowToProprietor')->default('0');
             $table->enum('status', ['approved', 'ongoing', 'pending', 'finish'])->default('pending');
             $table->unsignedBigInteger('star')->nullable();
+            $table->boolean('isSelectMode')->default('0');
             $table->timestamps();
         });
     }
