@@ -123,6 +123,7 @@ import 'video.js/dist/video-js.css'
 import { videoPlayer } from 'vue-video-player'
 import Category from './category'
 import { mapGetters } from 'vuex'
+import i18n from '~/plugins/i18n'
 import {
     getCurrentNotificationFromServer, 
     viewedCurrentNotification, 
@@ -190,7 +191,7 @@ export default {
             getPreviousItem(this.notificationId)
             .then(res=>{
                 if(res.data == ""){
-                    return this.error("This is the first.");
+                    return this.error(i18n.t('alert').first);
                 }
                 this.$router.push({ path:`/notification/${res.data.id}` });
             })
@@ -203,7 +204,7 @@ export default {
             getNextItem(this.notificationId)
             .then(res=>{
                 if(res.data == ""){
-                    return this.error("This is the last.");
+                    return this.error(i18n.t('alert').last);
                 }
                 this.$router.push({ path:`/notification/${res.data.id}` });
             })
@@ -262,7 +263,7 @@ export default {
             downgradeNotification(this.details)
             .then(res=>{
                 if(res.status == 200){
-                    this.success('Downgrade successfully');
+                    this.success(i18n.t('alert').downgrade);
                     this.$router.push({name:'notification.list'});
                 }
             })
@@ -278,7 +279,7 @@ export default {
             upgradeNotification(this.details)
             .then(res=>{
                 if(res.status == 200){
-                    this.success('Upgrade successfully');
+                    this.success(i18n.t('alert').upgrade);
                     this.$router.push({name:'notification.list'});
                 }
             })
@@ -296,7 +297,7 @@ export default {
             .then(res=>{
                 if(res.status == 200){
 
-                    this.success('successfully deleted')
+                    this.success(i18n.t('alert').removeSuccessfully);
                     this.$router.push({name:'notification.list'});
                 }
             })
@@ -308,7 +309,7 @@ export default {
         },
 
         cancelDeleteNotification(){
-            this.success('Title is required')
+            
         },
 
     }

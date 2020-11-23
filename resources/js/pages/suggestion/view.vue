@@ -198,6 +198,7 @@ import {
 import Category from './category'
 
 import { mapGetters } from 'vuex'
+import i18n from '~/plugins/i18n'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').viewDetailSuggestion }
@@ -269,7 +270,7 @@ export default {
             getPreviousItem(this.suggestionId)
             .then(res=>{
                 if(res.data == ""){
-                    return this.error("This is the first.");
+                    return this.error(i18n.t('alert').first);
                 }
                 this.$router.push({ path:`/suggestion/${res.data.id}` });
             })
@@ -282,7 +283,7 @@ export default {
             getNextItem(this.suggestionId)
             .then(res=>{
                 if(res.data == ""){
-                    return this.error("This is the last.");
+                    return this.error(i18n.t('alert').last);
                 }
                 this.$router.push({ path:`/suggestion/${res.data.id}` });
             })
@@ -316,13 +317,13 @@ export default {
                 this.$router.push({name:'suggestion.update',params:{updateSuggestionData:suggestion}})
             }
             else{
-                return this.error("You can no longer update your suggestion.");
+                return this.error(i18n.t('alert').cannotUpdate);
             }
         },
 
         async leaveComment(){
             if(this.commentData == null){
-                return this.error("Please enter comment");
+                return this.error(i18n.t('alert').comment);
             }
             await leaveCommentToSuggestion(this.commentData, this.details)
             .then(res=>{
@@ -561,7 +562,7 @@ export default {
             deleteSuggestion(this.details)
             .then(res=>{
                 if(res.status == 200){
-                    this.success('successfully deleted')
+                    this.success(i18n.t('alert').removeSuccessfully);
                     this.$router.push({name:'suggestion.list'});
                 }
             })
@@ -576,7 +577,7 @@ export default {
             deleteComment(comment)
             .then(res=>{
                 if(res.status == 200){
-                    this.success('successfully deleted');
+                    this.success(i18n.t('alert').removeSuccessfully);
                     comment.isRemoved = 1;
                     comment.content = "removed by author"
                 }

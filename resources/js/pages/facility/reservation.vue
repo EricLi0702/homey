@@ -153,6 +153,7 @@ import {
     denyReservation,
     } from '~/api/reservation'
 import { mapGetters } from 'vuex'
+import i18n from '~/plugins/i18n'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').reservation }
@@ -322,14 +323,14 @@ export default {
             allowReservation(obj)
             .then(res=>{
                 this.selectedFacility.reservation_data[this.allowDataIndex].status = 'allow';
-                this.success('You have allowed this reservation');
+                this.success(i18n.t('alert').allowedReservation);
                 this.allowReservationData = {};
                 this.allowDataIndex = -1;
             })
             .catch(err=>{
                 console.log(err.response);
                 if(err.response.data.access == false){
-                    this.error("you cannot allow this reservation");
+                    this.error(i18n.t('alert').notAccessAllow);
                 }
             })
         },
@@ -343,14 +344,14 @@ export default {
             denyReservation(obj)
             .then(res=>{
                 this.selectedFacility.reservation_data[this.denyDataIndex].status = 'deny';
-                this.success('You have denyed this reservation');
+                this.success(i18n.t('alert').denyReservation);
                 this.denyReservationData = {};
                 this.denyDataIndex = -1;
             })
             .catch(err=>{
                 console.log(err.response);
                 if(err.response.data.access == false){
-                    this.error("you cannot deny this reservation");
+                    this.error(i18n.t('alert').notDenyAllow);
                 }
             })
         },
@@ -364,7 +365,7 @@ export default {
             delReservation(obj)
             .then(res=>{
                 this.selectedFacility.reservation_data.splice(this.deleteDataIndex, 1)
-                this.success('Successfully removed reservation!');
+                this.success(i18n.t('alert').removeSuccessfully);
                 this.deleteReservationData = {};
                 this.deleteDataIndex = -1;
                 this.isDeleting = false;
@@ -373,7 +374,7 @@ export default {
             .catch(err=>{
                 console.log(err.response);
                 if(err.response.data.access == false){
-                    this.error("you can not delete this reservation.");
+                    this.error(i18n.t('alert').notDeleteAllow);
                 }
                 this.isDeleting = false;
                 this.removeModal = false;

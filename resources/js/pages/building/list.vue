@@ -51,6 +51,7 @@
 
 <script> 
 import { mapGetters } from 'vuex'
+import i18n from '~/plugins/i18n'
 import {getBuildingList,addBuilding,delBuilding, updateBuilding} from '~/api/apartment'
 export default {
     metaInfo () {
@@ -87,7 +88,7 @@ export default {
     methods:{
         addBuilding(){
             if(this.buildingInfo.number.trim() == ''){
-                return this.error("please enter building number!");
+                return this.error(i18n.t('alert').dong);
             }
             this.isAdding = true
             this.$set(this.buildingInfo,'aptId',this.currentUser.aptId)
@@ -113,14 +114,14 @@ export default {
             this.isDeletingBuilding = true;
             delBuilding(this.deleteBuildingData)
             .then(res=>{
-                this.success("removed succesfully!");
+                this.success(i18n.t('alert').removeSuccessfully);
                 this.removeModal = false;
                 this.isDeletingBuilding = false;
                 this.buildingList.pop(this.deleteBuildingData);
                 this.deleteBuildingData = null;
             })
             .catch(err=>{
-                this.error("something went wrong!");
+                this.error(i18n.t('alert').swr);
             })
             
         },

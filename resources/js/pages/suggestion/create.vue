@@ -83,6 +83,7 @@ import Upload from '~/components/Upload'
 //import Api
 import {getSuggestionList,registerSuggestion,updateSuggestion,delSuggestion} from '~/api/suggestion'
 import {delUploadFile} from '~/api/upload'
+import i18n from '~/plugins/i18n'
 
 export default {
     metaInfo () {
@@ -147,10 +148,10 @@ export default {
         async registerSuggestion(){
             this.emoStatus = false;
             if(this.createSuggestionData.title.trim() == ''){
-                return this.error('Title is required')
+                return this.error(i18n.t('alert').title);
             }
             if(this.createSuggestionData.desc.trim() == ''){
-                return this.error('Description is required')
+                return this.error(i18n.t('alert').desc);
             }
 
             this.isSuggesting = true;
@@ -173,10 +174,10 @@ export default {
         async saveToDraftSuggestion(){
             this.emoStatus = false;
             if(this.createSuggestionData.title.trim() == ''){
-                return this.error('Title is required')
+                return this.error(i18n.t('alert').title);
             }
             if(this.createSuggestionData.desc.trim() == ''){
-                return this.error('Description is required')
+                return this.error(i18n.t('alert').desc);
             }
             this.createSuggestionData.isDraft = 1;
             this.isSavingDraft = true;

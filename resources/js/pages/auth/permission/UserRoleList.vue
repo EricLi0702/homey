@@ -51,6 +51,7 @@
 import {mapGetters,mapAction} from 'vuex'
 import {fetchUserRole,addUserRole,updateUserRole,delUserRole} from '~/api/permission'
 import permission from '~/json/assignRole.json'
+import i18n from '~/plugins/i18n'
 export default {
     middleware: 'auth',
 
@@ -93,7 +94,7 @@ export default {
                 .then(res=>{
                     this.roleLists.push(res.data)
                     this.addData.roleName = ''
-                    this.success('Role is Added')
+                    this.success(i18n.t('alert').roleAdded);
                 })
                 .catch(err=>{
                     this.swr()
@@ -107,7 +108,7 @@ export default {
         },
         updateRole(role,index){
             if(role.roleName.trim() == ''){
-                return this.error('roleName is required')
+                return this.error(i18n.t('alert').userRole);
             }
             this.isEditing = true
             updateUserRole(role)
@@ -127,7 +128,7 @@ export default {
                     this.isDeleting = false;
                     this.roleLists.pop(this.deleteRoleData);
                     this.deleteRoleData = null;
-                    this.success("removed succesfully!");
+                    this.success(i18n.t('alert').removeSuccessfully);
                 })
                 .catch(err=>{
                     console.log(err)

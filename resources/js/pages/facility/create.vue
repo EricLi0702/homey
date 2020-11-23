@@ -94,7 +94,7 @@ import Upload from '~/components/Upload'
 //import Api
 import {registerFacility} from '~/api/facility'
 import {delUploadFile} from '~/api/upload'
-
+import i18n from '~/plugins/i18n'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').FacilityCreate }
@@ -153,20 +153,19 @@ export default {
         async registerNewFacility(){
             this.emoStatus = false;
             if(this.createFacilityData.name.trim() == ''){
-                return this.error('Name is required')
+                return this.error(i18n.t('alert').name);
             }
             if(this.createFacilityData.equipment.trim() == ''){
-                return this.error('Equipment is required')
+                return this.error(i18n.t('alert').equipment);
             }
             if(this.createFacilityData.nb.trim() == ''){
-                return this.error('N.B is required')
+                return this.error(i18n.t('alert').nb);
             }
             if(this.createFacilityData.outline.trim() == ''){
-                return this.error('Outline is required')
+                return this.error(i18n.t('alert').outline);
             }
-
             if(this.createFacilityData.file.imgUrl.length == 0){
-                return this.error("When registering a public building, at least one image to be used as a cover image is required.");
+                return this.error(i18n.t('alert').morethanOneImage);
             }
 
             this.isCreatingNewFacility = true;

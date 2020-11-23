@@ -1,9 +1,21 @@
 <template>
     <div>
+        <!-- <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
+            <div class="p-3 py-5 bg-white">
+                <p>something...</p>
+            </div>
+        </div> -->
         <div class="container m-0 p-0 mx-auto">
             <div class="row m-0 p-0">
                 <Category/>
                 <div class="col-12 col-md-8 m-0 p-0">
+                    <!-- <div v-if="noRequest" class="position-relative row m-0 p-2 h-50 d-flex justify-content-center align-items-center">
+                        <div class="no-fac text-center">
+                            <Icon size="150" type="ios-search" />
+                            <h5>{{ $t('repair').oopsThere }}</h5>
+                        </div>
+                    </div> -->
+
                     <div v-if="repairList.length" class="posted-item position-relative" v-for="(repair,i) in repairList" :key="i" >
                         <router-link :to="{path:`/repair/${repair.id}`}">
                             <div class="pi-wrap float-left ">
@@ -29,10 +41,10 @@
                                     <span>{{repair.object}}</span>
                                 </div>
                                 <div class="posted-item-info-views">
-                                    <Tag v-if="repair.status == 'pending'" color="warning">{{repair.status}}</Tag>
-                                    <Tag v-else-if="repair.status == 'approved'" color="success">{{repair.status}}</Tag>
-                                    <Tag v-else-if="repair.status == 'ongoing'" color="primary">{{repair.status}}</Tag>
-                                    <Tag v-else-if="repair.status == 'finish'" color="default">{{repair.status}}</Tag>
+                                    <Tag v-if="repair.status == 'pending'" color="warning">{{$t('common').pending}}</Tag>
+                                    <Tag v-else-if="repair.status == 'approved'" color="success">{{$t('common').approved}}</Tag>
+                                    <Tag v-else-if="repair.status == 'ongoing'" color="primary">{{$t('common').ongoing}}</Tag>
+                                    <Tag v-else-if="repair.status == 'finish'" color="default">{{$t('common').finish}}</Tag>
                                 </div>
                                 <div class="posted-item-info-time">
                                     <Icon type="ios-clock-outline" />
@@ -163,6 +175,7 @@ export default {
         async start(){
             await getrepairList()
             .then(res=>{
+                console.log(res);
             })
         },
 
@@ -187,6 +200,15 @@ export default {
                         vm.repairList.push(value);
                         let clonedVal = JSON.parse(JSON.stringify(value));
                         vm.repairListRaw.push(clonedVal); 
+                        
+                        if(value.isSelectMode == 1){
+                            let type = vm.repairJsonData[parseInt(value.type)-1].label;
+                            let object = vm.repairJsonData[parseInt(value.type)-1].object[parseInt(value.object)-1].label;
+                            let title = vm.repairJsonData[parseInt(value.type)-1].object[parseInt(value.object)-1].title[parseInt(value.title)-1].label;
+                            value.type = type;
+                            value.object = object;
+                            value.title = title;
+                        }
                     });
                 if (vm.pageOfRepair - 1 === vm.lastpageOfRepair) {
                     $state.complete();

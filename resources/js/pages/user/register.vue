@@ -60,6 +60,7 @@
 import {fetchUserRole} from '~/api/permission'
 import {addUser} from '~/api/user'
 import {mapGetters} from 'vuex'
+import i18n from '~/plugins/i18n'
 export default {
   metaInfo () {
         return { title: this.$t('metaInfo').registerUser }
@@ -96,22 +97,22 @@ export default {
   methods:{
     async  addUser(){
       if(this.user.name.trim() == ''){
-        return this.error('Name is required')
+        return this.error(i18n.t('alert').name);
       }
       if(this.user.email.trim() == ''){
-        return this.error('Email is required')
+        return this.error(i18n.t('alert').email);
       }
       if(this.user.phoneNumber.trim() == ''){
-        return this.error('Phone number is required')
+        return this.error(i18n.t('alert').phone);
       }
       if(this.user.buildingId == ''){
-        return this.error('Dong is required')
+        return this.error(i18n.t('alert').dong);
       }
       if(this.user.ho.trim() == ''){
-        return this.error('Ho is required')
+        return this.error(i18n.t('alert').ho);
       }
       if(this.user.roleId == ''){
-        return this.error('Role of this user is required')
+        return this.error(i18n.t('alert').userRole);
       }
 
       this.user.aptId = this.currentUser.apt.id
@@ -125,10 +126,10 @@ export default {
         .catch(error => {
           console.log(error.response)
           if(error.response.data.isMail == false){
-            this.error("Email you entered is aleardy exist in our DB.");
+            this.error(i18n.t('alert').emailAlreadyExist);
           }
           if(error.response.data.isPhone == false){
-            this.error("Phone number you entered is aleardy exist in our DB.");
+            this.error(i18n.t('alert').phoneAlreadyExist);
           }
         });
       this.isAdding = false

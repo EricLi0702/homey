@@ -146,6 +146,7 @@
 import {getAdminUserList, delUser} from '~/api/user'
 import {getAptLists} from '~/api/apartment'
 import {mapGetters} from 'vuex'
+import i18n from '~/plugins/i18n'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').userlist }
@@ -217,7 +218,7 @@ export default {
                     this.isDeleting = false;
                     this.userLists.pop(this.deleteUserData);
                     this.deleteUserData = null;
-                    this.success("removed succesfully!");
+                    this.success(i18n.t('alert').removeSuccessfully);
                 })
                 .catch(err=>{
                     console.log(err)

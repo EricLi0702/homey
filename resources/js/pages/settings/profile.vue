@@ -51,6 +51,7 @@
 <script>
 import Form from 'vform'
 import { mapGetters } from 'vuex'
+import i18n from '~/plugins/i18n'
 import {updateAvatarOfUser} from '~/api/auth'
 export default {
   scrollToTop: false,
@@ -105,16 +106,16 @@ export default {
     },
     async updateAvatar(){
       if(this.imgUrl == ''){
-        return this.error('Image is required')
+        return this.error(i18n.t('alert').avatar);
       }
       this.isUpdatingAvatar = true;
       await updateAvatarOfUser(this.imgUrl)
       .then(res=>{
         if(res.data.msg = "ok"){
-          return this.success('Updated your Avatar')
+          return this.success(i18n.t('alert').updateAvatarSuccessfully);
         }
         else{
-          return this.error('something went wrong');
+          return this.error(i18n.t('alert').swr);
         }
       })
       .catch(err=>{

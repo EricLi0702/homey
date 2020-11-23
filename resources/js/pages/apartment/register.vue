@@ -36,6 +36,7 @@
 
 <script>
 import {addApt,getAptLists,updateApt,delApt} from '~/api/apartment'
+import i18n from '~/plugins/i18n'
 export default {
   data(){
     return{
@@ -61,21 +62,21 @@ export default {
   methods:{
     async  addApt(){
       if(this.addData.aptName.trim() == ''){
-        this.error('aptName is required')
+        this.error(i18n.t('alert').aptNameRequired);
       }
       if(this.addData.address.trim() == ''){
-        this.error('address is required')
+        this.error(i18n.t('alert').aptAddressRequired);
       }
       if(this.addData.repreName.trim() == ''){
-        this.error('Representation Name is reqired')
+        this.error(i18n.t('alert').aptRepNameRequired);
       }
       if(this.addData.phoneNumber.trim() == ''){
-        this.error('phone Number is required')
+        this.error(i18n.t('alert').aptRepPhoneRequired);
       }
       if(this.addData.email.trim() == ''){
-        this.error('email is required')
+        this.error(i18n.t('alert').aptRepEmailRequired);
       }
-      
+
       this.isAdding = true
       await addApt(this.addData)
         .then(res=>{

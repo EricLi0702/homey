@@ -150,7 +150,10 @@
         "notUser" : "Không phải thành viên",
         "pending" : "đang chờ xử lý",
         "allow" : "Tán thành",
-        "deny" : "phủ nhận"
+        "deny" : "phủ nhận",
+        "approved" : "Được chấp thuận",
+        "ongoing" : "Đang diễn ra",
+        "finish" : "Kết thúc"
     },
     "login":{
         "login":"Đăng nhập",

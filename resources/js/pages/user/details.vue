@@ -60,6 +60,7 @@
 import { mapGetters } from 'vuex'
 import {fetchUserRole} from '~/api/permission'
 import {updateUser} from '~/api/user'
+import i18n from '~/plugins/i18n'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').updateUserInfo }
@@ -88,28 +89,28 @@ export default {
     methods:{
         updateUser(){
             if(this.userData.name.trim() == ''){
-                return this.error('Name is required')
+                return this.error(i18n.t('alert').name);
             }
             if(this.userData.email.trim() == ''){
-                return this.error('Email is required')
+                return this.error(i18n.t('alert').email);
             }
             if(this.userData.phoneNumber.trim() == ''){
-                return this.error('Phone number is required')
+                return this.error(i18n.t('alert').phone);
             }
             if(this.userData.buildingId == ''){
-                return this.error('Dong is required')
+                return this.error(i18n.t('alert').dong);
             }
             if(this.userData.ho.trim() == ''){
-                return this.error('Ho is required')
+                return this.error(i18n.t('alert').ho);
             }
             if(this.userData.roleId == ''){
-                return this.error('Role of this user is required')
+                return this.error(i18n.t('alert').userRole);
             }
             this.isUpdating = true;
             updateUser(this.userData)
             .then(res=>{
                 this.isUpdating = false;
-                this.userData.name = ''
+                this.userData.name = '' 
                 this.userData.email = ''
                 this.userData.phoneNumber = ''
                 this.userData.buildingId = ''
@@ -120,10 +121,10 @@ export default {
             .catch(error => {
                 console.log(error.response)
                 if(error.response.data.isMail == false){
-                    this.error("Email you entered is aleardy exist in our DB.");
+                    this.error(i18n.t('alert').emailAlreadyExist);
                 }
                 if(error.response.data.isPhone == false){
-                    this.error("Phone number you entered is aleardy exist in our DB.");
+                    this.error(i18n.t('alert').phoneAlreadyExist);
                 }
             });
             this.isUpdating = false;

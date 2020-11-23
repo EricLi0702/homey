@@ -25,6 +25,7 @@ import ko from 'view-design/dist/locale/ko-KR';
 import vn from 'view-design/dist/locale/vi-VN';
 
 import { mapGetters } from 'vuex'
+import i18n from '~/plugins/i18n'
 import {getAptLists,delApt} from '~/api/apartment'
 export default {
     data(){
@@ -196,7 +197,7 @@ export default {
                     this.isDeleting = false;
                     this.aptLists.pop(this.deleteAptData);
                     this.deleteAptData = null;
-                    this.success('successfully deleted')
+                    this.success(i18n.t('alert').removeSuccessfully);
                 })
                 .catch(err=>{
                     console.log(err)

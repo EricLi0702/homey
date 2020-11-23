@@ -57,6 +57,10 @@
                                 <router-link :to="{path:`/repair/${repair.id}`}">
                                     <p>{{repair.title}}</p>
                                 </router-link>
+                                <Tag v-if="repair.status == 'pending'" color="warning">{{$t('common').pending}}</Tag>
+                                <Tag v-else-if="repair.status == 'approved'" color="success">{{$t('common').approved}}</Tag>
+                                <Tag v-else-if="repair.status == 'ongoing'" color="primary">{{$t('common').ongoing}}</Tag>
+                                <Tag v-else-if="repair.status == 'finish'" color="default">{{$t('common').finish}}</Tag>
                             </div>
                         </div>
                     </div>
@@ -79,6 +83,7 @@ export default {
             vnJsonData:[],
             repairJsonData:[],
             repairData:[],
+            repairListRaw : [],
             monthData:1,
             todayData:0,
             weekData:0,
@@ -101,6 +106,36 @@ export default {
     watch:{
         $route(to,from){
             this.$router.go()
+        },
+        currentLang:{
+            handler(val){
+                if(val == 'en'){
+                    this.repairJsonData = this.enJsonData;
+                }
+                if(val == 'kr'){
+                    this.repairJsonData = this.krJsonData;
+                }
+                if(val == 'vn'){
+                    this.repairJsonData = this.vnJsonData;
+                }
+            },
+            deep:true
+        },
+        repairJsonData:{
+            handler(val){
+                for(let i = 0; i < this.repairData.length; i++){
+                    if(this.repairData[i].isSelectMode == 1){
+                        console.log("!!!!!!!!!!!!!!!!!!!", this.repairListRaw[i]);
+                        let type = val[parseInt(this.repairListRaw[i].type)-1].label;
+                        let object = val[parseInt(this.repairListRaw[i].type)-1].object[parseInt(this.repairListRaw[i].object)-1].label;
+                        let title = val[parseInt(this.repairListRaw[i].type)-1].object[parseInt(this.repairListRaw[i].object)-1].title[parseInt(this.repairListRaw[i].title)-1].label;
+                        this.repairData[i].type = type;
+                        this.repairData[i].object = object;
+                        this.repairData[i].title = title;
+                    }
+                }
+            },
+            deep:true
         }
     },
 
@@ -125,11 +160,15 @@ export default {
         })
     },
 
-    async mounted(){
-        await getTop5Repair(this.currentUser.id).then(res=>{
-            this.repairData = res.data
+    mounted(){
+        getTop5Repair(this.currentUser.id).then(res=>{
+            this.repairData = res.data;
+            for(let j = 0; j < res.data.length; j++){
+                this.repairListRaw.push(JSON.parse(JSON.stringify(this.repairData[j])));
+            }
             for(let i = 0; i < this.repairData.length; i++){
-                if(!isNaN(this.repairData[i].type)){
+                
+                if(this.repairData[i].isSelectMode == 1){
                     let type = this.repairJsonData[this.repairData[i].type-1].label;
                     let object = this.repairJsonData[this.repairData[i].type-1].object[this.repairData[i].object-1].label;
                     let title = this.repairJsonData[this.repairData[i].type-1].object[this.repairData[i].object-1].title[this.repairData[i].title-1].label;

@@ -193,7 +193,7 @@ import {
     getPreviousItem,
     getNextItem
 } from '~/api/community'
-
+import i18n from '~/plugins/i18n'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').viewDetailCommunity }
@@ -270,7 +270,7 @@ export default {
             getPreviousItem(this.communityId)
             .then(res=>{
                 if(res.data == ""){
-                    return this.error("This is the first.");
+                    return this.error(i18n.t('alert').first);
                 }
                 this.$router.push({ path:`/community/${res.data.id}` });
             })
@@ -283,7 +283,7 @@ export default {
             getNextItem(this.communityId)
             .then(res=>{
                 if(res.data == ""){
-                    return this.error("This is the last.");
+                    return this.error(i18n.t('alert').last);
                 }
                 this.$router.push({ path:`/community/${res.data.id}` });
             })
@@ -317,7 +317,7 @@ export default {
                 this.$router.push({name:'community.update',params:{updateCommunityData:community}})
             }
             else{
-                return this.error("You can no longer update your community.");
+                return this.error(i18n.t('alert').cannotUpdate);
             }
         },
 
@@ -399,7 +399,7 @@ export default {
             deleteCommunity(this.details)
             .then(res=>{
                 if(res.status == 200){
-                    this.success('successfully deleted')
+                    this.success(i18n.t('alert').removeSuccessfully);
                     this.$router.push({name:'community.list'});
                 }
             })
@@ -413,7 +413,7 @@ export default {
 
         async leaveComment(){
             if(this.commentData == null){
-                return this.error("Please enter comment...");
+                return this.error(i18n.t('alert').comment);
             }
             this.isLeaving = true;
             await leaveCommentToCommunity(this.commentData, this.details)
@@ -471,7 +471,7 @@ export default {
             deleteComment(comment)
             .then(res=>{
                 if(res.status == 200){
-                    this.success('successfully deleted');
+                    this.success(i18n.t('alert').removeSuccessfully);
                     comment.isRemoved = 1;
                     comment.content = "removed by author"
                 }
@@ -504,7 +504,7 @@ export default {
 
         replyToComment(comment){
             if(this.replyToCommentData.trim() == ''){
-                return this.error('Reply message is required');
+                return this.error(i18n.t('alert').comment);
             }
             let replyToCommentPayload = {};
             replyToCommentPayload.parentComment = comment;

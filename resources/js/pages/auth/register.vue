@@ -67,7 +67,7 @@
 import Form from 'vform'
 import LoginWithGithub from '~/components/LoginWithGithub'
 import {postValidation, verifyingCodeFromEmail, setupPassword} from '~/api/auth'
-
+import i18n from '~/plugins/i18n'
 export default {
   middleware: 'guest',
 
@@ -107,13 +107,13 @@ export default {
   methods: {
     async verifyUserInfo(){
       if(this.verifyData.name.trim() == ''){
-        return this.error('Name is required');
+        return this.error(i18n.t('alert').name);
       }
       if(this.verifyData.email.trim() == ''){
-        return this.error('Email is required');
+        return this.error(i18n.t('alert').email);
       }
       if(this.verifyData.phone.trim() == ''){
-        return this.error('Phone is required');
+        return this.error(i18n.t('alert').phone);
       }
 
       this.isConfirming = true;
@@ -126,14 +126,14 @@ export default {
         }
       })
       .catch(err=>{
-        this.error('Please check again if the information you entered is correct.');
+        this.error(i18n.t('alert').checkAgainYouEntered);
       });
       this.isConfirming = false;
     },
 
     async verifyingCode(){
       if(this.verifyCode.code.trim() == ''){
-        return this.error('Code is required');
+        return this.error(i18n.t('alert').code);
       }
       this.verifyCode.userData = this.verifyData;
       this.isVerifying = true;
@@ -144,24 +144,24 @@ export default {
         }
       })
       .catch(err=>{
-        this.error('please check again if the code you entered is correct');
+        this.error(i18n.t('alert').checkAgainYouEnteredCode);
       });
       this.isVerifying = false;
     },
 
     async setPassword(){
       if(this.isAgree == false){
-        return this.error('please agree to our Terms of Service and Privacy Policy');
+        return this.error(i18n.t('alert').agreePolicy);
       }
       if(this.password.password.trim() == ''){
-        return this.error('Password is required');
+        return this.error(i18n.t('alert').password);
       }
       if(this.password.confirmpassword.trim() == ''){
-        return this.error('Confirm Password is required');
+        return this.error(i18n.t('alert').passwordConfirm);
       }
       if(this.password.password !== this.password.confirmpassword){
         this.password.confirmpassword = '';
-        return this.error('Password does not match. please try again');
+        return this.error(i18n.t('alert').notMatchPass);
       }
       this.isSettingPassword = true;
       await setupPassword(this.password.password, this.verifyData)
@@ -171,7 +171,7 @@ export default {
         }
       })
       .catch(err=>{
-        this.error('please check again if the code you entered is correct');
+        console.log(err.response);
       });
 
       this.isSettingPassword = false;

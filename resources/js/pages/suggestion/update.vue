@@ -84,7 +84,8 @@ import Upload from '~/components/Upload'
 import {getSuggestionList,updateSuggestion,delSuggestion} from '~/api/suggestion'
 import {delUploadFile} from '~/api/upload'
 
-import { mapGetters } from 'vuex'   
+import { mapGetters } from 'vuex'
+import i18n from '~/plugins/i18n'   
 
 export default {
     metaInfo () {
@@ -143,10 +144,10 @@ export default {
         async updateSuggestion(){
             this.emoStatus = false;
             if(this.updateSuggestionData.title.trim() == ''){
-                return this.error('Title is required')
+                return this.error(i18n.t('alert').title);
             }
             if(this.updateSuggestionData.content.trim() == ''){
-                return this.error('Description is required')
+                return this.error(i18n.t('alert').desc);
             }
 
             this.isUpdating = true;

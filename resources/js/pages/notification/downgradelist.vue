@@ -83,6 +83,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 import {getDowngradNotificationList, upgradeNotification} from '~/api/notification'
 import Category from './category'
 import { mapGetters } from 'vuex'
+import i18n from '~/plugins/i18n'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').downgradeNotification }
@@ -149,7 +150,7 @@ export default {
             }
             upgradeNotification(notiId)
             .then(res=>{
-                this.success("successfully upgraded!");
+                this.success(i18n.t('alert').upgrade);
                 this.$router.push({path: '/notification/index'});
             })
             .catch(error=>{

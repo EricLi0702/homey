@@ -60,7 +60,7 @@
 import Form from 'vform'
 import LoginWithGithub from '~/components/LoginWithGithub'
 import LoginWithGoogle from '~/components/LoginWithGoogle'
-
+import i18n from '~/plugins/i18n'
 export default {
   middleware: 'guest',
 
@@ -85,7 +85,7 @@ export default {
   methods: {
     async login () {
       if (this.form.password.trim() == '' || this.form.email.trim() == ''){
-        return this.error("please enter fields");
+        return this.error(i18n.t('alert').loginField);
       }
       // Submit the form.
       const data = {}
@@ -94,7 +94,7 @@ export default {
           this.resData  = res.data
         })
         .catch(err=>{
-          this.error("email or password incorrect")
+          this.error(i18n.t('alert').loginFailed);
         })
       // Save the token.
       this.$store.dispatch('auth/saveToken', {

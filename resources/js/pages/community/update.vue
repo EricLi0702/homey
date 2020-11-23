@@ -98,6 +98,7 @@ import {updateCommunity} from '~/api/community'
 
 import {delUploadFile} from '~/api/upload'
 import { mapGetters } from 'vuex'
+import i18n from '~/plugins/i18n'
 
 export default {
     metaInfo () {
@@ -179,21 +180,21 @@ export default {
 
         async updateCommunity(){
             if(this.updateCommunityData.title.trim() == ''){
-                return this.error('Title is required')
+                return this.error(i18n.t('alert').title);
             }
             if(this.periodType == 'withPeriod'){
                 this.updateCommunityData.period = this.initPeriod;
                 if(this.updateCommunityData.period.trim() == ''){
-                    return this.error('Period is required')
+                    return this.error(i18n.t('alert').period);
                 }
             }
             else{
                 if(this.updateCommunityData.period.length == 0){
-                    return this.error('Period is required')
+                    return this.error(i18n.t('alert').period);
                 }
             }
             if(this.updateCommunityData.content.trim() == ''){
-                return this.error('Description is required')
+                return this.error(i18n.t('alert').desc);
             }
             this.isUpdating = true;
 

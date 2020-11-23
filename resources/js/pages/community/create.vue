@@ -102,6 +102,7 @@ import Upload from '~/components/Upload'
 import {getCommunityList,registerCommunity,updateCommunity,delCommunity} from '~/api/community'
 import {delUploadFile} from '~/api/upload'
 import { mapGetters } from 'vuex'
+import i18n from '~/plugins/i18n'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').createCommunity }
@@ -139,7 +140,7 @@ export default {
 
     created(){
         if(this.currentLang == 'en'){
-            locale(en);s
+            locale(en);
         }
         if(this.currentLang == 'kr'){
             locale(ko);
@@ -208,21 +209,21 @@ export default {
 
         async registerCommunity(){
             if(this.registerCommunityData.title.trim() == ''){
-                return this.error('Title is required')
+                return this.error(i18n.t('alert').title);
             }
             if(this.periodType == 'withPeriod'){
                 this.registerCommunityData.period = this.initPeriod;
                 if(this.registerCommunityData.period.trim() == ''){
-                    return this.error('Period is required')
+                    return this.error(i18n.t('alert').period);
                 }
             }
             else{
                 if(this.registerCommunityData.period.length == 0){
-                    return this.error('Period is required')
+                    return this.error(i18n.t('alert').period);
                 }
             }
             if(this.registerCommunityData.desc.trim() == ''){
-                return this.error('Description is required')
+                return this.error(i18n.t('alert').desc);
             }
             this.isRegistering = true;
 

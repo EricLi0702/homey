@@ -121,6 +121,7 @@ import {delUploadFile} from '~/api/upload'
 
 import {getRepairJsonData} from '../../api/repair'
 import { mapGetters } from 'vuex'
+import i18n from '~/plugins/i18n'
 
 export default {
     metaInfo () {
@@ -238,30 +239,30 @@ export default {
             this.emoStatus = false;
             if(this.autoInputMode){
                 if(this.createRepairData.type == ''){
-                    return this.error('Type is required');
+                    return this.error(i18n.t('alert').type);
                 }
                 if(this.createRepairData.object == ''){
-                    return this.error('Object is required');
+                    return this.error(i18n.t('alert').object);
                 }
                 if(this.createRepairData.title == ''){
-                    return this.error('Title is required');
+                    return this.error(i18n.t('alert').title);
                 }
                 if(this.createRepairData.desc.trim() == ''){
-                    return this.error('Description is required')
+                    return this.error(i18n.t('alert').desc);
                 }
             }
             else{
                 if(this.createRepairData.type.trim() == ''){
-                    return this.error('Type is required')
+                    return this.error(i18n.t('alert').type);
                 }
                 if(this.createRepairData.object.trim() == ''){
-                    return this.error('Object is required')
+                    return this.error(i18n.t('alert').object);
                 }
                 if(this.createRepairData.title.trim() == ''){
-                    return this.error('Title is required')
+                    return this.error(i18n.t('alert').title);
                 }
                 if(this.createRepairData.desc.trim() == ''){
-                    return this.error('Description is required')
+                    return this.error(i18n.t('alert').desc);
                 }
             }   
             this.isRequesting = true;

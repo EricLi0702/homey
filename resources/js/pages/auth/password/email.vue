@@ -82,7 +82,7 @@ export default {
 
     verifyUserEmail(){
       if(this.userEmail.trim() == ''){
-         return this.error('Email is required');
+         return this.error(i18n.t('alert').email);
       }
       let mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
       if(!(this.userEmail.match(mailFormat))){
@@ -104,18 +104,18 @@ export default {
         console.log(err.response)
         if(err.response.data.msg == 0){
           this.isConfirming = false;
-          this.error("inputed email does not found in our record.");
+          this.error(i18n.t('alert').emailNotFound);
         }
         if(err.response.data.msg == 1){
           this.isConfirming = false;
-          this.error("you have to register first.");
+          this.error(i18n.t('alert').firstMustRegister);
         }
       })
     },
 
     async verifyingCode(){
       if(this.verifyCode.code.trim() == ''){
-        return this.error('Code is required');
+        return this.error(i18n.t('alert').code);
       }
       this.verifyCode.userEmail = this.userEmail;
       this.isVerifying = true;
@@ -126,21 +126,21 @@ export default {
         }
       })
       .catch(err=>{
-        this.error('please check again if the code you entered is correct');
+        this.error(i18n.t('alert').checkAgainYouEnteredCode);
       });
       this.isVerifying = false;
     },
 
     async setPassword(){
       if(this.password.password.trim() == ''){
-        return this.error('Password is required');
+        return this.error(i18n.t('alert').password);
       }
       if(this.password.confirmpassword.trim() == ''){
-        return this.error('Confirm Password is required');
+        return this.error(i18n.t('alert').passwordConfirm);
       }
       if(this.password.password !== this.password.confirmpassword){
         this.password.confirmpassword = '';
-        return this.error('Password does not match. please try again');
+        return this.error(i18n.t('alert').notMatchPass);
       }
       this.isSettingPassword = true;
       await setupPasswordResetPass(this.password.password, this.userEmail)
@@ -150,7 +150,7 @@ export default {
         }
       })
       .catch(err=>{
-        this.error('please check again if the code you entered is correct');
+        console.log(err.response);
       });
 
       this.isSettingPassword = false;

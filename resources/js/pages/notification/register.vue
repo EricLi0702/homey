@@ -123,6 +123,7 @@ import {getNotificationList,registerNotification,updateNotification,delNotificat
 import Upload from '~/components/Upload'
 import {delUploadFile} from '~/api/upload'
 import { mapGetters } from 'vuex'
+import i18n from '~/plugins/i18n'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').registerNotification }
@@ -207,7 +208,7 @@ export default {
             getDraft()
             .then(res=>{
                 if(res.data.draftData.length !== 0){
-                    this.success("You have already draft");
+                    this.success(i18n.t('alert').alreadyDraft);
                     this.registerNotificationData.file = JSON.parse(res.data.draftData[0].upload_file);
                     this.registerNotificationData.title = res.data.draftData[0].title;
                     this.registerNotificationData.desc = res.data.draftData[0].content;
@@ -274,22 +275,22 @@ export default {
 
         async registerNotification(){
             if(this.registerNotificationData.title.trim() == ''){
-                return this.error('Title is required')
+                return this.error(i18n.t('alert').title);
             }
         
             if(this.periodType == 'withPeriod'){
                 this.registerNotificationData.period = this.initPeriod;
                 if(this.registerNotificationData.period.trim() == ''){
-                    return this.error('Period is required')
+                    return this.error(i18n.t('alert').period);
                 }
             }
             else{
                 if(this.registerNotificationData.period.length == 0){
-                    return this.error('Period is required')
+                    return this.error(i18n.t('alert').period);
                 }
             }
             if(this.registerNotificationData.desc.trim() == ''){
-                return this.error('Description is required')
+                return this.error(i18n.t('alert').desc);
             }
 
             if(this.isUrgent == true){
@@ -324,21 +325,21 @@ export default {
 
         async saveToDraftNotification(){
             if(this.registerNotificationData.title.trim() == ''){
-                return this.error('Title is required')
+                return this.error(i18n.t('alert').title);
             }
             if(this.periodType == 'withPeriod'){
                 this.registerNotificationData.period = this.initPeriod;
                 if(this.registerNotificationData.period.trim() == ''){
-                    return this.error('Period is required')
+                    return this.error(i18n.t('alert').period);
                 }
             }
             else{
                 if(this.registerNotificationData.period.length == 0){
-                    return this.error('Period is required')
+                    return this.error(i18n.t('alert').period);
                 }
             }
             if(this.registerNotificationData.desc.trim() == ''){
-                return this.error('Description is required')
+                return this.error(i18n.t('alert').desc);
             }
             if(this.isUrgent == true){
                 this.registerNotificationData.type = 1;

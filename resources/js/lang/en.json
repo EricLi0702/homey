@@ -150,7 +150,10 @@
         "notUser" : "not User",
         "pending" : "Pending",
         "allow" : "Allowed",
-        "deny" : "Deny"
+        "deny" : "Deny",
+        "approved" : "Approved",
+        "ongoing" : "Ongoing",
+        "finish" : "Finish"
     },
     "login":{
         "login":"Login",

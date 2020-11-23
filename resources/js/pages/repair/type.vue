@@ -97,6 +97,7 @@
 
 <script>
 import {getRepairJsonData, saveToJson} from '../../api/repair'
+import i18n from '~/plugins/i18n'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').registerRepairType }
@@ -380,7 +381,7 @@ export default {
             }
             saveToJson(payload)
             .then(res=>{
-                this.success("successfully updated!");
+                this.success(i18n.t('alert').update);
                 this.isUpdatingRepairJson = false;
             })
             .catch(err=>{

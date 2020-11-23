@@ -228,6 +228,7 @@ import Viewer from 'v-viewer'
 import 'video.js/dist/video-js.css'
 import { videoPlayer } from 'vue-video-player'
 import { mapGetters } from 'vuex'
+import i18n from '~/plugins/i18n'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').FacilityList }
@@ -312,7 +313,7 @@ export default {
         this.start();
         this.getReservationCnt();
         if(this.currentLang == 'en'){
-            locale(en);s
+            locale(en);
         }
         if(this.currentLang == 'kr'){
             locale(ko);
@@ -384,13 +385,13 @@ export default {
 
         async reservateNew(){
             if(this.createReservationData.title.trim() == ''){
-                return this.error('Title is required')
+                return this.error(i18n.t('alert').title);
             }
             if(this.createReservationData.period.length == 0){
-                return this.error('Period is required')
+                return this.error(i18n.t('alert').period);
             }
             if(this.createReservationData.purpose.trim() == ''){
-                return this.error('Purpose is required')
+                return this.error(i18n.t('alert').purpose);
             }
             let payload = {
                 reservationData: this.createReservationData,
@@ -409,7 +410,7 @@ export default {
             })
             .catch(err=>{
                 if(err.response.data.msg == "impossible"){
-                    this.error("You cannot reserve on period you have selected. Already someone reserved on that period. Please check reservations.");
+                    this.error(i18n.t('alert').cannotReserveThisFacility);
                 }
             })
             this.isReservating = false;
@@ -527,10 +528,10 @@ export default {
             changeAcceptMode(obj)
             .then(res=>{
                 if(res.data.msg == 1){
-                    this.success("You have selected Automatic mode");
+                    this.success(i18n.t('alert').selectedAutoMode);
                 }
                 else{
-                    this.success("You have selected Manual mode");
+                    this.success(i18n.t('alert').selectedManualMode);
                 }
                 this.isChaningMode = false;
             })

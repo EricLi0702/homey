@@ -152,7 +152,7 @@ import {getCurrentNotificationFromServer, getNotificationList,registerNotificati
 import Upload from '~/components/Upload'
 import {delUploadFile} from '~/api/upload'
 import { mapGetters } from 'vuex'
-
+import i18n from '~/plugins/i18n'
 
 export default {
     metaInfo () {
@@ -283,22 +283,22 @@ export default {
 
         async updateNotification(){
             if(this.updateNotificationData.title.trim() == ''){
-                return this.error('Title is required')
+                return this.error(i18n.t('alert').title);
             }
             
             if(this.periodType == 'withPeriod'){
                 this.updateNotificationData.period = this.initPeriod;
                 if(this.updateNotificationData.period.trim() == ''){
-                    return this.error('Period is required')
+                    return this.error(i18n.t('alert').period);
                 }
             }
             else{
                 if(this.updateNotificationData.period.length == 0){
-                    return this.error('Period is required')
+                    return this.error(i18n.t('alert').period);
                 }
             }
             if(this.updateNotificationData.content.trim() == ''){
-                return this.error('Description is required')
+                return this.error(i18n.t('alert').desc);
             }
 
             if(this.isUrgent == true){

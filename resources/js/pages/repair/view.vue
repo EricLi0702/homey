@@ -18,10 +18,10 @@
                             </div>
                             <div class="title d-flex justify-content-between">
                                 <h3>{{details.title}}</h3>
-                                <Tag v-if="details.status == 'pending'" color="warning">{{details.status}}</Tag>
-                                <Tag v-else-if="details.status == 'approved'" color="success">{{details.status}}</Tag>
-                                <Tag v-else-if="details.status == 'ongoing'" color="primary">{{details.status}}</Tag>
-                                <Tag v-else-if="details.status == 'finish'" color="default">{{details.status}}</Tag>
+                                <Tag v-if="details.status == 'pending'" color="warning">{{$t('common').pending}}</Tag>
+                                <Tag v-else-if="details.status == 'approved'" color="success">{{$t('common').approved}}</Tag>
+                                <Tag v-else-if="details.status == 'ongoing'" color="primary">{{$t('common').ongoing}}</Tag>
+                                <Tag v-else-if="details.status == 'finish'" color="default">{{$t('common').finish}}</Tag>
                             </div>
                             <div class="post-content p-2">
                                 <p v-html="details.desc"></p>
@@ -169,6 +169,7 @@ import {
 
 import Category from './category'
 import { mapGetters } from 'vuex'
+import i18n from '~/plugins/i18n'
 export default {
     metaInfo () {
         return { title: this.$t('metaInfo').viewDetailRepairRequest }
@@ -312,7 +313,7 @@ export default {
             getPreviousItem(this.repairId)
             .then(res=>{
                 if(res.data == ""){
-                    return this.error("This is the first.");
+                    return this.error(i18n.t('alert').first);
                 }
                 this.$router.push({ path:`/repair/${res.data.id}` });
             })
@@ -325,7 +326,7 @@ export default {
             getNextItem(this.repairId)
             .then(res=>{
                 if(res.data == ""){
-                    return this.error("This is the last.");
+                    return this.error(i18n.t('alert').last);
                 }
                 this.$router.push({ path:`/repair/${res.data.id}` });
             })
@@ -356,10 +357,10 @@ export default {
 
         async responseToRepairRequest(){
             if(this.details.status == "finish"){
-                return this.error("This thread has been broken.");
+                return this.error(i18n.t('alert').finishedThisThread);
             }
             if(this.responseData == null){
-                return this.error("Please enter comment");
+                return this.error(i18n.t('alert').comment);
             }
             this.isResponsingTo = true;
             await responseToRepairRequest(this.responseData, this.details)
@@ -446,7 +447,7 @@ export default {
             deleteRequest(request)
             .then(res=>{
                 if(res.status == 204){
-                    this.success('successfully deleted');
+                    this.success(i18n.t('alert').removeSuccessfully);
                     this.$router.push({name:'repair.list'})
                 }
             })
@@ -467,13 +468,13 @@ export default {
 
         finishRequest(request){
             if(request.status == 'finish'){
-                return this.error("This thread has been broken.");
+                return this.error(i18n.t('alert').finishedThisThread);
             }
             if(this.rateOfResponse == 0){
-                return this.error("Please select rating");
+                return this.error(i18n.t('alert').ratingResponseRepair);
             }
             if(this.finishRequestData == null || this.finishRequestData.trim() == ''){
-                return this.error("Please enter your review");
+                return this.error(i18n.t('alert').reviewResponseRepair);
             }
 
             let payload = {};
@@ -485,7 +486,7 @@ export default {
             finishRequest(payload)
             .then(res=>{
                 if(res.status == 200){
-                    this.success('successfully finished');
+                    this.success(i18n.t('alert').finishSuccessfully);
                     this.$router.push({name:'repair.list'})
                 }
             })
