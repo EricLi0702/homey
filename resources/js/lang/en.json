@@ -39,7 +39,7 @@
         "AvenueAddress":"Lô đất IC 32, Khu Đô Thị Nam Thăng Long,  Tây Hồ, Hà Nội",
         "CallUs":"Call us",
         "footerLocate": "Công ty TNHH một thành viên We Apt",
-        "CellNum":"1900-3432, 1900-1122",
+        "CellNum":"0243-758-2126, 1900-1122",
         "MailUs":"Mail us",
         "HomeyCom":"weapt2021@gmail.com",
         "Support":"We support a happy life",
@@ -735,7 +735,8 @@
         "downgrade" : "You have successfully downgrade notification.",
         "updateAvatarSuccessfully" : "You have successfully updated your avatar.",
         "finishSuccessfully" : "It ended successfully.",
-        "alreadyDraft" : "You already have a draft."
+        "alreadyDraft" : "You already have a draft.",
+        "cannotAccessThisThread" : "Sorry, You cannot access this thread."
     },
 
     "modal" : {

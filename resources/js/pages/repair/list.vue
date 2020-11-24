@@ -188,6 +188,12 @@ export default {
             let vm = this;
             await getRepairList(this.pageOfRepair)
             .then(res=>{
+                if(res.data.msg == 0){
+                    console.log(res.data.msg);
+                    this.noRequest = true;
+                    $state.complete();
+                    return;
+                }
                 if(vm.pageOfRepair == 1 && res.data.data.length == 0){
                     this.noRequest = true;
                     $state.complete();

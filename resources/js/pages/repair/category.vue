@@ -125,7 +125,6 @@ export default {
             handler(val){
                 for(let i = 0; i < this.repairData.length; i++){
                     if(this.repairData[i].isSelectMode == 1){
-                        console.log("!!!!!!!!!!!!!!!!!!!", this.repairListRaw[i]);
                         let type = val[parseInt(this.repairListRaw[i].type)-1].label;
                         let object = val[parseInt(this.repairListRaw[i].type)-1].object[parseInt(this.repairListRaw[i].object)-1].label;
                         let title = val[parseInt(this.repairListRaw[i].type)-1].object[parseInt(this.repairListRaw[i].object)-1].title[parseInt(this.repairListRaw[i].title)-1].label;

@@ -31,10 +31,10 @@
               <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
               <has-error :form="form" field="name" />
             </div>
-            <div class="col-12 mb-3 gray-input">
+            <!-- <div class="col-12 mb-3 gray-input">
               <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
               <has-error :form="form" field="email" />
-            </div>
+            </div> -->
             
             <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
               <v-button :loading="form.busy" type="success">

@@ -39,7 +39,7 @@
         "AvenueAddress":"Lô đất IC 32, Khu Đô Thị Nam Thăng Long,  Tây Hồ, Hà Nội",
         "footerLocate": "Công ty TNHH một thành viên We Apt",
         "CallUs":"연락처",
-        "CellNum":"1900-3432, 1900-1122",
+        "CellNum":"0243-758-2126, 1900-1122",
         "MailUs":"찾기",
         "HomeyCom":"weapt2021@gmail.com",
         "Support":"행복한 삶을 지원합니다",
@@ -736,7 +736,8 @@
         "downgrade" : "성공적으로 다운그레이드하였습니다.",
         "updateAvatarSuccessfully" : "성공적으로 아바타를 업데이트했습니다.",
         "finishSuccessfully" : "성공적으로 끝났습니다.",
-        "alreadyDraft" : "이미 초고를 가지고 있습니다."
+        "alreadyDraft" : "이미 초고를 가지고 있습니다.",
+        "cannotAccessThisThread" : "미안하지만 이 스레드에 접근할수 없습니다."
     },
 
     "modal" : {

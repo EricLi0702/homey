@@ -46,30 +46,67 @@ class RepairController extends Controller
     }
 
     public function index(Request $request){
-        if(Auth::user()->roleId == 2 || Auth::user()->roleId == 7){
+        $user = Auth::user();
+        if($user->roleId == 2 || $user->roleId == 7){
             return Repair::with(['userId', 'repairId.managerId'])
                             ->where([['isDraft','=',0]])
-                            ->where([['aptId','=',Auth::user()->aptId]])
+                            ->where([['aptId','=',$user->aptId]])
                             ->orderBy('created_at','desc')
                             ->paginate(5);
 
         }
+        elseif($user->roleId == 4){
+            $resident = User::where([
+                ['aptId', '=', $user->aptId],
+                ['buildingId', '=', $user->buildingId],
+                ['ho', '=', $user->ho],
+                ['roleId', '=', 3]
+            ])->first();
+            if($resident == null){
+                return response()->json([
+                    'msg' => 0
+                ], 200);
+            }
+            return Repair::with(['userId', 'repairId'])
+                                ->where('userId', '=', $resident->id)
+                                ->where('isShowToProprietor', '=', 1)
+                                ->orderBy('created_at','desc')
+                                ->paginate(5);
+        }
         else{
             return Repair::with(['userId', 'repairId'])
                             ->where([['isDraft','=',0]])
-                            ->where([['aptId','=',Auth::user()->aptId]])
-                            ->where([['userId','=',Auth::user()->id]])
+                            ->where([['aptId','=',$user->aptId]])
+                            ->where([['userId','=',$user->id]])
                             ->orderBy('created_at','desc')
                             ->paginate(5);
         }
     }
 
     public function getCurrent(Request $request){
-        $userId = Auth::user()->id;
+        $currentUser = Auth::user();
+        $userId = $currentUser->id;
         $id = $request->id;
         $repairData =  Repair::with(['userId', 'repairId.managerId', 'repairId.userId'])
                         ->where('id',$id)
                         ->first();
+        if($repairData->userId !== $userId){
+            $repairDataOfUser = User::where('id', $repairData->userId)->first();
+            if($repairDataOfUser->aptId == $currentUser->aptId &&
+                $repairDataOfUser->buildingId == $currentUser->buildingId &&
+                $repairDataOfUser->ho == $currentUser->ho &&
+                $repairDataOfUser->roleId == 3 &&
+                $repairData->isShowToProprietor == 1){
+                    return response()->json([
+                        'repairData' => $repairData,
+                    ], 200);
+                }
+            else{
+                return response()->json([
+                    'repairData' => 0
+                ], 200);
+            }
+        }
         return response()->json([
             'repairData' => $repairData,
         ], 200);

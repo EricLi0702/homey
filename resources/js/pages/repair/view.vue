@@ -427,6 +427,10 @@ export default {
         getCurrentRepair(){
             getCurrentRepairFromServer(this.repairId)
             .then(res=>{
+                if(res.data.repairData == 0){
+                    this.error(i18n.t('alert').cannotAccessThisThread);
+                    this.$router.push({ path:`/repair/index` });
+                }
                 this.responseCommentData = res.data.repairData.repair_id;
                 this.details = res.data.repairData;
                 this.rawDetails = JSON.parse(JSON.stringify(this.details));
