@@ -6,15 +6,15 @@
                 <Form :model="registerCommunityData">
                     <div class="row m-0 p-0">
                         <div class="col-12 mb-3 gray-input fac-name">
-                            <Input v-model="registerCommunityData.title" placeholder="please enter topic" />
+                            <Input v-model="registerCommunityData.title" :placeholder="$t('placeholder').enterTitle" />
                         </div>
                         <div class="col-12 mb-3">
-                            <p class="">Period</p>
+                            <p class="">{{$t('community').Period}}</p>
                             <RadioGroup @on-change="setPeriodToBlank" v-model="periodType" class="">
                                 <Radio label="withPeriod">{{ $t('community').ChoosePeriod }}</Radio>
                                 <Radio label="withCalendar">{{ $t('community').ChooseCalendar }}</Radio>
                             </RadioGroup>   
-                            <DatePicker v-if="periodType == 'withCalendar'" class="w-50 mx-auto" :options="disableBeforeDate" @on-change="notiDateChange" style="display: block" type="datetimerange" placeholder="Please check your date"></DatePicker>
+                            <DatePicker v-if="periodType == 'withCalendar'" class="w-50 mx-auto" :options="disableBeforeDate" @on-change="notiDateChange" style="display: block" type="datetimerange" :placeholder="$t('placeholder').selectPeriod" ></DatePicker>
                             <RadioGroup v-else v-model="initPeriod" class=" w-50 mx-auto d-flex justify-content-between">
                                 <Radio label="forever">{{ $t('community').Forever }}</Radio>
                                 <Radio label="week">{{ $t('community').OneWeek }}</Radio>
@@ -22,7 +22,7 @@
                             </RadioGroup> 
                         </div>
                         <div class="col-12 mb-3">
-                            <wysiwyg v-model="registerCommunityData.desc" placeholder="please enter description" />
+                            <wysiwyg v-model="registerCommunityData.desc" :placeholder="$('placeholder').enterDescription" />
                         </div>
                         <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
                             <Upload

@@ -6,10 +6,10 @@
                 <Form :model="updateSuggestionData" v-if=" updateSuggestionData !== null">
                     <div class="row m-0 p-0">
                         <div class="col-12 mb-3 newtopic">
-                            <Input v-model="updateSuggestionData.title" :placeholder=" $t('facility').enterTitle " />
+                            <Input v-model="updateSuggestionData.title" :placeholder=" $t('placeholder').enterTitle " />
                         </div>
                         <div class="col-12 mb-3">
-                            <wysiwyg v-model="updateSuggestionData.content" :placeholder=" $t('facility').enterDescription " />
+                            <wysiwyg v-model="updateSuggestionData.content" :placeholder=" $t('placeholder').enterDescription " />
                         </div>
                         <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
                             <Upload

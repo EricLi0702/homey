@@ -3,7 +3,7 @@
         <div class="notification-sub-menu container-fluid bg-white box-block">
             <div class="container d-flex justify-content-between p-0 py-3 row m-0 mx-auto">
                 <Input class="col-12 col-md-6 p-0"
-                 search :placeholder="$t('facility').EnterSomething" />
+                 search :placeholder="$t('placeholder').enterSearchWord" />
                 <div class="notification-sub-menu-items col-12 col-md-6 p-0 text-right">
                     <router-link v-if="currentUser.roleId == 2 || currentUser.roleId == 6" :to="{ name: 'notification.register' }" class="">
                         <Button type="success" icon="md-add">{{$t('community').New}}</Button>

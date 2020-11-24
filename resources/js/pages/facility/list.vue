@@ -159,10 +159,10 @@
                         <Modal v-model="removeModal" width="360">
                             <p slot="header" style="color:#f60;text-align:center">
                                 <Icon type="ios-information-circle"></Icon>
-                                <span>Delete {{selectedFacility.name}}</span>
+                                <span>{{$t('modal').delete}} : {{selectedFacility.name}}</span>
                             </p>
                             <div class="text-center">
-                                <p>Will you delete this reservation?</p>
+                                <p>{{$t('modal').willDeleteReservation}}</p>
                             </div>
                             <div slot="footer">
                                 <Button type="error" size="large" long :loading="isDeleting" :disabled="isDeleting" @click="removeSelectedFacility()">{{ $t('apartment').delete }}</Button>
@@ -180,7 +180,7 @@
                 <div v-if="isRegisterToFacility" class="bg-white p-2 mt-3 animate__animated animate__fadeIn row m-0"> 
                     <Form :model="createReservationData" class="w-100">
                         <div class="col-12 mt-4 mb-3 gray-input">
-                            <Input v-model="createReservationData.title" :placeholder="$t('facility').enterTitle" />
+                            <Input v-model="createReservationData.title" :placeholder="$t('placeholder').enterTitle" />
                         </div>
                         <div class="col-12 mb-3 gray-input fac-max d-flex align-items-center">
                             <Icon class="mr-2" size="25" type="ios-people" />
@@ -188,10 +188,10 @@
                             <p class="text-secondary ml-4">({{$t('facility').MaximumEquipment}})</p>
                         </div>
                         <div class="col-12 mb-3">
-                            <DatePicker class="w-100" :options="disableBeforeDate" @on-change="notiDateChange" type="datetimerange" :placeholder="$t('facility').checkYourDate"></DatePicker>
+                            <DatePicker class="w-100" :options="disableBeforeDate" @on-change="notiDateChange" type="datetimerange" :placeholder="$t('placeholder').selectPeriod"></DatePicker>
                         </div>
                         <div class="col-12 mb-3">
-                            <wysiwyg v-model="createReservationData.purpose" :placeholder="$t('facility').enterDescription" />
+                            <wysiwyg v-model="createReservationData.purpose" :placeholder="$t('placeholder').enterPurpose" />
                         </div>
                     </Form>
                     <div v-if="currentUser.roleId == 3 || currentUser.roleId == 4 " class="col-12 text-right mb-3">

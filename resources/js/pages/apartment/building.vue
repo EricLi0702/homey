@@ -3,7 +3,7 @@
         <div class="form-group row">
             <label for="inputPassword" class="col-sm-2 col-form-label">{{ $t('apartment').representativeName }}</label>
             <div class="col-sm-10">
-                <input type="text" id="repreName" v-model="buildingInfo.number" class="form-control" placeholder="">
+                <input type="text" id="repreName" v-model="buildingInfo.number" class="form-control" :placeholder="$t('placeholder').enterDong">
             </div>
             <Button type="success" @click="addBuilding" :disabled="isAdding" :loading="isAdding">{{ $t('register').register }}</Button>
         </div>

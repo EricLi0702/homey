@@ -25,10 +25,10 @@
         <Modal v-model="removeModal" width="360">
             <p slot="header" style="color:#f60;text-align:center">
                 <Icon type="ios-information-circle"></Icon>
-                <span v-if="deleteRoleData != null">Delete {{deleteRoleData.roleName}}</span>
+                <span v-if="deleteRoleData != null">{{$t('modal').delete}} {{deleteRoleData.roleName}}</span>
             </p>
             <div class="text-center">
-                <p>Will you delete it? All users and datas of this Role will delete.</p>
+                <p>{{$t('modal').willDeleteRole}}</p>
             </div>
             <div slot="footer">
                 <Button type="error" size="large" long :loading="isDeleting" @click="delRole()">{{ $t('apartment').delete }}</Button>
@@ -38,7 +38,7 @@
             v-model="addModal"
             title="Add Role"
         >
-            <Input v-model="addData.roleName" class="mb-2" placeholder="Enter something..."/>
+            <Input v-model="addData.roleName" class="mb-2" :placeholder="$t('placeholder').enterUserRole"/>
             <div slot="footer">
                 <Button type="default" @click="addModal=false">{{ $t('auth').close }}</Button>
                 <Button type="primary" @click="addRole" :disabled="isAdding" :loading="isAdding">{{isAdding ? 'Adding': 'Add Role'}}</Button>

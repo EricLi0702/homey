@@ -33,7 +33,7 @@
                                 <Radio label="withCalendar">{{$t('community').ChooseCalendar}}</Radio>
                             </RadioGroup>   
 
-                            <DatePicker v-if="periodType == 'withCalendar' " class="w-50 mx-auto"  type="daterange" @on-change="notiDateChange" placeholder="please select the date" style="display: block" placement="bottom-end"></DatePicker>
+                            <DatePicker v-if="periodType == 'withCalendar' " class="w-50 mx-auto"  type="daterange" @on-change="notiDateChange" :placeholder="$t('placeholder').selectPeriod" style="display: block" placement="bottom-end"></DatePicker>
                             <RadioGroup v-else v-model="initPeriod" class=" w-50 mx-auto d-flex justify-content-between">
                                 <Radio label="forever">{{$t('community').Forever}}</Radio>
                                 <Radio label="week">{{$t('community').OneWeek}}</Radio>
@@ -41,7 +41,7 @@
                             </RadioGroup> 
                         </div>
                         <div class="col-12 mb-3">
-                            <wysiwyg v-model="registerNotificationData.desc" :placeholder="$t('facility').enterDescription" />
+                            <wysiwyg v-model="registerNotificationData.desc" :placeholder="$t('placeholder').enterDescription" />
                         </div>
                         <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
                             <Upload

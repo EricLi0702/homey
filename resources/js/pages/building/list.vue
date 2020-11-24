@@ -18,10 +18,10 @@
             <Modal v-model="removeModal" width="360">
                 <p slot="header" style="color:#f60;text-align:center">
                     <Icon type="ios-information-circle"></Icon>
-                    <span v-if="deleteBuildingData != null">{{$t('apartment').delete}} {{deleteBuildingData.number}}</span>
+                    <span v-if="deleteBuildingData != null">{{$t('apartment').delete}} : {{deleteBuildingData.number}}</span>
                 </p>
                 <div class="text-center">
-                    <p>Will you delete it? All users and datas of this building will delete.</p>
+                    <p>{{$t('modal').willDeleteBuilding}}</p>
                 </div>
                 <div slot="footer">
                     <Button type="error" size="large" long :loading="isDeletingBuilding" @click="delBuilding()">{{ $t('apartment').delete }}</Button>
@@ -30,10 +30,10 @@
             <Modal v-model="updateModal" width="360">
                 <p slot="header" style="color:#47CB89;text-align:center">
                     <Icon type="ios-information-circle"></Icon>
-                    <span v-if="updateBuildingData != null">{{$t('auth').update}} {{updateBuildingData.number}}</span>
+                    <span v-if="updateBuildingData != null">{{$t('auth').update}} : {{updateBuildingData.number}}</span>
                 </p>
                 <div class="text-center">
-                    <Input v-if="updateBuildingData !== null" v-model="updateBuildingData.number" placeholder="Enter something..." />
+                    <Input v-if="updateBuildingData !== null" v-model="updateBuildingData.number" :placeholder="$t('placeholder').enterBuildingNumber" />
                 </div>
                 <div slot="footer">
                     <Button type="success" size="large" long :loading="isUpdatingBuilding" @click="updateBuilding()">{{ $t('notification').update }}</Button>
@@ -42,7 +42,7 @@
         <div class="form-group row">
             <label for="inputPassword" class="col-4 col-form-label">{{ $t('apartment').buildingNumber }}</label>
             <div class="col-8 gray-input">
-                <input type="text" id="repreName" v-model="buildingInfo.number" class="form-control" placeholder="">
+                <input type="text" id="repreName" v-model="buildingInfo.number" class="form-control" :placeholder="$t('placeholder').enterBuildingNumber">
             </div>
             <Button class="m-3" type="success" @click="addBuilding" :disabled="isAdding" :loading="isAdding">{{ $t('register').register }}</Button>
         </div>

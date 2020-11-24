@@ -94,7 +94,7 @@
 
                     <div v-if="isResponsing" class="posted-item mt-3 p-2 animate__animated animate__fadeIn">
                         <div class="reply-form-comment m-0 row p-2">
-                            <Input v-model="responseData" type="textarea" placeholder="Enter Response..." />
+                            <Input v-model="responseData" type="textarea" :placeholder="$t('placeholder').enterResponse" />
                             <div class="d-flex justify-content-between col-12 p-0">
                                 <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                                 <div class="emoji-area-popup">

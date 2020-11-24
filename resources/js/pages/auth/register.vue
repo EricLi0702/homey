@@ -12,15 +12,15 @@
         <div class="lc-form px-4">
             <div class="m-2">
                 <p class="mt-2">{{ $t('common').name }} </p>
-                <Input prefix="md-person" v-model="verifyData.name" type="text" name="name" :disabled="isSentVercode" />
+                <Input prefix="md-person" v-model="verifyData.name" type="text" name="name" :disabled="isSentVercode" :placeholder="$t('placeholder').enterName"/>
             </div>
             <div class="m-2">
                 <p class="mt-2">{{ $t('common').email }} </p>
-                <Input prefix="ios-mail-outline" v-model="verifyData.email" type="email" name="email" :disabled="isSentVercode" />
+                <Input prefix="ios-mail-outline" v-model="verifyData.email" type="email" name="email" :disabled="isSentVercode" :placeholder="$t('placeholder').enterEmail"/>
             </div>
             <div class="m-2">
                 <p class="mt-2">{{ $t('apartment').phoneNumber }}</p>
-                <Input prefix="ios-phone-portrait" v-model="verifyData.phone" type="tel" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" :disabled="isSentVercode" />
+                <Input prefix="ios-phone-portrait" v-model="verifyData.phone" type="tel" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" :disabled="isSentVercode" :placeholder="$t('placeholder').enterPhone"/>
             </div>
             <div class="m-2">
               <Button v-if="isSentVercode == false" class="mt-3" long icon="ios-send" type="success" @click="verifyUserInfo" :disabled="isConfirming" :loading="isConfirming">{{ $t('common').request }}</Button>
@@ -32,7 +32,7 @@
             </div>
             <div class="m-2 animate__animated animate__fadeIn" v-if="isSentVercode">
                 <p class="mt-2">{{ $t('auth').verificationCode }}</p>
-                <Input prefix="md-finger-print" class="d-block" v-model="verifyCode.code" name="vercode" maxlength="6" :disabled="isFinishVerify" />
+                <Input prefix="md-finger-print" class="d-block" v-model="verifyCode.code" name="vercode" maxlength="6" :disabled="isFinishVerify" :placeholder="$t('placeholder').enterCode"/>
                 <p>{{ $t('auth').verificationEmailCode }}</p>
                 <Button class="mt-3" icon="ios-send" type="success" long @click="verifyingCode" :disabled="isVerifying||isFinishVerify" :loading="isVerifying">{{ $t('auth').verify }}</Button>
             </div>

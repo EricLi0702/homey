@@ -21,31 +21,31 @@
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">{{ $t('apartment').superManger }}</label>
             <div class="col-sm-10">
-                <input type="text" id="aptName" v-model="superManager.mngName" class="form-control" placeholder="">
+                <input type="text" id="aptName" v-model="superManager.mngName" class="form-control" :placeholder="$t('placeholder').enterSuperManagerName">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">{{ $t('apartment').phoneNumber }}</label>
             <div class="col-sm-10">
-                <input type="text" id="aptName" v-model="superManager.mngPhoneNumber" class="form-control" placeholder="">
+                <input type="text" id="aptName" v-model="superManager.mngPhoneNumber" class="form-control" :placeholder="$t('placeholder').enterSuperManagerPhone">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">{{ $t('apartment').eMail }}</label>
             <div class="col-sm-10">
-                <input type="email" id="aptName" v-model="superManager.mngEmail" class="form-control" placeholder="">
+                <input type="email" id="aptName" v-model="superManager.mngEmail" class="form-control" :placeholder="$t('placeholder').enterSuperManagerEmail">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">{{ $t('apartment').superMangerId }}</label>
             <div class="col-sm-10">
-                <input type="text" id="aptName" v-model="superManager.mngId" class="form-control" placeholder="">
+                <input type="text" id="aptName" v-model="superManager.mngId" class="form-control" :placeholder="$t('placeholder').enterSuperManagerId">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">{{ $t('apartment').superMangerPWD }}</label>
             <div class="col-sm-10">
-                <input type="text" id="aptName" v-model="superManager.mngPassword" class="form-control" placeholder="">
+                <input type="text" id="aptName" v-model="superManager.mngPassword" class="form-control" :placeholder="$t('placeholder').enterSuperManagerPassword">
             </div>
         </div>
         <div class="form-group row">

@@ -107,14 +107,14 @@
                     </div>
                     <div v-if="isCommenting" id="commentArea" class="posted-item mt-3 p-2 animate__animated animate__fadeIn">
                         <div class="reply-form-comment row p-2">
-                            <Input v-model="commentData" type="textarea" :placeholder="$t('suggest').UpdateSuggestion" />
+                            <Input v-model="commentData" type="textarea" :placeholder="$t('placeholder').enterComment" />
                             <div class="d-flex justify-content-between col-12 p-0">
                                 <Icon @click="toggleEmo" class="pr-2 noti-upload-icons" size="25" type="md-happy" />
                                 <div class="emoji-area-popup">
                                     <div v-if="emoStatus" class="position-absolute close-emoji-btn" @click="closeEmojiWindow()">{{$t('common').closeEmoji}}</div>
                                     <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                                 </div>
-                                <Button @click="leaveComment">Leave</Button>
+                                <Button @click="leaveComment">{{$t('community').Leave}}</Button>
                             </div>
                         </div>
                     </div>

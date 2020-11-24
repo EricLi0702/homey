@@ -5,10 +5,10 @@
         <Modal v-model="removeModal" width="360">
             <p slot="header" style="color:#f60;text-align:center">
                 <Icon type="ios-information-circle"></Icon>
-                <span v-if="deleteAptData != null">Delete {{deleteAptData.aptName}}</span>
+                <span v-if="deleteAptData != null">{{$t('modal').delete}} : {{deleteAptData.aptName}}</span>
             </p>
             <div class="text-center">
-                <p>Will you delete it? All users, buildings and datas of this APT will delete.</p>
+                <p>{{$t('modal').willDeleteAPT}}</p>
             </div>
             <div slot="footer">
                 <Button type="error" size="large" long :loading="isDeleting" @click="delApt()">{{ $t('apartment').delete }}</Button>

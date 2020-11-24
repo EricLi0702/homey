@@ -130,10 +130,10 @@
         <Modal v-model="removeModal" width="360">
             <p slot="header" style="color:#f60;text-align:center">
                 <Icon type="ios-information-circle"></Icon>
-                <span v-if="deleteUserData != null">Delete {{deleteUserData.name}}</span>
+                <span v-if="deleteUserData != null">{{$t('modal').delete}} : {{deleteUserData.name}}</span>
             </p>
             <div class="text-center">
-                <p>Will you delete this user?</p>
+                <p>{{$t('modal').willDeleteUser}}</p>
             </div>
             <div slot="footer">
                 <Button type="error" size="large" long :loading="isDeleting" :disabled="isDeleting" @click="delUser()">{{ $t('apartment').delete }}</Button>

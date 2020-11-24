@@ -2,7 +2,7 @@
     <div class="container-fluid bg-light-gray m-0 p-0 pb-5">
         <div class="container m-0 p-0 mx-auto advice-to-customers mt-5 mb-3 box-block">
             <div class="p-3 pt-2 d-flex align-items-center justify-content-between">
-                <h2 class="p-3">Request Type</h2>
+                <h2 class="p-3">{{$t('repair').repairType}}</h2>
                 <div class="sel-lang-repair">
                     <Select v-model="selectedLang" default-label="VN" style="width:100px" @on-change="selectLang(selectedLang)">
                         <img class="navbar-flag" :src="`/asset/img/icon/${selectedLang}_flag.png`" slot="prefix"  alt="" />
@@ -12,8 +12,8 @@
             </div>
 
             <div class="add-repair-type-btn d-flex justify-content-end p-3">
-                <Button type="primary" @click="saveToJson()" :disabled="isUpdatingRepairJson" :loading="isUpdatingRepairJson" class="mr-3"> Save Request Type</Button>
-                <Button type="info" @click="addType()"> Add Repair Type</Button>
+                <Button type="primary" @click="saveToJson()" :disabled="isUpdatingRepairJson" :loading="isUpdatingRepairJson" class="mr-3">{{$t('repair').saveRepariType}}</Button>
+                <Button type="info" @click="addType()">{{$t('repair').newRepariType}}</Button>
             </div>
 
             <div class="str-table-area p-3">
@@ -46,49 +46,49 @@
             <Modal v-model="isEditRepairModal" width="360" @on-cancel="initVal()">
                 <p slot="header" style="color:#21C070;text-align:center" class="d-flex align-items-center justify-content-center">
                     <Icon class="mr-3" type="ios-create-outline" size="25"/>
-                    <span v-if="editRepairTypeData !== null && editRepairObjectData == null">Update Repair Type</span>
-                    <span v-else-if="editRepairTypeData != null && editRepairObjectData !== null && editRepairTitleData == null">Update Repair Object</span>
-                    <span v-else-if="editRepairTitleData != null">Update Repair Title</span>
+                    <span v-if="editRepairTypeData !== null && editRepairObjectData == null">{{$t('modal').updateRepairType}}</span>
+                    <span v-else-if="editRepairTypeData != null && editRepairObjectData !== null && editRepairTitleData == null">{{$t('modal').updateRepairObject}}</span>
+                    <span v-else-if="editRepairTitleData != null">{{$t('modal').updateRepairTitle}}</span>
                 </p>
                 <div class="text-center gray-input">
-                    <Input v-if="editRepairTypeData !== null && editRepairObjectData == null" v-model="editRepairTypeData.label" placeholder="Enter something..." />
-                    <Input v-else-if="editRepairTypeData != null && editRepairObjectData !== null && editRepairTitleData == null" v-model="editRepairObjectData.label" placeholder="Enter something..." />
-                    <Input v-else-if="editRepairTitleData != null" v-model="editRepairTitleData.label" placeholder="Enter something..." />
+                    <Input v-if="editRepairTypeData !== null && editRepairObjectData == null" v-model="editRepairTypeData.label" :placeholder="$t('repair').enterType" />
+                    <Input v-else-if="editRepairTypeData != null && editRepairObjectData !== null && editRepairTitleData == null" v-model="editRepairObjectData.label" :placeholder="$t('repair').enterObject"/>
+                    <Input v-else-if="editRepairTitleData != null" v-model="editRepairTitleData.label" :placeholder="$t('placeholder').enterTitle" />
                 </div>
                 <div slot="footer">
-                    <Button type="success" size="large" long @click="updateRepairContent()">Update</Button>
+                    <Button type="success" size="large" long @click="updateRepairContent()">{{$t('auth').update}}</Button>
                 </div>
             </Modal>
             <Modal v-model="isDeleteRepairModal" width="360" @on-cancel="initVal()">
                 <p slot="header" style="color:#f60;text-align:center" class="d-flex align-items-center justify-content-center">
                     <Icon class="mr-3" type="md-warning" size="25" color="#ED4014"/>
-                    <span v-if="deleteRepairTypeData !== null && deleteRepairObjectData == null">Delete Repair Type</span>
-                    <span v-else-if="deleteRepairTypeData != null && deleteRepairObjectData !== null && deleteRepairTitleData == null">Delete Repair Object</span>
-                    <span v-else-if="deleteRepairTitleData != null">Delete Repair Title</span>
+                    <span v-if="deleteRepairTypeData !== null && deleteRepairObjectData == null">{{$t('modal').deleteRepairType}}</span>
+                    <span v-else-if="deleteRepairTypeData != null && deleteRepairObjectData !== null && deleteRepairTitleData == null">{{$t('modal').deleteRepairObject}}</span>
+                    <span v-else-if="deleteRepairTitleData != null">{{$t('modal').deleteRepairTitle}}</span>
                 </p>
                 <div class="text-center gray-input">
-                    <p v-if="deleteRepairTypeData !== null && deleteRepairObjectData == null" > Are you sure remove repair type {{deleteRepairTypeData.label}}</p>
-                    <p v-else-if="deleteRepairTypeData != null && deleteRepairObjectData !== null && deleteRepairTitleData == null">Are you sure remove repair object {{deleteRepairObjectData.label}}</p> 
-                    <p v-else-if="deleteRepairTitleData != null"> Are you sure remove repair title {{deleteRepairTitleData.label}}</p>
+                    <p v-if="deleteRepairTypeData !== null && deleteRepairObjectData == null" > {{$t('modal').areYouSureDelRepairType}} : {{deleteRepairTypeData.label}}</p>
+                    <p v-else-if="deleteRepairTypeData != null && deleteRepairObjectData !== null && deleteRepairTitleData == null">{{$t('modal').areYouSureDelRepairObject}} : {{deleteRepairObjectData.label}}</p> 
+                    <p v-else-if="deleteRepairTitleData != null">{{$t('modal').areYouSureDelRepairTitle}} : {{deleteRepairTitleData.label}}</p>
                 </div>
                 <div slot="footer">
-                    <Button type="error" size="large" long @click="deleteRepairContent()">Delete</Button>
+                    <Button type="error" size="large" long @click="deleteRepairContent()">{{$t('apartment').delete}}</Button>
                 </div>
             </Modal>
             <Modal v-model="isAddRepairModal" width="360" @on-cancel="initVal()">
                 <p slot="header" style="color:#2D8CF0;text-align:center" class="d-flex align-items-center justify-content-center">
                     <Icon class="mr-3" type="md-create" size="25"/>
-                    <span v-if="addRepairTypeData == null && addRepairObjectData == null">Add Repair Type</span>
-                    <span v-else-if="addRepairTypeData != null && addRepairObjectData == null">Add Repair Object</span>
-                    <span v-else-if="addRepairTypeData != null && addRepairObjectData !== null">Add Repair Title</span>
+                    <span v-if="addRepairTypeData == null && addRepairObjectData == null">{{$t('modal').addRepairType}}</span>
+                    <span v-else-if="addRepairTypeData != null && addRepairObjectData == null">{{$t('modal').addRepairObject}}</span>
+                    <span v-else-if="addRepairTypeData != null && addRepairObjectData !== null">{{$t('modal').addRepairTitle}}</span>
                 </p>
                 <div class="text-center gray-input">
-                    <Input v-if="addRepairTypeData == null && addRepairObjectData == null" v-model="addInputRepairTypeData" placeholder="Enter something..." />
-                    <Input v-else-if="addRepairTypeData != null && addRepairObjectData == null" v-model="addInputRepairObjectData" placeholder="Enter something..." />
-                    <Input v-else-if="addRepairTypeData != null && addRepairObjectData !== null" v-model="addInputRepairTitleData" placeholder="Enter something..." />
+                    <Input v-if="addRepairTypeData == null && addRepairObjectData == null" v-model="addInputRepairTypeData" :placeholder="$t('repair').enterType"/>
+                    <Input v-else-if="addRepairTypeData != null && addRepairObjectData == null" v-model="addInputRepairObjectData" :placeholder="$t('repair').enterObject"/>
+                    <Input v-else-if="addRepairTypeData != null && addRepairObjectData !== null" v-model="addInputRepairTitleData" :placeholder="$t('placeholder').enterTitle" />
                 </div>
                 <div slot="footer">
-                    <Button type="success" size="large" long @click="addRepairContent()">Add</Button>
+                    <Button type="success" size="large" long @click="addRepairContent()">{{$t('modal').add}}</Button>
                 </div>
             </Modal>
         </div>

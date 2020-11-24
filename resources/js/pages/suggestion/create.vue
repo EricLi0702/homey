@@ -6,10 +6,10 @@
                 <Form :model="createSuggestionData">
                     <div class="row m-0 p-0">
                         <div class="col-12 mb-3 newtopic">
-                            <Input v-model="createSuggestionData.title" :placeholder=" $t('facility').enterTitle " />
+                            <Input v-model="createSuggestionData.title" :placeholder=" $t('placeholder').enterTitle " />
                         </div>
                         <div class="col-12 mb-3">
-                            <wysiwyg v-model="createSuggestionData.desc" :placeholder=" $t('facility').enterDescription " />
+                            <wysiwyg v-model="createSuggestionData.desc" :placeholder=" $t('placeholder').enterDescription " />
                         </div>
                         <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
                             <Upload
@@ -22,7 +22,7 @@
                                 <div v-if="emoStatus" class="position-absolute close-emoji-btn" @click="closeEmojiWindow()">{{$t('common').closeEmoji}}</div>
                                 <Picker v-if="emoStatus" set="emojione" @select="onInput" title="Pick your emoji..." />
                             </div>
-                            <Button icon="ios-send" type="success" class="" @click="registerSuggestion" :disabled="isSuggesting" :loading="isSuggesting">{{ $t('suggest').suggest }}</Button>
+                            <Button icon="ios-send" type="success" class="ml-auto" @click="registerSuggestion" :disabled="isSuggesting" :loading="isSuggesting">{{ $t('suggest').suggest }}</Button>
                         </div>
                         <div class="col-12 uploaded_file">
                             <div class="image-item" v-if="createSuggestionData.file.imgUrl && createSuggestionData.file.imgUrl.length >0">

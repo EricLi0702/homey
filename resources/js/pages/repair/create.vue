@@ -36,11 +36,11 @@
                                 <Input v-model="createRepairData.object" :placeholder="$t('repair').enterObject" />
                             </div>
                             <div class="col-12 mb-3 newtopic gray-input">
-                                <Input v-model="createRepairData.title" :placeholder="$t('facility').enterTitle" />
+                                <Input v-model="createRepairData.title" :placeholder="$t('placeholder').enterTitle" />
                             </div>
                         </div>
                         <div class="col-12 mb-3">
-                            <wysiwyg v-model="createRepairData.desc" :placeholder="$t('facility').enterDescription" />
+                            <wysiwyg v-model="createRepairData.desc" :placeholder="$t('placeholder').enterDescription" />
                         </div>
                         <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
                             <Upload

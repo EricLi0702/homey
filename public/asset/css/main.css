@@ -1435,6 +1435,9 @@ a.text-dark:hover, a.text-dark:focus {
     right: 0!important;
 }
 
+.footer-text .text-gray{
+    font-size: 18pt;
+}
 
 @media only screen and (max-width: 600px) {
     .subtitle h1 {

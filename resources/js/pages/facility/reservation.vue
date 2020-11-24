@@ -125,10 +125,10 @@
                                 <Modal v-model="removeModal" width="360">
                                     <p slot="header" style="color:#f60;text-align:center">
                                         <Icon type="ios-information-circle"></Icon>
-                                        <span v-if="deleteReservationData != null">Delete {{deleteReservationData.name}}</span>
+                                        <span v-if="deleteReservationData != null">{{$t('modal').delete}} : {{deleteReservationData.name}}</span>
                                     </p>
                                     <div class="text-center">
-                                        <p>Will you delete this reservation?</p>
+                                        <p>{{$t('modal').willDeleteReservation}}</p>
                                     </div>
                                     <div slot="footer">
                                         <Button type="error" size="large" long :loading="isDeleting" :disabled="isDeleting" @click="delReservation()">{{ $t('apartment').delete }}</Button>
