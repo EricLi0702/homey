@@ -13,25 +13,25 @@
       </div>
     </div>
     <div class="form-group row">
-      <label for="staticEmail" class="col-sm-2 col-form-label">UserName</label>
+      <label for="staticEmail" class="col-sm-2 col-form-label">{{$t('common').name}}</label>
       <div class="col-sm-10">
-        <input type="text" id="userName" v-model="user.name" class="form-control" placeholder="">
+        <input type="text" id="userName" v-model="user.name" class="form-control" :placeholder="$t('placeholder').enterName">
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
+      <label for="inputPassword" class="col-sm-2 col-form-label">{{$t('common').email}}</label>
       <div class="col-sm-10">
-        <input type="email" id="userEmail" v-model="user.email" class="form-control" placeholder="">
+        <input type="email" id="userEmail" v-model="user.email" class="form-control" :placeholder="$t('placeholder').enterEmail">
       </div>
     </div>
     <div class="form-group row">
-      <label for="staticEmail" class="col-sm-2 col-form-label">phoneNumber</label>
+      <label for="staticEmail" class="col-sm-2 col-form-label">{{$t('common').phone}}</label>
       <div class="col-sm-10">
-        <input type="text" id="userName" v-model="user.phoneNumber" class="form-control" placeholder="">
+        <input type="text" id="userName" v-model="user.phoneNumber" class="form-control" :placeholder="$t('placeholder').enterPhone">
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">Building</label>
+      <label for="inputPassword" class="col-sm-2 col-form-label">{{$t('buildingNumber').apartment}}</label>
       <div class="col-sm-10">
         <select class="mdb-select md-form" v-model="user.buildingId">
           <option v-for="building in currentUser.apt.building" :key="building.id" :value="building.id">{{building.number}}</option>
@@ -39,13 +39,13 @@
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">Ho</label>
+      <label for="inputPassword" class="col-sm-2 col-form-label">{{$t('auth').ho}}</label>
       <div class="col-sm-10">
         <input type="text" v-model="user.ho" class="form-control" id="phoneNumber" placeholder="">
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">UserRole</label>
+      <label for="inputPassword" class="col-sm-2 col-form-label">{{$t('common').userRole}}</label>
       <div class="col-sm-10">
         <select class="mdb-select md-form" v-model="user.roleId">
           <option v-for="role in userRole" :key="role.id" :value="role.id" v-if="role.id > 2">{{role.roleName}}</option>
