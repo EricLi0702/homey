@@ -736,6 +736,55 @@
         "updateAvatarSuccessfully" : "You have successfully updated your avatar.",
         "finishSuccessfully" : "It ended successfully.",
         "alreadyDraft" : "You already have a draft."
+    },
+
+    "modal" : {
+        "delete" : "Delete",
+        "willDeleteUser" : "Are you sure you want to delete this member?",
+        "willDeleteAPT" : "Are you sure you want to delete this APT? All members, buildings and datas of this APT will be deleted.",
+        "willDeleteRole" : "Are you sure you want to delete this user role? All members and data of this UserRole will be deleted.",
+        "willDeleteBuilding" : "Are you sure you want to delete this building? All members and datas of this building will be deleted.",
+        "willDeleteReservation" : "Are you sure you want to delete this reservation?",
+        "updateRepairType" : "Update request type",
+        "updateRepairObject" : "Update request object",
+        "updateRepairTitle" : "Update request title",
+        "deleteRepairType" : "Delete request type",
+        "deleteRepairObject" : "Delete request object",
+        "deleteRepairTitle" : "Delete request title",
+        "addRepairType" : "Add request type",
+        "addRepairObject" : "Add request object",
+        "addRepairTitle" : "Add request title",
+        "areYouSureDelRepairType" : "Are you sure you want to delete request type?",
+        "areYouSureDelRepairObject" : "Are you sure you want to delete request object?",
+        "areYouSureDelRepairTitle" : "Are you sure you want to delete request title?",
+        "add" : "Add"
+    },
+
+    "placeholder" : {
+        "enterBuildingNumber" : "Please enter the building number.",
+        "enterDong" : "Please enter the dong.",
+        "enterAPTName" : "Please enter the APT name.",
+        "enterAPTAddress" : "Please enter the APT address.",
+        "enterAPTRepName" : "Please enter the APT representative name.",
+        "enterAPTRepPhone" : "Please enter the APT representative phone number.",
+        "enterAPTRepEmail" : "Please enter the APT representative email.",
+        "enterSuperManagerName" : "Please enter the Supermanager name.",
+        "enterSuperManagerPhone" : "Please enter the Supermanager phone number.",
+        "enterSuperManagerEmail" : "Please enter the Supermanager email.",
+        "enterSuperManagerId" : "Please enter the Supermanager ID.",
+        "enterSuperManagerPassword" : "Please enter the Supermanager password.",
+        "enterName" : "Please enter the name.",
+        "enterEmail" : "Please enter the email.",
+        "enterPhone" : "Please enter the phone number.",
+        "enterCode" : "Please enter the code.",
+        "enterUserRole" : "Please enter user role.",
+        "enterTitle" : "Please enter the title.",
+        "enterDescription" : "Please enter the description.",
+        "enterPurpose" : "Please enter the purpose.",
+        "enterSearchWord" : "Please enter the search word.",
+        "selectPeriod" : "Please select a period.",
+        "enterComment" : "Please enter the comments.",
+        "enterResponse" : "Please enter the reply."
     }
     
 

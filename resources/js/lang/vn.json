@@ -735,6 +735,55 @@
         "updateAvatarSuccessfully" : "Bạn đã cập nhật thành công ảnh đại diện của mình.",
         "finishSuccessfully" : "Nó đã kết thúc thành công.",
         "alreadyDraft" : "Bạn đã có một bản nháp."
+    },
+
+    "modal" : {
+        "delete" : "Xóa bỏ",
+        "willDeleteUser" : "Bạn có chắc chắn muốn xóa thành viên này không?",
+        "willDeleteAPT" : "Bạn có chắc chắn muốn xóa APT này không? Tất cả các thành viên, tòa nhà và dữ liệu của APT này sẽ bị xóa.",
+        "willDeleteRole" : "Bạn có chắc chắn muốn xóa vai trò người dùng này không? Tất cả các thành viên và dữ liệu của UserRole này sẽ bị xóa.",
+        "willDeleteBuilding" : "Bạn có chắc chắn muốn xóa tòa nhà này không? Tất cả các thành viên và dữ liệu của tòa nhà này sẽ bị xóa.",
+        "willDeleteReservation" : "Bạn có chắc chắn muốn xóa đặt chỗ này không?",
+        "updateRepairType" : "Cập nhật loại yêu cầu",
+        "updateRepairObject" : "Cập nhật đối tượng yêu cầu",
+        "updateRepairTitle" : "Cập nhật tiêu đề yêu cầu",
+        "deleteRepairType" : "Xóa loại yêu cầu",
+        "deleteRepairObject" : "Xóa đối tượng yêu cầu",
+        "deleteRepairTitle" : "Xóa tiêu đề yêu cầu",
+        "addRepairType" : "Thêm loại yêu cầu",
+        "addRepairObject" : "Thêm đối tượng yêu cầu",
+        "addRepairTitle" : "Thêm tiêu đề yêu cầu",
+        "areYouSureDelRepairType" : "Bạn có chắc chắn muốn xóa loại yêu cầu không?",
+        "areYouSureDelRepairObject" : "Bạn có chắc chắn muốn xóa đối tượng yêu cầu không?",
+        "areYouSureDelRepairTitle" : "Bạn có chắc chắn muốn xóa tiêu đề yêu cầu không?",
+        "add" : "Thêm vào"
+    },
+
+    "placeholder" : {
+        "enterBuildingNumber" : "Vui lòng nhập số tòa nhà.",
+        "enterDong" : "Vui lòng nhập tiền đồng.",
+        "enterAPTName" : "Vui lòng nhập tên APT.",
+        "enterAPTAddress" : "Vui lòng nhập địa chỉ APT.",
+        "enterAPTRepName" : "Vui lòng nhập tên đại diện APT.",
+        "enterAPTRepPhone" : "Vui lòng nhập số điện thoại của đại diện APT.",
+        "enterAPTRepEmail" : "Vui lòng nhập email đại diện APT.",
+        "enterSuperManagerName" : "Vui lòng nhập tên Supermanager.",
+        "enterSuperManagerPhone" : "Vui lòng nhập số điện thoại của Supermanager.",
+        "enterSuperManagerEmail" : "Vui lòng nhập email Người quản lý cấp cao.",
+        "enterSuperManagerId" : "Vui lòng nhập ID người quản lý cấp cao.",
+        "enterSuperManagerPassword" : "Vui lòng nhập mật khẩu Supermanager.",
+        "enterName" : "Vui lòng nhập tên.",
+        "enterEmail" : "Vui lòng nhập email.",
+        "enterPhone" : "Vui lòng nhập số điện thoại.",
+        "enterCode" : "Vui lòng nhập mã.",
+        "enterUserRole" : "Vui lòng nhập vai trò người dùng.",
+        "enterTitle" : "Vui lòng nhập tiêu đề.",
+        "enterDescription" : "Vui lòng nhập mô tả.",
+        "enterPurpose" : "Vui lòng nhập mục đích.",
+        "enterSearchWord" : "Vui lòng nhập từ tìm kiếm.",
+        "selectPeriod" : "Vui lòng chọn một khoảng thời gian.",
+        "enterComment" : "Vui lòng nhập các ý kiến.",
+        "enterResponse" : "Vui lòng nhập câu trả lời."
     }
 
 
