@@ -14,8 +14,9 @@
         </div>
         <div class="manager-list mt-3">
             <div class="supermanager-list row justify-content-center">
-                <div v-for="(supermanager, i) in superManagerData" :key="i" class="col-4 text-center">
+                <div v-for="(supermanager, i) in superManagerData" :key="i" class="col-4 text-center mb-4">
                     <div class="manager-card-container p-3 m-1">
+                        <img :src="`${baseUrl}/asset/img/icon/supermanager_${currentLang}.png`" class="rounded-circle ribbon-banner mr-2" alt="">
                         <div class="manager-avatar">
                             <img :src="`${baseUrl}${supermanager.user_avatar}`" class="rounded-circle user-list-photo mr-2" alt="">
                         </div>
@@ -36,8 +37,9 @@
                 </div>
             </div>
             <div class="supermanager-list row justify-content-center">
-                <div v-for="(notiManager, i) in notiManagerData" :key="i" class="col-4 text-center">
+                <div v-for="(notiManager, i) in notiManagerData" :key="i" class="col-4 text-center mb-4">
                     <div class="manager-card-container p-3 m-1">
+                        <img :src="`${baseUrl}/asset/img/icon/notimanager_${currentLang}.png`" class="rounded-circle ribbon-banner mr-2" alt="">
                         <div class="manager-avatar">
                             <img :src="`${baseUrl}${notiManager.user_avatar}`" class="rounded-circle user-list-photo mr-2" alt="">
                         </div>
@@ -58,8 +60,9 @@
                 </div>
             </div>
             <div class="supermanager-list row justify-content-center">
-                <div v-for="(repairManager, i) in repairManagerData" :key="i" class="col-4 text-center">
+                <div v-for="(repairManager, i) in repairManagerData" :key="i" class="col-4 text-center mb-4">
                     <div class="manager-card-container p-3 m-1">
+                        <img :src="`${baseUrl}/asset/img/icon/repairmanager_${currentLang}.png`" class="rounded-circle ribbon-banner mr-2" alt="">
                         <div class="manager-avatar">
                             <img :src="`${baseUrl}${repairManager.user_avatar}`" class="rounded-circle user-list-photo mr-2" alt="">
                         </div>
@@ -170,7 +173,8 @@ export default {
     },
     computed:{
         ...mapGetters({
-            currentUser:'auth/user'
+            currentUser:'auth/user',
+            currentLang:'lang/locale'
         })
     },
     
