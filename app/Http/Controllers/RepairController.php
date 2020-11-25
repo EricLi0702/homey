@@ -92,6 +92,11 @@ class RepairController extends Controller
                         ->first();
         if($repairData->userId !== $userId){
             $repairDataOfUser = User::where('id', $repairData->userId)->first();
+            if($currentUser->roleId == 2) {
+                return response()->json([
+                    'repairData' => $repairData,
+                ], 200);
+            }
             if($repairDataOfUser->aptId == $currentUser->aptId &&
                 $repairDataOfUser->buildingId == $currentUser->buildingId &&
                 $repairDataOfUser->ho == $currentUser->ho &&
