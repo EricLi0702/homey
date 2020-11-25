@@ -22,7 +22,7 @@
                             </RadioGroup> 
                         </div>
                         <div class="col-12 mb-3">
-                            <wysiwyg v-model="registerCommunityData.desc" :placeholder="$('placeholder').enterDescription" />
+                            <wysiwyg v-model="registerCommunityData.desc" :placeholder="$t('placeholder').enterDescription" />
                         </div>
                         <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
                             <Upload
