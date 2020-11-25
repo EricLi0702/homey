@@ -92,7 +92,7 @@ class RepairController extends Controller
                         ->first();
         if($repairData->userId !== $userId){
             $repairDataOfUser = User::where('id', $repairData->userId)->first();
-            if($currentUser->roleId == 2) {
+            if($currentUser->roleId == 2 || $currentUser->roleId == 7) {
                 return response()->json([
                     'repairData' => $repairData,
                 ], 200);
