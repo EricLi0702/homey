@@ -25,6 +25,7 @@ export const actions = {
         fetchUserRole()
             .then(res=>{
                 const { data } = res.data
+                console.log("res.data", res.data);
                 commit(types.ROLE_LIST, { roleList: data })
             })
             .catch(err=>{
