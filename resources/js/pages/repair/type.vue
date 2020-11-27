@@ -275,6 +275,9 @@ export default {
             //delete repair type
             if(this.deleteRepairTypeData !== null && this.deleteRepairObjectData == null){
                 this.repairJsonData.splice(this.deleteRepairTypeIndex, 1);
+                for(let i = this.deleteRepairTypeIndex; i < this.repairJsonData[i] ; i++){
+                    this.repairJsonData[i].value = parseInt(this.repairJsonData[i].value) - 1;
+                }
                 this.deleteRepairTypeData = null;
                 this.deleteRepairTypeIndex = null;
                 this.isDeleteRepairModal = false;
@@ -283,6 +286,9 @@ export default {
             //delete repair object
             if(this.deleteRepairTypeData != null && this.deleteRepairObjectData !== null && this.deleteRepairTitleData == null){
                 this.repairJsonData[this.deleteRepairTypeData.value-1].object.splice(this.deleteRepairObjectIndex, 1);
+                for(let i = this.deleteRepairObjectIndex ; i < this.repairJsonData[this.deleteRepairTypeData.value-1].object.length ; i++){
+                    this.repairJsonData[this.deleteRepairTypeData.value-1].object[i].value = parseInt(this.repairJsonData[this.deleteRepairTypeData.value-1].object[i].value) - 1;
+                }
                 this.deleteRepairTypeData = null;
                 this.deleteRepairObjectData = null;
                 this.deleteRepairObjectIndex = null;
@@ -292,6 +298,9 @@ export default {
             //delete repair title
             if(this.deleteRepairTitleData != null){
                 this.repairJsonData[this.deleteRepairTypeData.value-1].object[this.deleteRepairObjectData.value-1].title.splice(this.deleteRepairTitleIndex, 1);
+                for(let i = this.deleteRepairTitleIndex; i < this.repairJsonData[this.deleteRepairTypeData.value-1].object[this.deleteRepairObjectData.value-1].title.length ; i++){
+                    this.repairJsonData[this.deleteRepairTypeData.value-1].object[this.deleteRepairObjectData.value-1].title[i].value = parseInt(this.repairJsonData[this.deleteRepairTypeData.value-1].object[this.deleteRepairObjectData.value-1].title[i].value) - 1
+                }
                 this.deleteRepairTypeData = null;
                 this.deleteRepairObjectData = null;
                 this.deleteRepairTitleData = null;
@@ -374,19 +383,20 @@ export default {
         },
 
         saveToJson(){
-            this.isUpdatingRepairJson = true;
-            let payload = {
-                lang : this.selectedLang,
-                jsonData : this.repairJsonData
-            }
-            saveToJson(payload)
-            .then(res=>{
-                this.success(i18n.t('alert').update);
-                this.isUpdatingRepairJson = false;
-            })
-            .catch(err=>{
-                console.log(err.response);
-            })
+            console.log("****************", this.repairJsonData);
+            // this.isUpdatingRepairJson = true;
+            // let payload = {
+            //     lang : this.selectedLang,
+            //     jsonData : this.repairJsonData
+            // }
+            // saveToJson(payload)
+            // .then(res=>{
+            //     this.success(i18n.t('alert').update);
+            //     this.isUpdatingRepairJson = false;
+            // })
+            // .catch(err=>{
+            //     console.log(err.response);
+            // })
         }
 
     }
