@@ -131,7 +131,8 @@
                                 <p>{{TimeView(responseComment.created_at)}}</p>
                             </div>
                             <div class="comment-content p-2">
-                                <p>{{responseComment.replyToClient}}</p>
+                                <p v-if="responseComment.replyToClient !== null">{{responseComment.replyToClient}}</p>
+                                <p v-else>{{responseComment.replyFromClient}}</p>
                             </div>
                             <div v-if="responseComment.user_id.id !== currentUser.id" class="reply ml-auto">
                                 <Icon size="25" type="ios-undo" @click="toggleReply"/>
@@ -431,7 +432,7 @@ export default {
                     this.error(i18n.t('alert').cannotAccessThisThread);
                     this.$router.push({ path:`/repair/index` });
                 }
-                this.responseCommentData = res.data.repairData.repair_id;
+                this.responseCommentData = res.data.repairData.repair_id.reverse();
                 this.details = res.data.repairData;
                 this.rawDetails = JSON.parse(JSON.stringify(this.details));
                 this.details.upload_file = JSON.parse(this.details.upload_file);
