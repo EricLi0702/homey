@@ -376,6 +376,8 @@ export default {
                 if(err.response.data.access == false){
                     this.error(i18n.t('alert').notDeleteAllow);
                 }
+                this.deleteReservationData = {};
+                this.deleteDataIndex = -1;
                 this.isDeleting = false;
                 this.removeModal = false;
             });
