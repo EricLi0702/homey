@@ -106,7 +106,10 @@ class ReservationFacilityController extends Controller
         $reservationData = ReservationFacility::where('id',$id)->first();
         $currentUserId = Auth::user()->id;
         if($currentUserId == $userId || Auth::user()->roleId == 2){
-            return ReservationFacility::where('id',$id)->delete();
+            ReservationFacility::where('id',$id)->delete();
+            return response()->json([
+                'access'=> true
+            ]);
         }
         else{
             return response()->json([
