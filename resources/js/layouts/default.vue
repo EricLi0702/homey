@@ -4,7 +4,7 @@
 
     <div class="container-fluid mt-navbar p-0">
       <child />
-      <Footer />
+      <Footer v-if="checkComponent"/>
     </div>
 
     <BackTop></BackTop>
@@ -25,7 +25,7 @@ export default {
   },
   computed:{
     checkComponent(){
-      if(this.$route.name == "welcomeMobile"){
+      if(this.$route.name == "welcomeMobile" || this.$route.name == "welcomeMobile_ko" || this.$route.name == "welcomeMobile_en" || this.$route.name == "welcomeMobile_vi"){
         let mtNavbar = $('.mt-navbar');
         mtNavbar.removeClass('mt-navbar');
         return false;

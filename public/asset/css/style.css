@@ -608,7 +608,7 @@ ul {
 }
 @media (max-width:991px) {
     .third-background {
-        height: 23rem;
+        height: 37rem;
     }
     .cta-text h4{
       font-size: 16px;
@@ -616,7 +616,7 @@ ul {
 }
 @media (max-width:767px) {
     .third-background {
-        height: 44rem;
+        height: 47rem;
     }
     .subtitle h1 {
       font-size: 4rem;
@@ -639,13 +639,16 @@ ul {
 }
 @media (max-width:500px) {
     .third-background {
-        height: 40rem;
+        height: 47rem;
     }
 }
 
-@media (max-width:400px) {
+@media (max-width:410px) {
   .third-background {
     height:40rem;
+  }
+  .third-background.misterious{
+    height: 55rem;
   }
   .second-background {
     height: 18rem;

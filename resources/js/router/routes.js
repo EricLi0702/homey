@@ -4,7 +4,10 @@ function page (path) {
 
 export default [
   { path: '/', name: 'welcome', component: page('welcome.vue') },
-  { path: '/welcomeMobile', name: 'welcomeMobile', component: page('welcomeMobile.vue') },
+  // { path: '/welcomeMobile', name: 'welcomeMobile', component: page('welcomeMobile.vue') },
+  { path: '/welcomeMobile_ko', name: 'welcomeMobile_ko', component: page('welcomeMobile_ko.vue') },
+  { path: '/welcomeMobile_vi', name: 'welcomeMobile_vi', component: page('welcomeMobile_vi.vue') },
+  { path: '/welcomeMobile_en', name: 'welcomeMobile_en', component: page('welcomeMobile_en.vue') },
 
   { path: '/login', name: 'login', component: page('auth/login.vue') },
   { path: '/register', name: 'register', component: page('auth/register.vue') },
