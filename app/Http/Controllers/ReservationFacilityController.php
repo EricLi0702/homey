@@ -137,7 +137,7 @@ class ReservationFacilityController extends Controller
     public function denyReservation(Request $request){
         if (Auth::user()->roleId == 2){
             $denyReservationData = ReservationFacility::where('id', $request->id)->first();
-            $denyReservationData['status'] = 'allow';
+            $denyReservationData['status'] = 'deny';
             $denyReservationData->save();
             return response()->json([
                 'access'=> true
