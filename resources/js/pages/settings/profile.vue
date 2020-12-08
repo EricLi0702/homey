@@ -25,24 +25,15 @@
           <Button class="mt-3 mb-5" type="success" icon="md-contact" @click="updateAvatar" :disabled="isUpdatingAvatar" :loading="isUpdatingAvatar">{{ $t('auth').update }}</Button>
 
         </div>
-        <form @submit.prevent="update" @keydown="form.onKeydown($event)">
-          <div class="row m-0 p-0">
-            <div class="col-12 mb-3 gray-input">
-              <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
-              <has-error :form="form" field="name" />
-            </div>
-            <!-- <div class="col-12 mb-3 gray-input">
-              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
-              <has-error :form="form" field="email" />
-            </div> -->
-            
-            <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
-              <v-button :loading="form.busy" type="success">
-                {{ $t('auth').update }}
-              </v-button>                             
-            </div>
+        <div class="row m-0 p-0">
+          <div class="col-12 mb-3 gray-input">
+            <Input @on-enter="updateUserName" v-model="user.name" class="customInput w-100" :placeholder="$t('placeholder').enterName"/>
           </div>
-        </form>
+          <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
+            <Button type="primary" @click="updateUserName" :disabled="isLoading" :loading="isLoading">{{ $t('auth').update }}</Button>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -52,7 +43,7 @@
 import Form from 'vform'
 import { mapGetters } from 'vuex'
 import i18n from '~/plugins/i18n'
-import {updateAvatarOfUser} from '~/api/auth'
+import {updateAvatarOfUser, updateNewUserName} from '~/api/auth'
 export default {
   scrollToTop: false,
 
@@ -65,10 +56,12 @@ export default {
       name: '',
       email: ''
     }),
+    newName:'',
     baseUrl:window.base_url,
     imgUrl:'',
     token:'',
     isUpdatingAvatar: false,
+    isLoading: false,
   }),
 
   computed: mapGetters({
@@ -76,11 +69,6 @@ export default {
   }),
 
   created () {
-    // Fill the form with user data.
-    this.form.keys().forEach(key => {
-      this.form[key] = this.user[key]
-    })
-
     this.token = window.Laravel.csrfToken;
   },
 
@@ -111,7 +99,7 @@ export default {
       this.isUpdatingAvatar = true;
       await updateAvatarOfUser(this.imgUrl)
       .then(res=>{
-        if(res.data.msg = "ok"){
+        if(res.data.msg = 1){
           return this.success(i18n.t('alert').updateAvatarSuccessfully);
         }
         else{
@@ -122,7 +110,28 @@ export default {
         console.log(err)
       })
       this.isUpdatingAvatar = false;
-    }
+    },
+    async updateUserName(){
+      if(this.user.name.trim() == ''){
+        return this.error(i18n.t('alert').name);
+      }
+      this.isLoading = true;
+      let payload = {
+        newName : this.user.name
+      }
+      updateNewUserName(payload)
+      .then(res=>{
+        if(res.data.msg == 1){
+          this.success(i18n.t('alert').update);
+          this.isLoading = false;
+        }
+      })
+      .catch(err=>{
+        this.isLoading = false;
+        console.log(err.response);
+      })
+      this.isLoading = false
+    },
   }
 }
 </script>

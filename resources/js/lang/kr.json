@@ -104,7 +104,7 @@
         "facebook":"페이스 북",
         "google":"구글",
         "DontHaveAnAccount":"아직 회원이 아니신가요?",
-        "createOne":"여기서 등록",
+        "createOne":"계정생성",
         "verificationCode":"확인 코드",
         "verify":"확인",
         "IagreeHomey":"Homey에 동의합니다.",
@@ -117,7 +117,8 @@
         "enterConfirmPass":"암호를 재확인하세요",
         "verificationEmailCode":"이메일에 전송된 코드를 입력하세요",
         "dong": "동",
-        "ho": "호"
+        "ho": "호",
+        "confrimResident" : "주거자확인"
     },
     "common":{
         "name":"이름",
@@ -691,6 +692,10 @@
         "code" : "코드필드가 비였습니다.",
         "password" : "암호필드가 비였습니다.",
         "passwordConfirm" : "암호확인필드가 비였습니다.",
+        "passwordShouldContainNum" : "암호는 수자를 포함해야 합니다.",
+        "passwordShouldContainUp" : "암호는 적어도 한개의 대문자를 포함해야 합니다.",
+        "passwordShouldContainSpec" : "암호는 적어도 한개의 특수문자를 포함해야 합니다.",
+        "passwordShouldLengthEight" : "암호는 적어도 8문자이상을 포함해야 합니다.",
         "userRole" : "회원권한필드가 비였습니다.",
         "dong" : "동필드가 비였습니다.",
         "ho" : " 호필드가 비였습니다.",
@@ -765,6 +770,7 @@
     "placeholder" : {
         "enterBuildingNumber" : "빌딩번호를 입력해주세요.",
         "enterDong" : "동을 입력해주세요.",
+        "enterHo" : "호를 입력해주세요.",
         "enterAPTName" : "APT이름을 입력해주세요.",
         "enterAPTAddress" : "APT주소를 입력해주세요.",
         "enterAPTRepName" : "APT대표이름을 입력해주세요.",
@@ -786,7 +792,9 @@
         "enterSearchWord" : "검색어를 입력해주세요.",
         "selectPeriod" : "기간을 선택해주세요.",
         "enterComment" : "소중한 댓글을 입력해주세요.",
-        "enterResponse" : "응답을 입력해주세요."
+        "enterResponse" : "응답을 입력해주세요.",
+        "enterNewPassword" : "새 암호를 입력해주세요.",
+        "enterNewPasswordConfirm" : "새 암호확인을 입력해주세요."
     }
 
 }

@@ -23,8 +23,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('users','Auth\UserController@delUser');
     Route::put('users','Auth\UserController@updateUser');
 
-    Route::patch('settings/profile', 'Settings\ProfileController@update');
-    Route::patch('settings/password', 'Settings\PasswordController@update');
+    Route::put('settings/newname', 'Settings\ProfileController@updateName');
+    Route::put('settings/newpass', 'Settings\ProfileController@updatePass');
     Route::post('settings/avatar', 'Settings\ProfileController@updateAvatar');
 
 

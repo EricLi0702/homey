@@ -6,18 +6,14 @@
         <form @submit.prevent="update" @keydown="form.onKeydown($event)">
           <div class="row m-0 p-0">
             <div class="col-12 mb-3 gray-input">
-              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
-              <has-error :form="form" field="password" />
+              <Input @on-enter="updatePassword" v-model="newPassword" type="password" class="customInput w-100" :placeholder="$t('placeholder').enterNewPassword"/>
             </div>
             <div class="col-12 mb-3 gray-input">
-              <input v-model="form.password_confirmation" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" class="form-control" type="password" name="password_confirmation">
-              <has-error :form="form" field="password_confirmation" />
+              <Input @on-enter="updatePassword" v-model="newPasswordConfrim" type="password" class="customInput w-100" :placeholder="$t('placeholder').enterNewPasswordConfirm"/>
             </div>
             
             <div class="col-12 text-left d-flex justify-content-start mt-3 position-relative">
-              <v-button :loading="form.busy" type="success">
-                {{ $t('auth').update }}
-              </v-button>                           
+              <Button type="primary"  @click="updatePassword" :disabled="isLoading" :loading="isLoading">{{$t('auth').resetPassword}}</Button>
             </div>
           </div>
         </form>
@@ -28,7 +24,8 @@
 
 <script>
 import Form from 'vform'
-
+import i18n from '~/plugins/i18n'
+import {updateNewPassword } from '~/api/auth'
 export default {
   scrollToTop: false,
 
@@ -40,7 +37,10 @@ export default {
     form: new Form({
       password: '',
       password_confirmation: ''
-    })
+    }),
+    isLoading:false,
+    newPassword:'',
+    newPasswordConfrim: '',
   }),
 
   methods: {
@@ -48,7 +48,53 @@ export default {
       await this.form.patch('/api/settings/password')
 
       this.form.reset()
-    }
+    },
+
+    async updatePassword(){
+      if(this.newPassword.trim() == ''){
+          return this.error(i18n.t('alert').password);
+      }
+      if(this.newPasswordConfrim.trim() == ''){
+          return this.error(i18n.t('alert').passwordConfirm);
+      }
+      if(this.newPassword !== this.newPasswordConfrim){
+        return this.error(i18n.t('alert').notMatchPass);
+      }
+      //check if contain number
+      if(/\d/.test(this.newPassword) == false){
+        return this.error(i18n.t('alert').passwordShouldContainNum);
+      }
+      //check if contain uppercase
+      if(/[A-Z]/.test(this.newPassword) == false){
+        return this.error(i18n.t('alert').passwordShouldContainUp);
+      }
+      //check if contain special character
+      if(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(this.newPassword) == false){
+        return this.error(i18n.t('alert').passwordShouldContainSpec);
+      }
+      //check if length is more than 8
+      if(this.newPassword.length < 8){
+        return this.error(i18n.t('alert').passwordShouldLengthEight);
+      }
+
+      this.isLoading = true;
+      let payload = {
+        newPassword : this.newPassword
+      }
+      updateNewPassword(payload)
+      .then(res=>{
+        if(res.data.msg == 1){
+          this.success(i18n.t('alert').update);
+          this.newPassword = '';
+          this.newPasswordConfrim = '';
+          this.isLoading = false;
+        }
+      })
+      .catch(err=>{
+        this.isLoading = false;
+        console.log(err.response);
+      })
+  },
   }
 }
 </script>

@@ -32,7 +32,27 @@ class ProfileController extends Controller
         $user['user_avatar'] = $imgUrl;
         $user->save();
         return response()->json([
-            'msg' => "ok"
+            'msg' => 1,
         ], 200);
+    }
+
+    public function updatePass(Request $request){
+        $newPassword = $request->newPassword;
+        $user = Auth::user();
+        $user['password'] = bcrypt($newPassword);
+        $user->save();
+        return response()->json([
+            'msg'=> 1,
+        ]);
+    }
+
+    public function updateName(Request $request){
+        $newName = $request->newName;
+        $user = Auth::user();
+        $user['name'] = $newName;
+        $user->save();
+        return response()->json([
+            'msg'=> 1,
+        ]);
     }
 }

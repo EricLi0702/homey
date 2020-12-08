@@ -1,13 +1,13 @@
 <template>
   <div class="m-2 py-5 gray-input">
     <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">Apt Code</label>
+      <label for="inputPassword" class="col-sm-2 col-form-label">{{$t('apartment').aptCode}}</label>
       <div class="col-sm-10">
         {{currentUser.apt.code}}
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">Apt Name</label>
+      <label for="inputPassword" class="col-sm-2 col-form-label">{{$t('apartment').AptName}}</label>
       <div class="col-sm-10">
         {{currentUser.apt.aptName}}
       </div>
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">{{$t('buildingNumber').apartment}}</label>
+      <label for="inputPassword" class="col-sm-2 col-form-label">{{$t('apartment').buildingNumber}}</label>
       <div class="col-sm-10">
         <select class="mdb-select md-form" v-model="user.buildingId">
           <option v-for="building in currentUser.apt.building" :key="building.id" :value="building.id">{{building.number}}</option>
@@ -41,7 +41,7 @@
     <div class="form-group row">
       <label for="inputPassword" class="col-sm-2 col-form-label">{{$t('auth').ho}}</label>
       <div class="col-sm-10">
-        <input type="text" v-model="user.ho" class="form-control" id="phoneNumber" placeholder="">
+        <input type="text" v-model="user.ho" class="form-control" :placeholder="$t('placeholder').enterHo">
       </div>
     </div>
     <div class="form-group row">

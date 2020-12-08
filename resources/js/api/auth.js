@@ -20,6 +20,14 @@ function updateAvatarOfUser(imgUrl){
     return axios.post('/api/settings/avatar', imageUrl)
 }
 
+function updateNewPassword(payload){
+    return axios.put('/api/settings/newpass', payload)
+}
+
+function updateNewUserName(payload){
+    return axios.put('/api/settings/newname', payload)
+}
+
 function verifyUserEmailResetPass(payload){
     return axios.post('/api/password/email', payload)
 }
@@ -44,4 +52,6 @@ export{
     verifyUserEmailResetPass,
     verifyingCodeFromEmailResetPass,
     setupPasswordResetPass,
+    updateNewPassword,
+    updateNewUserName,
 }

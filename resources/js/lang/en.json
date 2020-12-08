@@ -104,7 +104,7 @@
         "facebook":"Facebook",
         "google":"Google",
         "DontHaveAnAccount":"Don't have an account?",
-        "createOne":"Create one",
+        "createOne":"Create account",
         "verificationCode":"verification code",
         "verify":"Verify",
         "IagreeHomey":"I agree to the Homey",
@@ -117,7 +117,8 @@
         "enterConfirmPass":"Enter confirm password",
         "verificationEmailCode":"Enter the code sent to the email",
         "dong": "-dong",
-        "ho": "-ho"
+        "ho": "-ho",
+        "confrimResident" : "Resident Confirm"
     },
     "common":{
         "name":"name",
@@ -690,6 +691,10 @@
         "code" : "The code field is empty.",
         "password" : "The password field is empty.",
         "passwordConfirm" : "The password confirm field is empty.",
+        "passwordShouldContainNum" : "Password should contain numbers",
+        "passwordShouldContainUp" : "Password should contain at least 1 uppercase letter",
+        "passwordShouldContainSpec" : "Password should contain at least 1 special character",
+        "passwordShouldLengthEight" : "Password should contain at least 8 characters",
         "userRole" : "The user role field is empty.",
         "dong" : "The dong field is empty.",
         "ho" : "The ho field is empty.",
@@ -764,6 +769,7 @@
     "placeholder" : {
         "enterBuildingNumber" : "Please enter the building number.",
         "enterDong" : "Please enter the dong.",
+        "enterHo" : "Please enter the ho.",
         "enterAPTName" : "Please enter the APT name.",
         "enterAPTAddress" : "Please enter the APT address.",
         "enterAPTRepName" : "Please enter the APT representative name.",
@@ -785,7 +791,9 @@
         "enterSearchWord" : "Please enter the search word.",
         "selectPeriod" : "Please select a period.",
         "enterComment" : "Please enter the comments.",
-        "enterResponse" : "Please enter the reply."
+        "enterResponse" : "Please enter the reply.",
+        "enterNewPassword" : "Please enter a new password.",
+        "enterNewPasswordConfirm" : "Please enter new password confirmation."
     }
     
 

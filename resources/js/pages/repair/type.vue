@@ -383,20 +383,19 @@ export default {
         },
 
         saveToJson(){
-            console.log("****************", this.repairJsonData);
-            // this.isUpdatingRepairJson = true;
-            // let payload = {
-            //     lang : this.selectedLang,
-            //     jsonData : this.repairJsonData
-            // }
-            // saveToJson(payload)
-            // .then(res=>{
-            //     this.success(i18n.t('alert').update);
-            //     this.isUpdatingRepairJson = false;
-            // })
-            // .catch(err=>{
-            //     console.log(err.response);
-            // })
+            this.isUpdatingRepairJson = true;
+            let payload = {
+                lang : this.selectedLang,
+                jsonData : this.repairJsonData
+            }
+            saveToJson(payload)
+            .then(res=>{
+                this.success(i18n.t('alert').update);
+                this.isUpdatingRepairJson = false;
+            })
+            .catch(err=>{
+                console.log(err.response);
+            })
         }
 
     }

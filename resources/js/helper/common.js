@@ -19,16 +19,28 @@ export default{
         },
         
         success (nodesc) {
-            this.$Message.success(nodesc);
+            this.$Message.success({
+                content: nodesc,
+                duration: 3.5
+            });
         },
         warning (nodesc) {
-            this.$Message.warning(nodesc);
+            this.$Message.warning({
+                content: nodesc,
+                duration: 3.5
+            });
         },
         error (nodesc) {
-            this.$Message.error(nodesc);
+            this.$Message.error({
+                content: nodesc,
+                duration: 3.5
+            });
         },
         swr (nodesc="Oops! something went wrong") {
-            this.$Message.error(nodesc);
+            this.$Message.error({
+                content: nodesc,
+                duration: 3.5
+            });;
         },
         checkUserPermission(key){
             if(!this.userPermission) return true;
