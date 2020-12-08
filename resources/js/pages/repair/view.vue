@@ -77,7 +77,7 @@
                                     <Rate v-else disabled class="w-100 text-right" v-model="details.star" />
                                 </div>
 
-                                <div v-else-if="currentUser.roleId == 2 || currentUser.roleId == 7" class="reply ml-auto">
+                                <div v-else-if="(currentUser.roleId == 2 || currentUser.roleId == 7) && isNotReply == false && details.status !== 'finish'" class="reply ml-auto">
                                     <Icon size="25" type="ios-undo" @click="toggleReply"/>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                                 <p v-if="responseComment.replyToClient !== null">{{responseComment.replyToClient}}</p>
                                 <p v-else>{{responseComment.replyFromClient}}</p>
                             </div>
-                            <div v-if="responseComment.user_id.id !== currentUser.id" class="reply ml-auto">
+                            <div v-if="(responseComment.user_id.id !== currentUser.id) && isNotReply == false && details.status !== 'finish'" class="reply ml-auto">
                                 <Icon size="25" type="ios-undo" @click="toggleReply"/>
                             </div>
                         </div>  
@@ -214,6 +214,7 @@ export default {
             isResponsingTo:false,
             responseData:null,
             isFinishingRequest:false,
+            isNotReply:false,
             //emoji
             emoStatus:false,
             emoStatusOfFinishRequestData:false,
@@ -368,6 +369,7 @@ export default {
             .then(res=>{
                 let responseCommentCurrently = res.data.responseData;
                 this.responseData = null;
+                this.isNotReply = true;
                 this.responseCommentData.unshift(responseCommentCurrently);
             })
             this.isResponsing = false;
@@ -433,6 +435,13 @@ export default {
                     this.$router.push({ path:`/repair/index` });
                 }
                 this.responseCommentData = res.data.repairData.repair_id.reverse();
+                if(this.responseCommentData.length !== 0){
+                    let replyLastUserId = this.responseCommentData[0].userId;
+                    if(replyLastUserId == this.currentUser.id){
+                        this.isNotReply = true;
+                    }
+                }
+                console.log("///", this.responseCommentData);
                 this.details = res.data.repairData;
                 this.rawDetails = JSON.parse(JSON.stringify(this.details));
                 this.details.upload_file = JSON.parse(this.details.upload_file);

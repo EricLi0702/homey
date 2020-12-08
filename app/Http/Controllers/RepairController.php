@@ -47,6 +47,12 @@ class RepairController extends Controller
 
     public function index(Request $request){
         $user = Auth::user();
+        $resident = User::where([
+                ['aptId', '=', $user->aptId],
+                ['buildingId', '=', $user->buildingId],
+                ['ho', '=', $user->ho],
+                ['roleId', '=', 3]
+            ])->first();
         if($user->roleId == 2 || $user->roleId == 7){
             return Repair::with(['userId', 'repairId.managerId'])
                             ->where([['isDraft','=',0]])
@@ -56,20 +62,23 @@ class RepairController extends Controller
 
         }
         elseif($user->roleId == 4){
-            $resident = User::where([
-                ['aptId', '=', $user->aptId],
-                ['buildingId', '=', $user->buildingId],
-                ['ho', '=', $user->ho],
-                ['roleId', '=', 3]
-            ])->first();
+            
             if($resident == null){
-                return response()->json([
-                    'msg' => 0
-                ], 200);
+                return Repair::with(['userId', 'repairId'])
+                                ->where([['isDraft','=',0]])
+                                ->where([['aptId','=',$user->aptId]])
+                                ->where([['userId','=',$user->id]])
+                                ->orderBy('created_at','desc')
+                                ->paginate(5);
             }
             return Repair::with(['userId', 'repairId'])
-                                ->where('userId', '=', $resident->id)
-                                ->where('isShowToProprietor', '=', 1)
+                                ->where(function ($query) use ($resident){
+                                    $query->where('userId', '=', $resident->id)
+                                          ->where('isShowToProprietor', '=', 1);
+                                })->orWhere(function ($query) use ($user){
+                                    $query->where([['aptId','=',$user->aptId]])
+                                          ->where([['userId','=',$user->id]]);
+                                })
                                 ->orderBy('created_at','desc')
                                 ->paginate(5);
         }
