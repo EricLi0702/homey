@@ -287,7 +287,7 @@ class SuggestionController extends Controller
                     unset($currentLikeCnt[$key]);
                 }
             }
-            $suggestionData->like_cnt = json_encode($currentLikeCnt);
+            $suggestionData->like_cnt = $currentLikeCnt;
             $suggestionData->save();
             return $currentLikeCnt;
         }
