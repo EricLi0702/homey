@@ -132,8 +132,6 @@ export default {
         },
         repairJsonData:{
             handler(val){
-                console.log("@@@@@@", val);
-                console.log("!!!!!!", this.repairList);
                 for(let i = 0; i < this.repairList.length; i++){
                     if(this.repairList[i].isSelectMode == 1){
                         let type = val[parseInt(this.repairListRaw[i].type)-1].label;
@@ -209,14 +207,14 @@ export default {
                         let clonedVal = JSON.parse(JSON.stringify(value));
                         vm.repairListRaw.push(clonedVal); 
                         
-                        // if(value.isSelectMode == 1){
-                        //     let type = vm.repairJsonData[parseInt(value.type)-1].label;
-                        //     let object = vm.repairJsonData[parseInt(value.type)-1].object[parseInt(value.object)-1].label;
-                        //     let title = vm.repairJsonData[parseInt(value.type)-1].object[parseInt(value.object)-1].title[parseInt(value.title)-1].label;
-                        //     value.type = type;
-                        //     value.object = object;
-                        //     value.title = title;
-                        // }
+                        if(value.isSelectMode == 1){
+                            let type = vm.repairJsonData[parseInt(value.type)-1].label;
+                            let object = vm.repairJsonData[parseInt(value.type)-1].object[parseInt(value.object)-1].label;
+                            let title = vm.repairJsonData[parseInt(value.type)-1].object[parseInt(value.object)-1].title[parseInt(value.title)-1].label;
+                            value.type = type;
+                            value.object = object;
+                            value.title = title;
+                        }
                     });
                 if (vm.pageOfRepair - 1 === vm.lastpageOfRepair) {
                     $state.complete();

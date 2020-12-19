@@ -16,14 +16,14 @@
                 <has-error :form="form" field="email" />
             </div>
             <div class="m-2">
-                <div class="d-flex">
-                    <p class="mt-2">{{ $t('common').password }} </p>
-                    <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto mt-2 ml-auto">
-                      {{ $t('common').forgotPassword }}
-                    </router-link>
-                </div>
+                <p class="mt-2">{{ $t('common').password }} </p>
                 <Input prefix="ios-key-outline" v-model="form.password" type="password" password name="password" :placeholder="$t('auth').enterPass" :class="{ 'is-invalid': form.errors.has('password') }"/>
                 <has-error :form="form" field="password" />
+                <div class="d-flex">
+                  <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto mt-2 ml-auto">
+                    {{ $t('common').forgotPassword }}
+                  </router-link>
+                </div>
             </div>
             <div class="m-2">
                 <checkbox v-model="remember" name="remember">

@@ -17,11 +17,19 @@ class Suggestion extends Model
         'dislike_cnt',
         'isDraft',
         'isRemoved',
+        'aptId',
+        'comment_cnt',
     ];
 
     public function userId(){
         return $this->belongsTo(User::class, 'userId');
     }
 
-    
+    protected $casts = [
+        'view_cnt' => 'array',
+        'heart_cnt' => 'array',
+        'like_cnt' => 'array',
+        'dislike_cnt' => 'array',
+        'comment_cnt' => 'array',
+    ];
 }

@@ -24,7 +24,7 @@ class CommentOfCommunityController extends Controller
         $commentToCommunity->save();
 
         $currentCommunity = Community::where('id', $currentCommunityId)->first();
-        $currentCommentCnt = json_decode($currentCommunity->comment_cnt);
+        $currentCommentCnt = $currentCommunity->comment_cnt;
         if($currentCommentCnt == null){
             $currentCommentCnt[] = $userId;
             $currentCommunity->comment_cnt = $currentCommentCnt;
@@ -91,7 +91,7 @@ class CommentOfCommunityController extends Controller
         $replyToCommentData->save();
 
         $currentCommunity = Community::where('id', $replyToCommentData->coId)->first();
-        $currentCommentCnt = json_decode($currentCommunity->comment_cnt);
+        $currentCommentCnt = $currentCommunity->comment_cnt;
         array_push($currentCommentCnt, $replyToCommentData->userId);
         $currentCommunity->comment_cnt = $currentCommentCnt;
         $currentCommunity->save();

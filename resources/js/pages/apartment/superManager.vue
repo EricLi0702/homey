@@ -78,6 +78,7 @@ export default {
             this.isAdding = true
             addSuperMng(object)
                 .then(res=>{
+                    console.log(res.data)
                     this.$router.push({path:'/apartment'})
                 })
                 .catch(err=>{

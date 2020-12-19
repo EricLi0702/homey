@@ -79,20 +79,24 @@ class CommunityController extends Controller
         ])->get();
 
         foreach ($userList as $key => $user){
-            $newPushOfUser = json_decode($user->newPush);
-            if($newPushOfUser == null){
-                $willStoreAsNewPush = new \stdClass();
-                $willStoreAsNewPush->community[] = $broadcastingData;
-                // array_push($willStoreAsNewPush->notification, $broadcastingData);
-                $willStoreAsNewPush->suggestion = [];
-                $willStoreAsNewPush->notification = [];
-                $user->newPush = json_encode($willStoreAsNewPush);
-                $user->save();
+            if($user->email_verified_at == null){
             }
             else{
-                array_push($newPushOfUser->community, $broadcastingData);
-                $user->newPush = json_encode($newPushOfUser);
-                $user->save();
+                $newPushOfUser = json_decode($user->newPush);
+                if($newPushOfUser == null){
+                    $willStoreAsNewPush = new \stdClass();
+                    $willStoreAsNewPush->community[] = $broadcastingData;
+                    // array_push($willStoreAsNewPush->notification, $broadcastingData);
+                    $willStoreAsNewPush->suggestion = [];
+                    $willStoreAsNewPush->notification = [];
+                    $user->newPush = json_encode($willStoreAsNewPush);
+                    $user->save();
+                }
+                else{
+                    array_push($newPushOfUser->community, $broadcastingData);
+                    $user->newPush = json_encode($newPushOfUser);
+                    $user->save();
+                }
             }
         }
 
@@ -201,7 +205,7 @@ class CommunityController extends Controller
         $communityData =  Community::with('userId')
                         ->where('id',$id)
                         ->first();
-        $currentViewCnt = json_decode($communityData->view_cnt);
+        $currentViewCnt = $communityData->view_cnt;
         if($currentViewCnt == null){
             $currentViewCnt[] = $userId;
             $communityData->view_cnt = $currentViewCnt;

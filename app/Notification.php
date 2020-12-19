@@ -25,4 +25,8 @@ class Notification extends Model
     public function userId(){
         return $this->belongsTo(User::class, 'userId');
     }
+
+    protected $casts = [
+        'view_cnt' => 'array',
+    ];
 }

@@ -19,7 +19,9 @@ class SuggestionController extends Controller
             'desc' => 'bail|required',
         ]);
         $userId = Auth::user()->id;
+        $aptId = Auth::user()->aptId;
         $suggestionData['userId'] = $userId;
+        $suggestionData['aptId'] = $aptId;
         $suggestionData['title'] = $request->title;
         $suggestionData['content'] = $request->desc;
         $suggestionData['upload_file'] = json_encode($request->file);
@@ -44,20 +46,25 @@ class SuggestionController extends Controller
             ])->get();
 
             foreach ($userList as $key => $user){
-                $newPushOfUser = json_decode($user->newPush);
-                if($newPushOfUser == null){
-                    $willStoreAsNewPush = new \stdClass();
-                    $willStoreAsNewPush->suggestion[] = $broadcastingData;
-                    $willStoreAsNewPush->notification = [];
-                    $willStoreAsNewPush->community = [];
-                    $user->newPush = json_encode($willStoreAsNewPush);
-                    $user->save();
+                if($user->email_verified_at == null){
                 }
                 else{
-                    array_push($newPushOfUser->suggestion, $broadcastingData);
-                    $user->newPush = json_encode($newPushOfUser);
-                    $user->save();
+                    $newPushOfUser = json_decode($user->newPush);
+                    if($newPushOfUser == null){
+                        $willStoreAsNewPush = new \stdClass();
+                        $willStoreAsNewPush->suggestion[] = $broadcastingData;
+                        $willStoreAsNewPush->notification = [];
+                        $willStoreAsNewPush->community = [];
+                        $user->newPush = json_encode($willStoreAsNewPush);
+                        $user->save();
+                    }
+                    else{
+                        array_push($newPushOfUser->suggestion, $broadcastingData);
+                        $user->newPush = json_encode($newPushOfUser);
+                        $user->save();
+                    }
                 }
+                
             }
         }
 
@@ -67,8 +74,10 @@ class SuggestionController extends Controller
     }
 
     public function index(Request $request){
+        $aptId = Auth::user()->aptId;
         return Suggestion::with('userId')
                         ->where([['isDraft','=',0]])
+                        ->where([['aptId','=',$aptId]])
                         ->orderBy('created_at','desc')->paginate(5);
     }
 
@@ -146,7 +155,7 @@ class SuggestionController extends Controller
         $suggestionData =  Suggestion::with('userId')
                         ->where('id',$id)
                         ->first();
-        $currentViewCnt = json_decode($suggestionData->view_cnt);
+        $currentViewCnt = $suggestionData->view_cnt;
         if($currentViewCnt == null){
             $currentViewCnt[] = $userId;
             $suggestionData->view_cnt = $currentViewCnt;
@@ -172,7 +181,7 @@ class SuggestionController extends Controller
         $userId = Auth::user()->id;
         $suggestionId = $request->id;
         $suggestionData = Suggestion::where('id', $suggestionId)->first();
-        $currentHeartCnt = json_decode($suggestionData->heart_cnt);
+        $currentHeartCnt = $suggestionData->heart_cnt;
         if($currentHeartCnt == null){
             $currentHeartCnt[] = $userId;
             $suggestionData->heart_cnt = $currentHeartCnt;
@@ -195,7 +204,7 @@ class SuggestionController extends Controller
         $userId = Auth::user()->id;
         $suggestionId = $request->id;
         $suggestionData = Suggestion::where('id', $suggestionId)->first();
-        $currentLikeCnt = json_decode($suggestionData->like_cnt);
+        $currentLikeCnt = $suggestionData->like_cnt;
         if($currentLikeCnt == null){
             $currentLikeCnt[] = $userId;
             $suggestionData->like_cnt = $currentLikeCnt;
@@ -219,7 +228,7 @@ class SuggestionController extends Controller
         $userId = Auth::user()->id;
         $suggestionId = $request->id;
         $suggestionData = Suggestion::where('id', $suggestionId)->first();
-        $currentDislikeCnt = json_decode($suggestionData->dislike_cnt);
+        $currentDislikeCnt = $suggestionData->dislike_cnt;
         if($currentDislikeCnt == null){
             $currentDislikeCnt[] = $userId;
             $suggestionData->dislike_cnt = $currentDislikeCnt;
@@ -244,15 +253,17 @@ class SuggestionController extends Controller
         $userId = Auth::user()->id;
         $suggestionId = $request->id;
         $suggestionData = Suggestion::where('id', $suggestionId)->first();
-        $currentHeartCnt = json_decode($suggestionData->heart_cnt);
+        $currentHeartCnt = $suggestionData->heart_cnt;
         if( sizeof($currentHeartCnt) == 1 && $currentHeartCnt[0] == $userId){
             $currentHeartCnt = null;
             $suggestionData->heart_cnt = $currentHeartCnt;
             $suggestionData->save();
         }
         else{
-            if (($key = array_search($userId, $currentHeartCnt)) !== false) {
-                unset($currentHeartCnt[$key]);
+            foreach ($currentHeartCnt as $key => $heartedUserId){
+                if($heartedUserId == $userId){
+                    unset($currentHeartCnt[$key]);
+                }
             }
             $suggestionData->heart_cnt = $currentHeartCnt;
             $suggestionData->save();
@@ -264,17 +275,19 @@ class SuggestionController extends Controller
         $userId = Auth::user()->id;
         $suggestionId = $request->id;
         $suggestionData = Suggestion::where('id', $suggestionId)->first();
-        $currentLikeCnt = json_decode($suggestionData->like_cnt);
+        $currentLikeCnt = $suggestionData->like_cnt;
         if( sizeof($currentLikeCnt) == 1 && $currentLikeCnt[0] == $userId){
             $currentLikeCnt = null;
             $suggestionData->like_cnt = $currentLikeCnt;
             $suggestionData->save();
         }
         else{
-            if (($key = array_search($userId, $currentLikeCnt)) !== false) {
-                unset($currentLikeCnt[$key]);
+            foreach ($currentLikeCnt as $key => $likedUserId){
+                if($likedUserId == $userId){
+                    unset($currentLikeCnt[$key]);
+                }
             }
-            $suggestionData->like_cnt = $currentLikeCnt;
+            $suggestionData->like_cnt = json_encode($currentLikeCnt);
             $suggestionData->save();
             return $currentLikeCnt;
         }
@@ -284,7 +297,7 @@ class SuggestionController extends Controller
         $userId = Auth::user()->id;
         $suggestionId = $request->id;
         $suggestionData = Suggestion::where('id', $suggestionId)->first();
-        $currentDislikeCnt = json_decode($suggestionData->dislike_cnt);
+        $currentDislikeCnt = $suggestionData->dislike_cnt;
         if( sizeof($currentDislikeCnt) == 1 && $currentDislikeCnt[0] == $userId){
             $currentDislikeCnt = null;
             $suggestionData->dislike_cnt = $currentDislikeCnt;
@@ -293,6 +306,11 @@ class SuggestionController extends Controller
         else{
             if (($key = array_search($userId, $currentDislikeCnt)) !== false) {
                 unset($currentDislikeCnt[$key]);
+            }
+            foreach ($currentDislikeCnt as $key => $dislikedUserId){
+                if($dislikedUserId == $userId){
+                    unset($currentDislikeCnt[$key]);
+                }
             }
             $suggestionData->dislike_cnt = $currentDislikeCnt;
             $suggestionData->save();

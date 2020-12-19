@@ -116,20 +116,24 @@ class NotificationController extends Controller
             ])->get();
 
             foreach ($userList as $key => $user){
-                $newPushOfUser = json_decode($user->newPush);
-                if($newPushOfUser == null){
-                    $willStoreAsNewPush = new \stdClass();
-                    $willStoreAsNewPush->notification[] = $broadcastingData;
-                    // array_push($willStoreAsNewPush->notification, $broadcastingData);
-                    $willStoreAsNewPush->suggestion = [];
-                    $willStoreAsNewPush->community = [];
-                    $user->newPush = json_encode($willStoreAsNewPush);
-                    $user->save();
+                if($user->email_verified_at == null){
                 }
                 else{
-                    array_push($newPushOfUser->notification, $broadcastingData);
-                    $user->newPush = json_encode($newPushOfUser);
-                    $user->save();
+                    $newPushOfUser = json_decode($user->newPush);
+                    if($newPushOfUser == null){
+                        $willStoreAsNewPush = new \stdClass();
+                        $willStoreAsNewPush->notification[] = $broadcastingData;
+                        // array_push($willStoreAsNewPush->notification, $broadcastingData);
+                        $willStoreAsNewPush->suggestion = [];
+                        $willStoreAsNewPush->community = [];
+                        $user->newPush = json_encode($willStoreAsNewPush);
+                        $user->save();
+                    }
+                    else{
+                        array_push($newPushOfUser->notification, $broadcastingData);
+                        $user->newPush = json_encode($newPushOfUser);
+                        $user->save();
+                    }
                 }
             }
         }
@@ -201,7 +205,7 @@ class NotificationController extends Controller
         $notificationData =  Notification::with('userId')
                         ->where('id',$id)
                         ->first();
-        $currentViewCnt = json_decode($notificationData->view_cnt);
+        $currentViewCnt = $notificationData->view_cnt;
         if($currentViewCnt == null){
             $currentViewCnt[] = $userId;
             $notificationData->view_cnt = $currentViewCnt;

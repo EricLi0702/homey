@@ -22,7 +22,7 @@ class CommentOfSuggestionController extends Controller
         $commentToSuggest = CommentOfSuggestion::create($comment); 
 
         $currentSuggestion = Suggestion::where('id', $currentSuggestionId)->first();
-        $currentCommentCnt = json_decode($currentSuggestion->comment_cnt);
+        $currentCommentCnt = $currentSuggestion->comment_cnt;
         if($currentCommentCnt == null){
             $currentCommentCnt[] = $userId;
             $currentSuggestion->comment_cnt = $currentCommentCnt;
@@ -32,19 +32,12 @@ class CommentOfSuggestionController extends Controller
             ], 201);
         }
         else{
-            if (in_array($userId, $currentCommentCnt)) {
-                return response()->json([
-                    'commentToSuggest' => $commentToSuggest
-                ], 201);
-            }
-            else{
-                array_push($currentCommentCnt, $userId);
-                $currentSuggestion->comment_cnt = $currentCommentCnt;
-                $currentSuggestion->save();
-                return response()->json([
-                    'commentToSuggest' => $commentToSuggest
-                ], 201);
-            }
+            array_push($currentCommentCnt, $userId);
+            $currentSuggestion->comment_cnt = $currentCommentCnt;
+            $currentSuggestion->save();
+            return response()->json([
+                'commentToSuggest' => $commentToSuggest
+            ], 201);
         }
         return response()->json([
             'commentToSuggest' => $commentToSuggest

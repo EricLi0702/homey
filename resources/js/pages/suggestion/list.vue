@@ -155,11 +155,6 @@ export default {
                 vm.lastpageOfSuggestion = res.data.last_page;
 
                 $.each(res.data.data, function(key, value){
-                        value.heart_cnt = JSON.parse(value.heart_cnt);
-                        value.like_cnt = JSON.parse(value.like_cnt);
-                        value.dislike_cnt = JSON.parse(value.dislike_cnt);
-                        value.comment_cnt = JSON.parse(value.comment_cnt);
-                        value.view_cnt = JSON.parse(value.view_cnt);
                         vm.suggestionList.push(value); 
                     });
                 if (vm.pageOfSuggestion - 1 === vm.lastpageOfSuggestion) {

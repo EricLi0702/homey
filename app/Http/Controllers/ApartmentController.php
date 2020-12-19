@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Apartment;
 use App\User;
+use DateTime;
+use Laravolt\Avatar\Avatar;
 
 class ApartmentController extends Controller
 {
@@ -105,14 +107,24 @@ class ApartmentController extends Controller
         $mngEmail = $request->mngEmail;
         $mngId = $request->mngId;
         $mngPassword = $request->mngPassword;
+        $nowTime = new DateTime();
 
+        //set avatar
+        $name = date('YmdHis') . ".png";
+        $destinationPath = ('/uploads/avatar/user/'); 
+        $avatar = new Avatar;
+        $avatarImage = $avatar->create($mngEmail)->toBase64();
+        $avatarImage->save(public_path('/uploads/avatar/user/'.$name), $quality = 90);
+        
         return User::create([
             'name'=>$mngName,
             'email'=>$mngEmail,
             'password'=>bcrypt($mngPassword),
             'phoneNumber'=>$mngPhoneNumber,
             'roleId'=>2,
-            'aptId'=>$aptId
+            'aptId'=>$aptId,
+            'email_verified_at'=>$nowTime,
+            'user_avatar'=>$destinationPath.$name
         ]);
     }
 }

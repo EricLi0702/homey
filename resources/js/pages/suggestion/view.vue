@@ -387,11 +387,7 @@ export default {
             getCurrentSuggestionFromServer(this.suggestionId)
             .then(res=>{
                 this.details = res.data.suggestionData;
-                this.details.heart_cnt = JSON.parse(this.details.heart_cnt);
-                this.details.like_cnt = JSON.parse(this.details.like_cnt);
-                this.details.dislike_cnt = JSON.parse(this.details.dislike_cnt);
                 this.details.upload_file = JSON.parse(this.details.upload_file);
-                this.details.comment_cnt = JSON.parse(this.details.comment_cnt);
                 //video url
                 let videoUrlGroup = this.details.upload_file.videoUrl;
                 for(let i = 0; i < videoUrlGroup.length ; i++){

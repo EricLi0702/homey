@@ -148,7 +148,6 @@ export default {
                 vm.lastpageOfNotification = res.data.last_page;
 
                 $.each(res.data.data, function(key, value){
-                        value.view_cnt = JSON.parse(value.view_cnt);
                         vm.notificationList.push(value); 
                     });
                 if (vm.pageOfNotification - 1 === vm.lastpageOfNotification) {

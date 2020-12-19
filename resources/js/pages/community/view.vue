@@ -326,7 +326,6 @@ export default {
             .then(res=>{
                 this.details = res.data.communityData;
                 this.details.upload_file = JSON.parse(this.details.upload_file);
-                this.details.comment_cnt = JSON.parse(this.details.comment_cnt);
                 //video url
                 let videoUrlGroup = this.details.upload_file.videoUrl;
                 for(let i = 0; i < videoUrlGroup.length ; i++){

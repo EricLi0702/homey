@@ -140,9 +140,6 @@ export default {
                 vm.lastpageOfCommunity = res.data.last_page;
 
                 $.each(res.data.data, function(key, value){
-                        
-                        value.comment_cnt = JSON.parse(value.comment_cnt);
-                        value.view_cnt = JSON.parse(value.view_cnt);
                         vm.communityList.push(value); 
                     });
                 if (vm.pageOfCommunity - 1 === vm.lastpageOfCommunity) {
