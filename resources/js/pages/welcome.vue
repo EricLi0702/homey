@@ -221,11 +221,16 @@
         </div>
     </div>
     <GmapMap
-      :center="{lat:10.8231, lng:106.6297}"
-      :zoom="7"
+      :center="{lat:21.082243, lng:105.7917096}"
+      :zoom="17"
       map-type-id="terrain"
       style="width: 100%; height: 300px"
     >
+        <GmapMarker
+            :position="{lat:21.082243, lng:105.7917096}"
+            :clickable="false"
+            :draggable="false"
+        />
     </GmapMap>
   
   </div>
@@ -282,7 +287,7 @@ export default {
         }),
         player() {
             return this.$refs.videoPlayer.player
-        }
+        },
     },
   mounted(){
     this.playerOptions.poster = this.baseUrl + '/asset/img/bg/introduceVideoCoverImage.png'
