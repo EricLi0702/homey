@@ -35,13 +35,13 @@
                 {{ $t('login').login }}
               </v-button>
             </div>
-            <div class="m-2 text-center">
+            <!-- <div class="m-2 text-center">
                 <p>{{ $t('auth').loginWithSocial }}</p>
             </div>
             <div class="m-2 d-flex justify-content-between">
                 <Button class="w-49 mr-auto facebook-login-btn" icon="logo-facebook">{{ $t('auth').facebook }}</Button>
                 <login-with-google />
-            </div>
+            </div> -->
             <div class="m-2 text-center py-3">
                 <p>{{ $t('auth').DontHaveAnAccount }}
                   <router-link :to="{ name: 'register' }">
