@@ -132,8 +132,6 @@ export default {
         },
         repairJsonData:{
             handler(val){
-                console.log("@@@@@@", val);
-                console.log("!!!!!!", this.repairList);
                 for(let i = 0; i < this.repairList.length; i++){
                     if(this.repairList[i].isSelectMode == 1){
                         let type = val[parseInt(this.repairListRaw[i].type)-1].label;
@@ -177,7 +175,6 @@ export default {
         async start(){
             await getrepairList()
             .then(res=>{
-                console.log(res);
             })
         },
 
@@ -191,7 +188,6 @@ export default {
             await getRepairList(this.pageOfRepair)
             .then(res=>{
                 if(res.data.msg == 0){
-                    console.log(res.data.msg);
                     this.noRequest = true;
                     $state.complete();
                     return;

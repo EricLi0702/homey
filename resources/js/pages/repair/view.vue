@@ -441,7 +441,6 @@ export default {
                         this.isNotReply = true;
                     }
                 }
-                console.log("///", this.responseCommentData);
                 this.details = res.data.repairData;
                 this.rawDetails = JSON.parse(JSON.stringify(this.details));
                 this.details.upload_file = JSON.parse(this.details.upload_file);

@@ -175,7 +175,6 @@ export default {
         async start(){
             await getrepairList()
             .then(res=>{
-                console.log(res);
             })
         },
 
@@ -189,7 +188,6 @@ export default {
             await getRepairList(this.pageOfRepair)
             .then(res=>{
                 if(res.data.msg == 0){
-                    console.log(res.data.msg);
                     this.noRequest = true;
                     $state.complete();
                     return;

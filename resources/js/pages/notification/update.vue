@@ -316,7 +316,6 @@ export default {
             }
             
             this.isUpdating = true;
-            console.log(this.updateNotificationData);
             await updateNotification(this.updateNotificationData)
             .then(res=>{
                 this.updateNotificationData.title = '';
