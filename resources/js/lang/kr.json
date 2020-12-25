@@ -268,7 +268,10 @@
         "NumberOfReservation" : "예약건수",
         "SomeoneAlreadyReserved": "이미 누군가가 예약하였습니다.",
         "autoApproveReservation" : "자동으로 예약승인",
-        "removeThisFacility" : "이 시설 삭제"
+        "removeThisFacility" : "이 시설 삭제",
+        "outLineOfFac" : "요약",
+        "equipmentOfFac" : "장비들",
+        "nbOfFac" : "주의점"
     },
     "suggest":{
         "suggest":"건의",

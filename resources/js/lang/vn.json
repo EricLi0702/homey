@@ -268,7 +268,10 @@
         "NumberOfReservation" : "Số lượng đặt trước",
         "SomeoneAlreadyReserved": "Ai đó đã đặt cơ sở này",
         "autoApproveReservation" : "Phê duyệt đặt chỗ tự động",
-        "removeThisFacility" : "Xóa cơ sở này"
+        "removeThisFacility" : "Xóa cơ sở này",
+        "outLineOfFac" : "Đề cương",
+        "equipmentOfFac" : "Thiết bị",
+        "nbOfFac" : "N.B"
     },
     "suggest":{
         "suggest":"Không gian chung",

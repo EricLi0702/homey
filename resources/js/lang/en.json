@@ -268,7 +268,10 @@
         "NumberOfReservation" : "Number of reservation",
         "SomeoneAlreadyReserved": "Someone already reserved this facility",
         "autoApproveReservation" : "Approve reservations automatically",
-        "removeThisFacility" : "Remove this facility"
+        "removeThisFacility" : "Remove this facility",
+        "outLineOfFac" : "Outline",
+        "equipmentOfFac" : "Equipments",
+        "nbOfFac" : "N.B"
     },
     "suggest":{
         "suggest":"Suggestion",

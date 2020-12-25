@@ -25,8 +25,6 @@ class UserController extends Controller
     }
 
     public function userList(Request $request){
-        // $aptId = $request->id;
-        // $aptId = $request->aptId;
         return User::where([['aptId','=',Auth::user()->aptId],['roleId','>',2]])->with('role','apt','building')->paginate(7); 
     }
 

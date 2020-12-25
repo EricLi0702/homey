@@ -89,13 +89,13 @@
                     </div>
                     <div v-if="noFile" class="col-12 row m-0 p-0">
                         <Tabs class="w-100">
-                            <TabPane label="Outline" icon="ios-paper">
+                            <TabPane :label="$t('facility').outLineOfFac" icon="ios-paper">
                                 <p class="p-2 w-100" v-html="selectedFacility.outline" ></p>
                             </TabPane>
-                            <TabPane label="Equipments" icon="ios-pie-outline">
+                            <TabPane :label="$t('facility').equipmentOfFac" icon="ios-pie-outline">
                                 <p class="w-100 p-2">{{selectedFacility.equipment}}</p>
                             </TabPane>
-                            <TabPane label="N.B" icon="ios-warning-outline">
+                            <TabPane :label="$t('facility').nbOfFac" icon="ios-warning-outline">
                                 <p class="w-100 p-2">{{selectedFacility.nb}}</p>
                             </TabPane>
                         </Tabs>
@@ -107,13 +107,13 @@
                         <div class="col-12 col-lg-12 content-container">
                             <div class="row m-0 ">
                                 <Tabs class="w-100 mb-3">
-                                    <TabPane label="Outline" icon="ios-paper">
+                                    <TabPane :label="$t('facility').outLineOfFac" icon="ios-paper">
                                         <p class="w-100 p-2" v-html="selectedFacility.outline"></p>
                                     </TabPane>
-                                    <TabPane label="Equipments" icon="ios-pie-outline">
+                                    <TabPane :label="$t('facility').equipmentOfFac" icon="ios-pie-outline">
                                         <p class="w-100 p-2">{{selectedFacility.equipment}}</p>
                                     </TabPane>
-                                    <TabPane label="N.B" icon="ios-warning-outline">
+                                    <TabPane :label="$t('facility').nbOfFac" icon="ios-warning-outline">
                                         <p class="w-100 p-2">{{selectedFacility.nb}}</p>
                                     </TabPane>
                                 </Tabs>

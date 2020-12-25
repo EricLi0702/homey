@@ -233,12 +233,6 @@ class RepairController extends Controller
 
     public function getRepairType(Request $request){
         return RepairType::where('aptId', Auth::user()->aptId)->get();
-        // $userRoleId = Auth::user()->roleId;
-        // if($userRoleId !== 2 && $userRoleId !== 7){
-        //     return null;
-        // }
-        // else{
-        // }
     }
 
     public function postRepairType(Request $request)
